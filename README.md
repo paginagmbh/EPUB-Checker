@@ -19,14 +19,14 @@ und folgenden Ordneraufbau:
 
 * EPUB-Checker (java sources)
 * _ANT-buildDir
- * libs/
-  * jarbundler-2.2.0/
-   * jarbundler-2.2.0.jar
-  * launch4j/  _(!! Mac/Windows spezifisch !!)_
-   * launch4j.jar
-  * xmltask.jar
- * resources/
-  * JavaApplicationStub
- * output/
+	* libs/
+		* jarbundler-2.2.0/
+			* jarbundler-2.2.0.jar
+		* launch4j/  _(!! Mac/Windows spezifisch !!)_
+			* launch4j.jar
+		* xmltask.jar
+	* resources/
+		* JavaApplicationStub
+	* output/
 
 Unter diesen Voraussetzungen kann der ANT-Task aus Eclipse heraus gestartet werden.
