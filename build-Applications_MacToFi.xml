@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="../_ANT-buildDir">
+	
+
+	<property name="src.dir" location="../EPUB-Checker2"/>
+	<property name="build.dir" location="."/>
+	<property name="antLib.dir" location="${build.dir}/libs"/>
+	<property name="out.dir" location="${build.dir}/output"/>
+	
+    <buildnumber file="${build.dir}/buildID_EPUBChecker.txt"/>
+	
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<property name="program.version.txtNumber" value="1.1.1" />
+	<property name="program.version.number" value="${program.version.txtNumber}.${build.number}" />
+	<property name="program.version.build" value="${build.number}" />
+	<property name="program.version.release" value="" />	<!-- "" or "beta" -->
+	
+	<echo>Version: ${program.version.number}</echo>
+	<echo>Build: ${program.version.build}</echo>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	
+	
+	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <jar destfile="${build.dir}/paginaEPUBChecker.jar" filesetmanifest="mergewithoutmain">
+        <manifest>
+            <attribute name="Main-Class" value="de.paginagmbh.epubchecker.paginaEPUBChecker"/>
+            <attribute name="Class-Path" value="."/>
+        </manifest>
+        <fileset dir="${src.dir}/bin"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/AppleJavaExtensions.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/commons-compress-1.4.1.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/guava-13.0.1.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/jing-20120724.0.0.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/json-rpc-1.0.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/sac-1.3.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/saxon-9.1.0.8.jar"/>
+    </jar>
+	
+	<chmod perm="ugo+rx" file="${build.dir}/paginaEPUBChecker.jar" />
+	
+	
+	<zip destfile="${out.dir}/pagina-EPUB-Checker_Linux-${program.version.txtNumber}${program.version.release}.zip">
+		<zipfileset file="${build.dir}/paginaEPUBChecker.jar" filemode="777" />
+		<zipfileset file="${build.dir}/config/Linux-Readme.txt" fullpath="README" />
+	</zip>
+	
+	<tar destfile="${out.dir}/pagina-EPUB-Checker_Linux-${program.version.txtNumber}${program.version.release}.tar.gz" compression="gzip">
+	  <zipfileset src="${out.dir}/pagina-EPUB-Checker_Linux-${program.version.txtNumber}${program.version.release}.zip"/>
+	</tar>
+	
+	<delete file="${out.dir}/pagina-EPUB-Checker_Linux-${program.version.txtNumber}${program.version.release}.zip"/>
+	
+	
+	
+	
+	
+	<property name="resources.dir" location="${build.dir}/resources" />
+	<property name="jarbundler.dir" location="${antLib.dir}/jarbundler-2.2.0" />
+	
+	<taskdef name="jarbundler"
+		classname="net.sourceforge.jarbundler.JarBundler"
+		classpath="${jarbundler.dir}/jarbundler-2.2.0.jar" />
+	
+	<jarbundler
+		dir="${out.dir}"
+		name="EPUB-Checker"
+		shortname="EPUB-Checker"
+		aboutmenuname="pagina EPUB-Checker"
+		bundleid="de.paginagmbh.epubchecker"
+		mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
+		stubfile="${resources.dir}/JavaApplicationStub"
+		icon="${resources.dir}/paginaEPUBChecker_512.icns"
+		version="${program.version.txtNumber}"
+		developmentregion="German"
+		signature="PAEC"
+		build="${program.version.build}"
+		jvmversion="1.6+">
+		
+		<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
+		<!-- http://informagen.com/JarBundler/DocumentType.html -->
+		<documenttype
+			name="EPUB files"
+			extensions="epub EPUB"
+			role="Viewer"/>
+		
+		<jarfileset dir=".">
+			<include name="paginaEPUBChecker.jar" />
+		</jarfileset>
+	
+	</jarbundler>
+	
+    <exec executable="codesign">
+        <arg value="-f"/>
+        <arg value="-v"/>
+        <arg value="-s"/>
+        <arg value="Developer ID Application: pagina GmbH"/>
+        <arg value="${out.dir}/EPUB-Checker.app"/>
+    </exec>
+	
+    <exec executable="codesign">
+        <arg value="--verify"/>
+        <arg value="--verbose"/>
+        <arg value="${out.dir}/EPUB-Checker.app"/>
+    </exec>
+	
+	<zip destfile="${out.dir}/pagina-EPUB-Checker_Mac-${program.version.txtNumber}${program.version.release}.zip">
+		<zipfileset dir="${out.dir}/EPUB-Checker.app/" filemode="777" prefix="EPUB-Checker.app"/>
+	</zip>
+	
+	
+	
+	
+	
+	
+	
+	<property name="launch4j.dir" location="${antLib.dir}/launch4j" />
+	<property name="launch4j.config.dir" location="${build.dir}/config/launch4j" />
+	
+	<taskdef name="launch4j"
+	    classname="net.sf.launch4j.ant.Launch4jTask"
+	    classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"
+	/>
+	
+	<launch4j
+		configFile="${launch4j.config.dir}/paginaEPUBChecker_Mac.xml"
+		fileVersion="${program.version.number}"
+		txtFileVersion="${program.version.txtNumber}"
+		productVersion="${program.version.number}"
+		txtProductVersion="${program.version.txtNumber}"
+	/>
+	
+	<zip destfile="${out.dir}/pagina-EPUB-Checker_Win-${program.version.txtNumber}${program.version.release}.zip">
+		<zipfileset file="${out.dir}/EPUB-Checker.exe"/>
+	</zip>
+	
+</project>
