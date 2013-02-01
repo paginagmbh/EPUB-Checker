@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="../03_ANT-build">
+
+	
+	<property name="build.dir" location="." />
+	<property name="config.dir" location="${build.dir}/config" />
+	<property name="antLib.dir" location="${build.dir}/libs" />
+	<property name="out.dir" location="${build.dir}/output" />
+	
+	<tstamp>
+		<format property="current.date" pattern="dd.MM.yyyy" />
+	</tstamp>
+	<property name="program.version.date" value="${current.date}" />
+	
+	
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<property name="program.version.txtNumber" value="1.0.0" />
+	<property name="program.version.release" value="beta" />	<!-- "" or "beta" -->
+	
+	<echo>Version: ${program.version.txtNumber}</echo>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	
+	<!-- http://www.oopsconsultancy.com/software/xmltask/ -->
+	<taskdef name="xmltask"
+		classname="com.oopsconsultancy.xmltask.ant.XmlTask"
+		classpath="${antLib.dir}/xmltask.jar" />
+	
+	<echo>"release.xml" Datei wird aktualisiert...</echo>
+	
+	<xmltask source="${config.dir}/release.xml" dest="${config.dir}/release.xml">
+		
+		<replace path="updateinfo/package/entry[@key='buildversion']/value/text()" withText="${program.version.txtNumber}" />
+		
+		<replace path="updateinfo/package/entry[@key='builddate']/value/text()" withText="${program.version.date}" />
+		
+		<replace path="updateinfo/package[@os='windows']/entry[@key='downloadURL']/value/text()"
+			withText="http://download.pagina-online.de/epubchecker/pagina-EPUB-Checker_Win-${program.version.txtNumber}${program.version.release}.zip" />
+		
+		<replace path="updateinfo/package[@os='mac']/entry[@key='downloadURL']/value/text()"
+			withText="http://download.pagina-online.de/epubchecker/pagina-EPUB-Checker_Mac-${program.version.txtNumber}${program.version.release}.zip" />
+		
+	</xmltask>
+	
+	
+	
+	
+	<echo>Windows und Mac Release ${program.version.txtNumber} werden auf den Server hochgeladen...</echo>
+	
+	<scp
+		todir="root@83.133.126.179:/var/www/download/epubchecker/"
+		passphrase="" trust="true" sftp="true" verbose="yes"
+		keyfile="H:\2-Verwaltung\8-IT_Unterlagen\Website\Rootserver\ssh-keys\putty\prs-ossh">
+		
+		<!--
+		<fileset dir="${out.dir}">
+			<include name="*${program.version.txtNumber}${program.version.release}.zip"/>
+		</fileset>
+		-->
+		
+		<fileset dir="${config.dir}">
+			<include name="release.xml"/>
+			<include name="updatecheck.php"/>
+			<include name="beta.php"/>
+			<include name="screenshot.png"/>
+			<include name="paginaEPUBChecker_64.png"/>
+		</fileset>
+	</scp>
+
+	<echo>pagina EPUB-Checker wurde in Version ${program.version.txtNumber} ausgeliefert!</echo>
+	
+</project>
