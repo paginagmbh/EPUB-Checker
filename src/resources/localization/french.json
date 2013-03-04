@@ -197,7 +197,6 @@
 	"value of attribute '$1' is invalid; must be a string matching the regular expression \"$2\", must be a string matching the regular expression \"$3\" or must be a string matching the regular expression \"$4\"" : "",
 	"value of attribute '$1' is invalid; must be a string matching the regular expression: \"$2\"" : "",
 	"attribute \"$1\" not allowed here; expected attribute $2 or \"$3\" (with $4)" : "",
-	"The fixed value of the position property is not part of the EPUB 3 CSS Profile." : "",
 	"could not parse '$1': duplicate id: '$2'" : "Ne peut pas parser '$1' : id dupliqué : '$2'",
 	"assertion failed: identical playOrder values for navPoint/navTarget/pageTarget that do not refer to same target" : "",
 	"element '$1' incomplete; missing required element '$2'" : "",

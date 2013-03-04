@@ -197,7 +197,6 @@
 	"value of attribute '$1' is invalid; must be a string matching the regular expression \"$2\", must be a string matching the regular expression \"$3\" or must be a string matching the regular expression \"$4\"" : "Der Wert des Attributs '$1' ist ungültig! Es muss ein Wert sein, der auf folgenden regulären Ausdruck zutrifft: \"$2\" oder \"$3\" oder \"$4\"",
 	"value of attribute '$1' is invalid; must be a string matching the regular expression: \"$2\"" : "Der Wert des Attributs '$1' ist ungültig! Es muss ein Wert sein, der auf folgenden regulären Ausdruck zutrifft: $2",
 	"attribute \"$1\" not allowed here; expected attribute $2 or \"$3\" (with $4)" : "Das Attribut \"$1\" ist an diesem Element nicht erlaubt. Erlaubte Attribute sind: $2 oder \"$3\" (mit $4)",
-	"The fixed value of the position property is not part of the EPUB 3 CSS Profile." : "Der Wert 'fixed' der CSS-Eigenschaft 'position' ist nicht Teil des EPUB3 CSS-Profils!",
 	"could not parse '$1': duplicate id: '$2'" : "Kann '$1' nicht parsen! Grund: Doppelte ID: '$2'",
 	"assertion failed: identical playOrder values for navPoint/navTarget/pageTarget that do not refer to same target" : "TOC-Überprüfung fehlgeschlagen: Es existieren identische 'playOrder'-Werte für 'navPoint'/'navTarget'/'pageTarget'-Elemente die nicht auf das selbe Ziel verweisen",
 	"element '$1' incomplete; missing required element '$2'" : "Element '$1' ist nicht vollständig! Es fehlt das zwingend benötigte Kind-Element '$2'",
