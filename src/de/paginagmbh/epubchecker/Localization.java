@@ -11,8 +11,8 @@ import de.paginagmbh.common.json.JSON;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @version	1.2.1
-  * @date 		2013-01-03
+  * @version	1.2.2
+  * @date 		2013-03-08
   * @lastEdit	Tobias Fischer
   */
 public class Localization {
@@ -26,43 +26,41 @@ public class Localization {
 		
 		lang = null;
 
-		try {
+		// set system language
+		if(paginaEPUBChecker.programLanguage.equals("systemLanguage")) {
 			
-			// set system language
-			if(paginaEPUBChecker.programLanguage.equals("systemLanguage")) {
-				
-				// retrieve the "system language"
-				String locale = System.getProperty("user.language");
-				
-				
-				// load language file depending on system language
-				// possible values are: http://ftp.ics.uci.edu/pub/ietf/http/related/iso639.txt
-				
-				// German
-				if(locale.equals("de")) {
-					paginaEPUBChecker.programLanguage = "german";
-					lang = loadLanguageFile("german");
+			// retrieve the "system language"
+			String locale = System.getProperty("user.language");
+			
+			
+			// load language file depending on system language
+			// possible values are: http://ftp.ics.uci.edu/pub/ietf/http/related/iso639.txt
+			
+			// German
+			if(locale.equals("de")) {
+				paginaEPUBChecker.programLanguage = "german";
+				lang = loadLanguageFile("german");
 
-				// French
-				} else if(locale.equals("fr")) {
-					paginaEPUBChecker.programLanguage = "french";
-					lang = loadLanguageFile("french");
-					
-				// English; Fallback
-				} else {
-					paginaEPUBChecker.programLanguage = "english";
-					lang = loadLanguageFile("english");
-				}
-			
-			
-			// set pre-defined language (when user switched language in menu)
+			// French
+			} else if(locale.equals("fr")) {
+				paginaEPUBChecker.programLanguage = "french";
+				lang = loadLanguageFile("french");
+
+			// Spanish
+			} else if(locale.equals("es")) {
+				paginaEPUBChecker.programLanguage = "spanish";
+				lang = loadLanguageFile("spanish");
+				
+			// English; Fallback
 			} else {
-				lang = loadLanguageFile(paginaEPUBChecker.programLanguage);
+				paginaEPUBChecker.programLanguage = "english";
+				lang = loadLanguageFile("english");
 			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
+		
+		
+		// set pre-defined language (when user switched language in menu)
+		} else {
+			lang = loadLanguageFile(paginaEPUBChecker.programLanguage);
 		}
 	}
 	
@@ -71,8 +69,15 @@ public class Localization {
 	
 	/* ********************************************************************************************************** */
 	
-	private static JSONObject loadLanguageFile(String language) throws IOException {
-		return JSON.parseString(JSON.readResourceAsString(Localization.class, "/resources/localization/" + language + ".json"));
+	private static JSONObject loadLanguageFile(String language) {
+		try {
+			return JSON.parseString(JSON.readResourceAsString(Localization.class, "/resources/localization/" + language + ".json"));
+		} catch (IOException e) {
+			
+			// Fallback, if language file couldn't be found
+			paginaEPUBChecker.programLanguage = "english";
+			return loadLanguageFile("english");
+		}
 	}
 	
 	
