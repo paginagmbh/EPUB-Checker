@@ -32,21 +32,22 @@ import com.apple.eawt.QuitResponse;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @version	1.1.1
-  * @date 		2013-03-04
+  * @version	1.1.2
+  * @date 		2013-03-08
   * @lastEdit	Tobias Fischer
   */
 public class paginaEPUBChecker {
 	
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
-	public static final String PROGRAMVERSION = "1.1.1";
-	public static final String VERSIONDATE = "04.03.2013";
+	public static final String PROGRAMVERSION = "1.1.2";
+	public static final String VERSIONDATE = "08.03.2013";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
-
+	
     public static final String[] availableLanguages = {
+    	// also change in Localization.java !!!
     	"German",
     	"English",
     	"French",

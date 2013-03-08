@@ -13,7 +13,7 @@
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	
-	<property name="program.version.txtNumber" value="1.1.1" />
+	<property name="program.version.txtNumber" value="1.1.2" />
 	<property name="program.version.release" value="" />	<!-- "" or "beta" -->
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
