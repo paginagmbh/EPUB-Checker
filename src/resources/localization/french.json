@@ -115,7 +115,7 @@
 	
 	"Epubcheck Version $1" : "Epubcheck version $1",
 	"EpubPreflight Version $1" : "EpubPreflight version $1",
-	"length of first filename in archive must be 8, but was $1" : "",
+	"Length of the first filename in archive must be 8, but was $1" : "",
 	"Extra field length for first filename must be 0, but was $1" : "",
 	"The file $1 does not appear to be of type $2" : "",
 	"image file $1 is missing" : "Le fichier image $1 est manquant",
