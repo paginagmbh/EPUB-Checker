@@ -115,7 +115,7 @@
 	
 	"Epubcheck Version $1" : "",
 	"EpubPreflight Version $1" : "",
-	"length of first filename in archive must be 8, but was $1" : "Die erste Datei im EPUB-Archiv ist nicht die unkomprimierte MimeType-Datei \"mimetype\"",
+	"Length of the first filename in archive must be 8, but was $1" : "Die erste Datei im EPUB-Archiv ist nicht die unkomprimierte MimeType-Datei \"mimetype\"",
 	"Extra field length for first filename must be 0, but was $1" : "",
 	"The file $1 does not appear to be of type $2" : "Die Datei '$1' scheint nicht vom Typ '$2' zu sein",
 	"image file $1 is missing" : "Bild '$1' fehlt",

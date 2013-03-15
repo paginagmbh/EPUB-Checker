@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2012-12-30
+  * @date 		2013-03-15
   * @lastEdit	Tobias Fischer
   */
 public class RegexSearchReplace {
@@ -34,8 +34,8 @@ public class RegexSearchReplace {
 		fillArray("item \\((.*)\\) exists in the zip file, but is not declared in the OPF file",
 				__("item ($1) exists in the zip file, but is not declared in the OPF file"));
 	    
-	    fillArray("length of first filename in archive must be 8, but was (\\d+)",
-				__("length of first filename in archive must be 8, but was $1"));
+	    fillArray("Length of the first filename in archive must be 8, but was (\\d+)",
+				__("Length of the first filename in archive must be 8, but was $1"));
 	    
 	    fillArray("Extra field length for first filename must be 0, but was (\\d+)",
 				__("Extra field length for first filename must be 0, but was $1"));
