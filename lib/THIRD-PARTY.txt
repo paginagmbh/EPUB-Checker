@@ -4,7 +4,7 @@ Licenses of third-party dependencies
   Guava: Google Core Libraries for Java, 13.0.1
     The Apache Software License, Version 2.0
 
-  SaxonB, 9.1.0.8
+  Saxon-HE, 9.4.0.6
     Mozilla Public License Version 1.0
 
   Commons Compress, 1.4.1
