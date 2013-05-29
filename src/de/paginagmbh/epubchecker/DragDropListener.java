@@ -14,6 +14,9 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import com.adobe.epubcheck.api.EpubCheck;
+import com.adobe.epubcheck.util.Archive;
+import com.adobe.epubcheck.util.FeatureEnum;
 
 
 /**
@@ -23,8 +26,8 @@ import java.util.StringTokenizer;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @version	1.1
-  * @date 		2013-01-04
+  * @version	1.2
+  * @date 		2013-03-15
   * @lastEdit	Tobias Fischer
   */
 // 
@@ -157,10 +160,11 @@ public class DragDropListener implements DropTargetListener {
 				
 				File file = files.get(i);
 				
-				if(file.getName().toLowerCase().endsWith(".epub")) {
+				if(file.isFile() && file.getName().toLowerCase().endsWith(".epub")) {
 					
 					mainGUI.setBorderStateNormal();
-					
+
+					paginaEPUBChecker.modeExp = false;
 					paginaEPUBChecker.epubcheck_File = file;
 					paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
 					
@@ -168,6 +172,46 @@ public class DragDropListener implements DropTargetListener {
 					mainGUI.input_filePath.setText(file.getPath());
 					
 					paginaEPUBChecker.validate();
+					
+					
+				} else if(file.isDirectory()) {
+					
+					File expectedMimetype = new File(file.getPath() + File.separator + "mimetype");
+					File expectedMetaInf = new File(file.getPath() + File.separator + "META-INF");
+					
+					if(expectedMimetype.exists() && expectedMimetype.isFile()
+						&& expectedMetaInf.exists() && expectedMetaInf.isDirectory()) {
+						
+						paginaEPUBChecker.modeExp = true;
+						paginaEPUBChecker.modeExp_keepArchive = true;
+						
+						Archive epub = new Archive(file.getPath(), paginaEPUBChecker.modeExp_keepArchive);
+						
+						paginaReport report = new paginaReport(epub.getEpubName());
+						
+		                report.info(null, FeatureEnum.TOOL_NAME, "epubcheck");
+						report.info(null, FeatureEnum.TOOL_VERSION, EpubCheck.version());
+						
+						epub.createArchive();
+						
+						paginaEPUBChecker.modeExp_epub = epub;
+						
+						paginaEPUBChecker.epubcheck_File = epub.getEpubFile();
+						paginaEPUBChecker.epubcheck_Report = report;
+						
+						// set file path in the file-path-input field
+						mainGUI.input_filePath.setText(epub.getEpubFile().toString());
+						
+						paginaEPUBChecker.validate();
+						
+						
+					} else {
+
+						mainGUI.setBorderStateError();
+						mainGUI.txtarea_results.setText(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
+						mainGUI.txtarea_results.append("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
+					}
+					
 					
 				} else {
 					

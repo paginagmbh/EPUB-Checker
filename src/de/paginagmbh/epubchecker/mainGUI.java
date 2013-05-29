@@ -485,6 +485,7 @@ public class mainGUI extends JFrame implements ActionListener {
 				    File file = new File(fd.getDirectory() + System.getProperty("file.separator") + fd.getFile());
 				    input_filePath.setText(file.getPath());
     	            
+					paginaEPUBChecker.modeExp = false;
             		paginaEPUBChecker.epubcheck_File = file;
             		paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
             		
@@ -511,7 +512,8 @@ public class mainGUI extends JFrame implements ActionListener {
     	            
     				File file = fc.getSelectedFile();
     	            input_filePath.setText(file.getPath());
-    	            
+
+					paginaEPUBChecker.modeExp = false;
             		paginaEPUBChecker.epubcheck_File = file;
             		paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
             		
@@ -536,7 +538,8 @@ public class mainGUI extends JFrame implements ActionListener {
             
             // file exists
             } else {
-            	
+
+				paginaEPUBChecker.modeExp = false;
 	    		paginaEPUBChecker.epubcheck_File = file;
 	    		paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
 	    		
@@ -726,8 +729,11 @@ public class mainGUI extends JFrame implements ActionListener {
 	
 	private static void validateImmediatelyIfFileIsSet() {
 	    if(paginaEPUBChecker.epubcheck_File != null && paginaEPUBChecker.epubcheck_File.exists()) {
+
+			paginaEPUBChecker.modeExp = false;
 			paginaEPUBChecker.epubcheck_Report = new paginaReport(paginaEPUBChecker.epubcheck_File.getName());
 			mainGUI.input_filePath.setText(paginaEPUBChecker.epubcheck_File.getPath());
+			
 	    	paginaEPUBChecker.validate();
 	    }
 	}

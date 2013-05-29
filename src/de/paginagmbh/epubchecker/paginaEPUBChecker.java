@@ -17,6 +17,7 @@ import javax.xml.xpath.*;
 import javax.swing.JFrame;
 import com.adobe.epubcheck.api.EpubCheck;
 import com.adobe.epubcheck.api.Report;
+import com.adobe.epubcheck.util.Archive;
 import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
 import com.apple.eawt.AppEvent.QuitEvent;
@@ -32,16 +33,16 @@ import com.apple.eawt.QuitResponse;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @version	1.1.2
-  * @date 		2013-03-08
+  * @version	1.2.0
+  * @date 		2013-03-15
   * @lastEdit	Tobias Fischer
   */
 public class paginaEPUBChecker {
 	
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
-	public static final String PROGRAMVERSION = "1.1.2";
-	public static final String VERSIONDATE = "08.03.2013";
+	public static final String PROGRAMVERSION = "1.2.0";
+	public static final String VERSIONDATE = "15.03.2013";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
@@ -70,6 +71,11 @@ public class paginaEPUBChecker {
 	public static Boolean AutoSave = false;
     public static long timestamp_begin, timestamp_end;
     public static String os_name;
+    
+    // mode "expanded"
+    public static Boolean modeExp = false;
+    public static Boolean modeExp_keepArchive = false;
+    public static Archive modeExp_epub = null;
     
     // predefined global variables
     public static Boolean guiReady = false;
@@ -366,6 +372,15 @@ public class paginaEPUBChecker {
 					}
 					
 					
+					// delete the temporarily created EPUB file cause it's invalid
+					if(modeExp && modeExp_epub != null && modeExp_keepArchive) {
+						// do not show this standard message from "Checker.java:205" as it is confusing in our case
+						//mainGUI.txtarea_results.append("\n\n" + __(Messages.DELETING_ARCHIVE) + "\n");
+						
+						modeExp_epub.deleteEpubFile();
+					}
+					
+					
 					
 					
 				
@@ -386,6 +401,12 @@ public class paginaEPUBChecker {
 					// set error counter in mac dock badge
 					if(os_name.equals("mac")) {
 						macApp.setDockIconBadge("✓");
+					}
+					
+					
+					// mode "expanded" : show a message "epub" saved successfully
+					if(modeExp && modeExp_epub != null && modeExp_keepArchive) {
+						mainGUI.txtarea_results.append("\n\n" + __("EPUB from source folder was successfully saved!") + "\n");
 					}
 				}
 				
