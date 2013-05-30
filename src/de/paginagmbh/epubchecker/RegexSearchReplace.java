@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-03-15
+  * @date 		2013-05-30
   * @lastEdit	Tobias Fischer
   */
 public class RegexSearchReplace {
@@ -29,16 +29,13 @@ public class RegexSearchReplace {
 		regex_replace.clear();
 		
 		
-		// version 0.x.x
+		// pagina version 0.x.x
 
 		fillArray("item \\((.*)\\) exists in the zip file, but is not declared in the OPF file",
 				__("item ($1) exists in the zip file, but is not declared in the OPF file"));
 	    
 	    fillArray("Length of the first filename in archive must be 8, but was (\\d+)",
 				__("Length of the first filename in archive must be 8, but was $1"));
-	    
-	    fillArray("Extra field length for first filename must be 0, but was (\\d+)",
-				__("Extra field length for first filename must be 0, but was $1"));
 	    
 	    fillArray("The file (.*) does not appear to be of type (.*)",
 				__("The file $1 does not appear to be of type $2"));
@@ -79,11 +76,14 @@ public class RegexSearchReplace {
 	    fillArray("'(.*)' is not a permissible spine media-type",
 				__("'$1' is not a permissible spine media-type"));
 	    
-	    fillArray("non-standard media-type '(.*)' with no fallback",
-				__("non-standard media-type '$1' with no fallback"));
+	    fillArray("Spine item with non-standard media-type '(.*)' with no fallback",
+				__("Spine item with non-standard media-type '$1' with no fallback"));
 	    
 	    fillArray("Spine item with non-standard media-type '(.*)' with fallback to non-spine-allowed media-type",
 				__("Spine item with non-standard media-type '$1' with fallback to non-spine-allowed media-type"));
+	    
+	    fillArray("non-standard media-type '(.*)' with no fallback",
+				__("non-standard media-type '$1' with no fallback"));
 	    
 	    fillArray("non-standard media-type '(.*)' with fallback to non-spine-allowed media-type",
 				__("non-standard media-type '$1' with fallback to non-spine-allowed media-type"));
@@ -208,6 +208,9 @@ public class RegexSearchReplace {
 	    fillArray("element \"([-a-z0-9_:]*)\" not allowed here; expected element ([-a-z0-9_\",: ]*) or \"([-a-z0-9_:]*)\" \\(with ([^\\)]*)\\)",
 				__("element \"$1\" not allowed here; expected element $2 or \"$3\" (with $4)"));
 	    
+	    fillArray("element \"([-a-z0-9_:]*)\" not allowed here; expected element ([-a-z0-9_\",: ]*)",
+				__("element \"$1\" not allowed here; expected element $2"));
+	    
 	    fillArray("element \"([-a-z0-9_:]*)\" not allowed here; expected the element end-tag",
 				__("element \"$1\" not allowed here; expected the element end-tag"));
 	    
@@ -255,7 +258,7 @@ public class RegexSearchReplace {
 	    
 	    
 
-	    // version 1.1
+	    // pagina version 1.1
 	    
 	    fillArray("'(.*)': referenced resource is not declared in the OPF manifest",
 	    		__("'$1': referenced resource is not declared in the OPF manifest"));
@@ -313,6 +316,40 @@ public class RegexSearchReplace {
 
 	    fillArray("assertion failed: spine element toc attribute must reference the NCX manifest item \\(referenced media type was '(.*)'\\)",
 	    		__("assertion failed: spine element toc attribute must reference the NCX manifest item (referenced media type was '$1')"));
+	    
+	    
+
+	    // pagina version 1.2
+	    
+	    fillArray("This file should declare in the OPF the property: (.*)",
+	    		__("This file should declare in the OPF the property: $1"));
+	    
+	    fillArray("This file should not declare in the OPF the properties: (.*)",
+	    		__("This file should not declare in the OPF the properties: $1"));
+	    
+	    fillArray("meta@dtb:uid content '(.*)' should conform to unique-identifier in content.opf: '(.*)'",
+	    		__("meta@dtb:uid content '$1' should conform to unique-identifier in content.opf: '$2'"));
+	    
+	    fillArray("non-standard stylesheet resource '(.*)' of type '(.*)'. A fallback must be specified.",
+	    		__("non-standard stylesheet resource '$1' of type '$2'. A fallback must be specified."));
+	    
+	    fillArray("File name contains non-ascii characters:(.*)\\. Consider changing filename",
+	    		__("File name contains non-ascii characters: $1 - Consider changing filename"));
+	    
+	    fillArray("Duplicate entry in the ZIP file \\(after Unicode NFC normalization\\): (.*)",
+	    		__("Duplicate entry in the ZIP file (after Unicode NFC normalization): $1"));
+	    
+	    fillArray("Duplicate entry in the ZIP file: (.*)",
+	    		__("Duplicate entry in the ZIP file: $1"));
+	    
+	    fillArray("Guide reference to an item that is not a Content Document: (.*)",
+	    		__("Guide reference to an item that is not a Content Document: $1"));
+	    
+	    fillArray("assertion failed: The \"(.*)\" attribute does not have a unique value",
+	    		__("assertion failed: The '$1' attribute does not have a unique value"));
+	    
+	    fillArray("spine contains multiple references to the manifest item with id (.*)",
+	    		__("spine contains multiple references to the manifest item with id '$1'"));
 	    
 	}
 	
