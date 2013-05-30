@@ -30,7 +30,8 @@
     
 	"EPUB Checker - Update" : "EPUB-Checker Update",
 	"Failed to download the update!" : "",
-	"Thanks for updating! The new version was saved on your desktop." : "",
+	"Thanks for updating!" : "",
+	"The new version was saved on your desktop." : "",
 	"Version %NEW_VERSION% is now available for download!" : "",
 	"You are currently using %CURRENT_VERSION%" : "",
 	"New version %NEW_VERSION% includes these features [EN]:" : "",
