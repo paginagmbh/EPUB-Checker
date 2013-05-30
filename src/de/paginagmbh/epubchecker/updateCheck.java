@@ -169,7 +169,7 @@ public class updateCheck {
 						+ __("You are currently using %CURRENT_VERSION%")
 							.replaceAll("%CURRENT_VERSION%", paginaEPUBChecker.PROGRAMVERSION)
 						+ "<br/><br/>"
-						+ __("New version %NEW_VERSION% includes these features [EN]:")
+						+ __("New version %NEW_VERSION% includes these features:")
 							.replaceAll("%NEW_VERSION%", UpdateInfo[0])
 						+ "<br/><br/>"
 						+ UpdateInfo[3]
