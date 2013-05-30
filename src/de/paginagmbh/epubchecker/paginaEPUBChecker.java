@@ -29,22 +29,22 @@ import com.apple.eawt.QuitResponse;
 
 
 /**
-  * checks and validates EPUB eBooks
-  * 
-  * @author		Tobias Fischer
-  * @copyright	pagina GmbH, Tübingen
-  * @version	1.2.0
-  * @date 		2013-03-15
-  * @lastEdit	Tobias Fischer
-  */
+ * checks and validates EPUB eBooks
+ * 
+ * @author		Tobias Fischer
+ * @copyright	pagina GmbH, Tübingen
+ * @version		1.2.0
+ * @date 		2013-05-30
+ * @lastEdit	Tobias Fischer
+ */
 public class paginaEPUBChecker {
 	
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
 	public static final String PROGRAMVERSION = "1.2.0";
-	public static final String VERSIONDATE = "15.03.2013";
+	public static final String VERSIONDATE = "30.05.2013";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "";
+	public static final String RELEASENOTES = "- Updated epubcheck library to v3.0.1<br/>- Check expanded/unzipped EPUBs<br/>- Translation updates<br/>- Bugfixes";
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 	
