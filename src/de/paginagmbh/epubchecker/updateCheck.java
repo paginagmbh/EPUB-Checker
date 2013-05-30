@@ -145,12 +145,14 @@ public class updateCheck {
 	        //  [0] BuildVersion
 	        //  [1] BuildDate
 	        //  [2] DownloadURL
+	        //  [3] ReleaseNotes
 	        String[] UpdateInfo = retrieve_UpdateInfo(paginaEPUBChecker.os_name);
 			
 //	        System.out.println(paginaEPUBChecker.os_name);
 //	        System.out.println(UpdateInfo[0]);
 //	        System.out.println(UpdateInfo[1]);
 //	        System.out.println(UpdateInfo[2]);
+//	        System.out.println(UpdateInfo[3]);
 	        
 	        
 	        // lokale Version ist niedriger als Server-Version
@@ -161,9 +163,18 @@ public class updateCheck {
 				
 				messageGUI msg = new messageGUI();
 				int answer = msg.showQuestion(
-						__("A new version is available: %NEW_VERSION%.<br/>You are currently using %CURRENT_VERSION%<br/><br/>Do you want to download the update?")
-						.replaceAll("%NEW_VERSION%", UpdateInfo[0])
-						.replaceAll("%CURRENT_VERSION%", paginaEPUBChecker.PROGRAMVERSION));
+						__("Version %NEW_VERSION% is now available for download!")
+							.replaceAll("%NEW_VERSION%", UpdateInfo[0])
+						+ "<br/>"
+						+ __("You are currently using %CURRENT_VERSION%")
+							.replaceAll("%CURRENT_VERSION%", paginaEPUBChecker.PROGRAMVERSION)
+						+ "<br/><br/>"
+						+ __("New version %NEW_VERSION% includes these features [EN]:")
+							.replaceAll("%NEW_VERSION%", UpdateInfo[0])
+						+ "<br/><br/>"
+						+ UpdateInfo[3]
+						+ "<br/><br/><br/>"
+						+ __("Do you want to download the update?"));
 				
 				
 				if(answer == JOptionPane.YES_OPTION) {
@@ -253,7 +264,7 @@ public class updateCheck {
     
 	public static String[] retrieve_UpdateInfo(String OSname) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		
-		String[] UpdateInfo = {null, null, null};
+		String[] UpdateInfo = {null, null, null, null};
         
         // read update information
         Document docUpdate = builder.parse(updateCheckURL);
@@ -266,6 +277,9 @@ public class updateCheck {
 
         // DownloadURL
         UpdateInfo[2] = xpath.compile("//package[@os='" + OSname + "']/entry[@key='downloadURL']/value").evaluate(docUpdate);
+
+        // ReleaseNotes
+        UpdateInfo[3] = xpath.compile("//package[@os='" + OSname + "']/entry[@key='releaseNotes']/value").evaluate(docUpdate);
         
         return UpdateInfo;
 	}
