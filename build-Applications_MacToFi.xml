@@ -13,7 +13,7 @@
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	
-	<property name="program.version.txtNumber" value="1.1.2" />
+	<property name="program.version.txtNumber" value="1.2.0" />
 	<property name="program.version.release" value="" />	<!-- "" or "beta" -->
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -51,7 +51,7 @@
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/jing-20120724.0.0.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/json-rpc-1.0.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/sac-1.3.jar"/>
-        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/saxon-9.1.0.8.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/Saxon-HE-9.4.0.6.jar"/>
     </jar>
 	
 	<chmod perm="ugo+rx" file="${build.dir}/paginaEPUBChecker.jar" />
