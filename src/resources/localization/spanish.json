@@ -34,7 +34,7 @@
 	"The new version was saved on your desktop." : "La nueva versión se guardará en su equipo",
 	"Version %NEW_VERSION% is now available for download!" : "Hay una nueva versión disponible: %NEW_VERSION%",
 	"You are currently using %CURRENT_VERSION%" : "En este momento está usando la versión %CURRENT_VERSION%",
-	"New version %NEW_VERSION% includes these features [EN]:" : "",
+	"New version %NEW_VERSION% includes these features:" : "",
 	"Do you want to download the update?" : "¿Quiere descargar la actualización?",
 	"There are no new updates available." : "No hay actualizaciones disponibles",
 	"Update check failed!<br/>Can't establish internet connection." : "¡Actualización fallida!<br/>Sin connexión a internet",

@@ -34,7 +34,7 @@
 	"The new version was saved on your desktop." : "",
 	"Version %NEW_VERSION% is now available for download!" : "",
 	"You are currently using %CURRENT_VERSION%" : "",
-	"New version %NEW_VERSION% includes these features [EN]:" : "",
+	"New version %NEW_VERSION% includes these features:" : "",
 	"Do you want to download the update?" : "",
 	"There are no new updates available." : "",
 	"Update check failed!<br/>Can't establish internet connection." : "",
