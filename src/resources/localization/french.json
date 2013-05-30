@@ -49,6 +49,7 @@
 	"Download" : "Télécharger",
 	"of" : "de",
 	"Estimating download size..." : "Estimation de la taille du téléchargement...",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "",
 	
 	"This operating system isn't supported yet!": "Ce système d'exploitation n'est pas encore supporté",
 	

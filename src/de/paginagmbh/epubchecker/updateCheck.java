@@ -29,7 +29,7 @@ import de.paginagmbh.common.internet.NetTest;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2012-05-20
+  * @date 		2012-05-30
   * @lastEdit	Tobias Fischer
   */
 public class updateCheck {
@@ -180,7 +180,15 @@ public class updateCheck {
 				if(answer == JOptionPane.YES_OPTION) {
 					
 	        		// download the update
-		        	dlgui = new FileDownloader(UpdateInfo[2], System.getProperty("user.home") + File.separator + "Desktop", "Ein Update (v" + UpdateInfo[0] + ", " + UpdateInfo[1] +") für Ihre Installation (v" + paginaEPUBChecker.PROGRAMVERSION + ", " + paginaEPUBChecker.VERSIONDATE + ") wird heruntergeladen ...");
+		        	dlgui = new FileDownloader(
+		        					UpdateInfo[2],
+		        					System.getProperty("user.home") + File.separator + "Desktop",
+		        					String.format(
+		        							__("An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..."),
+		        							UpdateInfo[0],
+		        							UpdateInfo[1],
+		        							paginaEPUBChecker.PROGRAMVERSION,
+		        							paginaEPUBChecker.VERSIONDATE));
 		        	
 				} else {
 					return;
