@@ -13,7 +13,7 @@ import com.adobe.epubcheck.util.Messages;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.2
- * @date 		2012-12-29
+ * @date 		2013-05-30
  * @lastEdit	Tobias Fischer
  */
 public class paginaReport implements Report {
@@ -56,6 +56,47 @@ public class paginaReport implements Report {
 		if (message == null)
 			return "";
 		return message.replaceAll("[\\s]+", " ");
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	@Override
+	public void hint(String resource, int line, int column, String message) {
+		message = fixMessage(message);
+
+		// translate epubcheck results
+		if(paginaEPUBChecker.epubcheck_translate) {
+
+			// pagina implementation
+			mainGUI.txtarea_results.append(
+					__("HINT:") + " "
+							+ "\"" + ePubName
+							+ (resource == null ? "" : "/" + resource) + "\""
+							+ (line <= 0 ? "" : " (" + __("line") + " " + line
+									+ (column <= 0 ? "" : ", " + __("col") + " " + column) + ")") + ":\n"
+									+ "   " + analyzeString(message)
+									+ "\n\n"
+					);
+
+			// do not translate epubcheck results
+		} else {
+			// changed standard implementation from "DefaultReportImpl.java"
+			mainGUI.txtarea_results.append(
+					"HINT: "
+							+ ePubName
+							+ (resource == null ? "" : "/" + resource)
+							+ (line <= 0 ? "" : "(" + line
+									+ (column <= 0 ? "" : "," + column) + ")") + ": "
+									+ message
+									+ "\n\n"
+					);
+		}
+
+		// scroll to the end
+		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
 	}
 
 

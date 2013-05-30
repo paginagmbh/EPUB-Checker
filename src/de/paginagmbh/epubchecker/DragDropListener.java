@@ -27,7 +27,7 @@ import com.adobe.epubcheck.util.FeatureEnum;
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
   * @version	1.2
-  * @date 		2013-03-15
+  * @date 		2013-05-30
   * @lastEdit	Tobias Fischer
   */
 // 
@@ -135,7 +135,7 @@ public class DragDropListener implements DropTargetListener {
     public void dragExit(DropTargetEvent event) {
     	// System.out.println("Exit");
     	mainGUI.setBorderStateNormal();
-    	mainGUI.txtarea_results.setText(__("Drag & Drop your EPUB file here to validate"));
+    	mainGUI.txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
     }
 
     @Override

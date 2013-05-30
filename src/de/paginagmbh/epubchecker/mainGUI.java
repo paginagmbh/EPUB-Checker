@@ -50,7 +50,7 @@ import java.awt.event.InputEvent;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-01-11
+  * @date 		2013-05-30
   * @lastEdit	Tobias Fischer
   */
 public class mainGUI extends JFrame implements ActionListener {
@@ -210,7 +210,7 @@ public class mainGUI extends JFrame implements ActionListener {
         // try catch is needed for running this app on openjdk on ubuntu
         // don't know exactly why...
         try {
-        	txtarea_results.setText(__("Drag & Drop your EPUB file here to validate"));
+        	txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
 	    } catch (Exception e) {
 //	        e.printStackTrace();
 	    }
