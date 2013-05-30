@@ -44,6 +44,7 @@ public class paginaEPUBChecker {
 	public static final String PROGRAMVERSION = "1.2.0";
 	public static final String VERSIONDATE = "15.03.2013";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
+	public static final String RELEASENOTES = "";
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 	
@@ -94,6 +95,8 @@ public class paginaEPUBChecker {
 	private static String cfgFile_Language = "Language.cfg";
 	public static String path_TranslateFile;
 	private static String cfgFile_Translate = "Translate.cfg";
+	public static String path_FirstRunFile;
+	private static String cfgFile_FirstRun = "FirstRun_" + PROGRAMVERSION + ".cfg";
 
 	// icons
     public static final Icon loadingIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/loading.gif")));
@@ -156,6 +159,7 @@ public class paginaEPUBChecker {
 		path_AutoSaveFile = path_ConfigDir + File.separator + cfgFile_AutoSave;
 		path_LanguageFile = path_ConfigDir + File.separator + cfgFile_Language;
 		path_TranslateFile = path_ConfigDir + File.separator + cfgFile_Translate;
+		path_FirstRunFile = path_ConfigDir + File.separator + cfgFile_FirstRun;
 		
 		// create directories to config base path if not existing
 		if(!new File(path_ConfigDir).exists()) {
@@ -187,6 +191,23 @@ public class paginaEPUBChecker {
         
         // init mac specific event listeners; after GUI is loaded
         initMacOSEventListeners();
+        
+		
+		
+		// show release notes only on first run
+		if( ! new File(path_FirstRunFile).exists() ) {
+			messageGUI msg = new messageGUI();
+			//msg.setTitle("");
+			msg.showMessage(__("Thanks for updating!")
+					+ "<br/><br/><br/>"
+					+ __("New version %NEW_VERSION% includes these features:").replaceAll("%NEW_VERSION%", PROGRAMVERSION)
+					+ "<br/><br/>"
+					+ RELEASENOTES
+					+ "<br/>");
+			
+			// write current version to FirstRun File
+	    	updateCheck.writeStringToFile(paginaEPUBChecker.path_FirstRunFile, String.valueOf(PROGRAMVERSION));
+		}
     	
     }
     
