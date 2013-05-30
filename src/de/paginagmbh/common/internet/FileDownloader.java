@@ -206,7 +206,7 @@ public class FileDownloader {
         
         if(dl_status==true && new File(downloadLocation).exists()) {
         	
-        	downloadInfo.setText(__("Thanks for updating! The new version was saved on your desktop."));
+        	downloadInfo.setText(__("Thanks for updating!") + " " + __("The new version was saved on your desktop."));
         	
         	btn_Button.setText(__("Finish update"));
         	for(int i=0; i< btn_Button.getActionListeners().length; i++) {
