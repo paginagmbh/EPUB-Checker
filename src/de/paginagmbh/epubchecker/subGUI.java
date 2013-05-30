@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-03-04
+  * @date 		2013-05-30
   * @lastEdit	Tobias Fischer
   */
 public class subGUI {
@@ -70,9 +70,9 @@ public class subGUI {
 				+ __("translation_content-2") + "\n\n"
 				
 				+ "<html>"
-				+ "<b>" + __("French") + "</b> (French): Quentin Valmori" + "<br/>"
-				+ "<b>" + __("German") + "</b> (German): pagina GmbH" + "<br/>"
-				+ "<b>" + __("Spanish") + "</b> (Spanish): Pedro Alamo" + "<br/>"
+				+ "<b>" + __("French") + "</b>: Quentin Valmori" + "<br/>"
+				+ "<b>" + __("German") + "</b>: pagina GmbH" + "<br/>"
+				+ "<b>" + __("Spanish") + "</b>: Pedro Alamo" + "<br/>"
 				+ "<br/></html>",
 				
 				__("Translations"),
