@@ -55,13 +55,11 @@
 	
 	"choose EPUB file" : "",
 	"validate EPUB" : "",
-	"validate EPUB 3" : "",
 	"epubcheck %1$1s" : "",
 	"Please choose an EPUB file for validation" : "",
 	"EPUB files (*.epub)" : "",
 	"Text files (*.txt)" : "",
 	"Validated in %s seconds" : "",
-	"Error!" : "",
 	"Please choose a proper EPUB file!" : "",
 	
 	"Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..." : "",
@@ -72,15 +70,10 @@
 	"Done" : "",
 	"Sorry, but more than one file can't be validated at the same time!" : "",
 	
-	"D'oh! Something went wrong..." : "",
-	"Maybe this cryptic error message will provide help in fixing the problem:" : "",
-	
 	"Check finished with %d warnings!" : "",
 	"Check finished with %d errors!" : "",
 	"Check finished with %1$1s warnings and %2$1s errors!" : "",
 	"Check finished with warnings or errors!" : "epubcheck finished with warnings or errors!",
-	"error(s)" : "",
-	"warning(s)" : "",
 	"This isn't an EPUB file" : "",
 	"This folder doesn't seem to contain any valid EPUB structure" : "",
 	"There should be at least a folder named 'META-INF' and the 'mimetype' file..." : "",
