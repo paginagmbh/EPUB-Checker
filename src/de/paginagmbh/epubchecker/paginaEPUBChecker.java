@@ -33,18 +33,18 @@ import com.apple.eawt.QuitResponse;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.2.0
- * @date 		2013-05-30
+ * @version		1.2.1
+ * @date 		2013-07-23
  * @lastEdit	Tobias Fischer
  */
 public class paginaEPUBChecker {
 	
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
-	public static final String PROGRAMVERSION = "1.2.0";
-	public static final String VERSIONDATE = "30.05.2013";
-	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- Updated epubcheck library to v3.0.1<br/>- Check expanded/unzipped EPUBs<br/>- Translation updates<br/>- Bugfixes";
+	public static final String PROGRAMVERSION = "1.2.1";
+	public static final String VERSIONDATE = "03.08.2013";
+	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
+	public static final String RELEASENOTES = "- Russian translation";		// - Updated epubcheck library to v3.0.1<br/>- Check expanded/unzipped EPUBs<br/>- Translation updates<br/>- Bugfixes
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 	
@@ -53,7 +53,8 @@ public class paginaEPUBChecker {
     	"German",
     	"English",
     	"French",
-    	"Spanish"
+    	"Spanish",
+    	"Russian"
     };
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //

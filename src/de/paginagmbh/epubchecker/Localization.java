@@ -11,8 +11,8 @@ import de.paginagmbh.common.json.JSON;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @version	1.2.2
-  * @date 		2013-03-08
+  * @version	1.2.3
+  * @date 		2013-07-23
   * @lastEdit	Tobias Fischer
   */
 public class Localization {
@@ -30,11 +30,11 @@ public class Localization {
 		if(paginaEPUBChecker.programLanguage.equals("systemLanguage")) {
 			
 			// retrieve the "system language"
-			String locale = System.getProperty("user.language");
+			String locale = System.getProperty("user.language").toLowerCase();
 			
 			
 			// load language file depending on system language
-			// possible values are: http://ftp.ics.uci.edu/pub/ietf/http/related/iso639.txt
+			// possible values are: http://mindprod.com/jgloss/countrycodes.html
 			
 			// German
 			if(locale.equals("de")) {
@@ -50,6 +50,11 @@ public class Localization {
 			} else if(locale.equals("es")) {
 				paginaEPUBChecker.programLanguage = "spanish";
 				lang = loadLanguageFile("spanish");
+
+			// Russian
+			} else if(locale.equals("ru")) {
+				paginaEPUBChecker.programLanguage = "russian";
+				lang = loadLanguageFile("russian");
 				
 			// English; Fallback
 			} else {
