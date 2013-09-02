@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -193,8 +194,19 @@ public class paginaEPUBChecker {
         // init mac specific event listeners; after GUI is loaded
         initMacOSEventListeners();
         
-		
-		
+        
+        
+        // init commandLine start for windows drag'n'drop on exe icon (issue #6)
+        List<File> argFiles = new ArrayList<File>();
+        if(args.length > 0) {
+	        for (int i = 0; i < args.length; i++) {
+	        	argFiles.add(new File(args[i]));
+	        }
+	        DragDropListener.handleDropedFiles(argFiles);
+        }
+        
+        
+        
 		// show release notes only on first run
 		if( ! new File(path_FirstRunFile).exists() ) {
 			messageGUI msg = new messageGUI();
