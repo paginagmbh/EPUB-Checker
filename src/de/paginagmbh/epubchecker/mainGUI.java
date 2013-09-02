@@ -50,7 +50,7 @@ import java.awt.event.InputEvent;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-05-30
+  * @date 		2013-09-02
   * @lastEdit	Tobias Fischer
   */
 public class mainGUI extends JFrame implements ActionListener {
@@ -94,7 +94,7 @@ public class mainGUI extends JFrame implements ActionListener {
         
         // set window size
 		if(paginaEPUBChecker.MainGuiDimension == null) {
-			setSize(675,550);
+			setSize(775,650);
 		} else {
 			setSize(paginaEPUBChecker.MainGuiDimension);
 		}
