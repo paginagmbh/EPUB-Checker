@@ -97,6 +97,8 @@ public class paginaEPUBChecker {
 	private static String cfgFile_Language = "Language.cfg";
 	public static String path_TranslateFile;
 	private static String cfgFile_Translate = "Translate.cfg";
+	public static String path_WindowFile;
+	private static String cfgFile_Window = "WindowPosition.cfg";
 	public static String path_FirstRunFile;
 	private static String cfgFile_FirstRun = "FirstRun_" + PROGRAMVERSION + ".cfg";
 
@@ -161,6 +163,7 @@ public class paginaEPUBChecker {
 		path_AutoSaveFile = path_ConfigDir + File.separator + cfgFile_AutoSave;
 		path_LanguageFile = path_ConfigDir + File.separator + cfgFile_Language;
 		path_TranslateFile = path_ConfigDir + File.separator + cfgFile_Translate;
+		path_WindowFile = path_ConfigDir + File.separator + cfgFile_Window;
 		path_FirstRunFile = path_ConfigDir + File.separator + cfgFile_FirstRun;
 		
 		// create directories to config base path if not existing
@@ -178,6 +181,39 @@ public class paginaEPUBChecker {
 			}
 		}
 		// "else" isn't needed since the default is the "systemLanguage" if no language is specified
+		
+		
+		
+		// load window position and dimensions from window config file (content example: 775x650@50,50 - WxH@X,Y)
+		if(new File(path_WindowFile).exists()) {
+			String windowConfig = updateCheck.readFileAsString(paginaEPUBChecker.path_WindowFile);
+			String[] windowConfigSplit = windowConfig.split("@");
+			
+			// handle window dimensions (WxH)
+			if(windowConfigSplit[0].length() != 0) {
+				String[] windowDimensions = windowConfigSplit[0].split("x");
+				
+				// reload window dimensions only if they are integers
+				if(windowDimensions.length == 2 && isInteger(windowDimensions[0]) && isInteger(windowDimensions[1])) {
+					MainGuiDimension = new Dimension(new Integer(windowDimensions[0]), new Integer(windowDimensions[1]));
+				}
+			}
+			// handle window position (X,Y)
+			if(windowConfigSplit[1].length() != 0) {
+				String[] windowPosition = windowConfigSplit[1].split(",");
+				
+				// reload window position only if they are integers, and...
+				if(windowPosition.length == 2 && isInteger(windowPosition[0]) && isInteger(windowPosition[1])) {
+					int posX = new Integer(windowPosition[0]);
+					int posY = new Integer(windowPosition[1]);
+					// ... and only if the posX and posY are within the current screen size dimensions (second screen fallback)
+					if(posX < Toolkit.getDefaultToolkit().getScreenSize().getWidth() && posY < Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
+						MainGuiPosition = new Point(posX, posY);
+					}
+				}
+			}			
+		}
+		// "else" isn't needed since there's a default in mainGui.java
 		
 		
 		
@@ -222,6 +258,19 @@ public class paginaEPUBChecker {
 	    	updateCheck.writeStringToFile(paginaEPUBChecker.path_FirstRunFile, String.valueOf(PROGRAMVERSION));
 		}
     	
+		
+		
+		// ShutdownHook to save window size and position for next startup
+		Runtime.getRuntime().addShutdownHook( new Thread() { 
+			@Override public void run() {
+				
+		    	MainGuiDimension = gui.getSize();
+		    	MainGuiPosition = gui.getLocation();
+		    	
+				// write window dimension and position to config file
+		    	updateCheck.writeStringToFile(path_WindowFile, (int)MainGuiDimension.getWidth() + "x" + (int)MainGuiDimension.getHeight() + "@" + (int)MainGuiPosition.getX() + "," + (int)MainGuiPosition.getY());
+			} 
+		} );
     }
     
     
@@ -476,6 +525,22 @@ public class paginaEPUBChecker {
 		
 		// execute SwingWorker
 		validationWorker.execute();
+    }
+	
+	
+	
+	
+	/* ********************************************************************************************************** */
+	
+    // http://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+    public static boolean isInteger(String s) {
+        try { 
+            Integer.parseInt(s); 
+        } catch(NumberFormatException e) { 
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
     }
 	
 	
