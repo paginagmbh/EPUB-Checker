@@ -42,8 +42,8 @@ public class paginaEPUBChecker {
 	
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
-	public static final String PROGRAMVERSION = "1.2.1";
-	public static final String VERSIONDATE = "03.09.2013";
+	public static final String PROGRAMVERSION = "1.2.2";
+	public static final String VERSIONDATE = "29.11.2013";
 	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
 	public static final String RELEASENOTES = "- Drop EPUB on program icon to validate instantly<br/>&nbsp;&nbsp;&nbsp;(on Windows; only when program is closed)<br/>- Russian translation<br/>- GUI size/position is beeing stored for next run<br/>- Slightly bigger default window size";		// - Updated epubcheck library to v3.0.1<br/>- Check expanded/unzipped EPUBs<br/>- Translation updates<br/>- Bugfixes
 	
