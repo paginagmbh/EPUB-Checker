@@ -31,7 +31,7 @@ import java.awt.Insets;
 /**
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2012-05-20
+  * @date 		2013-11-28
   * @lastEdit	Tobias Fischer
   */
 public class FileDownloader {
@@ -41,15 +41,15 @@ public class FileDownloader {
     private static String downloadPath;
     private static JDialog f;
     
+	// html tags for label wrap
+	private static final String html1 = "<html><body style='width:400px'>";
+	private static final String html2 = "</body></html>";
+    
     
     /* ***************************************************************************************************************** */
     
 	// Constructor
     public FileDownloader(String url, String downloadP, String message) {
-    	
-    	// Testdaten
-        // final String url = "http://www.pagina-online.de/uploads/media/pagina-EPUB-Checker_latest.zip";
-    	// final String downloadPath = System.getProperty("user.home");
         
     	downloadPath = downloadP;
     	
@@ -121,7 +121,7 @@ public class FileDownloader {
 		
 				
     	// Label "Download: File.Ext"
-        downloadInfo = new JLabel(__("Download") + ": " + url);
+        downloadInfo = new JLabel(html1 + __("Download") + ": " + url + html2);
         downloadInfo.setVerticalAlignment(SwingConstants.BOTTOM);
         downloadInfo.setFont(downloadInfo.getFont().deriveFont(11f));
         GridBagConstraints gbc_downloadInfo = new GridBagConstraints();
@@ -206,7 +206,11 @@ public class FileDownloader {
         
         if(dl_status==true && new File(downloadLocation).exists()) {
         	
-        	downloadInfo.setText(__("Thanks for updating!") + " " + __("The new version was saved on your desktop."));
+        	// Update Download-URI label with thank you note
+        	downloadInfo.setText(html1 + __("Thanks for updating!") + " " + __("The new version was saved on your desktop.") + html2);
+        	// Update file size label with UNZIP hint (refs issue #5) in bold and slightly bigger font size
+        	progressInfo.setText(html1 + __("Please unzip the downloaded update and replace your current version manually!") + html2);
+        	progressInfo.setFont(progressInfo.getFont().deriveFont(Font.BOLD, progressInfo.getFont().getSize() + 1f));
         	
         	btn_Button.setText(__("Finish update"));
         	for(int i=0; i< btn_Button.getActionListeners().length; i++) {

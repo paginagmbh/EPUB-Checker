@@ -51,6 +51,7 @@
 	"of" : "von",
 	"Estimating download size..." : "Berechnung läuft...",
 	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "Ein Update (v%1$s, %2$s) für Ihre Installation (v%3$s, %4$s) wird heruntergeladen...",
+	"Please unzip the downloaded update and replace your current version manually!" : "Bitte entpacken Sie das heruntergeladene ZIP-Update und ersetzen Sie Ihre lokale Version damit!",
 	
 	"This operating system isn't supported yet!": "Dieses Betriebssystem wird leider nicht unterstützt!",
 	
