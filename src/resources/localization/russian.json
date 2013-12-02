@@ -51,7 +51,7 @@
 	"of" : "из",
 	"Estimating download size..." : "Оценка размера загружаемого файла...",
 	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "Обновления (v%1$s, %2$s) для программы (v%3$s, %4$s) загружаются...",
-	"Please unzip the downloaded update and replace your current version manually!" : "",
+	"Please unzip the downloaded update and replace your current version manually!" : "Распакуйте загруженное обновление и замените текущую версию вручную!",
 	
 	"This operating system isn't supported yet!": "Данная операционная система пока не поддерживается!",
 	
