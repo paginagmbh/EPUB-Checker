@@ -50,7 +50,7 @@ import java.awt.event.InputEvent;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-09-02
+  * @date 		2013-12-13
   * @lastEdit	Tobias Fischer
   */
 public class mainGUI extends JFrame implements ActionListener {
@@ -610,7 +610,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "open website pagina"
         } else if(e.getSource() == mnItem_WebsitePagina) {
         	
-        	new OpenURIinBrowser("http://bit.ly/rUHWts");
+        	new OpenURIinBrowser("http://bit.ly/1h7g4rn");
 			
 			
     		
@@ -619,7 +619,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "open website epubcheck"
         } else if(e.getSource() == mnItem_WebsiteEpubcheck) {
         	
-        	new OpenURIinBrowser("http://code.google.com/p/epubcheck/");
+        	new OpenURIinBrowser("http://github.com/IDPF/epubcheck");
 			
 			
     		
