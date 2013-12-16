@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-05-30
+  * @date 		2013-12-16
   * @lastEdit	Tobias Fischer
   */
 public class RegexSearchReplace {
@@ -97,11 +97,14 @@ public class RegexSearchReplace {
 	    fillArray("role value '(.*)' is not valid",
 				__("role value '$1' is not valid"));
 	    
-	    fillArray("date value '(.*)' is not valid as per http://www.w3.org/TR/NOTE-datetime:\\[For input string: \"(.*)\"\\] is not an integer",
-	    		__("date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:[For input string: '$1'] is not an integer"));
+	    fillArray("date value '(.*)' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: (.*)",
+	    		__("date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2"));
 	    
-	    fillArray("date value '(.*)' is not valid as per http://www.w3.org/TR/NOTE-datetime:zero-length string",
-	    		__("date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:zero-length string"));
+	    fillArray("date value '(.*)' is not valid as per http://www.w3.org/TR/NOTE-datetime: \\[For input string: \"(.*)\"\\] is not an integer",
+	    		__("date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: [For input string: '$1'] is not an integer"));
+	    
+	    fillArray("date value '(.*)' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string",
+	    		__("date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string"));
 	    
 	    fillArray("date value '(.*)' is not valid.",
 				__("date value '$1' is not valid.") + "\n" + "   ");

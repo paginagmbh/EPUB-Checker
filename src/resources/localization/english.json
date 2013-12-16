@@ -118,7 +118,6 @@
 	"Unable to read zip file entries." : "",
 	
 	"Epubcheck Version $1" : "Epubcheck version $1",
-	"EpubPreflight Version $1" : "EpubPreflight version $1",
 	"Length of the first filename in archive must be 8, but was $1" : "",
 	"Mimetype entry must not have an extra field in its ZIP header" : "",
 	"The file $1 does not appear to be of type $2" : "",
@@ -187,8 +186,8 @@
 	"col" : "",
 	"assertion failed: playOrder sequence has gaps" : "",
 	"The direction and unicode-bidi properties must not be included in an EPUB Style Sheet." : "",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:[For input string: '$1'] is not an integer" : "",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:zero-length string" : "",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: [For input string: '$1'] is not an integer" : "",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string" : "",
 	"Mimetype file should contain only the string \"application/epub+zip\"." : "",
 	"title element is empty" : "",
 	"zip file contains empty directory '$1'" : "",
@@ -260,5 +259,7 @@
 	"Guide reference to an item that is not a Content Document: $1" : "",
 	"spine contains only non-linear resources" : "",
 	"assertion failed: The '$1' attribute does not have a unique value" : "",
-	"spine contains multiple references to the manifest item with id '$1'" : ""
+	"spine contains multiple references to the manifest item with id '$1'" : "",
+	
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : ""
 }

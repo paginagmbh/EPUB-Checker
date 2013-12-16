@@ -118,7 +118,6 @@
 	"Unable to read zip file entries." : "No es posible leer las entradas del archivo ZIP",
 	
 	"Epubcheck Version $1" : "Versión de Epubcheck $1",
-	"EpubPreflight Version $1" : "Versión de EpubPreflight $1",
 	"Length of the first filename in archive must be 8, but was $1" : "La longitud del primer nombre de archivo en el fichero debe ser de 8, pero fue de $1",
 	"Mimetype entry must not have an extra field in its ZIP header" : "",
 	"The file $1 does not appear to be of type $2" : "El archivo $1 no parece ser del tipo $2",
@@ -187,8 +186,8 @@
 	"col" : "columna",
 	"assertion failed: playOrder sequence has gaps" : "error de aserción: la Secuencia de Orden de Reproducción tiene vacíos",
 	"The direction and unicode-bidi properties must not be included in an EPUB Style Sheet." : "La dirección y propiedades unicode-bidi no deben incluirse en una hoja de estilos EPUB.",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:[For input string: '$1'] is not an integer" : "el valor de la fecha '$1' no es válido según http://www.w3.org/TR/NOTE-datetime: [Para la cadena de entrada: '$1'] no es un número entero",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:zero-length string" : "el valor de la fecha '$1' no es válido según http://www.w3.org/TR/NOTE-datetime: cadena de longitud cero",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: [For input string: '$1'] is not an integer" : "el valor de la fecha '$1' no es válido según http://www.w3.org/TR/NOTE-datetime: [Para la cadena de entrada: '$1'] no es un número entero",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string" : "el valor de la fecha '$1' no es válido según http://www.w3.org/TR/NOTE-datetime: cadena de longitud cero",
 	"Mimetype file should contain only the string \"application/epub+zip\"." : "El tipo de de archivo mime debe contener sólo la cadena \"application/epub+zip\".",
 	"title element is empty" : "El elemento título está vacío",
 	"zip file contains empty directory '$1'" : "El archivo zip contiene dos directorios '$1' vacíos",
@@ -260,5 +259,7 @@
 	"Guide reference to an item that is not a Content Document: $1" : "",
 	"spine contains only non-linear resources" : "",
 	"assertion failed: The '$1' attribute does not have a unique value" : "",
-	"spine contains multiple references to the manifest item with id '$1'" : ""
+	"spine contains multiple references to the manifest item with id '$1'" : "",
+	
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : ""
 }

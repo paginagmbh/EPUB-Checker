@@ -118,7 +118,6 @@
 	"Unable to read zip file entries." : "Die Inhalte der ZIP-Datei können nicht gelesen werden!",
 	
 	"Epubcheck Version $1" : "",
-	"EpubPreflight Version $1" : "",
 	"Length of the first filename in archive must be 8, but was $1" : "Die erste Datei im EPUB-Archiv ist nicht die unkomprimierte MimeType-Datei \"mimetype\"",
 	"Mimetype entry must not have an extra field in its ZIP header" : "",
 	"The file $1 does not appear to be of type $2" : "Die Datei '$1' scheint nicht vom Typ '$2' zu sein",
@@ -187,8 +186,8 @@
 	"col" : "Zeichen",
 	"assertion failed: playOrder sequence has gaps" : "TOC-Überprüfung fehlgeschlagen: Die \"playOrder\"-Sequenz enthält Lücken",
 	"The direction and unicode-bidi properties must not be included in an EPUB Style Sheet." : "Die Sprachrichtungs- und Unicode-Bidi-Eigenschaften dürfen im CSS-Stylesheet nicht verwendet werden",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:[For input string: '$1'] is not an integer" : "Datumseintrag '$1' ist keine Zahl und somit ungültig (vgl. http://www.w3.org/TR/NOTE-datetime )",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:zero-length string" : "Datumseintrag ist leer und somit ungültig (vgl. http://www.w3.org/TR/NOTE-datetime )",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: [For input string: '$1'] is not an integer" : "Datumseintrag '$1' ist keine Zahl und somit ungültig (vgl. http://www.w3.org/TR/NOTE-datetime )",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string" : "Datumseintrag ist leer und somit ungültig (vgl. http://www.w3.org/TR/NOTE-datetime )",
 	"Mimetype file should contain only the string \"application/epub+zip\"." : "Die Mimetype-Datei darf nur den String \"application/epub+zip\" als Inhalt haben!",
 	"title element is empty" : "'title'-Element ist leer!",
 	"zip file contains empty directory '$1'" : "Die Zip-Datei enthält ein leeres Verzeichnis: '$1'",
@@ -243,11 +242,11 @@
 	"Your system doesn't support xml version verification. Make sure your xml files are conformant to XML 1.0" : "Ihr System unterstützt keine XML-Überprüfung. Stellen Sie sicher, dass Ihre XML-Dateien XML 1.0 konform sind.",
 	"Filename is not allowed to end with \'.\'." : "Dateiname darf nicht mit Punkten enden",
 	
-	"This file has the 'remote-resources' property declared in the OPF, but no reference to remote resources has been found. Make sure this property is legitimate." : "",
+	"This file has the 'remote-resources' property declared in the OPF, but no reference to remote resources has been found. Make sure this property is legitimate." : "Diese Datei weist die Eigenschaft 'remote-resources' auf, es wurden jedoch keine Referenzen auf entfernte Ressourcen gefunden!",
 	"This file should declare in the OPF the property: $1" : "Für diese Datei muss im OPF die folgende Eigenschaft deklariert werden: '$1'",
 	"This file should not declare in the OPF the properties: $1" : "Für diese Datei sollte im OPF die folgende Eigenschaft NICHT deklariert werden: '$1'",
 	"non-standard stylesheet resource '$1' of type '$2'. A fallback must be specified." : "Stylesheet '$1' vom Typ '$2' ist laut dem EPUB-Standard nicht erlaubt. Es muss ein Fallback angegeben werden!",
-	"meta@dtb:uid content '$1' should conform to unique-identifier in content.opf: '$2'" : "",
+	"meta@dtb:uid content '$1' should conform to unique-identifier in content.opf: '$2'" : "Der Attributwert des Elements <meta name=\"dtb:uid\" ... /> (Wert '$1') gleicht nicht dem \"unique-identifier\"-Attribut im \"package\"-Element der OPF-Datei (Wert '$2')!",
 	"element \"rootfile\" missing required attribute \"full-path\"" : "Am Element 'rootfile' fehlt das erforderliche Attribut 'full-path'.",
 	"attribute \"full-path\" on element \"rootfile\" must not be empty" : "Das Attribut 'full-path' am Element 'rootfile' darf nicht leer sein!",
 	"Version attribute not found" : "Das EPUB-Versionsattribut ('version') wurde nicht gefunden!",
@@ -260,5 +259,7 @@
 	"Guide reference to an item that is not a Content Document: $1" : "Dieses 'guide'-Element referenziert auf eine Datei die laut EPUB-Standard kein 'Content Document' ist: '$1'",
 	"spine contains only non-linear resources" : "Der EPUB-\"Spine\" enthält nur nicht-lineare Einträge (@linear='no')",
 	"assertion failed: The '$1' attribute does not have a unique value" : "Prüfung fehlgeschlagen: Das '$1'-Attribut hat keinen einzigartigen Wert",
-	"spine contains multiple references to the manifest item with id '$1'" : "Der EPUB-\"Spine\" enthält mehrfache Referenzen auf die manifestierte Datei mit der ID '$1'"
+	"spine contains multiple references to the manifest item with id '$1'" : "Der EPUB-\"Spine\" enthält mehrfache Referenzen auf die manifestierte Datei mit der ID '$1'",
+	
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "Datumseintrag '$1' folgt nicht dem vorgegebenen Schema aus http://www.w3.org/TR/NOTE-datetime : $2"
 }
