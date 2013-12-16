@@ -118,7 +118,6 @@
 	"Unable to read zip file entries." : "Не удается прочитать записи zip-файла",
 	
 	"Epubcheck Version $1" : "Версия Epubcheck $1",
-	"EpubPreflight Version $1" : "Версия EpubPreflight $1",
 	"Length of the first filename in archive must be 8, but was $1" : "Длина имени первого файла в архиве должна быть 8, но была $1",
 	"Mimetype entry must not have an extra field in its ZIP header" : "Запись mimetype не должна иметь дополнительное поле в заголовке ZIP",
 	"The file $1 does not appear to be of type $2" : "Файл $1 не является файлом типа $2",
@@ -187,8 +186,8 @@
 	"col" : "столбец",
 	"assertion failed: playOrder sequence has gaps" : "последовательность чисел playOrder имеет пропуски",
 	"The direction and unicode-bidi properties must not be included in an EPUB Style Sheet." : "Таблица стилей EPUB не должна содержать свойства direction и unicode-bidi",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:[For input string: '$1'] is not an integer" : "Значение date '$1' является не допустимым в соответствии http://www.w3.org/TR/NOTE-datetime: [строка: '$1'] не является числом",
-	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime:zero-length string" : "Значение date '$1' является не допустимым в соответствии http://www.w3.org/TR/NOTE-datetime: пустая строка (строка нулевой длины)",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: [For input string: '$1'] is not an integer" : "Значение date '$1' является не допустимым в соответствии http://www.w3.org/TR/NOTE-datetime: [строка: '$1'] не является числом",
+	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string" : "Значение date '$1' является не допустимым в соответствии http://www.w3.org/TR/NOTE-datetime: пустая строка (строка нулевой длины)",
 	"Mimetype file should contain only the string \"application/epub+zip\"." : "Файл mimetype должен содержать только строку \"application/epub+zip\".",
 	"title element is empty" : "элемент title не содержит значения",
 	"zip file contains empty directory '$1'" : "архив содержит пустой каталог '$1'",
@@ -260,5 +259,7 @@
 	"Guide reference to an item that is not a Content Document: $1" : "Ссылка на элемент, кторый не является содержанием документа: $1",
 	"spine contains only non-linear resources" : "'spine' содержит только нелинейные ресурсы",
 	"assertion failed: The '$1' attribute does not have a unique value" : "Значение атрибута '$1' не уникально",
-	"spine contains multiple references to the manifest item with id '$1'" : "'spine' содержит несколько ссылок на элемент, указанный в 'manifest', с идентификатором '$1'"
+	"spine contains multiple references to the manifest item with id '$1'" : "'spine' содержит несколько ссылок на элемент, указанный в 'manifest', с идентификатором '$1'",
+	
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : ""
 }
