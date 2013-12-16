@@ -518,7 +518,7 @@ public class paginaEPUBChecker {
 				
 				// Auto Save logfile if desired
 				if(AutoSave) {
-					mainGUI.saveLogfile(new File(paginaEPUBChecker.epubcheck_File.getAbsolutePath().toLowerCase().replaceAll("\\.epub", "_log.txt")));
+					mainGUI.saveLogfile(new File(paginaEPUBChecker.epubcheck_File.getAbsolutePath().replaceAll("(?i)\\.epub", "_log.txt")));
 				}
 			}
 		};
