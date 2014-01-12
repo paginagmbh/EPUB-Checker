@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -29,7 +30,7 @@ import de.paginagmbh.common.internet.NetTest;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-09-03
+  * @date 		2014-01-12
   * @lastEdit	Tobias Fischer
   */
 public class updateCheck {
@@ -81,43 +82,62 @@ public class updateCheck {
 		
 		
 		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Checking for updates..."));
+		
+		
+		// InternetConnection Test
 		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Checking internet connection..."));
 		
-		
-		// Internet Test
-		if(! new NetTest().InternetTester("http://www.google.com")) {
+		try {
+			NetTest internetTest = new NetTest("http://www.google.com");
+			boolean hasInternetConnection = internetTest.testInternetConnection();
 			
-			if(backgroundTask) {
-				mainGUI.statusBar.update(null, __("Update check failed!<br/>Can't establish internet connection.").replaceAll("<br/>", " "));
-				return;
-			} else {
-				messageGUI msg = new messageGUI();
-				mainGUI.statusBar.update(null, null);
-				msg.showError(__("Update check failed!<br/>Can't establish internet connection."));
-				return;
+			// cancel updateCheck with message if failing
+			if(hasInternetConnection == false) {
+				if(backgroundTask) {
+					mainGUI.statusBar.update(null, __("Update check failed!<br/>Can't establish internet connection.").replaceAll("<br/>", " "));
+					return;
+				} else {
+					messageGUI msg = new messageGUI();
+					mainGUI.statusBar.update(null, null);
+					msg.showError(__("Update check failed!<br/>Can't establish internet connection."));
+					return;
+				}
 			}
 			
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
 		}
+
 		
 		
-		
+		// UpdateServer Test
 		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Checking update server..."));
 		
-		
-		// Update-Server Test
-		if(! new NetTest().InternetTester(updateCheckURL)) {
+		try {
+			NetTest updateserverTest = new NetTest(updateCheckURL);
+			boolean updateserverReady = updateserverTest.testWebsiteConnection(NetTest.HTTP_OK);
 			
-			if(backgroundTask) {
-				mainGUI.statusBar.update(null, __("Update check failed!<br/>Update server not available.").replaceAll("<br/>", " "));
-				return;
-			} else {
-				messageGUI msg = new messageGUI();
-				mainGUI.statusBar.update(null, null);
-				msg.showError(__("Update check failed!<br/>Update server not available."));
-				return;
+			// cancel updateCheck with message if failing
+			if(updateserverReady == false) {
+				if(backgroundTask) {
+					mainGUI.statusBar.update(null, __("Update check failed!<br/>Update server not available.").replaceAll("<br/>", " "));
+					return;
+				} else {
+					messageGUI msg = new messageGUI();
+					mainGUI.statusBar.update(null, null);
+					msg.showError(__("Update check failed!<br/>Update server not available."));
+					return;
+				}
 			}
 			
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+			return;
 		}
+		
 		
 		
         // Dokument instanzieren
