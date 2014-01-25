@@ -9,7 +9,7 @@ ANT-Task
 
 Der ANT-Build-Task benötigt folgende Libraries:
 
-* [jarbundler 2.2.0](http://sourceforge.net/projects/jarbundler/files/JarBundler/v2.2.0/ "Jarbundler 2.2.0 Download")
+* [jarbundler 2.2.1](https://github.com/tofi86/Jarbundler/releases/tag/v2.2.1 "Jarbundler 2.2.1 Download")
 * [launch4j 3.x](https://sourceforge.net/projects/launch4j/files/launch4j-3/ "launch4j 3.x Download")
  * _Für Mac OS X Mountain Lion steht ein extra Build (3.1 beta) zur Verfügung_
 * [xmltask](https://sourceforge.net/projects/xmltask/files/xmltask/)
@@ -21,7 +21,7 @@ und folgenden Ordneraufbau:
 * _ANT-buildDir
 	* libs/
 		* jarbundler-2.2.0/
-			* jarbundler-2.2.0.jar
+			* jarbundler-2.2.1.jar
 		* launch4j/  _(!! Mac/Windows spezifisch !!)_
 			* launch4j.jar
 		* xmltask.jar
