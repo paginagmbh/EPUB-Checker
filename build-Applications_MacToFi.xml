@@ -88,13 +88,12 @@
 	
 	<taskdef name="jarbundler"
 		classname="net.sourceforge.jarbundler.JarBundler"
-		classpath="${jarbundler.dir}/jarbundler-2.2.1.jar" />
+		classpath="${jarbundler.dir}/jarbundler-2.3.0.jar" />
 	
 	<jarbundler
 		dir="${out.dir}"
 		name="EPUB-Checker"
-		shortname="EPUB-Checker"
-		aboutmenuname="pagina EPUB-Checker"
+		shortname="pagina EPUB-Checker"
 		bundleid="de.paginagmbh.epubchecker"
 		mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
 		stubfile="${resources.dir}/universalJavaApplicationStub"
@@ -104,6 +103,7 @@
 		allowMixedLocalizations="true"
 		signature="PAEC"
 		build="${program.version.build}"
+		copyright="© 2010-2014 pagina GmbH, Tübingen, Germany"
 		jvmversion="1.6+">
 		
 		<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
