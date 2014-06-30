@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.0
- * @date 		2012-02-26
+ * @version		1.1
+ * @date 		2014-06-30
  * @lastEdit	Tobias Fischer
  * 
  * generates a status bar at the bottom of a border 
@@ -74,8 +74,6 @@ public class StatusBar extends JPanel {
 		setLayout(new BorderLayout());
 		// set dimensions - only the height ("22") is important
 		setPreferredSize(new Dimension(10, 22));
-		// set background color to system color
-		setBackground(SystemColor.control);
 		
 		
 		// create text label
