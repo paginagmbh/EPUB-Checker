@@ -35,7 +35,7 @@ import com.apple.eawt.QuitResponse;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.3.2
- * @date 		2014-06-30
+ * @date 		2014-10-15
  * @lastEdit	Tobias Fischer
  */
 public class paginaEPUBChecker {
@@ -43,7 +43,7 @@ public class paginaEPUBChecker {
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
 	public static final String PROGRAMVERSION = "1.3.2";
-	public static final String VERSIONDATE = "30.06.2014";
+	public static final String VERSIONDATE = "15.10.2014";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
 	public static final String RELEASENOTES = "- Bugfix for Macs with Oracle Java 7 or 8 installed";
 	
@@ -189,29 +189,33 @@ public class paginaEPUBChecker {
 			String windowConfig = updateCheck.readFileAsString(paginaEPUBChecker.path_WindowFile);
 			String[] windowConfigSplit = windowConfig.split("@");
 			
-			// handle window dimensions (WxH)
-			if(windowConfigSplit[0].length() != 0) {
-				String[] windowDimensions = windowConfigSplit[0].split("x");
+			// check if windowConfig contains valid information
+			if(windowConfig.length() > 0 && windowConfigSplit.length == 2) {
 				
-				// reload window dimensions only if they are integers
-				if(windowDimensions.length == 2 && isInteger(windowDimensions[0]) && isInteger(windowDimensions[1])) {
-					MainGuiDimension = new Dimension(new Integer(windowDimensions[0]), new Integer(windowDimensions[1]));
-				}
-			}
-			// handle window position (X,Y)
-			if(windowConfigSplit[1].length() != 0) {
-				String[] windowPosition = windowConfigSplit[1].split(",");
-				
-				// reload window position only if they are integers, and...
-				if(windowPosition.length == 2 && isInteger(windowPosition[0]) && isInteger(windowPosition[1])) {
-					int posX = new Integer(windowPosition[0]);
-					int posY = new Integer(windowPosition[1]);
-					// ... and only if the posX and posY are within the current screen size dimensions (second screen fallback)
-					if(posX < Toolkit.getDefaultToolkit().getScreenSize().getWidth() && posY < Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
-						MainGuiPosition = new Point(posX, posY);
+				// handle window dimensions (WxH)
+				if(windowConfigSplit[0].length() != 0) {
+					String[] windowDimensions = windowConfigSplit[0].split("x");
+					
+					// reload window dimensions only if they are integers
+					if(windowDimensions.length == 2 && isInteger(windowDimensions[0]) && isInteger(windowDimensions[1])) {
+						MainGuiDimension = new Dimension(new Integer(windowDimensions[0]), new Integer(windowDimensions[1]));
 					}
 				}
-			}			
+				// handle window position (X,Y)
+				if(windowConfigSplit[1].length() != 0) {
+					String[] windowPosition = windowConfigSplit[1].split(",");
+					
+					// reload window position only if they are integers, and...
+					if(windowPosition.length == 2 && isInteger(windowPosition[0]) && isInteger(windowPosition[1])) {
+						int posX = new Integer(windowPosition[0]);
+						int posY = new Integer(windowPosition[1]);
+						// ... and only if the posX and posY are within the current screen size dimensions (second screen fallback)
+						if(posX < Toolkit.getDefaultToolkit().getScreenSize().getWidth() && posY < Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
+							MainGuiPosition = new Point(posX, posY);
+						}
+					}
+				}
+			}
 		}
 		// "else" isn't needed since there's a default in mainGui.java
 		
