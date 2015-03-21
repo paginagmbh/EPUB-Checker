@@ -1,8 +1,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>H:\8-Mitarbeiter\tofi\JAVA\eclipse-workspace\EPUB-Checker\02_sealed_jar\paginaEPUBChecker.jar</jar>
-  <outfile>H:\8-Mitarbeiter\tofi\JAVA\eclipse-workspace\EPUB-Checker\03_ANT-build\output\EPUB-Checker.exe</outfile>
+  <jar>../../dist/paginaEPUBChecker.jar</jar>
+  <outfile>../../dist/EPUB-Checker.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
@@ -12,7 +12,7 @@
   <customProcName>true</customProcName>
   <stayAlive>true</stayAlive>
   <manifest></manifest>
-  <icon>H:\8-Mitarbeiter\tofi\JAVA\eclipse-workspace\EPUB-Checker\03_ANT-build\resources\paginaEPUBChecker_512.ico</icon>
+  <icon>../icons/paginaEPUBChecker_512.ico</icon>
   <singleInstance>
     <mutexName>paginaEPUBChecker</mutexName>
     <windowTitle>EPUB-Checker</windowTitle>
@@ -24,12 +24,12 @@
     <jdkPreference>preferJre</jdkPreference>
   </jre>
   <versionInfo>
-    <fileVersion>1.1.1.207</fileVersion>
-    <txtFileVersion>1.1.1.207</txtFileVersion>
+    <fileVersion>1.4.0.249</fileVersion>
+    <txtFileVersion>1.4.0</txtFileVersion>
     <fileDescription>pagina EPUB-Checker</fileDescription>
     <copyright>pagina GmbH, Tuebingen</copyright>
-    <productVersion>1.1.1.207</productVersion>
-    <txtProductVersion>1.1.1.207</txtProductVersion>
+    <productVersion>1.4.0.249</productVersion>
+    <txtProductVersion>1.4.0</txtProductVersion>
     <productName>pagina EPUB-Checker</productName>
     <companyName>pagina GmbH</companyName>
     <internalName>EPUB-Checker</internalName>
