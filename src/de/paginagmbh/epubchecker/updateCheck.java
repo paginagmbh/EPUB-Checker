@@ -137,7 +137,9 @@ public class updateCheck {
 			builder = domFactory.newDocumentBuilder();
 	        
 	        // XPath instanzieren
-	        XPathFactory factory = XPathFactory.newInstance();
+	        XPathFactory factory = XPathFactory.newInstance(XPathFactory.DEFAULT_OBJECT_MODEL_URI,
+					  "net.sf.saxon.xpath.XPathFactoryImpl",
+					  ClassLoader.getSystemClassLoader());
 	        xpath = factory.newXPath();
 	        
 	        
