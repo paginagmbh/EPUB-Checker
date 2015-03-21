@@ -30,7 +30,7 @@ import de.paginagmbh.common.internet.NetTest;
   * 
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2014-01-12
+  * @date 		2015-03-21
   * @lastEdit	Tobias Fischer
   */
 public class updateCheck {
@@ -228,7 +228,7 @@ public class updateCheck {
 				} else {
 					messageGUI msg = new messageGUI();
 					mainGUI.statusBar.reset();
-					msg.showMessage(__("There are no new updates available."));
+					msg.showMessage(__("There are no new updates available."), __("You're up-to-date!"));
 					return;
 				}
 			}

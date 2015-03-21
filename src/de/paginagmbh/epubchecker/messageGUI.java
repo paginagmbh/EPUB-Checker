@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 /**
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
-  * @date 		2013-01-04
+  * @date 		2015-03-21
   * @lastEdit	Tobias Fischer
   */
 public class messageGUI extends JDialog {
@@ -79,8 +79,10 @@ public class messageGUI extends JDialog {
     /* ***************************************************************************************************************** */
     
 	public void showError(String message) {
-        
-		JOptionPane.showMessageDialog(f, "<html><b>"+ windowTitle +"</b><br/><br/>" + message + "<br/><br/><html>", windowTitle, JOptionPane.ERROR_MESSAGE);
+		showError(message, windowTitle);
+	}
+	public void showError(String message, String title) {
+		JOptionPane.showMessageDialog(f, "<html><b>"+ title +"</b><br/><br/>" + message + "<br/><br/><html>", windowTitle, JOptionPane.ERROR_MESSAGE);
 	}
     
     
@@ -88,8 +90,10 @@ public class messageGUI extends JDialog {
     /* ***************************************************************************************************************** */
     
 	public void showMessage(String message) {
-        
-		JOptionPane.showMessageDialog(f, "<html><b>"+ windowTitle +"</b><br/><br/>" + message + "<br/><br/><html>", windowTitle, JOptionPane.INFORMATION_MESSAGE);
+		showMessage(message, windowTitle);
+	}
+	public void showMessage(String message, String title) {
+		JOptionPane.showMessageDialog(f, "<html><b>"+ title +"</b><br/><br/>" + message + "<br/><br/><html>", windowTitle, JOptionPane.INFORMATION_MESSAGE);
 	}
     
     
@@ -97,9 +101,11 @@ public class messageGUI extends JDialog {
     /* ***************************************************************************************************************** */
     
 	public int showQuestion(String message) {
-        
+		return showQuestion(message, windowTitle);
+	}
+	public int showQuestion(String message, String title) {
 		Object[] options = {__("Start update"), __("Cancel")};
-		int n = JOptionPane.showOptionDialog(f, "<html><b>"+ windowTitle +"</b><br/><br/>" + message + "<br/><br/><html>", windowTitle, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		int n = JOptionPane.showOptionDialog(f, "<html><b>"+ title +"</b><br/><br/>" + message + "<br/><br/><html>", windowTitle, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		return n;
 	}
 	
