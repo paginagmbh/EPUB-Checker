@@ -105,8 +105,9 @@ public class updateCheck {
 			}
 			
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			messageGUI msg = new messageGUI();
+			mainGUI.statusBar.reset();
+			msg.showError(__("Update check failed!<br/>Can't establish internet connection."));
 			return;
 		}
 
@@ -133,8 +134,9 @@ public class updateCheck {
 			}
 			
 		} catch (MalformedURLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			messageGUI msg = new messageGUI();
+			mainGUI.statusBar.reset();
+			msg.showError(__("Update check failed!<br/>Update server not available."));
 			return;
 		}
 		
