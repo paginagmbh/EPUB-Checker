@@ -93,21 +93,12 @@ public class updateCheck {
 			
 			// cancel updateCheck with message if failing
 			if(hasInternetConnection == false) {
-				if(backgroundTask) {
-					mainGUI.statusBar.update(null, __("Update check failed!<br/>Can't establish internet connection.").replaceAll("<br/>", " "));
-					return;
-				} else {
-					messageGUI msg = new messageGUI();
-					mainGUI.statusBar.reset();
-					msg.showError(__("Update check failed!<br/>Can't establish internet connection."));
-					return;
-				}
+				errorInternetConnectionNotAvailable();
+				return;
 			}
 			
 		} catch (MalformedURLException e1) {
-			messageGUI msg = new messageGUI();
-			mainGUI.statusBar.reset();
-			msg.showError(__("Update check failed!<br/>Can't establish internet connection."));
+			errorUpdateCheck(e1);
 			return;
 		}
 
@@ -122,23 +113,20 @@ public class updateCheck {
 			
 			// cancel updateCheck with message if failing
 			if(updateserverReady == false) {
-				if(backgroundTask) {
-					mainGUI.statusBar.update(null, __("Update check failed!<br/>Update server not available.").replaceAll("<br/>", " "));
-					return;
-				} else {
-					messageGUI msg = new messageGUI();
-					mainGUI.statusBar.reset();
-					msg.showError(__("Update check failed!<br/>Update server not available."));
-					return;
-				}
+				errorUpdateServerNotAvailable();
+				return;
 			}
 			
 		} catch (MalformedURLException e2) {
-			messageGUI msg = new messageGUI();
-			mainGUI.statusBar.reset();
-			msg.showError(__("Update check failed!<br/>Update server not available."));
+			errorUpdateCheck(e2);
 			return;
 		}
+
+		
+		
+		
+		
+		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Gathering update information..."));
 		
 		
 		
@@ -155,12 +143,6 @@ public class updateCheck {
 	        
 			// write today's date in updatecheckFile
 			writeStringToFile(paginaEPUBChecker.path_LastUpdateCheckFile, UpdateCheckToday);
-
-			
-			
-			
-			
-			mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Gathering update information..."));
 			
 
 	        // read update info from server
@@ -224,25 +206,19 @@ public class updateCheck {
 
 				if(backgroundTask) {
 					mainGUI.statusBar.update(null, __("There are no new updates available."));
-					return;
 				} else {
 					messageGUI msg = new messageGUI();
 					mainGUI.statusBar.reset();
 					msg.showMessage(__("There are no new updates available."), __("You're up-to-date!"));
-					return;
 				}
+				return;
 			}
 		
 			
 		
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			errorUpdateCheck(e);
+			return;
 		}
 	}
     
@@ -286,6 +262,48 @@ public class updateCheck {
         } catch (Exception e){
 			e.printStackTrace();
         }
+    }
+    
+    
+    
+    /* ***************************************************************************************************************** */
+    
+    public static void errorUpdateCheck(Exception e) {
+		if(backgroundTask) {
+			mainGUI.statusBar.update(null, __("Update check failed!") + " " + __("Please check manually for updates").replace("<br/>", " "));
+		} else {
+			messageGUI msg = new messageGUI();
+			mainGUI.statusBar.reset();
+			msg.showMessage(__("Please check manually for updates") + "<br/><br/>["+ e.getClass().getName() +"]<br/>"+ e.getMessage().replace(System.getProperty("line.separator"), "<br/>"), __("Update check failed!"));
+		}
+    }
+    
+    
+    
+    /* ***************************************************************************************************************** */
+    
+    public static void errorInternetConnectionNotAvailable() {
+    		if(backgroundTask) {
+			mainGUI.statusBar.update(null, __("Update check failed!") + " " + __("Can't establish internet connection."));
+		} else {
+			messageGUI msg = new messageGUI();
+			mainGUI.statusBar.reset();
+			msg.showError(__("Update check failed!") + "<br/>" + __("Can't establish internet connection."));
+		}
+    }
+    
+    
+    
+    /* ***************************************************************************************************************** */
+    
+    public static void errorUpdateServerNotAvailable() {
+    		if(backgroundTask) {
+			mainGUI.statusBar.update(null, __("Update check failed!") + " " + __("Update server not available."));
+		} else {
+			messageGUI msg = new messageGUI();
+			mainGUI.statusBar.reset();
+			msg.showError(__("Update check failed!") + "<br/>" + __("Update server not available."));
+		}
     }
     
     
