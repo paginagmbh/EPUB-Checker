@@ -224,36 +224,36 @@ public class updateCheck {
     
     
     
-    /* ***************************************************************************************************************** */
-    
-    public static String readFileAsString(String filePath) throws java.io.IOException {
-    	
-    	// Variablen instanziieren
-    	StringBuffer fileData = new StringBuffer(1000);
-    	char[] buf = new char[1024];
-    	int numRead=0;
-    	
-    	// Datei einlesen
-    	BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    	while((numRead=reader.read(buf)) != -1){
-    		String readData = String.valueOf(buf, 0, numRead);
-    		fileData.append(readData);
-    		buf = new char[1024];
-    	}
-    	
-    	// Datei schließen
-    	reader.close();
-    	
-    	// Dateiinhalt als String zurückgeben
-    	return fileData.toString();
-    }
-    
+	/* ***************************************************************************************************************** */
+
+	public static String readFileAsString(String filePath) throws java.io.IOException {
+
+		// Variablen instanziieren
+		StringBuffer fileData = new StringBuffer(1000);
+		char[] buf = new char[1024];
+		int numRead=0;
+
+		// Datei einlesen
+		BufferedReader reader = new BufferedReader(new FileReader(filePath));
+		while((numRead=reader.read(buf)) != -1){
+			String readData = String.valueOf(buf, 0, numRead);
+			fileData.append(readData);
+			buf = new char[1024];
+		}
+
+		// Datei schließen
+		reader.close();
+
+		// Dateiinhalt als String zurückgeben
+		return fileData.toString();
+	}
+
     
     
     /* ***************************************************************************************************************** */
     
     public static void writeStringToFile(String file, String content) {
-    	try {
+    		try {
 			// Create file 
 			FileWriter fstream = new FileWriter(file);
 			BufferedWriter out = new BufferedWriter(fstream);
