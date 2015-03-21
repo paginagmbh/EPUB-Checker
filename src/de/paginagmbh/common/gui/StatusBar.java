@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.SystemColor;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -14,8 +13,8 @@ import javax.swing.JPanel;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.1
- * @date 		2014-06-30
+ * @version		1.2
+ * @date 		2015-03-21
  * @lastEdit	Tobias Fischer
  * 
  * generates a status bar at the bottom of a border 
@@ -106,6 +105,16 @@ public class StatusBar extends JPanel {
 	public void update(Icon icon, String text) {
 		lbl_text.setIcon(icon);
 		lbl_text.setText(text);
+	}
+	
+	
+	
+	
+	/* ********************************************************************************************************** */
+	
+	public void reset() {
+		lbl_text.setIcon(null);
+		lbl_text.setText(null);
 	}
 	
 	
