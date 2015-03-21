@@ -415,6 +415,9 @@ public class paginaEPUBChecker {
 				
 				// validation finished with warnings or errors
 				if(epubcheck_Result == false) {
+					
+					// set border color to red
+					mainGUI.setBorderStateError();
 
 
 					// if output is translated, then format it nicely
@@ -436,6 +439,9 @@ public class paginaEPUBChecker {
 					
 					// only warnings
 					} else if(epubcheck_translate && paginaReport.warningCount > 0) {
+						// set border color to orange
+						mainGUI.setBorderStateWarning();
+						
 						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d warnings!"), paginaReport.warningCount) + "\n");
 					
 					// something went wrong
@@ -473,6 +479,9 @@ public class paginaEPUBChecker {
 				
 				// validation finished without warnings or errors
 				} else {
+					
+					// set border color to green
+					mainGUI.setBorderStateValid();
 					
 					// translate the output
 					if(epubcheck_translate) {

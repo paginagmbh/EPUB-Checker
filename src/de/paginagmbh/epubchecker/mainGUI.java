@@ -699,6 +699,18 @@ public class mainGUI extends JFrame implements ActionListener {
     	scroll_results.setBorder(new DashedLineBorder(Color.RED, 7));
     }
 	
+	public static void setBorderStateWarning() {
+    	txtarea_results.setBackground(new Color(255,240,230));
+    	scroll_results.setBackground(new Color(255,240,230));
+    	scroll_results.setBorder(new DashedLineBorder(new Color(255,102,0), 7));
+    }
+	
+	public static void setBorderStateValid() {
+    	txtarea_results.setBackground(new Color(235,247,235));
+    	scroll_results.setBackground(new Color(235,247,235));
+    	scroll_results.setBorder(new DashedLineBorder(new Color(51,173,51), 7));
+    }
+	
 	
 	
 	
