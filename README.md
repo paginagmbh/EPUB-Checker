@@ -7,26 +7,25 @@ Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux
 ANT-Task
 --------
 
-Der ANT-Build-Task benötigt folgende Libraries:
+The ANT build.xml needs the following libraries:
 
 * [jarbundler 2.3.0](https://github.com/tofi86/Jarbundler/releases/tag/v2.3.0 "Jarbundler 2.3.0 Download")
 * [launch4j 3.x](https://sourceforge.net/projects/launch4j/files/launch4j-3/ "launch4j 3.x Download")
  * _Für Mac OS X Mountain Lion steht ein extra Build (3.1 beta) zur Verfügung_
-* [xmltask](https://sourceforge.net/projects/xmltask/files/xmltask/)
- * _Nur für die ANT-Skripte zum automatischen veröffentlichen. Wird aber momentan nicht genutzt!_
 
-und folgenden Ordneraufbau:
+which need to be placed here:
 
-* EPUB-Checker (java sources)
-* _ANT-buildDir
-	* libs/
-		* jarbundler-2.2.0/
-			* jarbundler-2.3.0.jar
-		* launch4j/  _(!! Mac/Windows spezifisch !!)_
-			* launch4j.jar
-		* xmltask.jar
-	* resources/
-		* JavaApplicationStub
-	* output/
+* git root
+  * `bin/`
+  * `buildConfig/`
+    * `lib/`
+      * `jarbundler/`
+        * `jarbundler.jar`
+        * *plus dependencies...*
+      * `launch4j/`
+        * `launch4j.jar`
+        * *plus dependencies...*
+  * `dist/`
+  * `src/`
 
-Unter diesen Voraussetzungen kann der ANT-Task aus Eclipse heraus gestartet werden.
+If these two libraries are in the correct place, it should be easy to build the EPUB-Checker project from sources!

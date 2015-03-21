@@ -7,9 +7,10 @@
 
 
 bin/
+dist/
+buildConfig/lib/
 
 .project
 .classpath
 
 .settings/
-

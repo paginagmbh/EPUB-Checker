@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="../_ANT-buildDir">
+<project>
 	
 
-	<property name="src.dir" location="../EPUB-Checker"/>
-	<property name="src.cfg.dir" location="${src.dir}/buildConfig"/>
-	<property name="build.dir" location="."/>
-	<property name="antLib.dir" location="${build.dir}/libs"/>
-	<property name="out.dir" location="${build.dir}/output"/>
+	<property name="src.dir" location="."/>
+	<property name="build.dir" location="${src.dir}/buildConfig"/>
+	<property name="antLib.dir" location="${build.dir}/lib"/>
+	<property name="out.dir" location="${src.dir}/dist"/>
 	
-    <buildnumber file="${src.cfg.dir}/build-ID.txt"/>
+    <buildnumber file="${build.dir}/build-ID.txt"/>
     
     <tstamp>
         <format property="YEAR" pattern="yyyy" locale="de,DE"/>
@@ -38,12 +37,24 @@
 	
 	<echo> </echo>
 	<echo> </echo>
+	<echo>Cleaning up dist directory...</echo>
+	<echo> </echo>
+	
+	<delete includeemptydirs="true" failonerror="false">
+		<fileset dir="${out.dir}" includes="**/*"/>
+	</delete>
+	
+	
+	
+	
+	<echo> </echo>
+	<echo> </echo>
 	<echo>Building JAR file...</echo>
 	<echo> </echo>
 	
 	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
-    <jar destfile="${build.dir}/paginaEPUBChecker.jar" filesetmanifest="mergewithoutmain">
+    <jar destfile="${out.dir}/paginaEPUBChecker.jar" filesetmanifest="mergewithoutmain">
         <manifest>
             <attribute name="Main-Class" value="de.paginagmbh.epubchecker.paginaEPUBChecker"/>
             <attribute name="Class-Path" value="."/>
@@ -59,7 +70,7 @@
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/Saxon-HE-9.4.0.6.jar"/>
     </jar>
 	
-	<chmod perm="ugo+rx" file="${build.dir}/paginaEPUBChecker.jar" />
+	<chmod perm="ugo+rx" file="${out.dir}/paginaEPUBChecker.jar" />
 	
 	
 	
@@ -70,8 +81,8 @@
 	<echo> </echo>
 	
 	<zip destfile="${out.dir}/pagina-EPUB-Checker_Linux-${program.version.txtNumber}${program.version.release}.zip">
-		<zipfileset file="${build.dir}/paginaEPUBChecker.jar" filemode="777" />
-		<zipfileset file="${src.cfg.dir}/Linux-Readme.txt" fullpath="README" />
+		<zipfileset file="${out.dir}/paginaEPUBChecker.jar" filemode="777" />
+		<zipfileset file="${build.dir}/Linux-Readme.txt" fullpath="README" />
 	</zip>
 	
 	<tar destfile="${out.dir}/pagina-EPUB-Checker_Linux-${program.version.txtNumber}${program.version.release}.tar.gz" compression="gzip">
@@ -88,12 +99,9 @@
 	<echo>Building Mac App...</echo>
 	<echo> </echo>
 	
-	<property name="resources.dir" location="${build.dir}/resources" />
-	<property name="jarbundler.dir" location="${antLib.dir}/jarbundler-2.2.0" />
-	
 	<taskdef name="jarbundler"
 		classname="net.sourceforge.jarbundler.JarBundler"
-		classpath="${jarbundler.dir}/jarbundler-2.3.0.jar" />
+		classpath="${antLib.dir}/jarbundler/jarbundler.jar" />
 	
 	<jarbundler
 		dir="${out.dir}"
@@ -101,8 +109,8 @@
 		shortname="pagina EPUB-Checker"
 		bundleid="de.paginagmbh.epubchecker"
 		mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
-		stubfile="${resources.dir}/universalJavaApplicationStub"
-		icon="${src.cfg.dir}/icons/paginaEPUBChecker_1024.icns"
+		stubfile="${build.dir}/MacJavaStub/universalJavaApplicationStub"
+		icon="${build.dir}/icons/paginaEPUBChecker_1024.icns"
 		version="${program.version.txtNumber}"
 		developmentregion="German"
 		allowMixedLocalizations="true"
@@ -118,7 +126,7 @@
 			extensions="epub EPUB"
 			role="Viewer"/>
 		
-		<jarfileset dir=".">
+		<jarfileset dir="${out.dir}">
 			<include name="paginaEPUBChecker.jar" />
 		</jarfileset>
 	
@@ -169,11 +177,12 @@
 	
 	<taskdef name="launch4j"
 	    classname="net.sf.launch4j.ant.Launch4jTask"
-	    classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"
-	/>
+	    classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
 	
 	<launch4j
-		configFile="${src.cfg.dir}/launch4j/launch4jConfig_MacToFi.xml"
+		jar="${out.dir}/paginaEPUBChecker.jar"
+		outfile="${out.dir}/EPUB-Checker.exe"
+		configFile="${build.dir}/launch4j/launch4jConfig.xml"
 		fileVersion="${program.version.number}"
 		txtFileVersion="${program.version.txtNumber}"
 		productVersion="${program.version.number}"
