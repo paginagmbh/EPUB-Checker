@@ -18,12 +18,11 @@ import java.util.logging.Logger;
  * @copyright	pagina GmbH, Tübingen
  * @version		1.1
  * @date 		2014-01-12
- * @lastEdit	Tobias Fischer
  */
 public class ProxyTest {
 
 	public static void test(Logger logger, Boolean debug) throws URISyntaxException {
-		
+
 		System.setProperty("java.net.useSystemProxies", "true");
 
 		List<?> l = ProxySelector.getDefault().select(new URI("http://www.pagina-online.de/"));

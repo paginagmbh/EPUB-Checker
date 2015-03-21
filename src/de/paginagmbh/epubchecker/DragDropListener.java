@@ -28,9 +28,7 @@ import com.adobe.epubcheck.util.FeatureEnum;
  * @copyright	pagina GmbH, Tübingen
  * @version		1.2
  * @date			2013-05-30
- * @lastEdit		Tobias Fischer
  */
-// 
 public class DragDropListener implements DropTargetListener {
 
 

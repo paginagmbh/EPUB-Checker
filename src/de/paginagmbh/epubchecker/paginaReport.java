@@ -14,7 +14,6 @@ import com.adobe.epubcheck.util.Messages;
  * @copyright	pagina GmbH, Tübingen
  * @version		1.2
  * @date 		2013-05-30
- * @lastEdit	Tobias Fischer
  */
 public class paginaReport implements Report {
 
@@ -81,7 +80,7 @@ public class paginaReport implements Report {
 									+ "\n\n"
 					);
 
-			// do not translate epubcheck results
+		// do not translate epubcheck results
 		} else {
 			// changed standard implementation from "DefaultReportImpl.java"
 			mainGUI.txtarea_results.append(
@@ -110,7 +109,7 @@ public class paginaReport implements Report {
 		switch (feature) {
 		case FORMAT_VERSION:
 			// System.out.println(String.format(Messages.VALIDATING_VERSION_MESSAGE, value));
-			
+
 			// "insert at 0" instead of "append" to catch warnings and errors from above
 			mainGUI.txtarea_results.insert((String.format(__(Messages.VALIDATING_VERSION_MESSAGE), value )
 					+ "\n" + "(http://code.google.com/p/epubcheck/)"
@@ -152,7 +151,7 @@ public class paginaReport implements Report {
 									+ "\n\n"
 					);
 
-			// do not translate epubcheck results
+		// do not translate epubcheck results
 		} else {
 			// standard implementation of "DefaultReportImpl.java"
 			mainGUI.txtarea_results.append(
@@ -193,7 +192,7 @@ public class paginaReport implements Report {
 									+ "\n\n"
 					);
 
-			// do not translate epubcheck results
+		// do not translate epubcheck results
 		} else {
 			// standard implementation of "DefaultReportImpl.java"
 			mainGUI.txtarea_results.append(
@@ -231,7 +230,7 @@ public class paginaReport implements Report {
 							+ "\n\n"
 					);
 
-			// do not translate epubcheck results
+		// do not translate epubcheck results
 		} else {
 			// standard implementation of "DefaultReportImpl.java"
 			mainGUI.txtarea_results.append(
@@ -271,24 +270,24 @@ public class paginaReport implements Report {
 
 		// try to replace all strings without any regex-patterns with the localized version
 		try {
-			
+
 			//retreive language key
 			String s_loc = paginaEPUBChecker.l10n.getString(s);
-			
+
 			if(s.equals(s_loc)) {
 				// there seems to be no corresponding language key => Try Regex patterns!
 				throw new Exception();
-				
+
 			} else {
 				// there's a corresponding language key => return it!
 				return s_loc;
 			}
-			
-			
+
+
 		// there's no corresponding language key
 		// we're assuming the string includes a regex pattern
 		} catch (Exception e) {
-			
+
 			// do regex stuff
 			return paginaEPUBChecker.regex.doReplace(s);
 
