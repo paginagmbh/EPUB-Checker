@@ -44,8 +44,8 @@ public class paginaEPUBChecker {
 
 	public static final String PROGRAMVERSION = "1.4.0";
 	public static final String VERSIONDATE = "21.03.2015";
-	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
-	public static final String RELEASENOTES = "- bugfixes and minor improvements";
+	public static final String PROGRAMRELEASE = "";	// "" or "beta"
+	public static final String RELEASENOTES = "- Many bugfixes and some minor improvements";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
