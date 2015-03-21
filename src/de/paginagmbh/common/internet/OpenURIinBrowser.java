@@ -11,7 +11,6 @@ import java.net.URI;
   * @author		Tobias Fischer
   * @copyright	pagina GmbH, Tübingen
   * @date 		2012-02-26
-  * @lastEdit	Tobias Fischer
   */
 public class OpenURIinBrowser {
 	

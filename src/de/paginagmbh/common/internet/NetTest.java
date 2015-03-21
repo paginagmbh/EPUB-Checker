@@ -16,7 +16,6 @@ import java.net.URL;
  * @copyright	pagina GmbH, Tuebingen
  * @version		2.1
  * @date 		2015-03-21
- * @lastEdit	Tobias Fischer
  */
 public class NetTest {
 

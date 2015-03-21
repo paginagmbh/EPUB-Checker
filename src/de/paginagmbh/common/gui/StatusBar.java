@@ -14,8 +14,7 @@ import javax.swing.JPanel;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.2
- * @date 		2015-03-21
- * @lastEdit	Tobias Fischer
+ * @date			2015-03-21
  * 
  * generates a status bar at the bottom of a border 
  * 
@@ -23,23 +22,23 @@ import javax.swing.JPanel;
  * 
  */
 public class StatusBar extends JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 	private static JLabel lbl_text;
-	
-	
-	
-	
+
+
+
+
 	/* ********************************************************************************************************** */
-	
+
 	public StatusBar(Icon icon, String text, Boolean draggableCorner) {
-		
+
 		// set new layout
 		setLayout(new BorderLayout());
 		// set dimensions - only the height ("22") is important
 		setPreferredSize(new Dimension(10, 22));
-		
-		
+
+
 		// create text label
 		lbl_text = new JLabel(text);
 		lbl_text.setFont(lbl_text.getFont().deriveFont(lbl_text.getFont().getSize() - 2f));
@@ -51,7 +50,7 @@ public class StatusBar extends JPanel {
 		lbl_text.setIcon(icon);
 		// add to component
 		add(lbl_text, BorderLayout.WEST);
-		
+
 		// set draggable corner icon if desired
 		if(draggableCorner) {
 			JPanel rightPanel = new JPanel(new BorderLayout());
@@ -59,34 +58,34 @@ public class StatusBar extends JPanel {
 			rightPanel.setOpaque(false);
 			add(rightPanel, BorderLayout.EAST);
 		}
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	/* ********************************************************************************************************** */
-	
+
 	public void update(Icon icon, String text) {
 		lbl_text.setIcon(icon);
 		lbl_text.setText(text);
 	}
-	
-	
-	
-	
+
+
+
+
 	/* ********************************************************************************************************** */
-	
+
 	public void reset() {
 		lbl_text.setIcon(null);
 		lbl_text.setText(null);
 	}
-	
-	
-	
-	
+
+
+
+
 	/* ********************************************************************************************************** */
-	
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -120,13 +119,13 @@ public class StatusBar extends JPanel {
 /* ********************************************************************************************************** */
 
 class AngledLinesWindowsCornerIcon implements Icon {
-	
+
 	private static final Color WHITE_LINE_COLOR = new Color(255, 255, 255);
 	private static final Color GRAY_LINE_COLOR = new Color(172, 168, 153);
 	private static final int WIDTH = 13;
 	private static final int HEIGHT = 13;
-	
-	
+
+
 	public int getIconHeight() {
 		return WIDTH;
 	}
