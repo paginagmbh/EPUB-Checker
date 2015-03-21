@@ -98,7 +98,7 @@ public class updateCheck {
 					return;
 				} else {
 					messageGUI msg = new messageGUI();
-					mainGUI.statusBar.update(null, null);
+					mainGUI.statusBar.reset();
 					msg.showError(__("Update check failed!<br/>Can't establish internet connection."));
 					return;
 				}
@@ -126,7 +126,7 @@ public class updateCheck {
 					return;
 				} else {
 					messageGUI msg = new messageGUI();
-					mainGUI.statusBar.update(null, null);
+					mainGUI.statusBar.reset();
 					msg.showError(__("Update check failed!<br/>Update server not available."));
 					return;
 				}
@@ -179,7 +179,7 @@ public class updateCheck {
 			// Ein Update steht bereit!
 			if(Integer.parseInt(paginaEPUBChecker.PROGRAMVERSION.replace(".", "")) < Integer.parseInt(UpdateInfo[0].replace(".", ""))) {
 				
-				mainGUI.statusBar.update(null, null);
+				mainGUI.statusBar.reset();
 				
 				messageGUI msg = new messageGUI();
 				int answer = msg.showQuestion(
@@ -225,7 +225,7 @@ public class updateCheck {
 					return;
 				} else {
 					messageGUI msg = new messageGUI();
-					mainGUI.statusBar.update(null, null);
+					mainGUI.statusBar.reset();
 					msg.showMessage(__("There are no new updates available."));
 					return;
 				}
