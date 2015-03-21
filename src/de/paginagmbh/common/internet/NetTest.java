@@ -14,8 +14,8 @@ import java.net.URL;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tuebingen
- * @version		2.0
- * @date 		2013-01-12
+ * @version		2.1
+ * @date 		2015-03-21
  * @lastEdit	Tobias Fischer
  */
 public class NetTest {
@@ -74,6 +74,7 @@ public class NetTest {
 
 			// open a connection to that source
 			HttpURLConnection urlConnect = (HttpURLConnection) test_url.openConnection();
+			urlConnect.setReadTimeout(10000);
 
 			// set RequestMethod to HEAD, not GET
 			urlConnect.setRequestMethod("HEAD");
