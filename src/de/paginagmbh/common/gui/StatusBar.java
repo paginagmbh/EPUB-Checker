@@ -30,41 +30,6 @@ public class StatusBar extends JPanel {
 	
 	
 	
-//	/* ********************************************************************************************************** */
-//	
-//	public static void main(String[] args) {
-//		
-//		
-//		// Only for testing!
-//		
-//		
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//		} catch (Exception e) {
-//
-//		}
-//
-//		JFrame frame = new JFrame();
-//		frame.setBounds(200, 200, 600, 200);
-//		frame.setTitle("Status bar simulator");
-//
-//		Container contentPane = frame.getContentPane();
-//		contentPane.setLayout(new BorderLayout());
-//		
-//		StatusBar statusBar = new StatusBar(
-//					new ImageIcon(paginaEPUBChecker.logoImg16),
-//					"test test test test test test",
-//					true
-//				);
-//		contentPane.add(statusBar, BorderLayout.SOUTH);
-//
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setVisible(true);
-//	}
-	
-	
-	
-	
 	/* ********************************************************************************************************** */
 	
 	public StatusBar(Icon icon, String text, Boolean draggableCorner) {
