@@ -97,7 +97,7 @@
 		bundleid="de.paginagmbh.epubchecker"
 		mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
 		stubfile="${resources.dir}/universalJavaApplicationStub"
-		icon="${src.cfg.dir}/icons/paginaEPUBChecker_512.icns"
+		icon="${src.cfg.dir}/icons/paginaEPUBChecker_1024.icns"
 		version="${program.version.txtNumber}"
 		developmentregion="German"
 		allowMixedLocalizations="true"
