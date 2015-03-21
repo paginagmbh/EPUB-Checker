@@ -45,6 +45,7 @@
             <attribute name="Class-Path" value="."/>
         </manifest>
         <fileset dir="${src.dir}/bin"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/epubcheck-3.0.1.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/AppleJavaExtensions.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/commons-compress-1.4.1.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/guava-13.0.1.jar"/>
