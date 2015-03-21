@@ -34,18 +34,18 @@ import com.apple.eawt.QuitResponse;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.3.2
- * @date 		2014-10-15
+ * @version		1.4.0
+ * @date 		2015-03-21
  * @lastEdit	Tobias Fischer
  */
 public class paginaEPUBChecker {
 	
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 	
-	public static final String PROGRAMVERSION = "1.3.2";
-	public static final String VERSIONDATE = "15.10.2014";
-	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- Bugfix for Macs with Oracle Java 7 or 8 installed";
+	public static final String PROGRAMVERSION = "1.4.0";
+	public static final String VERSIONDATE = "21.03.2015";
+	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
+	public static final String RELEASENOTES = "- bugfixes and minor improvements";
 	
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 	
