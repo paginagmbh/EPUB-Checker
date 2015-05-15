@@ -110,6 +110,7 @@
 		bundleid="de.paginagmbh.epubchecker"
 		mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
 		stubfile="${build.dir}/MacJavaStub/universalJavaApplicationStub"
+		usejavaxkey="true"
 		icon="${build.dir}/icons/paginaEPUBChecker_1024.icns"
 		version="${program.version.txtNumber}"
 		developmentregion="German"
