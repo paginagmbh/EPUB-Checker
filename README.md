@@ -35,7 +35,7 @@ We use the following libraries to build our GUI wrapper around *epubcheck*:
   * *Apple License*
 
 To build the EPUB-Checker app, we use the following tools and libraries:
-* [Jarbundler](https://github.com/tofi86/Jarbundler) *(a forked version of [Jarbundler](http://informagen.com/JarBundler/))*
+* [Jarbundler v2.4](https://github.com/tofi86/Jarbundler) *(a forked version of [Jarbundler](http://informagen.com/JarBundler/))*
   * *Apache License v2.0*
 * [launch4j](http://launch4j.sourceforge.net/)
   * *BSD license / MIT License*
@@ -58,9 +58,8 @@ ANT-Task
 
 The ANT build.xml needs the following libraries:
 
-* [jarbundler 2.3.0](https://github.com/tofi86/Jarbundler/releases/tag/v2.3.0 "Jarbundler 2.3.0 Download")
+* [jarbundler 2.4.0](https://github.com/tofi86/Jarbundler/releases/tag/v2.4.0 "Jarbundler 2.4.0 Download")
 * [launch4j 3.x](https://sourceforge.net/projects/launch4j/files/launch4j-3/ "launch4j 3.x Download")
- * _Für Mac OS X Mountain Lion steht ein extra Build (3.1 beta) zur Verfügung_
 
 which need to be placed here:
 
