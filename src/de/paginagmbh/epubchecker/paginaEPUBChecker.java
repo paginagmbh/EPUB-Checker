@@ -34,17 +34,17 @@ import com.apple.eawt.QuitResponse;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.4.0
- * @date			2015-03-21
+ * @version		1.5.0
+ * @date			2015-09-02
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.4.0";
-	public static final String VERSIONDATE = "21.03.2015";
+	public static final String PROGRAMVERSION = "1.5.0";
+	public static final String VERSIONDATE = "02.09.2015";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- Many bugfixes and some minor improvements";
+	public static final String RELEASENOTES = "- Includes updated epubcheck library v4.0.0";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -422,25 +422,26 @@ public class paginaEPUBChecker {
 					// if output is translated, then format it nicely
 					if(epubcheck_translate) {
 						mainGUI.txtarea_results.append("\n" + "---------------------------------------------------");
+						mainGUI.txtarea_results.append("\n\n" + String.format(Messages.get("validating_version_message"), epubcheck_EpubVersion));
 					}
 
 
 					// warnings AND errors
-					if(epubcheck_translate && paginaReport.errorCount > 0 && paginaReport.warningCount > 0) {
+					if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0 && paginaEPUBChecker.epubcheck_Report.getWarningCount() > 0) {
 
 						mainGUI.txtarea_results.append("\n\n"
-								+ String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaReport.warningCount, paginaReport.errorCount)
+								+ String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaEPUBChecker.epubcheck_Report.getWarningCount(), paginaEPUBChecker.epubcheck_Report.getErrorCount())
 								+ "\n");
 
 					// only errors
-					} else if(epubcheck_translate && paginaReport.errorCount > 0) {
-						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d errors!"), paginaReport.errorCount) + "\n");
+					} else if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0) {
+						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d errors!"), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
 
 					// only warnings
-					} else if(epubcheck_translate && paginaReport.warningCount > 0) {
+					} else if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getWarningCount() > 0) {
 						// set border color to orange
 						mainGUI.setBorderStateWarning();
-						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d warnings!"), paginaReport.warningCount) + "\n");
+						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d warnings!"), paginaEPUBChecker.epubcheck_Report.getWarningCount()) + "\n");
 
 					// something went wrong
 					} else if(epubcheck_translate) {
@@ -454,8 +455,8 @@ public class paginaEPUBChecker {
 
 					// set error counter in mac dock badge
 					if(os_name.equals("mac")) {
-						if(paginaReport.warningCount + paginaReport.errorCount > 0) {
-							macApp.setDockIconBadge(new Integer(paginaReport.warningCount + paginaReport.errorCount).toString());
+						if(paginaEPUBChecker.epubcheck_Report.getWarningCount() + paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0) {
+							macApp.setDockIconBadge(new Integer(paginaEPUBChecker.epubcheck_Report.getWarningCount() + paginaEPUBChecker.epubcheck_Report.getErrorCount()).toString());
 						} else {
 							macApp.setDockIconBadge("error");
 						}
