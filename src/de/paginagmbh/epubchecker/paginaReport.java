@@ -1,8 +1,13 @@
 package de.paginagmbh.epubchecker;
 
-import com.adobe.epubcheck.api.Report;
+import com.adobe.epubcheck.api.EPUBLocation;
+import com.adobe.epubcheck.messages.Message;
+import com.adobe.epubcheck.messages.Severity;
+import com.adobe.epubcheck.util.DefaultReportImpl;
 import com.adobe.epubcheck.util.FeatureEnum;
 import com.adobe.epubcheck.util.Messages;
+import com.adobe.epubcheck.util.PathUtil;
+import com.adobe.epubcheck.util.outWriter;
 
 
 
@@ -12,14 +17,14 @@ import com.adobe.epubcheck.util.Messages;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.2
- * @date 		2013-05-30
+ * @version		2.0
+ * @date 		2015-09-02
  */
-public class paginaReport implements Report {
+public final class paginaReport extends DefaultReportImpl {
 
 	private String ePubName;
 	private static boolean DEBUG = false;
-	public static int errorCount, warningCount, exceptionCount;
+	boolean quiet, saveQuiet;
 
 
 
@@ -27,10 +32,8 @@ public class paginaReport implements Report {
 	/* ********************************************************************************************************** */
 
 	public paginaReport(String ePubName) {
+	    super(ePubName);
 		this.ePubName = ePubName;
-		errorCount = 0;
-		warningCount = 0;
-		exceptionCount = 0;
 	}
 
 
@@ -38,19 +41,7 @@ public class paginaReport implements Report {
 
 	/* ********************************************************************************************************** */
 
-	public paginaReport(String ePubName, String info) {
-		this.ePubName = ePubName;
-		warning("", 0, 0, info);
-		errorCount = 0;
-		warningCount = 0;
-		exceptionCount = 0;
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
+	// duplicate method fixMessage() since original method is private
 	private String fixMessage(String message) {
 		if (message == null)
 			return "";
@@ -62,40 +53,16 @@ public class paginaReport implements Report {
 
 	/* ********************************************************************************************************** */
 
-	@Override
-	public void hint(String resource, int line, int column, String message) {
-		message = fixMessage(message);
+	// duplicate method pushQuiet() since original method is private
+	boolean pushQuiet() {
+		saveQuiet = outWriter.isQuiet();
+		outWriter.setQuiet(quiet);
+		return saveQuiet;
+	}
 
-		// translate epubcheck results
-		if(paginaEPUBChecker.epubcheck_translate) {
-
-			// pagina implementation
-			mainGUI.txtarea_results.append(
-					__("HINT:") + " "
-							+ "\"" + ePubName
-							+ (resource == null ? "" : "/" + resource) + "\""
-							+ (line <= 0 ? "" : " (" + __("line") + " " + line
-									+ (column <= 0 ? "" : ", " + __("col") + " " + column) + ")") + ":\n"
-									+ "   " + analyzeString(message)
-									+ "\n\n"
-					);
-
-		// do not translate epubcheck results
-		} else {
-			// changed standard implementation from "DefaultReportImpl.java"
-			mainGUI.txtarea_results.append(
-					"HINT: "
-							+ ePubName
-							+ (resource == null ? "" : "/" + resource)
-							+ (line <= 0 ? "" : "(" + line
-									+ (column <= 0 ? "" : "," + column) + ")") + ": "
-									+ message
-									+ "\n\n"
-					);
-		}
-
-		// scroll to the end
-		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+	// duplicate method popQuiet() since original method is private
+	void popQuiet() {
+		outWriter.setQuiet(saveQuiet);
 	}
 
 
@@ -111,9 +78,10 @@ public class paginaReport implements Report {
 			// System.out.println(String.format(Messages.VALIDATING_VERSION_MESSAGE, value));
 
 			// "insert at 0" instead of "append" to catch warnings and errors from above
-			mainGUI.txtarea_results.insert((String.format(__(Messages.VALIDATING_VERSION_MESSAGE), value )
-					+ "\n" + "(http://code.google.com/p/epubcheck/)"
+			mainGUI.txtarea_results.insert((String.format(Messages.get("validating_version_message"), value )
+					+ "\n" + "(https://github.com/IDPF/epubcheck)"
 					+ "\n\n"), 0);
+			paginaEPUBChecker.epubcheck_EpubVersion = value;
 			break;
 		default:
 			if (DEBUG) {
@@ -133,40 +101,17 @@ public class paginaReport implements Report {
 
 	/* ********************************************************************************************************** */
 
-	public void error(String resource, int line, int column, String message) {
-		errorCount++;
-		message = fixMessage(message);
-
-		// translate epubcheck results
-		if(paginaEPUBChecker.epubcheck_translate) {
-
-			// pagina implementation
-			mainGUI.txtarea_results.append(
-					__("ERROR:") + " "
-							+ "\"" + ePubName
-							+ (resource == null ? "" : "/" + resource) + "\""
-							+ (line <= 0 ? "" : " (" + __("line") + " " + line
-									+ (column <= 0 ? "" : ", " + __("col") + " " + column) + ")") + ":\n"
-									+ "   " + analyzeString(message)
-									+ "\n\n"
-					);
-
-		// do not translate epubcheck results
-		} else {
-			// standard implementation of "DefaultReportImpl.java"
-			mainGUI.txtarea_results.append(
-					"ERROR: "
-							+ ePubName
-							+ (resource == null ? "" : "/" + resource)
-							+ (line <= 0 ? "" : "(" + line
-									+ (column <= 0 ? "" : "," + column) + ")") + ": "
-									+ message
-									+ "\n\n"
-					);
-		}
-
-		// scroll to the end
-		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+	String formatMessage(Message message, EPUBLocation location, Object... args) {
+		String fileName = (location.getPath() == null ? "" : "/" + location.getPath());
+		fileName = PathUtil.removeWorkingDirectory(fileName);
+		return String.format("%1$s (%2$s) %3$s \"%4$s%5$s\"%6$s:\n   %7$s\n\n",
+				__(message.getSeverity().toString()),
+				message.getID(),
+				__(message.getSeverity().toString()+"_preposition"),
+				PathUtil.removeWorkingDirectory(this.getEpubFileName()),
+				fileName,
+				location.getLine() > 0 ? (" (" + __("line") + " " + location.getLine() + (location.getColumn() > 0 ? ", " + __("col") + " " + location.getColumn() : ""))  + ")" : "",
+				analyzeString(fixMessage(args != null && args.length > 0 ? message.getMessage(args) : message.getMessage())));
 	}
 
 
@@ -174,91 +119,20 @@ public class paginaReport implements Report {
 
 	/* ********************************************************************************************************** */
 
-	public void warning(String resource, int line, int column, String message) {
-		warningCount++;
-		message = fixMessage(message);
-
-		// translate epubcheck results
-		if(paginaEPUBChecker.epubcheck_translate) {
-
-			// pagina implementation
-			mainGUI.txtarea_results.append(
-					__("WARNING:") + " "
-							+ "\"" + ePubName
-							+ (resource == null ? "" : "/" + resource) + "\""
-							+ (line <= 0 ? "" : " (" + __("line") + " " + line
-									+ (column <= 0 ? "" : ", " + __("col") + " " + column) + ")") + ":\n"
-									+ "   " + analyzeString(message)
-									+ "\n\n"
-					);
-
-		// do not translate epubcheck results
+	@Override
+	public void message(Message message, EPUBLocation location, Object... args) {
+		Severity severity = message.getSeverity();
+		String text = formatMessage(message, location, args);
+		if (severity.equals(Severity.USAGE)) {
+			pushQuiet();
+			mainGUI.txtarea_results.append("USAGE: " + text);
+			popQuiet();
 		} else {
-			// standard implementation of "DefaultReportImpl.java"
-			mainGUI.txtarea_results.append(
-					"WARNING: "
-							+ ePubName
-							+ (resource == null ? "" : "/" + resource)
-							+ (line <= 0 ? "" : "(" + line
-									+ (column <= 0 ? "" : "," + column) + ")") + ": "
-									+ message
-									+ "\n\n"
-					);
+			mainGUI.txtarea_results.append(text);
 		}
 
 		// scroll to the end
 		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
-	public void exception(String resource, Exception e) {
-		exceptionCount++;
-
-		// translate epubcheck results
-		if(paginaEPUBChecker.epubcheck_translate) {
-
-			// pagina implementation
-			mainGUI.txtarea_results.append(
-					__("EXCEPTION:") + " "
-							+ "\"" + ePubName
-							+ (resource == null ? "" : "/" + resource) + "\":\n"
-							+ "   " + e.getMessage()
-							+ "\n\n"
-					);
-
-		// do not translate epubcheck results
-		} else {
-			// standard implementation of "DefaultReportImpl.java"
-			mainGUI.txtarea_results.append(
-					"EXCEPTION: " + ePubName
-					+ (resource == null ? "" : "/" + resource) + e.getMessage()
-					+ "\n\n"
-					);
-		}
-
-		// scroll to the end
-		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
-	public int getErrorCount() {
-		return errorCount;
-	}
-
-	public int getWarningCount() {
-		return warningCount;
-	}
-
-	public int getExceptionCount() {
-		return exceptionCount;
 	}
 
 
