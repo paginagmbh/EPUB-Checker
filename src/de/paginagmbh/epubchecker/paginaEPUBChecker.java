@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.swing.*;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.*;
@@ -19,6 +22,7 @@ import javax.swing.JFrame;
 import com.adobe.epubcheck.api.EpubCheck;
 import com.adobe.epubcheck.api.Report;
 import com.adobe.epubcheck.util.Archive;
+import com.adobe.epubcheck.util.Messages;
 import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
 import com.apple.eawt.AppEvent.QuitEvent;
@@ -35,14 +39,14 @@ import com.apple.eawt.QuitResponse;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.5.0
- * @date			2015-09-02
+ * @date			2015-09-03
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.5.0";
-	public static final String VERSIONDATE = "02.09.2015";
+	public static final String VERSIONDATE = "03.09.2015";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
 	public static final String RELEASENOTES = "- Includes updated epubcheck library v4.0.0";
 
@@ -283,6 +287,11 @@ public class paginaEPUBChecker {
 
 	public static void loadAndInitGuiAndDependencies() {
 
+		// invalidate the old Report object (needed after switching the program's language in the gui menu)
+		if(epubcheck_Report != null) {
+			epubcheck_Report = null;
+		}
+
 		// invalidate the old language object (needed after switching the program's language in the gui menu)
 		if(l10n != null) {
 			l10n = null;
@@ -290,6 +299,28 @@ public class paginaEPUBChecker {
 
 		// init language object
 		l10n = new Localization();
+
+		// set the defaultLocale for epubcheck resource bundles
+		// TODO: seems as this has no effect when switching the language and the user already validated an epub
+		if(programLanguage.equals("german")) {
+			Locale.setDefault(new Locale("de", "DE"));
+		} else if(programLanguage.equals("french")) {
+			Locale.setDefault(new Locale("fr", "FR"));
+		} else if(programLanguage.equals("spanish")) {
+			Locale.setDefault(new Locale("es", "ES"));
+		} else if(programLanguage.equals("russian")) {
+			Locale.setDefault(new Locale("ru", "RU"));
+		} else if(programLanguage.equals("english")) {
+			Locale.setDefault(new Locale("en", "US"));
+		} else {
+			// don't fall back to en_US but use standard default locale instead
+			// this is to support official epubcheck localizations for which
+			// pagina EPUB-Checker doesn't offer translations
+
+			//Locale.setDefault(new Locale("en", "US"));
+		}
+		ResourceBundle.clearCache();
+		System.out.println(Locale.getDefault());
 
 
 		// invalidate and dispose the old GUI (needed after switching the program's language in the gui menu)
