@@ -7,7 +7,6 @@ import com.adobe.epubcheck.util.DefaultReportImpl;
 import com.adobe.epubcheck.util.FeatureEnum;
 import com.adobe.epubcheck.util.Messages;
 import com.adobe.epubcheck.util.PathUtil;
-import com.adobe.epubcheck.util.outWriter;
 
 
 
@@ -18,7 +17,7 @@ import com.adobe.epubcheck.util.outWriter;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		2.0
- * @date 		2015-09-02
+ * @date 		2015-09-04
  */
 public final class paginaReport extends DefaultReportImpl {
 
@@ -53,23 +52,6 @@ public final class paginaReport extends DefaultReportImpl {
 
 	/* ********************************************************************************************************** */
 
-	// duplicate method pushQuiet() since original method is private
-	boolean pushQuiet() {
-		saveQuiet = outWriter.isQuiet();
-		outWriter.setQuiet(quiet);
-		return saveQuiet;
-	}
-
-	// duplicate method popQuiet() since original method is private
-	void popQuiet() {
-		outWriter.setQuiet(saveQuiet);
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
 	@Override
 	public void info(String resource, FeatureEnum feature, String value) {
 
@@ -81,6 +63,7 @@ public final class paginaReport extends DefaultReportImpl {
 			mainGUI.txtarea_results.insert((String.format(Messages.get("validating_version_message"), value )
 					+ "\n" + "(https://github.com/IDPF/epubcheck)"
 					+ "\n\n"), 0);
+			mainGUI.tableModel.addRow(new Object[]{Severity.INFO, "", "", String.format(Messages.get("validating_version_message"), value )});
 			paginaEPUBChecker.epubcheck_EpubVersion = value;
 			break;
 		default:
@@ -122,17 +105,21 @@ public final class paginaReport extends DefaultReportImpl {
 	@Override
 	public void message(Message message, EPUBLocation location, Object... args) {
 		Severity severity = message.getSeverity();
+		String fileName = (location.getPath() == null ? "" : "/" + location.getPath());
+		fileName = PathUtil.removeWorkingDirectory(fileName);
+		
 		String text = formatMessage(message, location, args);
-		if (severity.equals(Severity.USAGE)) {
-			pushQuiet();
-			mainGUI.txtarea_results.append("USAGE: " + text);
-			popQuiet();
-		} else {
-			mainGUI.txtarea_results.append(text);
-		}
+
+		mainGUI.txtarea_results.append(text);
+		mainGUI.tableModel.addRow(new Object[]{
+						severity,
+						message.getID(),
+						fileName + (location.getLine() > 0 ? ("\n(" + __("line") + " " + location.getLine() + (location.getColumn() > 0 ? ", " + __("col") + " " + location.getColumn() : ""))  + ")" : ""),
+						analyzeString(fixMessage(args != null && args.length > 0 ? message.getMessage(args) : message.getMessage()))
+					});
 
 		// scroll to the end
-		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+		mainGUI.scrollToBottom();
 	}
 
 
