@@ -31,15 +31,21 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.DefaultTableModel;
+
 import com.adobe.epubcheck.api.EpubCheck;
+import com.adobe.epubcheck.messages.Severity;
+
 import de.paginagmbh.common.gui.DashedLineBorder;
 import de.paginagmbh.common.gui.StatusBar;
 import de.paginagmbh.common.internet.OpenURIinBrowser;
+
 import javax.swing.UIManager;
 import javax.swing.KeyStroke;
 import java.awt.event.InputEvent;
@@ -50,14 +56,16 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2013-12-13
+ * @date			2015-09-04
  */
 public class mainGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public static JTextField input_filePath;
 	public static JTextArea txtarea_results;
+	public static DefaultTableModel tableModel;
 	public static JScrollPane scroll_results;
+	public static JTable table_results;
 	public static JLabel lbl_test;
 	public static JButton btn_validateEpub, btn_chooseEpubFile;
 	public static JMenuItem mnItem_Open, mnItem_Save, mnItem_Exit, mnItem_About, mnItem_Translations, mnItem_licenceInformation, mnItem_WebsiteEpubcheck, mnItem_WebsitePagina, mnItem_Updates;
@@ -100,7 +108,7 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// set minimum size
-		setMinimumSize(new Dimension(525,450));
+		setMinimumSize(new Dimension(650,500));
 
 
 		// set window position
@@ -221,7 +229,55 @@ public class mainGUI extends JFrame implements ActionListener {
 		gbc_txtarea_results.gridx = 1;
 		gbc_txtarea_results.gridy = 6;
 
-		scroll_results = new JScrollPane(txtarea_results);
+
+
+
+		tableModel = new DefaultTableModel();
+		tableModel.addColumn("Severity");
+		tableModel.addColumn("Code");
+		tableModel.addColumn("File (Line/Col)");
+		tableModel.addColumn("Message");
+		
+		table_results = new JTable(tableModel){
+			private static final long serialVersionUID = -4430174981226468686L;
+
+			@Override
+			public boolean isCellEditable(int arg0, int arg1) {
+				return false;
+			}
+		};
+
+		table_results.setAutoCreateRowSorter(true);
+		table_results.getTableHeader().setReorderingAllowed(false);
+		table_results.setFillsViewportHeight(true);
+		table_results.setOpaque(false);
+		table_results.setBackground(Color.GREEN);
+		table_results.setRowHeight(25);
+		//table_results.getTableHeader().setPreferredSize(new Dimension(-1,25));
+
+		table_results.getColumnModel().getColumn(0).setResizable(false);
+		table_results.getColumnModel().getColumn(1).setResizable(false);
+
+		table_results.getColumnModel().getColumn(0).setMaxWidth(100);
+		table_results.getColumnModel().getColumn(0).setMinWidth(100);
+		table_results.getColumnModel().getColumn(1).setMaxWidth(100);
+		table_results.getColumnModel().getColumn(1).setMinWidth(100);
+		table_results.getColumnModel().getColumn(2).setMinWidth(130);
+		table_results.getColumnModel().getColumn(2).setPreferredWidth(130);
+		table_results.getColumnModel().getColumn(3).setMinWidth(270);
+		table_results.getColumnModel().getColumn(3).setPreferredWidth(270);
+
+		table_results.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+		table_results.getColumnModel().getColumn(0).setCellRenderer(new IconTableCellRenderer());
+		table_results.getColumnModel().getColumn(1).setCellRenderer(new BoardTableCellRenderer());
+		table_results.getColumnModel().getColumn(2).setCellRenderer(new MultiLineCellRenderer());
+		table_results.getColumnModel().getColumn(3).setCellRenderer(new MultiLineCellRenderer());
+
+
+
+        scroll_results = new JScrollPane(table_results);
+//		scroll_results = new JScrollPane(txtarea_results);
 		setBorderStateNormal();
 		GridBagConstraints gbc_scroll_results = new GridBagConstraints();
 		gbc_scroll_results.insets = new Insets(0, 0, 5, 5);
@@ -534,6 +590,12 @@ public class mainGUI extends JFrame implements ActionListener {
 			if(!file.exists()) {
 
 				txtarea_results.setText(__("EPUB file couldn't be found"));
+				mainGUI.tableModel.addRow(new Object[]{
+						Severity.FATAL,
+						"",
+						"",
+						__("EPUB file couldn't be found")
+					});
 
 				// file exists
 			} else {
@@ -681,31 +743,31 @@ public class mainGUI extends JFrame implements ActionListener {
 	/* ********************************************************************************************************** */
 
 	public static void setBorderStateActive() {
-		txtarea_results.setBackground(new Color(255,255,215));
+		table_results.setBackground(new Color(255,255,215));
 		scroll_results.setBackground(new Color(255,255,215));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,153,0), 7));
 	}	
 
 	public static void setBorderStateNormal() {
-		txtarea_results.setBackground(new Color(255,255,245));
+		table_results.setBackground(new Color(255,255,245));
 		scroll_results.setBackground(new Color(255,255,245));
 		scroll_results.setBorder(new DashedLineBorder(Color.ORANGE, 7));
 	}
 
 	public static void setBorderStateError() {
-		txtarea_results.setBackground(new Color(255,230,230));
+		table_results.setBackground(new Color(255,230,230));
 		scroll_results.setBackground(new Color(255,230,230));
 		scroll_results.setBorder(new DashedLineBorder(Color.RED, 7));
 	}
 
 	public static void setBorderStateWarning() {
-		txtarea_results.setBackground(new Color(255,240,230));
+		table_results.setBackground(new Color(255,240,230));
 		scroll_results.setBackground(new Color(255,240,230));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,102,0), 7));
 	}
 
 	public static void setBorderStateValid() {
-		txtarea_results.setBackground(new Color(235,247,235));
+		table_results.setBackground(new Color(235,247,235));
 		scroll_results.setBackground(new Color(235,247,235));
 		scroll_results.setBorder(new DashedLineBorder(new Color(51,173,51), 7));
 	}
@@ -772,16 +834,28 @@ public class mainGUI extends JFrame implements ActionListener {
 
 			if(logfile.exists()) {
 				txtarea_results.append("\n\n" + __("Test results were saved in a logfile") + ":\n" + logfile + "\n\n");
+				mainGUI.tableModel.addRow(new Object[]{
+						Severity.INFO, "", "",
+						__("Test results were saved in a logfile") + ":\n" + logfile
+					});
 			} else {
 				txtarea_results.append("\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
+				mainGUI.tableModel.addRow(new Object[]{
+						Severity.WARNING, "", "",
+						__("An error occured! Logfile couldn't be saved!") + "\n" + logfile
+					});
 			}
 
 		} catch (Exception e1) {
 			txtarea_results.append("\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
+			mainGUI.tableModel.addRow(new Object[]{
+					Severity.WARNING, "", "",
+					__("An error occured! Logfile couldn't be saved!") + "\n" + logfile
+				});
 		}
 
 		// scroll to the end
-		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+		scrollToBottom();
 	}
 
 
@@ -796,6 +870,21 @@ public class mainGUI extends JFrame implements ActionListener {
 			}
 		}
 		return -1;
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public static void scrollToBottom(){
+		table_results.scrollRectToVisible(
+				table_results.getCellRect(
+						table_results.getRowCount()-1,
+						0,
+						true
+				)
+		);
 	}
 
 
