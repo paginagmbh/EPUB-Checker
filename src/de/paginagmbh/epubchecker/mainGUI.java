@@ -250,8 +250,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		table_results.setAutoCreateRowSorter(true);
 		table_results.getTableHeader().setReorderingAllowed(false);
 		table_results.setFillsViewportHeight(true);
-		table_results.setOpaque(false);
-		table_results.setBackground(Color.GREEN);
+		table_results.setOpaque(true);
 		table_results.setRowHeight(25);
 		//table_results.getTableHeader().setPreferredSize(new Dimension(-1,25));
 
