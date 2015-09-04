@@ -214,14 +214,6 @@ public class mainGUI extends JFrame implements ActionListener {
 		txtarea_results.setBackground(new Color(255,255,240));
 		txtarea_results.setMargin(new Insets(10,10,10,15));
 
-		// try catch is needed for running this app on openjdk on ubuntu
-		// don't know exactly why...
-		try {
-			txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
-		} catch (Exception e) {
-			//	        e.printStackTrace();
-		}
-
 		GridBagConstraints gbc_txtarea_results = new GridBagConstraints();
 		gbc_txtarea_results.insets = new Insets(0, 0, 5, 5);
 		gbc_txtarea_results.fill = GridBagConstraints.BOTH;
@@ -255,6 +247,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		table_results.setShowGrid(false);
 		table_results.setIntercellSpacing(new Dimension(0, 0));
 		table_results.setRowMargin(0);
+		table_results.setDropMode(DropMode.INSERT);
 		//table_results.getTableHeader().setPreferredSize(new Dimension(-1,25));
 
 		table_results.getColumnModel().getColumn(0).setResizable(false);
@@ -289,10 +282,23 @@ public class mainGUI extends JFrame implements ActionListener {
 		gbc_scroll_results.gridy = 6;
 		main.add(scroll_results, gbc_scroll_results);
 
+
+		
 		// Create the drag and drop listener
 		DragDropListener txtareaDNDListener = new DragDropListener();
 		// Connect the label with a drag and drop listener
+		new DropTarget(table_results, txtareaDNDListener);
 		new DropTarget(txtarea_results, txtareaDNDListener);
+
+		// try catch is needed for running this app on openjdk on ubuntu
+		// don't know exactly why...
+		try {
+			txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
+			tableModel.addRow(new Object[]{Severity.INFO, "", "", __("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder...")});
+		} catch (Exception e) {
+			//	        e.printStackTrace();
+		}
+
 
 
 		// Windows
