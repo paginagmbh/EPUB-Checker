@@ -1,9 +1,13 @@
 package de.paginagmbh.epubchecker;
 
+import java.awt.Color;
 import java.awt.Component;
-import javax.swing.BorderFactory;
+import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import com.adobe.epubcheck.messages.Severity;
 
@@ -19,7 +23,10 @@ class IconTableCellRenderer extends DefaultTableCellRenderer {
 
 		// set the Font, Color, etc.
 		renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		setBorder(new CompoundBorder(
+        		new MatteBorder(0,1,1,1,Color.WHITE),
+        		new EmptyBorder(new Insets(5,5,5,5))
+    		));
 		setVerticalAlignment(NORTH);
 		setForeground(renderer.getForeground());
 		setBackground(renderer.getBackground());
