@@ -252,6 +252,9 @@ public class mainGUI extends JFrame implements ActionListener {
 		table_results.setFillsViewportHeight(true);
 		table_results.setOpaque(true);
 		table_results.setRowHeight(25);
+		table_results.setShowGrid(false);
+		table_results.setIntercellSpacing(new Dimension(0, 0));
+		table_results.setRowMargin(0);
 		//table_results.getTableHeader().setPreferredSize(new Dimension(-1,25));
 
 		table_results.getColumnModel().getColumn(0).setResizable(false);

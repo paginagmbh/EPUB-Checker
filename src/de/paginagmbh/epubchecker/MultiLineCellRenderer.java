@@ -1,12 +1,16 @@
 package de.paginagmbh.epubchecker;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Insets;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -51,7 +55,10 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 		renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 		setForeground(renderer.getForeground());
 		setBackground(renderer.getBackground());
-		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new CompoundBorder(
+        		new MatteBorder(0,0,1,1,Color.WHITE),
+        		new EmptyBorder(new Insets(5,5,5,5))
+    		));
 		setFont(renderer.getFont());
 		setText(renderer.getText());
 
