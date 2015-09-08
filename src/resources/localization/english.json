@@ -5,6 +5,8 @@
 	"Logfile" : "",
 	"Save logfile" : "",
 	"Auto Save" : "",
+	"Text View" : "Text view",
+	"Table View" : "Table view",
 	"Language" : "",
 	"German" : "Deutsch (German)",
 	"English" : "",
@@ -89,6 +91,13 @@
 	"WARNING_preposition" : "at",
 	"HINT" : "HINT",
 	"HINT_preposition" : "at",
+	"INFO" : "INFORMATION",
+	"INFO_preposition" : "at",
+	
+	"Severity" : "",
+	"Code" : "",
+	"File (line,col)" : "",
+	"Message" : "",
 	
 	"referenced resource missing in the package" : "",
 	"referenced resource exists, but not declared in the OPF file" : "",

@@ -31,15 +31,22 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.DefaultTableModel;
+
 import com.adobe.epubcheck.api.EpubCheck;
+import com.adobe.epubcheck.messages.Severity;
+
 import de.paginagmbh.common.gui.DashedLineBorder;
 import de.paginagmbh.common.gui.StatusBar;
 import de.paginagmbh.common.internet.OpenURIinBrowser;
+import de.paginagmbh.epubchecker.paginaEPUBChecker.LogViewMode;
+
 import javax.swing.UIManager;
 import javax.swing.KeyStroke;
 import java.awt.event.InputEvent;
@@ -50,19 +57,21 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2013-12-13
+ * @date			2015-09-08
  */
 public class mainGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	public static JTextField input_filePath;
 	public static JTextArea txtarea_results;
+	public static DefaultTableModel tableModel;
 	public static JScrollPane scroll_results;
+	public static JTable table_results;
 	public static JLabel lbl_test;
 	public static JButton btn_validateEpub, btn_chooseEpubFile;
 	public static JMenuItem mnItem_Open, mnItem_Save, mnItem_Exit, mnItem_About, mnItem_Translations, mnItem_licenceInformation, mnItem_WebsiteEpubcheck, mnItem_WebsitePagina, mnItem_Updates;
 	JMenu mn_File, mn_Language, mn_Help;
-	public static JRadioButtonMenuItem opt_AutoSave, opt_Translate;
+	public static JRadioButtonMenuItem opt_AutoSave, opt_Translate, opt_ViewMode_Text, opt_ViewMode_Table;
 	public static StatusBar statusBar;
 	private JMenu mn_Log;
 
@@ -100,7 +109,7 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// set minimum size
-		setMinimumSize(new Dimension(525,450));
+		setMinimumSize(new Dimension(650,500));
 
 
 		// set window position
@@ -206,14 +215,6 @@ public class mainGUI extends JFrame implements ActionListener {
 		txtarea_results.setBackground(new Color(255,255,240));
 		txtarea_results.setMargin(new Insets(10,10,10,15));
 
-		// try catch is needed for running this app on openjdk on ubuntu
-		// don't know exactly why...
-		try {
-			txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
-		} catch (Exception e) {
-			//	        e.printStackTrace();
-		}
-
 		GridBagConstraints gbc_txtarea_results = new GridBagConstraints();
 		gbc_txtarea_results.insets = new Insets(0, 0, 5, 5);
 		gbc_txtarea_results.fill = GridBagConstraints.BOTH;
@@ -221,7 +222,58 @@ public class mainGUI extends JFrame implements ActionListener {
 		gbc_txtarea_results.gridx = 1;
 		gbc_txtarea_results.gridy = 6;
 
-		scroll_results = new JScrollPane(txtarea_results);
+
+
+
+		tableModel = new DefaultTableModel();
+		tableModel.addColumn(__("Severity"));
+		tableModel.addColumn(__("Code"));
+		tableModel.addColumn(__("File (line,col)"));
+		tableModel.addColumn(__("Message"));
+
+		table_results = new JTable(tableModel){
+			private static final long serialVersionUID = -4430174981226468686L;
+
+			@Override
+			public boolean isCellEditable(int arg0, int arg1) {
+				return false;
+			}
+		};
+
+		table_results.setAutoCreateRowSorter(true);
+		table_results.getTableHeader().setReorderingAllowed(false);
+		table_results.setFillsViewportHeight(true);
+		table_results.setOpaque(true);
+		table_results.setRowHeight(25);
+		table_results.setShowGrid(false);
+		table_results.setIntercellSpacing(new Dimension(0, 0));
+		table_results.setRowMargin(0);
+		table_results.setDropMode(DropMode.INSERT);
+		//table_results.getTableHeader().setPreferredSize(new Dimension(-1,25));
+
+		table_results.getColumnModel().getColumn(0).setResizable(false);
+		table_results.getColumnModel().getColumn(1).setResizable(false);
+
+		table_results.getColumnModel().getColumn(0).setMaxWidth(100);
+		table_results.getColumnModel().getColumn(0).setMinWidth(100);
+		table_results.getColumnModel().getColumn(1).setMaxWidth(100);
+		table_results.getColumnModel().getColumn(1).setMinWidth(100);
+		table_results.getColumnModel().getColumn(2).setMinWidth(130);
+		table_results.getColumnModel().getColumn(2).setPreferredWidth(130);
+		table_results.getColumnModel().getColumn(3).setMinWidth(270);
+		table_results.getColumnModel().getColumn(3).setPreferredWidth(270);
+
+		table_results.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+		table_results.getColumnModel().getColumn(0).setCellRenderer(new IconTableCellRenderer());
+		table_results.getColumnModel().getColumn(1).setCellRenderer(new BoardTableCellRenderer());
+		table_results.getColumnModel().getColumn(2).setCellRenderer(new MultiLineCellRenderer());
+		table_results.getColumnModel().getColumn(3).setCellRenderer(new MultiLineCellRenderer());
+
+
+
+		scroll_results = new JScrollPane();
+		scroll_results.setViewportView(table_results);
 		setBorderStateNormal();
 		GridBagConstraints gbc_scroll_results = new GridBagConstraints();
 		gbc_scroll_results.insets = new Insets(0, 0, 5, 5);
@@ -231,10 +283,23 @@ public class mainGUI extends JFrame implements ActionListener {
 		gbc_scroll_results.gridy = 6;
 		main.add(scroll_results, gbc_scroll_results);
 
+
+
 		// Create the drag and drop listener
 		DragDropListener txtareaDNDListener = new DragDropListener();
 		// Connect the label with a drag and drop listener
+		new DropTarget(table_results, txtareaDNDListener);
 		new DropTarget(txtarea_results, txtareaDNDListener);
+
+		// try catch is needed for running this app on openjdk on ubuntu
+		// don't know exactly why...
+		try {
+			txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
+			tableModel.addRow(new Object[]{Severity.INFO, "", "", __("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder...")});
+		} catch (Exception e) {
+			//	        e.printStackTrace();
+		}
+
 
 
 		// Windows
@@ -299,11 +364,21 @@ public class mainGUI extends JFrame implements ActionListener {
 		mnItem_Save.addActionListener(this);
 		mn_Log.add(mnItem_Save);
 
-		mn_Log.addSeparator();
-
 		opt_AutoSave = new JRadioButtonMenuItem(__("Auto Save"));
 		opt_AutoSave.addActionListener(this);
 		mn_Log.add(opt_AutoSave);
+
+		mn_Log.addSeparator();
+
+		opt_ViewMode_Text = new JRadioButtonMenuItem(__("Text View"));
+		opt_ViewMode_Text.addActionListener(this);
+		opt_ViewMode_Text.setSelected(false);
+		mn_Log.add(opt_ViewMode_Text);
+
+		opt_ViewMode_Table = new JRadioButtonMenuItem(__("Table View"));
+		opt_ViewMode_Table.addActionListener(this);
+		opt_ViewMode_Table.setSelected(true);
+		mn_Log.add(opt_ViewMode_Table);
 
 
 
@@ -383,20 +458,6 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 
-
-
-		// show GUI
-		setVisible(true);
-		paginaEPUBChecker.guiReady = true;
-
-
-
-		// start validating immediately if a file has been set yet (e.g. when changing the language)
-		validateImmediatelyIfFileIsSet();
-
-
-
-
 		// Swing Worker which reads and sets the "autoSave" and "translate" options in a background task
 		SwingWorker<Void, Void> setOptionsWorker = new SwingWorker<Void, Void>() {
 
@@ -437,10 +498,46 @@ public class mainGUI extends JFrame implements ActionListener {
 
 				opt_Translate.setSelected(paginaEPUBChecker.epubcheck_translate);
 
+
+				// LogViewMode
+				if(new File(paginaEPUBChecker.path_LogViewFile).exists()) {
+
+					try {
+						if(updateCheck.readFileAsString(paginaEPUBChecker.path_LogViewFile).equals("text")) {
+							paginaEPUBChecker.LogView = LogViewMode.TEXT;
+							scroll_results.setViewportView(txtarea_results);
+						} else {
+							paginaEPUBChecker.LogView = LogViewMode.TABLE;
+						}
+					} catch (IOException e) {
+						paginaEPUBChecker.LogView = LogViewMode.TABLE;
+						e.printStackTrace();
+					}
+
+					if(paginaEPUBChecker.LogView == LogViewMode.TEXT) {
+						opt_ViewMode_Table.setSelected(false);
+						opt_ViewMode_Text.setSelected(true);
+					}
+				}
+
 				return null;
 			}
 		};
 		setOptionsWorker.execute();
+
+
+
+
+
+
+		// show GUI
+		setVisible(true);
+		paginaEPUBChecker.guiReady = true;
+
+
+
+		// start validating immediately if a file has been set yet (e.g. when changing the language)
+		validateImmediatelyIfFileIsSet();
 
 	}
 
@@ -534,6 +631,12 @@ public class mainGUI extends JFrame implements ActionListener {
 			if(!file.exists()) {
 
 				txtarea_results.setText(__("EPUB file couldn't be found"));
+				mainGUI.tableModel.addRow(new Object[]{
+						Severity.FATAL,
+						"",
+						"",
+						__("EPUB file couldn't be found")
+				});
 
 				// file exists
 			} else {
@@ -606,6 +709,32 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
+		// handle "ViewMode" menuItem
+		} else if(e.getSource() == opt_ViewMode_Table || e.getSource() == opt_ViewMode_Text) {
+
+			if((e.getSource() == opt_ViewMode_Table && opt_ViewMode_Table.isSelected())
+					|| (e.getSource() == opt_ViewMode_Text && opt_ViewMode_Text.isSelected()) ) {
+				// do nothing when user clicks on currently selected ViewMode Item
+			}
+
+			String selectedLogView = "";
+			if(e.getSource() == opt_ViewMode_Text) {
+				selectedLogView = "text";
+				paginaEPUBChecker.LogView = LogViewMode.TEXT;
+			} else {
+				selectedLogView = "table";
+				paginaEPUBChecker.LogView = LogViewMode.TABLE;
+			}
+
+			updateCheck.writeStringToFile(paginaEPUBChecker.path_LogViewFile, selectedLogView);
+
+			// start re-validating immediately if a file has been set yet
+			saveGuiSettingsAndReloadGui();
+
+
+
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
 		// handle "open website pagina"
 		} else if(e.getSource() == mnItem_WebsitePagina) {
 
@@ -618,7 +747,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "open website epubcheck"
 		} else if(e.getSource() == mnItem_WebsiteEpubcheck) {
 
-			new OpenURIinBrowser("http://github.com/IDPF/epubcheck");
+			new OpenURIinBrowser("https://github.com/IDPF/epubcheck");
 
 
 
@@ -680,33 +809,34 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
+	private static void setLogComponentsBackgroundColor(Color color) {
+		txtarea_results.setBackground(color);
+		table_results.setBackground(color);
+		scroll_results.setBackground(color);
+	}
+
 	public static void setBorderStateActive() {
-		txtarea_results.setBackground(new Color(255,255,215));
-		scroll_results.setBackground(new Color(255,255,215));
+		setLogComponentsBackgroundColor(new Color(255,255,215));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,153,0), 7));
 	}	
 
 	public static void setBorderStateNormal() {
-		txtarea_results.setBackground(new Color(255,255,245));
-		scroll_results.setBackground(new Color(255,255,245));
+		setLogComponentsBackgroundColor(new Color(255,255,245));
 		scroll_results.setBorder(new DashedLineBorder(Color.ORANGE, 7));
 	}
 
 	public static void setBorderStateError() {
-		txtarea_results.setBackground(new Color(255,230,230));
-		scroll_results.setBackground(new Color(255,230,230));
+		setLogComponentsBackgroundColor(new Color(255,230,230));
 		scroll_results.setBorder(new DashedLineBorder(Color.RED, 7));
 	}
 
 	public static void setBorderStateWarning() {
-		txtarea_results.setBackground(new Color(255,240,230));
-		scroll_results.setBackground(new Color(255,240,230));
+		setLogComponentsBackgroundColor(new Color(255,240,230));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,102,0), 7));
 	}
 
 	public static void setBorderStateValid() {
-		txtarea_results.setBackground(new Color(235,247,235));
-		scroll_results.setBackground(new Color(235,247,235));
+		setLogComponentsBackgroundColor(new Color(235,247,235));
 		scroll_results.setBorder(new DashedLineBorder(new Color(51,173,51), 7));
 	}
 
@@ -722,6 +852,16 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		// set new language in mainClass so that the new Constructor can read this information
 		paginaEPUBChecker.programLanguage = language;
+
+		saveGuiSettingsAndReloadGui();
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	private static void saveGuiSettingsAndReloadGui() {
 
 		// read and save dimensions of the current gui window
 		paginaEPUBChecker.MainGuiDimension = paginaEPUBChecker.gui.getSize();
@@ -771,17 +911,17 @@ public class mainGUI extends JFrame implements ActionListener {
 			out.close();
 
 			if(logfile.exists()) {
-				txtarea_results.append("\n\n" + __("Test results were saved in a logfile") + ":\n" + logfile + "\n\n");
+				addLogMessage("\n\n" + __("Test results were saved in a logfile") + ":\n" + logfile + "\n\n");
 			} else {
-				txtarea_results.append("\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
+				addLogMessage(Severity.WARNING, "\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
 			}
 
 		} catch (Exception e1) {
-			txtarea_results.append("\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
+			addLogMessage(Severity.WARNING, "\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
 		}
 
 		// scroll to the end
-		mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+		scrollToBottom();
 	}
 
 
@@ -789,13 +929,53 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public int getIndex(String[] array, String specificValue){
+	public int getIndex(String[] array, String specificValue) {
 		for(int i=0; i<array.length; i++){
 			if(array[i].equals(specificValue)){
 				return i;
 			}
 		}
 		return -1;
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public static void scrollToBottom() {
+		if(paginaEPUBChecker.LogView == LogViewMode.TEXT) {
+			mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+		} else {
+			table_results.scrollRectToVisible(table_results.getCellRect(table_results.getRowCount()-1, 0, true));
+		}
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public static void clearLog() {
+		txtarea_results.setText("");
+		while(tableModel.getRowCount() > 0) {
+			tableModel.removeRow(0);
+		}
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public static void addLogMessage(String message) {
+		addLogMessage(Severity.INFO, message);
+	}
+
+	public static void addLogMessage(Severity severity, String message) {
+		mainGUI.txtarea_results.append(message);
+		// remove leading and trailing line breaks in table log message
+		mainGUI.tableModel.addRow(new Object[]{severity, "", "", message.trim()});
 	}
 
 

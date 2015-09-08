@@ -18,7 +18,7 @@ import javax.swing.*;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
-import javax.swing.JFrame;
+
 import com.adobe.epubcheck.api.EpubCheck;
 import com.adobe.epubcheck.api.Report;
 import com.adobe.epubcheck.util.Archive;
@@ -39,16 +39,16 @@ import com.apple.eawt.QuitResponse;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.5.0
- * @date			2015-09-03
+ * @date			2015-09-08
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.5.0";
-	public static final String VERSIONDATE = "03.09.2015";
+	public static final String VERSIONDATE = "08.09.2015";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- Includes updated epubcheck library v4.0.0";
+	public static final String RELEASENOTES = "- Includes updated epubcheck library v4.0.0<br/>- New sortable table layout for log messages<br/>&nbsp;&nbsp;(Feel free to change it back to 'text' mode in 'log' menu)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -60,6 +60,11 @@ public class paginaEPUBChecker {
 		"Spanish",
 		"Russian"
 	};
+
+	public enum LogViewMode {
+		TEXT, TABLE;
+	}
+
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -75,6 +80,7 @@ public class paginaEPUBChecker {
 	public static Boolean epubcheck_Result;
 	public static String epubcheck_EpubVersion;
 	public static Boolean AutoSave = false;
+	public static LogViewMode LogView = LogViewMode.TABLE;
 	public static long timestamp_begin, timestamp_end;
 	public static String os_name;
 
@@ -100,6 +106,8 @@ public class paginaEPUBChecker {
 	private static String cfgFile_Language = "Language.cfg";
 	public static String path_TranslateFile;
 	private static String cfgFile_Translate = "Translate.cfg";
+	public static String path_LogViewFile;
+	private static String cfgFile_LogView = "LogView.cfg";
 	public static String path_WindowFile;
 	private static String cfgFile_Window = "WindowPosition.cfg";
 	public static String path_FirstRunFile;
@@ -166,6 +174,7 @@ public class paginaEPUBChecker {
 		path_AutoSaveFile = path_ConfigDir + File.separator + cfgFile_AutoSave;
 		path_LanguageFile = path_ConfigDir + File.separator + cfgFile_Language;
 		path_TranslateFile = path_ConfigDir + File.separator + cfgFile_Translate;
+		path_LogViewFile = path_ConfigDir + File.separator + cfgFile_LogView;
 		path_WindowFile = path_ConfigDir + File.separator + cfgFile_Window;
 		path_FirstRunFile = path_ConfigDir + File.separator + cfgFile_FirstRun;
 
@@ -405,8 +414,8 @@ public class paginaEPUBChecker {
 		// set "begin" timestamp
 		timestamp_begin = System.currentTimeMillis();
 
-		// clear and reset TextArea
-		mainGUI.txtarea_results.setText("");
+		// clear and reset TextArea and Table
+		mainGUI.clearLog();
 
 		// Print timestamp of current epubcheck
 		Calendar cal = Calendar.getInstance();
@@ -420,6 +429,9 @@ public class paginaEPUBChecker {
 
 		// set the loading icon and update the statusbar
 		mainGUI.statusBar.update(loadingIcon, __("Checking file"));
+
+		// reset border color to normal
+		mainGUI.setBorderStateNormal();
 
 		// disable "save" menuItem
 		mainGUI.mnItem_Save.setEnabled(false);
@@ -459,28 +471,25 @@ public class paginaEPUBChecker {
 
 					// warnings AND errors
 					if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0 && paginaEPUBChecker.epubcheck_Report.getWarningCount() > 0) {
-
-						mainGUI.txtarea_results.append("\n\n"
-								+ String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaEPUBChecker.epubcheck_Report.getWarningCount(), paginaEPUBChecker.epubcheck_Report.getErrorCount())
-								+ "\n");
+						mainGUI.addLogMessage("\n\n" + String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaEPUBChecker.epubcheck_Report.getWarningCount(), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
 
 					// only errors
 					} else if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0) {
-						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d errors!"), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
+						mainGUI.addLogMessage("\n\n" + String.format(__("Check finished with %d errors!"), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
 
 					// only warnings
 					} else if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getWarningCount() > 0) {
 						// set border color to orange
 						mainGUI.setBorderStateWarning();
-						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d warnings!"), paginaEPUBChecker.epubcheck_Report.getWarningCount()) + "\n");
+						mainGUI.addLogMessage("\n\n" + String.format(__("Check finished with %d warnings!"), paginaEPUBChecker.epubcheck_Report.getWarningCount()) + "\n");
 
 					// something went wrong
 					} else if(epubcheck_translate) {
-						mainGUI.txtarea_results.append("\n\n" + __("Check finished with warnings or errors!") + "\n");
+						mainGUI.addLogMessage("\n\n" + __("Check finished with warnings or errors!") + "\n");
 
 					// epubcheck results shouldn't be translated
 					} else {
-						mainGUI.txtarea_results.append("\n\n" + "Check finished with warnings or errors!" + "\n");
+						mainGUI.addLogMessage("\n\n" + "Check finished with warnings or errors!" + "\n");
 					}
 
 
@@ -514,11 +523,11 @@ public class paginaEPUBChecker {
 
 					// translate the output
 					if(epubcheck_translate) {
-						mainGUI.txtarea_results.append("\n\n" + __("No errors or warnings detected") + "\n");
+						mainGUI.addLogMessage("\n\n" + __("No errors or warnings detected") + "\n");
 
 					// epubcheck results shouldn't be translated
 					} else {
-						mainGUI.txtarea_results.append("\n\n" + "No errors or warnings detected" + "\n");
+						mainGUI.addLogMessage("\n\n" + "No errors or warnings detected" + "\n");
 					}
 
 
@@ -531,14 +540,13 @@ public class paginaEPUBChecker {
 
 					// mode "expanded" : show a message "epub" saved successfully
 					if(modeExp && modeExp_epub != null && modeExp_keepArchive) {
-						mainGUI.txtarea_results.append("\n\n" + __("EPUB from source folder was successfully saved!") + "\n");
+						mainGUI.addLogMessage("\n\n" + __("EPUB from source folder was successfully saved!") + "\n");
 					}
 				}
 
 
 				// scroll to the end
-				mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
-
+				mainGUI.scrollToBottom();
 
 
 				// set "end" timestamp
