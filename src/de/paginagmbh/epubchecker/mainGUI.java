@@ -911,25 +911,13 @@ public class mainGUI extends JFrame implements ActionListener {
 			out.close();
 
 			if(logfile.exists()) {
-				txtarea_results.append("\n\n" + __("Test results were saved in a logfile") + ":\n" + logfile + "\n\n");
-				mainGUI.tableModel.addRow(new Object[]{
-						Severity.INFO, "", "",
-						__("Test results were saved in a logfile") + ":\n" + logfile
-					});
+				addLogMessage("\n\n" + __("Test results were saved in a logfile") + ":\n" + logfile + "\n\n");
 			} else {
-				txtarea_results.append("\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
-				mainGUI.tableModel.addRow(new Object[]{
-						Severity.WARNING, "", "",
-						__("An error occured! Logfile couldn't be saved!") + "\n" + logfile
-					});
+				addLogMessage(Severity.WARNING, "\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
 			}
 
 		} catch (Exception e1) {
-			txtarea_results.append("\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
-			mainGUI.tableModel.addRow(new Object[]{
-					Severity.WARNING, "", "",
-					__("An error occured! Logfile couldn't be saved!") + "\n" + logfile
-				});
+			addLogMessage(Severity.WARNING, "\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
 		}
 
 		// scroll to the end
@@ -987,7 +975,7 @@ public class mainGUI extends JFrame implements ActionListener {
 	public static void addLogMessage(Severity severity, String message) {
 		mainGUI.txtarea_results.append(message);
 		// remove leading and trailing line breaks in table log message
-		mainGUI.tableModel.addRow(new Object[]{severity, "", "", message.replaceAll("^\n*(.*)\n*$","$1")});
+		mainGUI.tableModel.addRow(new Object[]{severity, "", "", message.trim()});
 	}
 
 
