@@ -230,7 +230,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		tableModel.addColumn(__("Code"));
 		tableModel.addColumn(__("File (line,col)"));
 		tableModel.addColumn(__("Message"));
-		
+
 		table_results = new JTable(tableModel){
 			private static final long serialVersionUID = -4430174981226468686L;
 
@@ -284,7 +284,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		main.add(scroll_results, gbc_scroll_results);
 
 
-		
+
 		// Create the drag and drop listener
 		DragDropListener txtareaDNDListener = new DragDropListener();
 		// Connect the label with a drag and drop listener
@@ -636,7 +636,7 @@ public class mainGUI extends JFrame implements ActionListener {
 						"",
 						"",
 						__("EPUB file couldn't be found")
-					});
+				});
 
 				// file exists
 			} else {
