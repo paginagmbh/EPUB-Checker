@@ -21,7 +21,6 @@ import javax.xml.xpath.*;
 
 import com.adobe.epubcheck.api.EpubCheck;
 import com.adobe.epubcheck.api.Report;
-import com.adobe.epubcheck.messages.Severity;
 import com.adobe.epubcheck.util.Archive;
 import com.adobe.epubcheck.util.Messages;
 import com.apple.eawt.AboutHandler;
@@ -416,10 +415,7 @@ public class paginaEPUBChecker {
 		timestamp_begin = System.currentTimeMillis();
 
 		// clear and reset TextArea and Table
-		mainGUI.txtarea_results.setText("");
-		while(mainGUI.tableModel.getRowCount() > 0) {
-			mainGUI.tableModel.removeRow(0);
-		}
+		mainGUI.clearLog();
 
 		// Print timestamp of current epubcheck
 		Calendar cal = Calendar.getInstance();
@@ -475,48 +471,25 @@ public class paginaEPUBChecker {
 
 					// warnings AND errors
 					if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0 && paginaEPUBChecker.epubcheck_Report.getWarningCount() > 0) {
-
-						mainGUI.txtarea_results.append("\n\n"
-								+ String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaEPUBChecker.epubcheck_Report.getWarningCount(), paginaEPUBChecker.epubcheck_Report.getErrorCount())
-								+ "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaEPUBChecker.epubcheck_Report.getWarningCount(), paginaEPUBChecker.epubcheck_Report.getErrorCount())
-							});
+						mainGUI.addLogMessage("\n\n" + String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), paginaEPUBChecker.epubcheck_Report.getWarningCount(), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
 
 					// only errors
 					} else if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getErrorCount() > 0) {
-						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d errors!"), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								String.format(__("Check finished with %d errors!"), paginaEPUBChecker.epubcheck_Report.getErrorCount())
-							});
+						mainGUI.addLogMessage("\n\n" + String.format(__("Check finished with %d errors!"), paginaEPUBChecker.epubcheck_Report.getErrorCount()) + "\n");
 
 					// only warnings
 					} else if(epubcheck_translate && paginaEPUBChecker.epubcheck_Report.getWarningCount() > 0) {
 						// set border color to orange
 						mainGUI.setBorderStateWarning();
-						mainGUI.txtarea_results.append("\n\n" + String.format(__("Check finished with %d warnings!"), paginaEPUBChecker.epubcheck_Report.getWarningCount()) + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								String.format(__("Check finished with %d warnings!"), paginaEPUBChecker.epubcheck_Report.getWarningCount())
-							});
+						mainGUI.addLogMessage("\n\n" + String.format(__("Check finished with %d warnings!"), paginaEPUBChecker.epubcheck_Report.getWarningCount()) + "\n");
 
 					// something went wrong
 					} else if(epubcheck_translate) {
-						mainGUI.txtarea_results.append("\n\n" + __("Check finished with warnings or errors!") + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								__("Check finished with warnings or errors!")
-							});
+						mainGUI.addLogMessage("\n\n" + __("Check finished with warnings or errors!") + "\n");
 
 					// epubcheck results shouldn't be translated
 					} else {
-						mainGUI.txtarea_results.append("\n\n" + "Check finished with warnings or errors!" + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								__("Check finished with warnings or errors!")
-							});
+						mainGUI.addLogMessage("\n\n" + "Check finished with warnings or errors!" + "\n");
 					}
 
 
@@ -550,19 +523,11 @@ public class paginaEPUBChecker {
 
 					// translate the output
 					if(epubcheck_translate) {
-						mainGUI.txtarea_results.append("\n\n" + __("No errors or warnings detected") + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								__("No errors or warnings detected")
-							});
+						mainGUI.addLogMessage("\n\n" + __("No errors or warnings detected") + "\n");
 
 					// epubcheck results shouldn't be translated
 					} else {
-						mainGUI.txtarea_results.append("\n\n" + "No errors or warnings detected" + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								"No errors or warnings detected"
-							});
+						mainGUI.addLogMessage("\n\n" + "No errors or warnings detected" + "\n");
 					}
 
 
@@ -575,11 +540,7 @@ public class paginaEPUBChecker {
 
 					// mode "expanded" : show a message "epub" saved successfully
 					if(modeExp && modeExp_epub != null && modeExp_keepArchive) {
-						mainGUI.txtarea_results.append("\n\n" + __("EPUB from source folder was successfully saved!") + "\n");
-						mainGUI.tableModel.addRow(new Object[]{
-								Severity.INFO, "", "",
-								__("EPUB from source folder was successfully saved!")
-							});
+						mainGUI.addLogMessage("\n\n" + __("EPUB from source folder was successfully saved!") + "\n");
 					}
 				}
 

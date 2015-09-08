@@ -941,7 +941,7 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public int getIndex(String[] array, String specificValue){
+	public int getIndex(String[] array, String specificValue) {
 		for(int i=0; i<array.length; i++){
 			if(array[i].equals(specificValue)){
 				return i;
@@ -955,12 +955,39 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public static void scrollToBottom(){
+	public static void scrollToBottom() {
 		if(paginaEPUBChecker.LogView == LogViewMode.TEXT) {
 			mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
 		} else {
 			table_results.scrollRectToVisible(table_results.getCellRect(table_results.getRowCount()-1, 0, true));
 		}
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public static void clearLog() {
+		txtarea_results.setText("");
+		while(tableModel.getRowCount() > 0) {
+			tableModel.removeRow(0);
+		}
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public static void addLogMessage(String message) {
+		addLogMessage(Severity.INFO, message);
+	}
+
+	public static void addLogMessage(Severity severity, String message) {
+		mainGUI.txtarea_results.append(message);
+		// remove leading and trailing line breaks in table log message
+		mainGUI.tableModel.addRow(new Object[]{severity, "", "", message.replaceAll("^\n*(.*)\n*$","$1")});
 	}
 
 
