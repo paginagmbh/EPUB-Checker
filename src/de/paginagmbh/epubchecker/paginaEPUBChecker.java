@@ -62,7 +62,7 @@ public class paginaEPUBChecker {
 	};
 
 	public enum LogViewMode {
-	    TEXT, TABLE;
+		TEXT, TABLE;
 	}
 
 
