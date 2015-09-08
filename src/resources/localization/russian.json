@@ -5,6 +5,8 @@
 	"Logfile" : "Журнал",
 	"Save logfile" : "Сохранить файл журнала",
 	"Auto Save" : "Сохранять автоматически",
+	"Text View" : "вид: текст",
+	"Table View" : "вид: табличный",
 	"Language" : "Язык",
 	"German" : "Deutsch (немецкий)",
 	"English" : "English (английский)",
@@ -89,6 +91,13 @@
 	"WARNING_preposition" : "для",
 	"HINT" : "ПОДСКАЗКА",
 	"HINT_preposition" : "для",
+	"INFO" : "ИНФОРМАЦИЯ",
+	"INFO_preposition" : "для",
+	
+	"Severity" : "строгость",
+	"Code" : "код",
+	"File (line,col)" : "файл (строка, столбец)",
+	"Message" : "сообщение",
 	
 	"referenced resource missing in the package" : "указанный ресурс отсутствует в пакете",
 	"referenced resource exists, but not declared in the OPF file" : "указанный ресурс существует, но не объявлен в OPF файле",

@@ -226,10 +226,10 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		tableModel = new DefaultTableModel();
-		tableModel.addColumn("Severity");
-		tableModel.addColumn("Code");
-		tableModel.addColumn("File (Line/Col)");
-		tableModel.addColumn("Message");
+		tableModel.addColumn(__("Severity"));
+		tableModel.addColumn(__("Code"));
+		tableModel.addColumn(__("File (line,col)"));
+		tableModel.addColumn(__("Message"));
 		
 		table_results = new JTable(tableModel){
 			private static final long serialVersionUID = -4430174981226468686L;
