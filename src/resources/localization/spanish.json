@@ -5,6 +5,8 @@
 	"Logfile" : "Informe log",
 	"Save logfile" : "Guardar informe log",
 	"Auto Save" : "Guardar automáticamente",
+	"Text View" : "Vista de texto",
+	"Table View" : "Vista de tabla",
 	"Language" : "Lenguaje",
 	"German" : "Deutsch (Alemán)",
 	"English" : "English (Inglés)",
@@ -89,6 +91,13 @@
 	"WARNING_preposition" : "en",
 	"HINT" : "INDICIO",
 	"HINT_preposition" : "in",
+	"INFO" : "INFORMACIÓN",
+	"INFO_preposition" : "en",
+	
+	"Severity" : "Gravedad",
+	"Code" : "Código	",
+	"File (line,col)" : "Archivo (línea, columna)",
+	"Message" : "Noticia",
 	
 	"referenced resource missing in the package" : "Faltan recursos de referencia en el empaquetado",
 	"referenced resource exists, but not declared in the OPF file" : "Los recursos de referencia existen, pero no se declaran en el archivo OPF",

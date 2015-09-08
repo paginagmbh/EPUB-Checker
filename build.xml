@@ -60,14 +60,22 @@
             <attribute name="Class-Path" value="."/>
         </manifest>
         <fileset dir="${src.dir}/bin"/>
-        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/epubcheck-3.0.1.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/AppleJavaExtensions.jar"/>
-        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/commons-compress-1.4.1.jar"/>
-        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/guava-13.0.1.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/common-image-3.1.2.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/common-io-3.1.2.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/common-lang-3.1.2.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/commons-compress-1.5.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/epubcheck.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/guava-14.0.1.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/imageio-core-3.1.2.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/imageio-jpeg-3.1.2.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/imageio-metadata-3.1.2.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/jackson-core-asl-1.9.12.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/jackson-mapper-asl-1.9.12.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/jing-20120724.0.0.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/json-rpc-1.0.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/sac-1.3.jar"/>
-        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/Saxon-HE-9.4.0.6.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/Saxon-HE-9.5.1-5.jar"/>
     </jar>
 	
 	<chmod perm="ugo+rx" file="${out.dir}/paginaEPUBChecker.jar" />
@@ -118,7 +126,7 @@
 		signature="PAEC"
 		build="${program.version.build}"
 		copyright="© 2010-${YEAR} pagina GmbH, Tübingen, Germany"
-		jvmversion="1.6+">
+		jvmversion="1.7+">
 		
 		<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
 		<!-- http://informagen.com/JarBundler/DocumentType.html -->

@@ -26,8 +26,8 @@ import com.adobe.epubcheck.util.FeatureEnum;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.2
- * @date			2013-05-30
+ * @version		1.2.1
+ * @date			2015-09-08
  */
 public class DragDropListener implements DropTargetListener {
 
@@ -125,7 +125,8 @@ public class DragDropListener implements DropTargetListener {
 	public void dragEnter(DropTargetDragEvent event) {
 		// System.out.println("Enter");
 		mainGUI.setBorderStateActive();
-		mainGUI.txtarea_results.setText(__("Yeah! Drop your EPUB right here!"));
+		mainGUI.clearLog();
+		mainGUI.addLogMessage(__("Yeah! Drop your EPUB right here!"));
 
 	}
 
@@ -133,7 +134,8 @@ public class DragDropListener implements DropTargetListener {
 	public void dragExit(DropTargetEvent event) {
 		// System.out.println("Exit");
 		mainGUI.setBorderStateNormal();
-		mainGUI.txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
+		mainGUI.clearLog();
+		mainGUI.addLogMessage(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
 	}
 
 	@Override
@@ -205,21 +207,24 @@ public class DragDropListener implements DropTargetListener {
 
 					} else {
 						mainGUI.setBorderStateError();
-						mainGUI.txtarea_results.setText(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
-						mainGUI.txtarea_results.append("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
+						mainGUI.clearLog();
+						mainGUI.addLogMessage(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
+						mainGUI.addLogMessage("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
 					}
 
 
 				} else {
 					mainGUI.setBorderStateError();
-					mainGUI.txtarea_results.setText(__("This isn't an EPUB file") + ": " + file.getName());
+					mainGUI.clearLog();
+					mainGUI.addLogMessage(__("This isn't an EPUB file") + ": " + file.getName());
 				}
 
 			}
 
 			// if multiple files were dropped
 		} else {
-			mainGUI.txtarea_results.setText(__("Sorry, but more than one file can't be validated at the same time!"));
+			mainGUI.clearLog();
+			mainGUI.addLogMessage(__("Sorry, but more than one file can't be validated at the same time!"));
 		}
 	}
 

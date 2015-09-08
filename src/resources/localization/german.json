@@ -5,6 +5,8 @@
 	"Logfile" : "Protokoll",
 	"Save logfile" : "Protokoll speichern",
 	"Auto Save" : "Protokoll automatisch speichern",
+	"Text View" : "Ansicht: Text",
+	"Table View" : "Ansicht: Tabellarisch",
 	"Language" : "Sprache",
 	"German" : "Deutsch",
 	"English" : "English (Englisch)",
@@ -89,6 +91,13 @@
 	"WARNING_preposition" : "in",
 	"HINT" : "HINWEIS",
 	"HINT_preposition" : "in",
+	"INFO" : "INFO",
+	"INFO_preposition" : "zu",
+	
+	"Severity" : "Level",
+	"Code" : "Fehlercode",
+	"File (line,col)" : "Datei (Zeile, Zeichen)",
+	"Message" : "Nachricht",
 	
 	"referenced resource missing in the package" : "Die Datei wurde im EPUB nicht gefunden",
 	"referenced resource exists, but not declared in the OPF file" : "Die verlinkte Datei existiert zwar, wurde jedoch nicht in der OPF-Datei deklariert",
