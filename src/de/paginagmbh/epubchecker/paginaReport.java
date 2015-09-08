@@ -17,11 +17,10 @@ import com.adobe.epubcheck.util.PathUtil;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		2.0
- * @date 		2015-09-04
+ * @date 		2015-09-08
  */
 public final class paginaReport extends DefaultReportImpl {
 
-	private String ePubName;
 	private static boolean DEBUG = false;
 	boolean quiet, saveQuiet;
 
@@ -32,7 +31,6 @@ public final class paginaReport extends DefaultReportImpl {
 
 	public paginaReport(String ePubName) {
 	    super(ePubName);
-		this.ePubName = ePubName;
 	}
 
 
