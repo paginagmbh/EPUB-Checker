@@ -126,7 +126,7 @@
 		signature="PAEC"
 		build="${program.version.build}"
 		copyright="© 2010-${YEAR} pagina GmbH, Tübingen, Germany"
-		jvmversion="1.6+">
+		jvmversion="1.7+">
 		
 		<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
 		<!-- http://informagen.com/JarBundler/DocumentType.html -->
