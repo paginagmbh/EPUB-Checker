@@ -24,12 +24,12 @@
     <jdkPreference>preferJre</jdkPreference>
   </jre>
   <versionInfo>
-    <fileVersion>1.4.0.249</fileVersion>
-    <txtFileVersion>1.4.0</txtFileVersion>
+    <fileVersion>1.5.0.252</fileVersion>
+    <txtFileVersion>1.5.0</txtFileVersion>
     <fileDescription>pagina EPUB-Checker</fileDescription>
     <copyright>pagina GmbH, Tuebingen</copyright>
-    <productVersion>1.4.0.249</productVersion>
-    <txtProductVersion>1.4.0</txtProductVersion>
+    <productVersion>1.5.0.252</productVersion>
+    <txtProductVersion>1.5.0</txtProductVersion>
     <productName>pagina EPUB-Checker</productName>
     <companyName>pagina GmbH</companyName>
     <internalName>EPUB-Checker</internalName>
