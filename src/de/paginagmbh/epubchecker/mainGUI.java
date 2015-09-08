@@ -688,7 +688,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "open website epubcheck"
 		} else if(e.getSource() == mnItem_WebsiteEpubcheck) {
 
-			new OpenURIinBrowser("http://github.com/IDPF/epubcheck");
+			new OpenURIinBrowser("https://github.com/IDPF/epubcheck");
 
 
 
