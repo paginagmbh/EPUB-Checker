@@ -40,16 +40,16 @@ import com.apple.eawt.QuitResponse;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.5.0
- * @date			2015-09-04
+ * @date			2015-09-08
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.5.0";
-	public static final String VERSIONDATE = "03.09.2015";
+	public static final String VERSIONDATE = "08.09.2015";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- Includes updated epubcheck library v4.0.0";
+	public static final String RELEASENOTES = "- Includes updated epubcheck library v4.0.0<br/>- New sortable table layout for log messages<br/>&nbsp;&nbsp;(Feel free to change it back to 'text' mode in 'log' menu)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -61,6 +61,11 @@ public class paginaEPUBChecker {
 		"Spanish",
 		"Russian"
 	};
+
+	public enum LogViewMode {
+	    TEXT, TABLE;
+	}
+
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -76,6 +81,7 @@ public class paginaEPUBChecker {
 	public static Boolean epubcheck_Result;
 	public static String epubcheck_EpubVersion;
 	public static Boolean AutoSave = false;
+	public static LogViewMode LogView = LogViewMode.TABLE;
 	public static long timestamp_begin, timestamp_end;
 	public static String os_name;
 
@@ -101,6 +107,8 @@ public class paginaEPUBChecker {
 	private static String cfgFile_Language = "Language.cfg";
 	public static String path_TranslateFile;
 	private static String cfgFile_Translate = "Translate.cfg";
+	public static String path_LogViewFile;
+	private static String cfgFile_LogView = "LogView.cfg";
 	public static String path_WindowFile;
 	private static String cfgFile_Window = "WindowPosition.cfg";
 	public static String path_FirstRunFile;
@@ -167,6 +175,7 @@ public class paginaEPUBChecker {
 		path_AutoSaveFile = path_ConfigDir + File.separator + cfgFile_AutoSave;
 		path_LanguageFile = path_ConfigDir + File.separator + cfgFile_Language;
 		path_TranslateFile = path_ConfigDir + File.separator + cfgFile_Translate;
+		path_LogViewFile = path_ConfigDir + File.separator + cfgFile_LogView;
 		path_WindowFile = path_ConfigDir + File.separator + cfgFile_Window;
 		path_FirstRunFile = path_ConfigDir + File.separator + cfgFile_FirstRun;
 
