@@ -12,7 +12,6 @@ import java.text.DecimalFormat;
 import javax.swing.*;
 import java.awt.Container;
 import java.awt.Desktop;
-import java.awt.SystemColor;
 import java.awt.Font;
 
 import de.paginagmbh.epubchecker.paginaEPUBChecker;
@@ -29,7 +28,7 @@ import java.awt.Insets;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-03-22
+ * @date 		2015-10-08
  */
 public class FileDownloader {
 
@@ -106,7 +105,7 @@ public class FileDownloader {
 		// TextPane "message"
 		JTextPane tp_message = new JTextPane();
 		tp_message.setFont(tp_message.getFont().deriveFont(12f));
-		tp_message.setBackground(SystemColor.control);
+		tp_message.setBackground(c.getBackground());
 		tp_message.setEditable(false);
 		tp_message.setText(message);
 		GridBagConstraints gbc_tp_message = new GridBagConstraints();
