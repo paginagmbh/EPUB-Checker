@@ -120,6 +120,7 @@
 		stubfile="${build.dir}/MacJavaStub/universalJavaApplicationStub"
 		usejavaxkey="true"
 		icon="${build.dir}/icons/paginaEPUBChecker_1024.icns"
+		splashfile="SplashScreen_Mac.png"
 		version="${program.version.txtNumber}"
 		developmentregion="German"
 		allowMixedLocalizations="true"
@@ -138,6 +139,10 @@
 		<jarfileset dir="${out.dir}">
 			<include name="paginaEPUBChecker.jar" />
 		</jarfileset>
+		
+		<resourcefileset dir="${build.dir}/splashscreen/">
+			<include name="SplashScreen_Mac.png"/>
+		</resourcefileset>
 	
 	</jarbundler>
 	
