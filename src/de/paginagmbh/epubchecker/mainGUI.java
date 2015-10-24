@@ -91,8 +91,12 @@ public class mainGUI extends JFrame implements ActionListener {
 		super("pagina EPUB-Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// set Icon (Windows only)
-		setIconImage(paginaEPUBChecker.logoImg32);
+		// set lowRes Windows Icon and hiRes Linux Icon
+		if(paginaEPUBChecker.os_name.equals("windows")) {
+			setIconImage(paginaEPUBChecker.logoImg32);
+		} else if(paginaEPUBChecker.os_name.equals("linux")) {
+			setIconImage(paginaEPUBChecker.logoImg1024);
+		}
 
 		// set Apple specific system properties
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
