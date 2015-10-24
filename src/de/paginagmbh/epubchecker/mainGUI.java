@@ -563,8 +563,8 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "File Choose" menuItem and Button
 		} else if(e.getSource() == mnItem_Open || e.getSource() == btn_chooseEpubFile) {
 
-			// better File-Chooser for Mac OS X
-			if(paginaEPUBChecker.os_name.equals("mac")) {
+			// better File-Chooser for Mac OS X and Linux
+			if(paginaEPUBChecker.os_name.matches("mac|linux")) {
 
 				FileDialog fd = new FileDialog(mainGUI.this, __("Please choose an EPUB file for validation"), FileDialog.LOAD);
 				System.setProperty("apple.awt.use-file-dialog-packages", "true");
