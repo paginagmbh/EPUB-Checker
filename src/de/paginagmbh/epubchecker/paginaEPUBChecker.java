@@ -34,21 +34,21 @@ import com.apple.eawt.QuitResponse;
 
 
 /**
- * checks and validates EPUB eBooks
+ * checks and validates EPUB eBooks in a nice graphical user interface
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.5.0
- * @date			2015-09-22
+ * @date		2015-10-24
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.5.0";
-	public static final String VERSIONDATE = "22.09.2015";
+	public static final String VERSIONDATE = "24.10.2015";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- EpubCheck library v4.0.0<br/>- Sortable table layout for log messages<br/>&nbsp;&nbsp;&nbsp;(Feel free to change it back to 'text' mode in 'log' menu)";
+	public static final String RELEASENOTES = "- EpubCheck library v4.0.1<br/>- Fixed Linux support<br/>- Fixed Java support on Mac OS X";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
