@@ -118,9 +118,10 @@ public class paginaEPUBChecker {
 	public static final Image logoImg16 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_16.png"));
 	public static final Image logoImg32 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_32.png"));
 	public static final Image logoImg64 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_64.png"));
-	//    public static final Image logoImg128 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_128.png"));
-	//    public static final Image logoImg256 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_256.png"));
-	//    public static final Image logoImg512 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_512.png"));
+	public static final Image logoImg128 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_128.png"));
+	public static final Image logoImg256 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_256.png"));
+	public static final Image logoImg512 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_512.png"));
+	public static final Image logoImg1024 = Toolkit.getDefaultToolkit().getImage(mainGUI.class.getResource("/resources/icons/paginaEPUBChecker_1024.png"));
 
 
 
