@@ -23,6 +23,12 @@
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>
   </jre>
+  <splash>
+    <file>../splashscreen/SplashScreen_Windows.bmp</file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>60</timeout>
+    <timeoutErr>false</timeoutErr>
+  </splash>
   <versionInfo>
     <fileVersion>1.5.0.252</fileVersion>
     <txtFileVersion>1.5.0</txtFileVersion>
