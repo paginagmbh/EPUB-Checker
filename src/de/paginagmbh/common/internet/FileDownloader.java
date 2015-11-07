@@ -16,7 +16,6 @@ import java.awt.Font;
 
 import de.paginagmbh.epubchecker.FileManager;
 import de.paginagmbh.epubchecker.GuiManager;
-import de.paginagmbh.epubchecker.LocalizationManager;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -344,6 +343,6 @@ public class FileDownloader {
 	/* ********************************************************************************************************** */
 
 	private String __(String s) {
-		return LocalizationManager.getInstance().getString(s);
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 }

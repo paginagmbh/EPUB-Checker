@@ -154,8 +154,7 @@ public class paginaReport extends DefaultReportImpl {
 		} catch (Exception e) {
 
 			// do regex stuff
-			return LocalizationManager.getInstance().getRegexEngine().doReplace(s);
-
+			return GuiManager.getInstance().getCurrentLocalizationObject().getRegexEngine().doReplace(s);
 		}
 	}
 
@@ -189,7 +188,7 @@ public class paginaReport extends DefaultReportImpl {
 	/* ********************************************************************************************************** */
 
 	private String __(String s) {
-		return LocalizationManager.getInstance().getString(s);
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 
 }

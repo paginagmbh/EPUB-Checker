@@ -137,13 +137,7 @@ public class paginaEPUBChecker {
 	public void loadAndInitGuiAndDependencies() {
 
 		// init language object
-		LocalizationManager l10n = LocalizationManager.getInstance();
-		if(guiManager.getCurrentLanguage() != null) {
-			l10n.init(guiManager.getCurrentLanguage());
-		} else {
-			l10n.init();
-		}
-		guiManager.setCurrentLanguage(l10n.getCurrentLanguage());
+		guiManager.createNewLocalizationObject();
 
 		String currentLanguage = guiManager.getCurrentLanguage();
 
@@ -240,6 +234,6 @@ public class paginaEPUBChecker {
 	/* ********************************************************************************************************** */
 
 	private String __(String s) {
-		return LocalizationManager.getInstance().getString(s);
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 }
