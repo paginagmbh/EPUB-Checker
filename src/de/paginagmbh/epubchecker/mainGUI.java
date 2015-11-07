@@ -179,6 +179,12 @@ public class mainGUI extends JFrame implements ActionListener {
 		gbc_input_filePath.gridy = 1;
 		main.add(input_filePath, gbc_input_filePath);
 
+		// Fill path from GuiManager if possible
+		// e.g. in case of a language switch
+		if(guiManager.getCurrentFile() != null && guiManager.getCurrentFile().exists()) {
+			input_filePath.setText(guiManager.getCurrentFile().getAbsolutePath());
+		}
+
 		// Key listener listening to the filepath input field and changing the validate buttons status
 		KeyListener keyListener = new KeyListener() {
 			public void keyPressed(KeyEvent keyEvent) { }
@@ -517,12 +523,6 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		// show GUI
 		setVisible(true);
-
-
-
-		// start validating immediately if a file has been set yet (e.g. when changing the language)
-		validateImmediatelyIfFileIsSet();
-
 	}
 
 
@@ -831,20 +831,6 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		// new GUI in given language
 		new paginaEPUBChecker(null);
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
-	private void validateImmediatelyIfFileIsSet() {
-		if(guiManager.getCurrentFile() != null && guiManager.getCurrentFile().exists()) {
-			File file = guiManager.getCurrentFile();
-			input_filePath.setText(file.getAbsolutePath());
-			EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
-			epubValidator.validate(file);
-		}
 	}
 
 
