@@ -302,10 +302,10 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// Create the drag and drop listener
-		DragDropListener txtareaDNDListener = new DragDropListener();
+		DragDropListener dragDropListener = new DragDropListener();
 		// Connect the label with a drag and drop listener
-		new DropTarget(table_results, txtareaDNDListener);
-		new DropTarget(txtarea_results, txtareaDNDListener);
+		new DropTarget(table_results, dragDropListener);
+		new DropTarget(txtarea_results, dragDropListener);
 
 		// try catch is needed for running this app on openjdk on ubuntu
 		// don't know exactly why...
@@ -512,9 +512,6 @@ public class mainGUI extends JFrame implements ActionListener {
 			}
 		};
 		setOptionsWorker.execute();
-
-
-
 
 
 
