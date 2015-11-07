@@ -116,14 +116,14 @@ public class FileManager {
 			try {
 				String windowConfig = StringHelper.readFileAsString(FileManager.path_WindowFile);
 				String[] windowConfigSplit = windowConfig.split("@");
-	
+
 				// check if windowConfig contains valid information
 				if(windowConfig.length() > 0 && windowConfigSplit.length == 2) {
-	
+
 					// handle window dimensions (WxH)
 					if(windowConfigSplit[0].length() != 0) {
 						String[] windowDimensions = windowConfigSplit[0].split("x");
-	
+
 						// reload window dimensions only if they are integers
 						if(windowDimensions.length == 2 && isInteger(windowDimensions[0]) && isInteger(windowDimensions[1])) {
 							guiManager.setMainGuiDimension(new Dimension(
@@ -135,7 +135,7 @@ public class FileManager {
 					// handle window position (X,Y)
 					if(windowConfigSplit[1].length() != 0) {
 						String[] windowPosition = windowConfigSplit[1].split(",");
-	
+
 						// reload window position only if they are integers, and...
 						if(windowPosition.length == 2 && isInteger(windowPosition[0]) && isInteger(windowPosition[1])) {
 							int posX = new Integer(windowPosition[0]);

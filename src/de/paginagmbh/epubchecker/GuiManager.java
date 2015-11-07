@@ -38,14 +38,14 @@ public class GuiManager {
 
 	public static GuiManager getInstance() {
 		if (instance == null) {
-            synchronized (GuiManager.class) {
-                // Double check
-                if (instance == null) {
-                    instance = new GuiManager();
-                }
-            }
-        }
-        return instance;
+			synchronized (GuiManager.class) {
+				// Double check
+				if (instance == null) {
+					instance = new GuiManager();
+				}
+			}
+		}
+		return instance;
 	}
 
 	public String getCurrentLanguage() {
