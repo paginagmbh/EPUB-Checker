@@ -22,9 +22,9 @@ class BoardTableCellRenderer extends DefaultTableCellRenderer {
 		// set the Font, Color, etc.
 		renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 		setBorder(new CompoundBorder(
-        		new MatteBorder(0,0,1,1,Color.WHITE),
-        		new EmptyBorder(new Insets(5,5,5,5))
-    		));
+				new MatteBorder(0,0,1,1,Color.WHITE),
+				new EmptyBorder(new Insets(5,5,5,5))
+				));
 		setVerticalAlignment(NORTH);
 		setForeground(renderer.getForeground());
 		setBackground(renderer.getBackground());
