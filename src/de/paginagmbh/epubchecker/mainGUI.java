@@ -45,7 +45,6 @@ import com.adobe.epubcheck.messages.Severity;
 import de.paginagmbh.common.gui.DashedLineBorder;
 import de.paginagmbh.common.gui.StatusBar;
 import de.paginagmbh.common.internet.OpenURIinBrowser;
-import de.paginagmbh.epubchecker.paginaEPUBChecker.LogViewMode;
 
 import javax.swing.UIManager;
 import javax.swing.KeyStroke;
@@ -57,29 +56,40 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2015-09-08
+ * @date			2015-11-07
  */
 public class mainGUI extends JFrame implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
-	public static JTextField input_filePath;
-	public static JTextArea txtarea_results;
-	public static DefaultTableModel tableModel;
-	public static JScrollPane scroll_results;
-	public static JTable table_results;
-	public static JLabel lbl_test;
-	public static JButton btn_validateEpub, btn_chooseEpubFile;
-	public static JMenuItem mnItem_Open, mnItem_Save, mnItem_Exit, mnItem_About, mnItem_Translations, mnItem_licenceInformation, mnItem_WebsiteEpubcheck, mnItem_WebsitePagina, mnItem_Updates;
+	private static final long serialVersionUID = -9097011004038447484L;
+	private static GuiManager guiManager;
+	private JTextField input_filePath;
+	private JTextArea txtarea_results;
+	private DefaultTableModel tableModel;
+	private JScrollPane scroll_results;
+	private JTable table_results;
+	private JLabel lbl_test;
+	private JButton btn_validateEpub;
+	private JButton btn_chooseEpubFile;
+	private JMenuItem mnItem_Open;
+	private JMenuItem mnItem_Save;
+	private JMenuItem mnItem_Exit;
+	private JMenuItem mnItem_About;
+	private JMenuItem mnItem_Translations;
+	private JMenuItem mnItem_licenceInformation;
+	private JMenuItem mnItem_WebsiteEpubcheck;
+	private JMenuItem mnItem_WebsitePagina;
+	private JMenuItem mnItem_Updates;
 	JMenu mn_File, mn_Language, mn_Help;
-	public static JRadioButtonMenuItem opt_AutoSave, opt_Translate, opt_ViewMode_Text, opt_ViewMode_Table;
-	public static StatusBar statusBar;
+	private JRadioButtonMenuItem opt_AutoSave, opt_ViewMode_Text, opt_ViewMode_Table;
+	private StatusBar statusBar;
 	private JMenu mn_Log;
 
-
-	// language stuff
-	private static JRadioButtonMenuItem[] opt_Lang;
-	private static String[] availableLanguagesOriginal;
-
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
+	
+	private LogViewMode LogView = LogViewMode.TABLE;
+	public enum LogViewMode {
+		TEXT, TABLE;
+	}
 
 
 
@@ -91,11 +101,13 @@ public class mainGUI extends JFrame implements ActionListener {
 		super("pagina EPUB-Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		guiManager = GuiManager.getInstance();
+
 		// set lowRes Windows Icon and hiRes Linux Icon
-		if(paginaEPUBChecker.os_name.equals("windows")) {
-			setIconImage(paginaEPUBChecker.logoImg32);
-		} else if(paginaEPUBChecker.os_name.equals("linux")) {
-			setIconImage(paginaEPUBChecker.logoImg1024);
+		if(FileManager.os_name.equals("windows")) {
+			setIconImage(FileManager.logoImg32);
+		} else if(FileManager.os_name.equals("linux")) {
+			setIconImage(FileManager.logoImg1024);
 		}
 
 		// set Apple specific system properties
@@ -105,10 +117,10 @@ public class mainGUI extends JFrame implements ActionListener {
 		System.setProperty("com.apple.mrj.application.live-resize", "true");
 
 		// set window size
-		if(paginaEPUBChecker.MainGuiDimension == null) {
+		if(guiManager.getMainGuiDimension() == null) {
 			setSize(775,650);
 		} else {
-			setSize(paginaEPUBChecker.MainGuiDimension);
+			setSize(guiManager.getMainGuiDimension());
 		}
 
 
@@ -117,10 +129,10 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// set window position
-		if(paginaEPUBChecker.MainGuiPosition == null) {
+		if(guiManager.getMainGuiPosition() == null) {
 			setLocation(50, 50);
 		} else {
-			setLocation(paginaEPUBChecker.MainGuiPosition);
+			setLocation(guiManager.getMainGuiPosition());
 		}
 
 
@@ -330,7 +342,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		menuBar.add(mn_File);
 
 		mnItem_Open = new JMenuItem(__("Open"));
-		if(paginaEPUBChecker.os_name.equals("mac")) {
+		if(FileManager.os_name.equals("mac")) {
 			mnItem_Open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.META_MASK));
 		} else {
 			mnItem_Open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
@@ -340,12 +352,12 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// not a mac system
-		if(!paginaEPUBChecker.os_name.equals("mac")) {
+		if(!FileManager.os_name.equals("mac")) {
 
 			mn_File.addSeparator();
 
 			mnItem_Exit = new JMenuItem(__("Exit"));
-			if(paginaEPUBChecker.os_name.equals("windows")) {
+			if(FileManager.os_name.equals("windows")) {
 				mnItem_Exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
 			} else {
 				mnItem_Exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
@@ -359,7 +371,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		menuBar.add(mn_Log);
 
 		mnItem_Save = new JMenuItem(__("Save logfile"));
-		if(paginaEPUBChecker.os_name.equals("mac")) {
+		if(FileManager.os_name.equals("mac")) {
 			mnItem_Save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_MASK));
 		} else {
 			mnItem_Save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
@@ -391,21 +403,21 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// init the AvailableLanguage/-button arrays
-		opt_Lang = new JRadioButtonMenuItem[paginaEPUBChecker.availableLanguages.length];
-		availableLanguagesOriginal = new String[paginaEPUBChecker.availableLanguages.length];
+		JRadioButtonMenuItem[] opt_Lang = new JRadioButtonMenuItem[LocalizationManager.getInstance().getAvailableLanguages().length];
+		final String[] availableLanguagesOriginal = new String[LocalizationManager.getInstance().getAvailableLanguages().length];
 
 		// iterate over the available langauges
-		for(int i=0; i<paginaEPUBChecker.availableLanguages.length; i++) {
+		for(int i=0; i<LocalizationManager.getInstance().getAvailableLanguages().length; i++) {
 
 			// add the translated language string to the "original" array
 			// later on we need the translated string to determine which language was clicked
-			availableLanguagesOriginal[i] = __(paginaEPUBChecker.availableLanguages[i]);
+			availableLanguagesOriginal[i] = __(LocalizationManager.getInstance().getAvailableLanguages()[i]);
 
 
 			// make AWT RadioButton
-			opt_Lang[i] = new JRadioButtonMenuItem(__(paginaEPUBChecker.availableLanguages[i]));
+			opt_Lang[i] = new JRadioButtonMenuItem(__(LocalizationManager.getInstance().getAvailableLanguages()[i]));
 			// select RadioButton if language equals
-			if(paginaEPUBChecker.programLanguage.equals(paginaEPUBChecker.availableLanguages[i].toLowerCase())) { opt_Lang[i].setSelected(true); }
+			if(guiManager.getCurrentLanguage().equals(LocalizationManager.getInstance().getAvailableLanguages()[i].toLowerCase())) { opt_Lang[i].setSelected(true); }
 			// add RadioButton to "language" menu item
 			mn_Language.add(opt_Lang[i]);
 			// add actionListener
@@ -414,18 +426,10 @@ public class mainGUI extends JFrame implements ActionListener {
 					// get index of Menu Label in Array "availableLanguagesOriginal"
 					int index = getIndex(availableLanguagesOriginal, e.paramString().split(",")[1].replaceAll("cmd=", ""));
 					// get english language string of given index in array "availableLanguages"
-					restartWithNewLanguage(paginaEPUBChecker.availableLanguages[index].toLowerCase());
+					restartWithNewLanguage(LocalizationManager.getInstance().getAvailableLanguages()[index].toLowerCase());
 				}
 			});
 		}
-
-
-
-		mn_Language.addSeparator();
-
-		opt_Translate = new JRadioButtonMenuItem(__("Translate epubcheck log messages"));
-		opt_Translate.addActionListener(this);
-		mn_Language.add(opt_Translate);
 
 
 		mn_Help = new JMenu(__("Help"));
@@ -469,56 +473,35 @@ public class mainGUI extends JFrame implements ActionListener {
 			protected Void doInBackground() throws Exception {
 
 				// AutoSave
-				if(new File(paginaEPUBChecker.path_AutoSaveFile).exists()) {
+				if(new File(FileManager.path_AutoSaveFile).exists()) {
 
 					try {
-						paginaEPUBChecker.AutoSave = Boolean.valueOf(updateCheck.readFileAsString(paginaEPUBChecker.path_AutoSaveFile));
+						guiManager.setMenuOptionAutoSave(Boolean.valueOf(StringHelper.readFileAsString(FileManager.path_AutoSaveFile)));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					if(paginaEPUBChecker.AutoSave) {
+					if(guiManager.getMenuOptionAutoSave()) {
 						opt_AutoSave.setSelected(true);
 					}
 				}
 
 
-				// Translate
-				if(new File(paginaEPUBChecker.path_TranslateFile).exists()) {
-
-					try {
-						paginaEPUBChecker.epubcheck_translate = Boolean.valueOf(updateCheck.readFileAsString(paginaEPUBChecker.path_TranslateFile));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-				} else if(paginaEPUBChecker.programLanguage.equals("german")) {
-					// Always auto-translate for "german"
-					paginaEPUBChecker.epubcheck_translate = true;
-
-				} else {
-					// Never auto-translate for other languages
-					paginaEPUBChecker.epubcheck_translate = false;
-				}
-
-				opt_Translate.setSelected(paginaEPUBChecker.epubcheck_translate);
-
-
 				// LogViewMode
-				if(new File(paginaEPUBChecker.path_LogViewFile).exists()) {
+				if(new File(FileManager.path_LogViewFile).exists()) {
 
 					try {
-						if(updateCheck.readFileAsString(paginaEPUBChecker.path_LogViewFile).equals("text")) {
-							paginaEPUBChecker.LogView = LogViewMode.TEXT;
+						if(StringHelper.readFileAsString(FileManager.path_LogViewFile).equals("text")) {
+							LogView = LogViewMode.TEXT;
 							scroll_results.setViewportView(txtarea_results);
 						} else {
-							paginaEPUBChecker.LogView = LogViewMode.TABLE;
+							LogView = LogViewMode.TABLE;
 						}
 					} catch (IOException e) {
-						paginaEPUBChecker.LogView = LogViewMode.TABLE;
+						LogView = LogViewMode.TABLE;
 						e.printStackTrace();
 					}
 
-					if(paginaEPUBChecker.LogView == LogViewMode.TEXT) {
+					if(LogView == LogViewMode.TEXT) {
 						opt_ViewMode_Table.setSelected(false);
 						opt_ViewMode_Text.setSelected(true);
 					}
@@ -536,7 +519,6 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		// show GUI
 		setVisible(true);
-		paginaEPUBChecker.guiReady = true;
 
 
 
@@ -568,7 +550,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		} else if(e.getSource() == mnItem_Open || e.getSource() == btn_chooseEpubFile) {
 
 			// better File-Chooser for Mac OS X and Linux
-			if(paginaEPUBChecker.os_name.matches("mac|linux")) {
+			if(FileManager.os_name.matches("mac|linux")) {
 
 				FileDialog fd = new FileDialog(mainGUI.this, __("Please choose an EPUB file for validation"), FileDialog.LOAD);
 				System.setProperty("apple.awt.use-file-dialog-packages", "true");
@@ -583,13 +565,10 @@ public class mainGUI extends JFrame implements ActionListener {
 
 				if(fd.getFile() != null) {
 					File file = new File(fd.getDirectory() + System.getProperty("file.separator") + fd.getFile());
-					input_filePath.setText(file.getPath());
+					guiManager.setCurrentFile(file);
 
-					paginaEPUBChecker.modeExp = false;
-					paginaEPUBChecker.epubcheck_File = file;
-					paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
-
-					paginaEPUBChecker.validate();
+					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
+					epubValidator.validate(file);
 				}
 
 
@@ -611,13 +590,10 @@ public class mainGUI extends JFrame implements ActionListener {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 
 					File file = fc.getSelectedFile();
-					input_filePath.setText(file.getPath());
+					guiManager.setCurrentFile(file);
 
-					paginaEPUBChecker.modeExp = false;
-					paginaEPUBChecker.epubcheck_File = file;
-					paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
-
-					paginaEPUBChecker.validate();
+					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
+					epubValidator.validate(file);
 				}
 
 			}
@@ -632,25 +608,20 @@ public class mainGUI extends JFrame implements ActionListener {
 			File file = new File(input_filePath.getText());
 
 			// file doesn't exist
-			if(!file.exists()) {
+			if(file.exists()) {
+				guiManager.setCurrentFile(file);
+				EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
+				epubValidator.validate(file);
+
+			} else {
 
 				txtarea_results.setText(__("EPUB file couldn't be found"));
-				mainGUI.tableModel.addRow(new Object[]{
+				tableModel.addRow(new Object[]{
 						Severity.FATAL,
 						"",
 						"",
 						__("EPUB file couldn't be found")
 				});
-
-				// file exists
-			} else {
-
-				paginaEPUBChecker.modeExp = false;
-				paginaEPUBChecker.epubcheck_File = file;
-				paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
-
-				// validate the given file
-				paginaEPUBChecker.validate();
 			}
 
 
@@ -661,8 +632,8 @@ public class mainGUI extends JFrame implements ActionListener {
 		} else if(e.getSource() == mnItem_Save) {
 
 			final JFileChooser fc = new JFileChooser();
-			fc.setCurrentDirectory(paginaEPUBChecker.epubcheck_File);
-			fc.setSelectedFile(new File(paginaEPUBChecker.epubcheck_File.getAbsolutePath().replaceAll("\\.epub", "_log.txt")));
+			fc.setCurrentDirectory(guiManager.getCurrentFile());
+			fc.setSelectedFile(new File(guiManager.getCurrentFile().getAbsolutePath().replaceAll("\\.epub", "_log.txt")));
 			fc.setAcceptAllFileFilterUsed(false);
 			fc.setFileFilter(new FileFilter() {
 				public boolean accept(File f) {
@@ -693,21 +664,8 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "AutoSave" menuItem
 		} else if(e.getSource() == opt_AutoSave) {
 
-			updateCheck.writeStringToFile(paginaEPUBChecker.path_AutoSaveFile, String.valueOf(opt_AutoSave.isSelected()));
-			paginaEPUBChecker.AutoSave = opt_AutoSave.isSelected();
-
-
-
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
-
-		// handle "Translate" menuItem
-		} else if(e.getSource() == opt_Translate) {
-
-			updateCheck.writeStringToFile(paginaEPUBChecker.path_TranslateFile, String.valueOf(opt_Translate.isSelected()));
-			paginaEPUBChecker.epubcheck_translate = opt_Translate.isSelected();
-
-			// start re-validating immediately if a file has been set yet
-			validateImmediatelyIfFileIsSet();
+			StringHelper.writeStringToFile(FileManager.path_AutoSaveFile, String.valueOf(opt_AutoSave.isSelected()));
+			guiManager.setMenuOptionAutoSave(opt_AutoSave.isSelected());
 
 
 
@@ -724,13 +682,13 @@ public class mainGUI extends JFrame implements ActionListener {
 			String selectedLogView = "";
 			if(e.getSource() == opt_ViewMode_Text) {
 				selectedLogView = "text";
-				paginaEPUBChecker.LogView = LogViewMode.TEXT;
+				LogView = LogViewMode.TEXT;
 			} else {
 				selectedLogView = "table";
-				paginaEPUBChecker.LogView = LogViewMode.TABLE;
+				LogView = LogViewMode.TABLE;
 			}
 
-			updateCheck.writeStringToFile(paginaEPUBChecker.path_LogViewFile, selectedLogView);
+			StringHelper.writeStringToFile(FileManager.path_LogViewFile, selectedLogView);
 
 			// start re-validating immediately if a file has been set yet
 			saveGuiSettingsAndReloadGui();
@@ -813,33 +771,33 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	private static void setLogComponentsBackgroundColor(Color color) {
+	private void setLogComponentsBackgroundColor(Color color) {
 		txtarea_results.setBackground(color);
 		table_results.setBackground(color);
 		scroll_results.setBackground(color);
 	}
 
-	public static void setBorderStateActive() {
+	public void setBorderStateActive() {
 		setLogComponentsBackgroundColor(new Color(255,255,215));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,153,0), 7));
 	}	
 
-	public static void setBorderStateNormal() {
+	public void setBorderStateNormal() {
 		setLogComponentsBackgroundColor(new Color(255,255,245));
 		scroll_results.setBorder(new DashedLineBorder(Color.ORANGE, 7));
 	}
 
-	public static void setBorderStateError() {
+	public void setBorderStateError() {
 		setLogComponentsBackgroundColor(new Color(255,230,230));
 		scroll_results.setBorder(new DashedLineBorder(Color.RED, 7));
 	}
 
-	public static void setBorderStateWarning() {
+	public void setBorderStateWarning() {
 		setLogComponentsBackgroundColor(new Color(255,240,230));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,102,0), 7));
 	}
 
-	public static void setBorderStateValid() {
+	public void setBorderStateValid() {
 		setLogComponentsBackgroundColor(new Color(235,247,235));
 		scroll_results.setBorder(new DashedLineBorder(new Color(51,173,51), 7));
 	}
@@ -849,13 +807,13 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	private static void restartWithNewLanguage(String language) {
+	private void restartWithNewLanguage(String newLanguage) {
 
 		// write new language string to file
-		updateCheck.writeStringToFile(paginaEPUBChecker.path_LanguageFile, String.valueOf(language));
+		StringHelper.writeStringToFile(FileManager.path_LanguageFile, String.valueOf(newLanguage));
 
 		// set new language in mainClass so that the new Constructor can read this information
-		paginaEPUBChecker.programLanguage = language;
+		guiManager.setCurrentLanguage(newLanguage);
 
 		saveGuiSettingsAndReloadGui();
 	}
@@ -865,16 +823,16 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	private static void saveGuiSettingsAndReloadGui() {
+	private void saveGuiSettingsAndReloadGui() {
 
 		// read and save dimensions of the current gui window
-		paginaEPUBChecker.MainGuiDimension = paginaEPUBChecker.gui.getSize();
+		guiManager.setMainGuiDimension(getSize());
 
 		// read and save position of the current gui window
-		paginaEPUBChecker.MainGuiPosition = paginaEPUBChecker.gui.getLocation();
+		guiManager.setMainGuiPosition(getLocation());
 
 		// new GUI in given language
-		paginaEPUBChecker.loadAndInitGuiAndDependencies();
+		new paginaEPUBChecker(null);
 	}
 
 
@@ -882,14 +840,12 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	private static void validateImmediatelyIfFileIsSet() {
-		if(paginaEPUBChecker.epubcheck_File != null && paginaEPUBChecker.epubcheck_File.exists()) {
-
-			paginaEPUBChecker.modeExp = false;
-			paginaEPUBChecker.epubcheck_Report = new paginaReport(paginaEPUBChecker.epubcheck_File.getName());
-			mainGUI.input_filePath.setText(paginaEPUBChecker.epubcheck_File.getPath());
-
-			paginaEPUBChecker.validate();
+	private void validateImmediatelyIfFileIsSet() {
+		if(guiManager.getCurrentFile() != null && guiManager.getCurrentFile().exists()) {
+			File file = guiManager.getCurrentFile();
+			input_filePath.setText(file.getAbsolutePath());
+			EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
+			epubValidator.validate(file);
 		}
 	}
 
@@ -898,9 +854,9 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public static void saveLogfile(File logfile) {
+	public void saveLogfile(File logfile) {
 
-		mainGUI.txtarea_results.append("\n\n---------------------------------------------------");
+		txtarea_results.append("\n\n---------------------------------------------------");
 
 		// save epubcheck results
 		try{
@@ -947,9 +903,9 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public static void scrollToBottom() {
-		if(paginaEPUBChecker.LogView == LogViewMode.TEXT) {
-			mainGUI.txtarea_results.setCaretPosition(mainGUI.txtarea_results.getText().length());
+	public void scrollToBottom() {
+		if(LogView == LogViewMode.TEXT) {
+			txtarea_results.setCaretPosition(txtarea_results.getText().length());
 		} else {
 			table_results.scrollRectToVisible(table_results.getCellRect(table_results.getRowCount()-1, 0, true));
 		}
@@ -960,7 +916,7 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public static void clearLog() {
+	public void clearLog() {
 		txtarea_results.setText("");
 		while(tableModel.getRowCount() > 0) {
 			tableModel.removeRow(0);
@@ -972,14 +928,14 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public static void addLogMessage(String message) {
+	public void addLogMessage(String message) {
 		addLogMessage(Severity.INFO, message);
 	}
 
-	public static void addLogMessage(Severity severity, String message) {
-		mainGUI.txtarea_results.append(message);
+	public void addLogMessage(Severity severity, String message) {
+		txtarea_results.append(message);
 		// remove leading and trailing line breaks in table log message
-		mainGUI.tableModel.addRow(new Object[]{severity, "", "", message.trim()});
+		tableModel.addRow(new Object[]{severity, "", "", message.trim()});
 	}
 
 
@@ -987,8 +943,40 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	public StatusBar getStatusBar() {
+		return statusBar;
+	}
+
+	public DefaultTableModel getTableModel() {
+		return tableModel;
+	}
+
+	public JTextArea getTextArea() {
+		return txtarea_results;
+	}
+
+	public JTextField getPathInputField() {
+		return input_filePath;
+	}
+
+	public void disableButtonsDuringValidation() {
+		btn_validateEpub.setEnabled(false);
+		mnItem_Save.setEnabled(false);
+		btn_chooseEpubFile.setEnabled(false);
+	}
+	public void enableButtonsAfterValidation() {
+		btn_validateEpub.setEnabled(true);
+		mnItem_Save.setEnabled(true);
+		btn_chooseEpubFile.setEnabled(true);
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	private String __(String s) {
+		return LocalizationManager.getInstance().getString(s);
 	}
 
 }
