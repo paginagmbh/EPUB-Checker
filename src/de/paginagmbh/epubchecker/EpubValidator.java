@@ -75,7 +75,7 @@ public class EpubValidator {
 		gui.disableButtonsDuringValidation();
 
 		// set the loading icon and update the statusbar
-		gui.getStatusBar().update(FileManager.loadingIcon, __("Checking file"));
+		gui.getStatusBar().update(FileManager.iconLoading, __("Checking file"));
 
 		// reset border color to normal
 		gui.setBorderStateNormal();

@@ -83,11 +83,11 @@ public class updateCheck {
 		}
 
 
-		statusBar.update(FileManager.loadingIcon, __("Checking for updates..."));
+		statusBar.update(FileManager.iconLoading, __("Checking for updates..."));
 
 
 		// InternetConnection Test
-		statusBar.update(FileManager.loadingIcon, __("Checking internet connection..."));
+		statusBar.update(FileManager.iconLoading, __("Checking internet connection..."));
 
 		try {
 			NetTest internetTest = new NetTest("http://www.google.com");
@@ -107,7 +107,7 @@ public class updateCheck {
 
 
 		// UpdateServer Test
-		statusBar.update(FileManager.loadingIcon, __("Checking update server..."));
+		statusBar.update(FileManager.iconLoading, __("Checking update server..."));
 
 		try {
 			NetTest updateserverTest = new NetTest(updateCheckURL);
@@ -128,7 +128,7 @@ public class updateCheck {
 
 
 
-		statusBar.update(FileManager.loadingIcon, __("Gathering update information..."));
+		statusBar.update(FileManager.iconLoading, __("Gathering update information..."));
 
 
 

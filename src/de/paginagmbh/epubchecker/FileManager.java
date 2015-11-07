@@ -40,8 +40,7 @@ public class FileManager {
 	public static String path_FirstRunFile;
 	private static String cfgFile_FirstRun = "FirstRun_" + paginaEPUBChecker.PROGRAMVERSION + ".cfg";
 
-	// icons
-	public static final Icon loadingIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/loading.gif")));
+	// logo icons
 	public static final Image logoImg16 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_16.png"));
 	public static final Image logoImg32 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_32.png"));
 	public static final Image logoImg64 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_64.png"));
@@ -49,9 +48,16 @@ public class FileManager {
 	public static final Image logoImg256 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_256.png"));
 	public static final Image logoImg512 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_512.png"));
 	public static final Image logoImg1024 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_1024.png"));
-	
-	
-	
+
+	// icons
+	public static final Icon iconLoading = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/loading.gif")));
+	public static final Icon iconError = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_error.png")));
+	public static final Icon iconWarning = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_warning.png")));
+	public static final Icon iconInfo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_info.png")));
+	public static final Icon iconDebug = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_debug.png")));
+	public static final Icon iconConfig = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_config.png")));
+
+
 	public static void init() {
 
 		// windows
