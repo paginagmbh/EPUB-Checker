@@ -30,6 +30,7 @@ public class GuiManager {
 	private Application macApp = null;
 	private Boolean menuOptionAutoSave = false;
 	private File currentFile = null;
+	private Localization l10n = null;
 
 	protected GuiManager() {
 		// Exists only to defeat instantiation.
@@ -111,5 +112,14 @@ public class GuiManager {
 		this.currentFile = currentFile;
 		this.getCurrentGUI().getPathInputField().setText(currentFile.getAbsolutePath());
 	}
-	
+
+	public void createNewLocalizationObject() {
+		this.l10n = new Localization(getCurrentLanguage());
+		setCurrentLanguage(l10n.getCurrentLanguage());
+	}
+
+	public Localization getCurrentLocalizationObject() {
+		return l10n;
+	}
+
 }

@@ -14,9 +14,8 @@ import de.paginagmbh.common.json.JSON;
  * @version		1.3.0
  * @date 		2015-11-07
  */
-public class LocalizationManager {
+public class Localization {
 
-	private static volatile LocalizationManager instance = null;
 	private JSONObject currentLanguageJSON = null;
 	private String currentLanguage;
 	private RegexSearchReplace regexEngine;
@@ -29,33 +28,10 @@ public class LocalizationManager {
 			"Russian"
 	};
 
-	protected LocalizationManager() {
-		// Exists only to defeat instantiation.
-	}
-
-	public static LocalizationManager getInstance() {
-		if (instance == null) {
-			synchronized (LocalizationManager.class) {
-				// Double check
-				if (instance == null) {
-					instance = new LocalizationManager();
-				}
-			}
-		}
-		return instance;
-	}
-
-
-	/* ********************************************************************************************************** */
-
-	public void init() {
-		init("systemLanguage");
-	}
-
-	public void init(String initialLanguage) {
+	public Localization(String initialLanguage) {
 
 		// set system language
-		if(initialLanguage.equals("systemLanguage")) {
+		if(initialLanguage == null || initialLanguage.equals("systemLanguage")) {
 
 			// retrieve the "system language"
 			String currentUserLang = System.getProperty("user.language").toLowerCase();
@@ -108,7 +84,7 @@ public class LocalizationManager {
 
 	private JSONObject loadLanguageFile(String language) {
 		try {
-			return JSON.parseString(JSON.readResourceAsString(LocalizationManager.class, "/resources/localization/" + language + ".json"));
+			return JSON.parseString(JSON.readResourceAsString(Localization.class, "/resources/localization/" + language + ".json"));
 
 		} catch (IOException e) {
 			// Fallback, if language file couldn't be found

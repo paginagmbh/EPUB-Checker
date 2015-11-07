@@ -204,6 +204,6 @@ public class EpubValidator {
 	/* ********************************************************************************************************** */
 
 	private String __(String s) {
-		return LocalizationManager.getInstance().getString(s);
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 }

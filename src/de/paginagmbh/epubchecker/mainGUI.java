@@ -403,30 +403,31 @@ public class mainGUI extends JFrame implements ActionListener {
 
 
 		// init the AvailableLanguage/-button arrays
-		JRadioButtonMenuItem[] opt_Lang = new JRadioButtonMenuItem[LocalizationManager.getInstance().getAvailableLanguages().length];
-		final String[] availableLanguagesOriginal = new String[LocalizationManager.getInstance().getAvailableLanguages().length];
+		final String[] availableLanguages = guiManager.getCurrentLocalizationObject().getAvailableLanguages();
+		final String[] availableLanguagesTranslated = new String[availableLanguages.length];
+		JRadioButtonMenuItem[] opt_Lang = new JRadioButtonMenuItem[availableLanguages.length];
 
 		// iterate over the available langauges
-		for(int i=0; i<LocalizationManager.getInstance().getAvailableLanguages().length; i++) {
+		for(int i=0; i<availableLanguages.length; i++) {
 
 			// add the translated language string to the "original" array
 			// later on we need the translated string to determine which language was clicked
-			availableLanguagesOriginal[i] = __(LocalizationManager.getInstance().getAvailableLanguages()[i]);
+			availableLanguagesTranslated[i] = __(availableLanguages[i]);
 
 
 			// make AWT RadioButton
-			opt_Lang[i] = new JRadioButtonMenuItem(__(LocalizationManager.getInstance().getAvailableLanguages()[i]));
+			opt_Lang[i] = new JRadioButtonMenuItem(__(availableLanguages[i]));
 			// select RadioButton if language equals
-			if(guiManager.getCurrentLanguage().equals(LocalizationManager.getInstance().getAvailableLanguages()[i].toLowerCase())) { opt_Lang[i].setSelected(true); }
+			if(guiManager.getCurrentLanguage().equals(availableLanguages[i].toLowerCase())) { opt_Lang[i].setSelected(true); }
 			// add RadioButton to "language" menu item
 			mn_Language.add(opt_Lang[i]);
 			// add actionListener
 			opt_Lang[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// get index of Menu Label in Array "availableLanguagesOriginal"
-					int index = getIndex(availableLanguagesOriginal, e.paramString().split(",")[1].replaceAll("cmd=", ""));
+					int index = getIndex(availableLanguagesTranslated, e.paramString().split(",")[1].replaceAll("cmd=", ""));
 					// get english language string of given index in array "availableLanguages"
-					restartWithNewLanguage(LocalizationManager.getInstance().getAvailableLanguages()[index].toLowerCase());
+					restartWithNewLanguage(availableLanguages[index].toLowerCase());
 				}
 			});
 		}
@@ -976,7 +977,7 @@ public class mainGUI extends JFrame implements ActionListener {
 	/* ********************************************************************************************************** */
 
 	private String __(String s) {
-		return LocalizationManager.getInstance().getString(s);
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 
 }
