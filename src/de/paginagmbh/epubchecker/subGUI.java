@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2013-07-23
+ * @date 		2015-11-07
  */
 public class subGUI {
 
-	private static JFrame f;
-	private static final String about_header = "<html><h2>" + "pagina EPUB-Checker" + "</h2><br/>© 2010-"
+	private JFrame f;
+	private final String about_header = "<html><h2>" + "pagina EPUB-Checker" + "</h2><br/>© 2010-"
 			+ new SimpleDateFormat("yyyy").format(new Date())
 			+ " pagina GmbH, Tübingen (Germany)<br/>http://www.pagina-online.de<br/><br/>";
 
@@ -50,7 +50,7 @@ public class subGUI {
 
 				__("About"),
 				JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon(paginaEPUBChecker.logoImg64)
+				new ImageIcon(FileManager.logoImg64)
 				);
 	}
 
@@ -76,7 +76,7 @@ public class subGUI {
 
 				__("Translations"),
 				JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon(paginaEPUBChecker.logoImg64)
+				new ImageIcon(FileManager.logoImg64)
 				);
 	}
 
@@ -98,7 +98,7 @@ public class subGUI {
 
 				__("Licence information"),
 				JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon(paginaEPUBChecker.logoImg64)
+				new ImageIcon(FileManager.logoImg64)
 				);
 
 	}
@@ -108,8 +108,8 @@ public class subGUI {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	private String __(String s) {
+		return LocalizationManager.getInstance().getString(s);
 	}
 
 }

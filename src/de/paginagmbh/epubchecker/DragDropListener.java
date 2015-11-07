@@ -26,8 +26,8 @@ import com.adobe.epubcheck.util.FeatureEnum;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.2.1
- * @date			2015-09-08
+ * @version		1.2.2
+ * @date			2015-11-07
  */
 public class DragDropListener implements DropTargetListener {
 
@@ -45,7 +45,7 @@ public class DragDropListener implements DropTargetListener {
 
 
 		// Drag&Drop for mac and windows
-		if(!paginaEPUBChecker.os_name.equals("linux")) {
+		if(!FileManager.os_name.equals("linux")) {
 
 			// Get the data formats of the dropped item
 			DataFlavor[] flavors = transferable.getTransferDataFlavors();
@@ -62,7 +62,7 @@ public class DragDropListener implements DropTargetListener {
 						@SuppressWarnings("unchecked")
 						List<File> files = (java.util.List<File>) transferable.getTransferData(flavor);
 
-						handleDropedFiles(files);
+						handleDroppedFiles(files);
 
 					}
 
@@ -105,7 +105,7 @@ public class DragDropListener implements DropTargetListener {
 					}
 				}
 
-				handleDropedFiles(files);
+				handleDroppedFiles(files);
 
 			} catch (UnsupportedFlavorException e1) {
 				e1.printStackTrace();
@@ -123,19 +123,21 @@ public class DragDropListener implements DropTargetListener {
 
 	@Override
 	public void dragEnter(DropTargetDragEvent event) {
+		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
 		// System.out.println("Enter");
-		mainGUI.setBorderStateActive();
-		mainGUI.clearLog();
-		mainGUI.addLogMessage(__("Yeah! Drop your EPUB right here!"));
+		gui.setBorderStateActive();
+		gui.clearLog();
+		gui.addLogMessage(__("Yeah! Drop your EPUB right here!"));
 
 	}
 
 	@Override
 	public void dragExit(DropTargetEvent event) {
+		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
 		// System.out.println("Exit");
-		mainGUI.setBorderStateNormal();
-		mainGUI.clearLog();
-		mainGUI.addLogMessage(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
+		gui.setBorderStateNormal();
+		gui.clearLog();
+		gui.addLogMessage(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
 	}
 
 	@Override
@@ -152,7 +154,8 @@ public class DragDropListener implements DropTargetListener {
 
 	/* ********************************************************************************************************** */
 
-	public static void handleDropedFiles(List<File> files) {
+	public void handleDroppedFiles(List<File> files) {
+		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
 
 		// If exactly 1 file was dropped
 		if(files.size() == 1) { 
@@ -162,16 +165,14 @@ public class DragDropListener implements DropTargetListener {
 
 				if(file.isFile() && file.getName().toLowerCase().endsWith(".epub")) {
 
-					mainGUI.setBorderStateNormal();
+					gui.setBorderStateNormal();
 
-					paginaEPUBChecker.modeExp = false;
-					paginaEPUBChecker.epubcheck_File = file;
-					paginaEPUBChecker.epubcheck_Report = new paginaReport(file.getName());
+					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
 
 					// set file path in the file-path-input field
-					mainGUI.input_filePath.setText(file.getPath());
+					GuiManager.getInstance().setCurrentFile(file);
 
-					paginaEPUBChecker.validate();
+					epubValidator.validate(file);
 
 
 				} else if(file.isDirectory()) {
@@ -182,10 +183,7 @@ public class DragDropListener implements DropTargetListener {
 					if(expectedMimetype.exists() && expectedMimetype.isFile()
 							&& expectedMetaInf.exists() && expectedMetaInf.isDirectory()) {
 
-						paginaEPUBChecker.modeExp = true;
-						paginaEPUBChecker.modeExp_keepArchive = true;
-
-						Archive epub = new Archive(file.getPath(), paginaEPUBChecker.modeExp_keepArchive);
+						Archive epub = new Archive(file.getPath(), true);
 
 						paginaReport report = new paginaReport(epub.getEpubName());
 
@@ -194,37 +192,36 @@ public class DragDropListener implements DropTargetListener {
 
 						epub.createArchive();
 
-						paginaEPUBChecker.modeExp_epub = epub;
-
-						paginaEPUBChecker.epubcheck_File = epub.getEpubFile();
-						paginaEPUBChecker.epubcheck_Report = report;
+						EpubValidator epubValidator = new EpubValidator(report);
+						epubValidator.setExpanded(true);
+						epubValidator.setKeepArchive(true);
 
 						// set file path in the file-path-input field
-						mainGUI.input_filePath.setText(epub.getEpubFile().toString());
+						GuiManager.getInstance().setCurrentFile(epub.getEpubFile());
 
-						paginaEPUBChecker.validate();
+						epubValidator.validate(epub.getEpubFile());
 
 
 					} else {
-						mainGUI.setBorderStateError();
-						mainGUI.clearLog();
-						mainGUI.addLogMessage(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
-						mainGUI.addLogMessage("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
+						gui.setBorderStateError();
+						gui.clearLog();
+						gui.addLogMessage(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
+						gui.addLogMessage("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
 					}
 
 
 				} else {
-					mainGUI.setBorderStateError();
-					mainGUI.clearLog();
-					mainGUI.addLogMessage(__("This isn't an EPUB file") + ": " + file.getName());
+					gui.setBorderStateError();
+					gui.clearLog();
+					gui.addLogMessage(__("This isn't an EPUB file") + ": " + file.getName());
 				}
 
 			}
 
 			// if multiple files were dropped
 		} else {
-			mainGUI.clearLog();
-			mainGUI.addLogMessage(__("Sorry, but more than one file can't be validated at the same time!"));
+			gui.clearLog();
+			gui.addLogMessage(__("Sorry, but more than one file can't be validated at the same time!"));
 		}
 	}
 
@@ -233,8 +230,8 @@ public class DragDropListener implements DropTargetListener {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	private String __(String s) {
+		return LocalizationManager.getInstance().getString(s);
 	}
 
 }

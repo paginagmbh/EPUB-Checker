@@ -10,12 +10,12 @@ import javax.swing.UIManager;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-03-21
+ * @date 		2015-11-07
  */
 public class messageGUI extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private static JFrame f;
+	private JFrame f;
 	private String windowTitle = __("EPUB Checker - Update");
 
 
@@ -23,11 +23,12 @@ public class messageGUI extends JDialog {
 	/* ***************************************************************************************************************** */
 
 	public messageGUI() {
-		if(paginaEPUBChecker.gui == null) {
+		GuiManager guiManager = GuiManager.getInstance();
+		if(guiManager.getCurrentGUI() == null) {
 			// epub-checker gui isn't loaded yet
 			newFrame();
 		} else {
-			f = paginaEPUBChecker.gui;
+			f = guiManager.getCurrentGUI();
 		}
 	}
 
@@ -63,7 +64,7 @@ public class messageGUI extends JDialog {
 		f.setLocation(50, 50);
 
 		/* Icon definieren (Windows only) */
-		f.setIconImage(paginaEPUBChecker.logoImg32);
+		f.setIconImage(FileManager.logoImg32);
 
 	}
 
@@ -107,12 +108,8 @@ public class messageGUI extends JDialog {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		if(paginaEPUBChecker.l10n != null) { 
-			return paginaEPUBChecker.l10n.getString(s);
-		} else {
-			return s;
-		}
+	private String __(String s) {
+		return LocalizationManager.getInstance().getString(s);
 	}
 
 }

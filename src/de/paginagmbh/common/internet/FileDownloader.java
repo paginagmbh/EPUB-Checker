@@ -14,8 +14,9 @@ import java.awt.Container;
 import java.awt.Desktop;
 import java.awt.Font;
 
-import de.paginagmbh.epubchecker.paginaEPUBChecker;
-import de.paginagmbh.epubchecker.updateCheck;
+import de.paginagmbh.epubchecker.FileManager;
+import de.paginagmbh.epubchecker.GuiManager;
+import de.paginagmbh.epubchecker.LocalizationManager;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,18 +29,18 @@ import java.awt.Insets;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-10-08
+ * @date 		2015-11-07
  */
 public class FileDownloader {
 
-	private static JLabel downloadInfo;
-	private static JButton btn_Button;
-	private static String downloadPath;
-	private static JDialog f;
+	private JLabel downloadInfo;
+	private JButton btn_Button;
+	private String downloadPath;
+	private JDialog f;
 
 	// html tags for label wrap
-	private static final String html1 = "<html><body style='width:400px'>";
-	private static final String html2 = "</body></html>";
+	private static final String html_start = "<html><body style='width:400px'>";
+	private static final String html_end = "</body></html>";
 
 
 	/* ***************************************************************************************************************** */
@@ -50,7 +51,7 @@ public class FileDownloader {
 		downloadPath = downloadP;
 
 		/* neuen Frame instanzieren und Titel setzen */
-		f = new JDialog(paginaEPUBChecker.gui);
+		f = new JDialog(GuiManager.getInstance().getCurrentGUI());
 		f.setTitle(__("EPUB Checker - Update"));
 
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,7 +64,7 @@ public class FileDownloader {
 		}
 
 		/* Icon definieren (Windows only) */
-		f.setIconImage(paginaEPUBChecker.logoImg32);
+		f.setIconImage(FileManager.logoImg32);
 
 		/* Fenstergröße setzen */
 		f.setSize(570,340);
@@ -81,7 +82,7 @@ public class FileDownloader {
 		f.getContentPane().setLayout(gridBagLayout);
 
 		JLabel lbl_Icon = new JLabel();
-		Icon paginaIcon = new ImageIcon(paginaEPUBChecker.logoImg64);
+		Icon paginaIcon = new ImageIcon(FileManager.logoImg64);
 		lbl_Icon.setIcon(paginaIcon);
 		GridBagConstraints gbc_lbl_Icon = new GridBagConstraints();
 		gbc_lbl_Icon.anchor = GridBagConstraints.NORTH;
@@ -117,7 +118,7 @@ public class FileDownloader {
 
 
 		// Label "Download: File.Ext"
-		downloadInfo = new JLabel(html1 + __("Download") + ": " + url + html2);
+		downloadInfo = new JLabel(html_start + __("Download") + ": " + url + html_end);
 		downloadInfo.setVerticalAlignment(SwingConstants.BOTTOM);
 		downloadInfo.setFont(downloadInfo.getFont().deriveFont(11f));
 		GridBagConstraints gbc_downloadInfo = new GridBagConstraints();
@@ -158,7 +159,7 @@ public class FileDownloader {
 			public void actionPerformed(ActionEvent arg0) {
 				f.dispose();
 				try {
-					updateCheck.dlgui.finalize();
+					FileDownloader.this.finalize();
 				} catch (Throwable e) {
 					e.printStackTrace();
 				}
@@ -203,9 +204,9 @@ public class FileDownloader {
 		if(dl_status==true && new File(downloadLocation).exists()) {
 
 			// Update Download-URI label with thank you note
-			downloadInfo.setText(html1 + __("Thanks for updating!") + " " + __("The new version was saved on your desktop.") + html2);
+			downloadInfo.setText(html_start + __("Thanks for updating!") + " " + __("The new version was saved on your desktop.") + html_end);
 			// Update file size label with UNZIP hint (refs issue #5) in bold and slightly bigger font size
-			progressInfo.setText(html1 + __("Please unzip the downloaded update and replace your current version manually!") + html2);
+			progressInfo.setText(html_start + __("Please unzip the downloaded update and replace your current version manually!") + html_end);
 			progressInfo.setFont(progressInfo.getFont().deriveFont(Font.BOLD, progressInfo.getFont().getSize() + 1f));
 
 			btn_Button.setText(__("Finish update"));
@@ -242,7 +243,7 @@ public class FileDownloader {
 
 	/* ***************************************************************************************************************** */
 
-	public static String readableFileSize(long size) {
+	public String readableFileSize(long size) {
 		if(size <= 0) return "0";
 		final String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
 		int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
@@ -253,7 +254,7 @@ public class FileDownloader {
 
 	/* ***************************************************************************************************************** */
 
-	public static boolean downloadFile(String url_str, String downloadLocation, JProgressBar progressBar, JLabel progressInfo) throws MalformedURLException, ProtocolException, IOException {
+	public boolean downloadFile(String url_str, String downloadLocation, JProgressBar progressBar, JLabel progressInfo) throws MalformedURLException, ProtocolException, IOException {
 
 		// OutputStream zum Speicherort öffnen
 		FileOutputStream fos = new FileOutputStream(downloadLocation);
@@ -342,7 +343,7 @@ public class FileDownloader {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	private String __(String s) {
+		return LocalizationManager.getInstance().getString(s);
 	}
 }
