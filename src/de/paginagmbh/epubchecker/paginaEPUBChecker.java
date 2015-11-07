@@ -173,6 +173,14 @@ public class paginaEPUBChecker {
 		// show main GUI
 		mainGUI gui =  new mainGUI();
 		guiManager.setCurrentGUI(gui);
+
+		// start validating immediately if a file has been set yet
+		// (e.g. when changing the language)
+		if(guiManager.getCurrentFile() != null && guiManager.getCurrentFile().exists()) {
+			File file = guiManager.getCurrentFile();
+			EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
+			epubValidator.validate(file);
+		}
 	}
 
 
