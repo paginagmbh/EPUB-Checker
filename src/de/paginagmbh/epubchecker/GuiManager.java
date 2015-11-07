@@ -114,8 +114,10 @@ public class GuiManager {
 	}
 
 	public void createNewLocalizationObject() {
+		// create new Localization object
 		this.l10n = new Localization(getCurrentLanguage());
-		setCurrentLanguage(l10n.getCurrentLanguage());
+		// init regex-patterns
+		this.l10n.setRegexEngine(new RegexSearchReplace());
 	}
 
 	public Localization getCurrentLocalizationObject() {

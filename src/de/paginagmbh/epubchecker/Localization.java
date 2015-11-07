@@ -73,8 +73,10 @@ public class Localization {
 			currentLanguageJSON = loadLanguageFile(initialLanguage);
 		}
 
-		// init regex-patterns
-		regexEngine = new RegexSearchReplace();
+		// save currentLanguage in GuiManager to avoid
+		// NPE in RegexSearchReplace()
+		GuiManager.getInstance().setCurrentLanguage(currentLanguage);
+		GuiManager.getInstance().setCurrentLanguageJSONObject(currentLanguageJSON);
 	}
 
 
@@ -126,12 +128,12 @@ public class Localization {
 
 	/* ********************************************************************************************************** */
 
-	public String getCurrentLanguage() {
-		return currentLanguage;
-	}
-
 	public String[] getAvailableLanguages() {
 		return availableLanguages;
+	}
+
+	public void setRegexEngine(RegexSearchReplace regexEngine) {
+		this.regexEngine = regexEngine;
 	}
 
 	public RegexSearchReplace getRegexEngine() {
