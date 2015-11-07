@@ -166,15 +166,24 @@ public class FileManager {
 
 	/* ********************************************************************************************************** */
 
-	// http://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+	/**
+	 * Parse string as integer and
+	 * return true if possible
+	 * 
+	 * @author http://stackoverflow.com/a/5439547/1128689
+	 * @param String string
+	 * @return boolean True if string can pe parsed as Integer
+	 */
 	public static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false;
-		}
-		// only got here if we didn't return false
-		return true;
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
 	}
 
 }
