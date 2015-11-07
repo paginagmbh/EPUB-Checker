@@ -22,7 +22,7 @@ import com.adobe.epubcheck.util.FeatureEnum;
 /**
  * handles Drag'n'Drop events for the EPUB-Checker GUI
  * 
- * idea: http://blog.christoffer.me/2011/01/drag-and-dropping-files-to-java-desktop.html
+ * idea: http://blog.christoffer.me/post/2011-01-09-drag-and-dropping-files-to-java-desktop-application/
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen

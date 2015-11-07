@@ -14,6 +14,7 @@ import com.adobe.epubcheck.util.Messages;
 
 /**
  * Validates EPUB files with EpubCheck
+ * in a SwingWorker instance
  * 
  * @author Tobias Fischer
  * @date   2015-11-07

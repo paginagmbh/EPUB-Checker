@@ -19,7 +19,13 @@ import javax.swing.table.TableColumnModel;
 
 
 /**
- * @author	http://manivelcode.blogspot.de/2008/08/how-to-wrap-text-inside-cells-of-jtable.html
+ * renders a table cell with line breaks and adaptive width
+ * 
+ * idea: http://manivelcode.blogspot.de/2008/08/how-to-wrap-text-inside-cells-of-jtable.html
+ * 
+ * @author		Marc Diem, Tobias Fischer
+ * @copyright	pagina GmbH, Tübingen
+ * @date			2015-11-07
  */
 class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
@@ -56,9 +62,9 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 		setForeground(renderer.getForeground());
 		setBackground(renderer.getBackground());
 		setBorder(new CompoundBorder(
-        		new MatteBorder(0,0,1,1,Color.WHITE),
-        		new EmptyBorder(new Insets(5,5,5,5))
-    		));
+				new MatteBorder(0,0,1,1,Color.WHITE),
+				new EmptyBorder(new Insets(5,5,5,5))
+				));
 		setFont(renderer.getFont());
 		setText(renderer.getText());
 
