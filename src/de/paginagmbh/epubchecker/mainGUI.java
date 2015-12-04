@@ -45,6 +45,7 @@ import com.adobe.epubcheck.messages.Severity;
 import de.paginagmbh.common.gui.DashedLineBorder;
 import de.paginagmbh.common.gui.StatusBar;
 import de.paginagmbh.common.internet.OpenURIinBrowser;
+import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
 
 import javax.swing.UIManager;
 import javax.swing.KeyStroke;
@@ -83,13 +84,6 @@ public class mainGUI extends JFrame implements ActionListener {
 	private JRadioButtonMenuItem opt_AutoSave, opt_ViewMode_Text, opt_ViewMode_Table;
 	private StatusBar statusBar;
 	private JMenu mn_Log;
-
-	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
-	
-	private LogViewMode LogView = LogViewMode.TABLE;
-	public enum LogViewMode {
-		TEXT, TABLE;
-	}
 
 
 
@@ -498,17 +492,17 @@ public class mainGUI extends JFrame implements ActionListener {
 
 					try {
 						if(StringHelper.readFileAsString(FileManager.path_LogViewFile).equals("text")) {
-							LogView = LogViewMode.TEXT;
+							guiManager.setLogView(LogViewMode.TEXT);
 							scroll_results.setViewportView(txtarea_results);
 						} else {
-							LogView = LogViewMode.TABLE;
+							guiManager.setLogView(LogViewMode.TABLE);
 						}
 					} catch (IOException e) {
-						LogView = LogViewMode.TABLE;
+						guiManager.setLogView(LogViewMode.TABLE);
 						e.printStackTrace();
 					}
 
-					if(LogView == LogViewMode.TEXT) {
+					if(guiManager.getLogView() == LogViewMode.TEXT) {
 						opt_ViewMode_Table.setSelected(false);
 						opt_ViewMode_Text.setSelected(true);
 					}
@@ -678,12 +672,12 @@ public class mainGUI extends JFrame implements ActionListener {
 			}
 
 			if(e.getSource() == opt_ViewMode_Text) {
-				LogView = LogViewMode.TEXT;
+				guiManager.setLogView(LogViewMode.TEXT);
 			} else {
-				LogView = LogViewMode.TABLE;
+				guiManager.setLogView(LogViewMode.TABLE);
 			}
 
-			StringHelper.writeStringToFile(FileManager.path_LogViewFile, LogView.toString().toLowerCase());
+			StringHelper.writeStringToFile(FileManager.path_LogViewFile, guiManager.getLogView().toString().toLowerCase());
 
 			// start re-validating immediately if a file has been set yet
 			saveGuiSettingsAndReloadGui();
@@ -885,7 +879,7 @@ public class mainGUI extends JFrame implements ActionListener {
 	/* ********************************************************************************************************** */
 
 	public void scrollToBottom() {
-		if(LogView == LogViewMode.TEXT) {
+		if(guiManager.getLogView() == LogViewMode.TEXT) {
 			txtarea_results.setCaretPosition(txtarea_results.getText().length());
 		} else {
 			table_results.scrollRectToVisible(table_results.getCellRect(table_results.getRowCount()-1, 0, true));
