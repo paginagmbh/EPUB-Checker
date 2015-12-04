@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2013-12-16
+ * @date 		2015-11-07
  */
 public class RegexSearchReplace {
 
@@ -23,10 +23,6 @@ public class RegexSearchReplace {
 	/* ********************************************************************************************************** */
 
 	public RegexSearchReplace() {
-
-		regex_search.clear();
-		regex_replace.clear();
-
 
 		// pagina version 0.x.x
 
@@ -415,7 +411,7 @@ public class RegexSearchReplace {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	private String __(String s) {
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 }

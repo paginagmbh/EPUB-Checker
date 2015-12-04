@@ -1,10 +1,6 @@
 package de.paginagmbh.epubchecker;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
@@ -21,6 +17,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import de.paginagmbh.common.gui.StatusBar;
 import de.paginagmbh.common.internet.FileDownloader;
 import de.paginagmbh.common.internet.NetTest;
 
@@ -30,20 +27,29 @@ import de.paginagmbh.common.internet.NetTest;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-03-21
+ * @date 		2015-11-07
  */
 public class updateCheck {
 
-	private static final String updateCheckURL = "http://download.pagina-online.de/epubchecker/updatecheck.php?from="+ paginaEPUBChecker.PROGRAMVERSION;
-	private static Boolean backgroundTask;
-	private static DocumentBuilder builder;
-	private static XPath xpath;
-	public static FileDownloader dlgui;
+	private final String updateCheckURL = "http://download.pagina-online.de/epubchecker/updatecheck.php?from="+ paginaEPUBChecker.PROGRAMVERSION;
+	private Boolean backgroundTask;
+	private DocumentBuilder builder;
+	private XPath xpath;
+	public FileDownloader dlgui;
+	private static GuiManager guiManager;
+	private StatusBar statusBar;
+
+	public FileDownloader getFileDownloaderGui() {
+		return dlgui;
+	}
 
 
 	/* ***************************************************************************************************************** */
 
 	public updateCheck(Boolean performInBackground) {
+
+		guiManager = GuiManager.getInstance();
+		statusBar = guiManager.getCurrentGUI().getStatusBar();
 
 		if(performInBackground) {
 			backgroundTask = true;
@@ -60,12 +66,12 @@ public class updateCheck {
 
 
 		// check for last updatecheck if check runs in background at startup
-		if(backgroundTask && new File(paginaEPUBChecker.path_LastUpdateCheckFile).exists()) {
+		if(backgroundTask && new File(FileManager.path_LastUpdateCheckFile).exists()) {
 
 			String UpdateCheckLast = null;
 
 			try {
-				UpdateCheckLast = readFileAsString(paginaEPUBChecker.path_LastUpdateCheckFile);
+				UpdateCheckLast = StringHelper.readFileAsString(FileManager.path_LastUpdateCheckFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -77,11 +83,11 @@ public class updateCheck {
 		}
 
 
-		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Checking for updates..."));
+		statusBar.update(FileManager.iconLoading, __("Checking for updates..."));
 
 
 		// InternetConnection Test
-		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Checking internet connection..."));
+		statusBar.update(FileManager.iconLoading, __("Checking internet connection..."));
 
 		try {
 			NetTest internetTest = new NetTest("http://www.google.com");
@@ -101,7 +107,7 @@ public class updateCheck {
 
 
 		// UpdateServer Test
-		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Checking update server..."));
+		statusBar.update(FileManager.iconLoading, __("Checking update server..."));
 
 		try {
 			NetTest updateserverTest = new NetTest(updateCheckURL);
@@ -122,7 +128,7 @@ public class updateCheck {
 
 
 
-		mainGUI.statusBar.update(paginaEPUBChecker.loadingIcon, __("Gathering update information..."));
+		statusBar.update(FileManager.iconLoading, __("Gathering update information..."));
 
 
 
@@ -140,7 +146,7 @@ public class updateCheck {
 
 
 			// write today's date in updatecheckFile
-			writeStringToFile(paginaEPUBChecker.path_LastUpdateCheckFile, UpdateCheckToday);
+			StringHelper.writeStringToFile(FileManager.path_LastUpdateCheckFile, UpdateCheckToday);
 
 
 			// read update info from server
@@ -148,14 +154,14 @@ public class updateCheck {
 			//  [1] BuildDate
 			//  [2] DownloadURL
 			//  [3] ReleaseNotes
-			String[] UpdateInfo = retrieve_UpdateInfo(paginaEPUBChecker.os_name);
+			String[] UpdateInfo = retrieve_UpdateInfo(FileManager.os_name);
 
 
 			// lokale Version ist niedriger als Server-Version
 			// Ein Update steht bereit!
 			if(Integer.parseInt(paginaEPUBChecker.PROGRAMVERSION.replace(".", "")) < Integer.parseInt(UpdateInfo[0].replace(".", ""))) {
 
-				mainGUI.statusBar.reset();
+				statusBar.reset();
 
 				messageGUI msg = new messageGUI();
 				int answer = msg.showQuestion(
@@ -197,10 +203,10 @@ public class updateCheck {
 			} else {
 
 				if(backgroundTask) {
-					mainGUI.statusBar.update(null, __("There are no new updates available."));
+					statusBar.update(null, __("There are no new updates available."));
 				} else {
 					messageGUI msg = new messageGUI();
-					mainGUI.statusBar.reset();
+					statusBar.reset();
 					msg.showMessage(__("There are no new updates available."), __("You're up-to-date!"));
 				}
 				return;
@@ -218,54 +224,12 @@ public class updateCheck {
 
 	/* ***************************************************************************************************************** */
 
-	public static String readFileAsString(String filePath) throws java.io.IOException {
-
-		// Variablen instanziieren
-		StringBuffer fileData = new StringBuffer(1000);
-		char[] buf = new char[1024];
-		int numRead=0;
-
-		// Datei einlesen
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		while((numRead=reader.read(buf)) != -1){
-			String readData = String.valueOf(buf, 0, numRead);
-			fileData.append(readData);
-			buf = new char[1024];
-		}
-
-		// Datei schließen
-		reader.close();
-
-		// Dateiinhalt als String zurückgeben
-		return fileData.toString();
-	}
-
-
-
-	/* ***************************************************************************************************************** */
-
-	public static void writeStringToFile(String file, String content) {
-		try {
-			// Create file 
-			FileWriter fstream = new FileWriter(file);
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(content);
-			out.close();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-
-
-
-	/* ***************************************************************************************************************** */
-
-	public static void errorUpdateCheck(Exception e) {
+	public void errorUpdateCheck(Exception e) {
 		if(backgroundTask) {
-			mainGUI.statusBar.update(null, __("Update check failed!") + " " + __("Please check manually for updates").replace("<br/>", " "));
+			statusBar.update(null, __("Update check failed!") + " " + __("Please check manually for updates").replace("<br/>", " "));
 		} else {
 			messageGUI msg = new messageGUI();
-			mainGUI.statusBar.reset();
+			statusBar.reset();
 			msg.showMessage(__("Please check manually for updates") + "<br/><br/>["+ e.getClass().getName() +"]<br/>"+ e.getMessage().replace(System.getProperty("line.separator"), "<br/>"), __("Update check failed!"));
 		}
 	}
@@ -274,12 +238,12 @@ public class updateCheck {
 
 	/* ***************************************************************************************************************** */
 
-	public static void errorInternetConnectionNotAvailable() {
+	public void errorInternetConnectionNotAvailable() {
 		if(backgroundTask) {
-			mainGUI.statusBar.update(null, __("Update check failed!") + " " + __("Can't establish internet connection."));
+			statusBar.update(null, __("Update check failed!") + " " + __("Can't establish internet connection."));
 		} else {
 			messageGUI msg = new messageGUI();
-			mainGUI.statusBar.reset();
+			statusBar.reset();
 			msg.showError(__("Update check failed!") + "<br/>" + __("Can't establish internet connection."));
 		}
 	}
@@ -288,12 +252,12 @@ public class updateCheck {
 
 	/* ***************************************************************************************************************** */
 
-	public static void errorUpdateServerNotAvailable() {
+	public void errorUpdateServerNotAvailable() {
 		if(backgroundTask) {
-			mainGUI.statusBar.update(null, __("Update check failed!") + " " + __("Update server not available."));
+			statusBar.update(null, __("Update check failed!") + " " + __("Update server not available."));
 		} else {
 			messageGUI msg = new messageGUI();
-			mainGUI.statusBar.reset();
+			statusBar.reset();
 			msg.showError(__("Update check failed!") + "<br/>" + __("Update server not available."));
 		}
 	}
@@ -302,7 +266,7 @@ public class updateCheck {
 
 	/* ***************************************************************************************************************** */
 
-	public static String[] retrieve_UpdateInfo(String OSname) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+	public String[] retrieve_UpdateInfo(String OSname) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
 		String[] UpdateInfo = {null, null, null, null};
 
@@ -329,7 +293,7 @@ public class updateCheck {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	private String __(String s) {
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 }
