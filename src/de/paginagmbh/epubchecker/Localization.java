@@ -11,61 +11,72 @@ import de.paginagmbh.common.json.JSON;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.2.3
- * @date 		2013-07-23
+ * @version		1.3.0
+ * @date 		2015-11-07
  */
 public class Localization {
 
-	private JSONObject lang;
+	private JSONObject currentLanguageJSON = null;
+	private String currentLanguage;
+	private RegexSearchReplace regexEngine;
 
+	private final String[] availableLanguages = {
+			"German",
+			"English",
+			"French",
+			"Spanish",
+			"Russian"
+	};
 
-	/* ********************************************************************************************************** */
-
-	public Localization() {
-
-		lang = null;
+	public Localization(String initialLanguage) {
 
 		// set system language
-		if(paginaEPUBChecker.programLanguage.equals("systemLanguage")) {
+		if(initialLanguage == null || initialLanguage.equals("systemLanguage")) {
 
 			// retrieve the "system language"
-			String locale = System.getProperty("user.language").toLowerCase();
+			String currentUserLang = System.getProperty("user.language").toLowerCase();
 
 
 			// load language file depending on system language
 			// possible values are: http://mindprod.com/jgloss/countrycodes.html
 
 			// German
-			if(locale.equals("de")) {
-				paginaEPUBChecker.programLanguage = "german";
-				lang = loadLanguageFile("german");
+			if(currentUserLang.equals("de")) {
+				currentLanguage = "german";
+				currentLanguageJSON = loadLanguageFile("german");
 
-			// French
-			} else if(locale.equals("fr")) {
-				paginaEPUBChecker.programLanguage = "french";
-				lang = loadLanguageFile("french");
+				// French
+			} else if(currentUserLang.equals("fr")) {
+				currentLanguage = "french";
+				currentLanguageJSON = loadLanguageFile("french");
 
-			// Spanish
-			} else if(locale.equals("es")) {
-				paginaEPUBChecker.programLanguage = "spanish";
-				lang = loadLanguageFile("spanish");
+				// Spanish
+			} else if(currentUserLang.equals("es")) {
+				currentLanguage = "spanish";
+				currentLanguageJSON = loadLanguageFile("spanish");
 
-			// Russian
-			} else if(locale.equals("ru")) {
-				paginaEPUBChecker.programLanguage = "russian";
-				lang = loadLanguageFile("russian");
+				// Russian
+			} else if(currentUserLang.equals("ru")) {
+				currentLanguage = "russian";
+				currentLanguageJSON = loadLanguageFile("russian");
 
-			// English; Fallback
+				// English; Fallback
 			} else {
-				paginaEPUBChecker.programLanguage = "english";
-				lang = loadLanguageFile("english");
+				currentLanguage = "english";
+				currentLanguageJSON = loadLanguageFile("english");
 			}
 
 
-		// set pre-defined language (when user switched language in menu)
+			// set pre-defined language (when user switched language in menu)
 		} else {
-			lang = loadLanguageFile(paginaEPUBChecker.programLanguage);
+			currentLanguage = initialLanguage;
+			currentLanguageJSON = loadLanguageFile(initialLanguage);
 		}
+
+		// save currentLanguage in GuiManager to avoid
+		// NPE in RegexSearchReplace()
+		GuiManager.getInstance().setCurrentLanguage(currentLanguage);
+		GuiManager.getInstance().setCurrentLanguageJSONObject(currentLanguageJSON);
 	}
 
 
@@ -73,13 +84,13 @@ public class Localization {
 
 	/* ********************************************************************************************************** */
 
-	private static JSONObject loadLanguageFile(String language) {
+	private JSONObject loadLanguageFile(String language) {
 		try {
 			return JSON.parseString(JSON.readResourceAsString(Localization.class, "/resources/localization/" + language + ".json"));
-		} catch (IOException e) {
 
+		} catch (IOException e) {
 			// Fallback, if language file couldn't be found
-			paginaEPUBChecker.programLanguage = "english";
+			currentLanguage = "english";
 			return loadLanguageFile("english");
 		}
 	}
@@ -95,20 +106,37 @@ public class Localization {
 		try {
 
 			// value of key "s"
-			String keyValue = lang.getString(s);
+			String keyValue = currentLanguageJSON.getString(s);
 
 			// return the value if it isn't an empty string
 			if(keyValue.length() > 0) {
 				return keyValue;
 
-			// return the key itself if the keys value IS an empty string
+				// return the key itself if the keys value IS an empty string
 			} else {
 				return s;
 			}
 
-		// if this fails (e.g. key doesn't exist), return the key itself as a string
+			// if this fails (e.g. key doesn't exist), return the key itself as a string
 		} catch (Exception e) {
 			return s;
 		}
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	public String[] getAvailableLanguages() {
+		return availableLanguages;
+	}
+
+	public void setRegexEngine(RegexSearchReplace regexEngine) {
+		this.regexEngine = regexEngine;
+	}
+
+	public RegexSearchReplace getRegexEngine() {
+		return regexEngine;
 	}
 }

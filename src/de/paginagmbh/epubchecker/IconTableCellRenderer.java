@@ -3,7 +3,8 @@ package de.paginagmbh.epubchecker;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
-import javax.swing.ImageIcon;
+
+import javax.swing.Icon;
 import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -24,9 +25,9 @@ class IconTableCellRenderer extends DefaultTableCellRenderer {
 		// set the Font, Color, etc.
 		renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 		setBorder(new CompoundBorder(
-        		new MatteBorder(0,1,1,1,Color.WHITE),
-        		new EmptyBorder(new Insets(5,5,5,5))
-    		));
+				new MatteBorder(0,1,1,1,Color.WHITE),
+				new EmptyBorder(new Insets(5,5,5,5))
+				));
 		setVerticalAlignment(NORTH);
 		setForeground(renderer.getForeground());
 		setBackground(renderer.getBackground());
@@ -34,29 +35,29 @@ class IconTableCellRenderer extends DefaultTableCellRenderer {
 
 		// set the icon and text content
 		if (value instanceof Severity) {
-			setText(paginaEPUBChecker.l10n.getString( ((Severity)value).toString() ));
+			setText(GuiManager.getInstance().getCurrentLocalizationObject().getString( ((Severity)value).toString() ));
 			setIcon(iconForLogLevel((Severity)value));
 		}
 
 		return this;
 	}
 
-	private ImageIcon iconForLogLevel(Severity severity) {
+	private Icon iconForLogLevel(Severity severity) {
 
 		if (severity == Severity.ERROR) {
-			return new ImageIcon(paginaEPUBChecker.class.getResource("/resources/icons/icon_error.png"));
+			return FileManager.iconError;
 		}
 		if (severity == Severity.WARNING) {
-			return new ImageIcon(paginaEPUBChecker.class.getResource("/resources/icons/icon_warning.png"));
+			return FileManager.iconWarning;
 		}
 		if (severity == Severity.INFO) {
-			return new ImageIcon(paginaEPUBChecker.class.getResource("/resources/icons/icon_info.png"));
+			return FileManager.iconInfo;
 		}
 		if (severity == Severity.FATAL) {
-			return new ImageIcon(paginaEPUBChecker.class.getResource("/resources/icons/icon_debug.png"));
+			return FileManager.iconDebug;
 		}
 		if (severity == Severity.SUPPRESSED) {
-			return new ImageIcon(paginaEPUBChecker.class.getResource("/resources/icons/icon_config.png"));
+			return FileManager.iconConfig;
 		}
 
 		return null;

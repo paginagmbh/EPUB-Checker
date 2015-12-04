@@ -16,13 +16,14 @@ import com.adobe.epubcheck.util.PathUtil;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		2.0
- * @date 		2015-09-08
+ * @version		2.0.1
+ * @date 		2015-11-07
  */
-public final class paginaReport extends DefaultReportImpl {
+public class paginaReport extends DefaultReportImpl {
 
-	private static boolean DEBUG = false;
+	private boolean DEBUG = false;
 	boolean quiet, saveQuiet;
+	private String currentEpubVersion;
 
 
 
@@ -53,16 +54,18 @@ public final class paginaReport extends DefaultReportImpl {
 	@Override
 	public void info(String resource, FeatureEnum feature, String value) {
 
+		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
+
 		switch (feature) {
 		case FORMAT_VERSION:
 			// System.out.println(String.format(Messages.VALIDATING_VERSION_MESSAGE, value));
 
 			// "insert at 0" instead of "append" to catch warnings and errors from above
-			mainGUI.txtarea_results.insert((String.format(Messages.get("validating_version_message"), value )
+			gui.getTextArea().insert((String.format(Messages.get("validating_version_message"), value )
 					+ "\n" + "(https://github.com/IDPF/epubcheck)"
 					+ "\n\n"), 0);
-			mainGUI.tableModel.addRow(new Object[]{Severity.INFO, "", "", String.format(Messages.get("validating_version_message"), value )});
-			paginaEPUBChecker.epubcheck_EpubVersion = value;
+			gui.getTableModel().addRow(new Object[]{Severity.INFO, "", "", String.format(Messages.get("validating_version_message"), value )});
+			currentEpubVersion = value;
 			break;
 		default:
 			if (DEBUG) {
@@ -102,14 +105,17 @@ public final class paginaReport extends DefaultReportImpl {
 
 	@Override
 	public void message(Message message, EPUBLocation location, Object... args) {
+
+		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
+
 		Severity severity = message.getSeverity();
 		String fileName = (location.getPath() == null ? "" : "/" + location.getPath());
 		fileName = PathUtil.removeWorkingDirectory(fileName);
 		
 		String text = formatMessage(message, location, args);
 
-		mainGUI.txtarea_results.append(text);
-		mainGUI.tableModel.addRow(new Object[]{
+		gui.getTextArea().append(text);
+		gui.getTableModel().addRow(new Object[]{
 						severity,
 						message.getID(),
 						fileName + (location.getLine() > 0 ? ("\n(" + __("line") + " " + location.getLine() + (location.getColumn() > 0 ? ", " + __("col") + " " + location.getColumn() : ""))  + ")" : ""),
@@ -117,7 +123,7 @@ public final class paginaReport extends DefaultReportImpl {
 					});
 
 		// scroll to the end
-		mainGUI.scrollToBottom();
+		gui.scrollToBottom();
 	}
 
 
@@ -125,13 +131,13 @@ public final class paginaReport extends DefaultReportImpl {
 
 	/* ********************************************************************************************************** */
 
-	public static String analyzeString(String s) {
+	public String analyzeString(String s) {
 
 		// try to replace all strings without any regex-patterns with the localized version
 		try {
 
 			//retreive language key
-			String s_loc = paginaEPUBChecker.l10n.getString(s);
+			String s_loc = __(s);
 
 			if(s.equals(s_loc)) {
 				// there seems to be no corresponding language key => Try Regex patterns!
@@ -148,8 +154,7 @@ public final class paginaReport extends DefaultReportImpl {
 		} catch (Exception e) {
 
 			// do regex stuff
-			return paginaEPUBChecker.regex.doReplace(s);
-
+			return GuiManager.getInstance().getCurrentLocalizationObject().getRegexEngine().doReplace(s);
 		}
 	}
 
@@ -173,8 +178,17 @@ public final class paginaReport extends DefaultReportImpl {
 
 	/* ********************************************************************************************************** */
 
-	private static String __(String s) {
-		return paginaEPUBChecker.l10n.getString(s);
+	public String getCurrentEpubVersion() {
+		return currentEpubVersion;
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	private String __(String s) {
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
 	}
 
 }
