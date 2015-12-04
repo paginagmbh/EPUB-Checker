@@ -56,7 +56,7 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2015-11-07
+ * @date			2015-12-04
  */
 public class mainGUI extends JFrame implements ActionListener {
 
@@ -677,16 +677,13 @@ public class mainGUI extends JFrame implements ActionListener {
 				// do nothing when user clicks on currently selected ViewMode Item
 			}
 
-			String selectedLogView = "";
 			if(e.getSource() == opt_ViewMode_Text) {
-				selectedLogView = "text";
 				LogView = LogViewMode.TEXT;
 			} else {
-				selectedLogView = "table";
 				LogView = LogViewMode.TABLE;
 			}
 
-			StringHelper.writeStringToFile(FileManager.path_LogViewFile, selectedLogView);
+			StringHelper.writeStringToFile(FileManager.path_LogViewFile, LogView.toString().toLowerCase());
 
 			// start re-validating immediately if a file has been set yet
 			saveGuiSettingsAndReloadGui();
