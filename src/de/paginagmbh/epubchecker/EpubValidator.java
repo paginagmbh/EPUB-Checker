@@ -17,7 +17,7 @@ import com.adobe.epubcheck.util.Messages;
  * in a SwingWorker instance
  * 
  * @author Tobias Fischer
- * @date   2015-11-07
+ * @date   2015-12-04
  */
 public class EpubValidator {
 
@@ -28,6 +28,7 @@ public class EpubValidator {
 	private long timestamp_end;
 	private boolean epubcheckResult;
 	protected File epubFile = null;
+	private String resultMessage = "";
 
 	// Setters available
 	private boolean expanded = false;
@@ -113,22 +114,25 @@ public class EpubValidator {
 
 					// warnings AND errors
 					if(report.getErrorCount() > 0 && report.getWarningCount() > 0) {
-						gui.addLogMessage("\n\n" + String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), report.getWarningCount(), report.getErrorCount()) + "\n");
+						resultMessage = String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), report.getWarningCount(), report.getErrorCount());
 
 					// only errors
 					} else if(report.getErrorCount() > 0) {
-						gui.addLogMessage("\n\n" + String.format(__("Check finished with %d errors!"), report.getErrorCount()) + "\n");
+						resultMessage = String.format(__("Check finished with %d errors!"), report.getErrorCount());
 
 					// only warnings
 					} else if(report.getWarningCount() > 0) {
 						// set border color to orange
 						gui.setBorderStateWarning();
-						gui.addLogMessage("\n\n" + String.format(__("Check finished with %d warnings!"), report.getWarningCount()) + "\n");
+						resultMessage = String.format(__("Check finished with %d warnings!"), report.getWarningCount());
 
 					// something went wrong
 					} else {
-						gui.addLogMessage("\n\n" + __("Check finished with warnings or errors!") + "\n");
+						resultMessage = __("Check finished with warnings or errors!");
 					}
+
+					// add result message to log
+					gui.addLogMessage("\n\n" + resultMessage + "\n");
 
 
 					// set error counter in mac dock badge
@@ -154,7 +158,8 @@ public class EpubValidator {
 					gui.setBorderStateValid();
 
 					// translateLog the output
-					gui.addLogMessage("\n\n" + __("No errors or warnings detected") + "\n");
+					resultMessage = __("No errors or warnings detected");
+					gui.addLogMessage("\n\n" + resultMessage + "\n");
 
 
 					// set error counter in mac dock badge
@@ -183,7 +188,10 @@ public class EpubValidator {
 				String timestamp_result = df.format(timestamp_diff/1000);
 
 				// remove the loading icon and update the status bar
-				gui.getStatusBar().update(null, __("Done") + ". " + String.format(__("Validated in %s seconds"), timestamp_result));
+				gui.getStatusBar().update(null,
+						__("Done") + ". "
+						+ String.format(__("Validated in %s seconds"), timestamp_result) + ". "
+						+ resultMessage);
 
 				// re-enable validation button && "save" menuItem
 				gui.enableButtonsAfterValidation();
