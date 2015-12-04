@@ -108,8 +108,8 @@
 	<echo> </echo>
 	
 	<taskdef name="jarbundler"
-		classname="net.sourceforge.jarbundler.JarBundler"
-		classpath="${antLib.dir}/jarbundler/jarbundler.jar" />
+		classname="com.ultramixer.jarbundler.JarBundler"
+		classpath="${antLib.dir}/jarbundler/jarbundler-core-3.3.0.jar" />
 	
 	<jarbundler
 		dir="${out.dir}"
