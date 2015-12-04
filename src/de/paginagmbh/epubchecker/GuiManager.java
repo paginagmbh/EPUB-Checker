@@ -16,7 +16,7 @@ import com.apple.eawt.Application;
  * 
  * 
  * @author  Tobias Fischer
- * @date    2015-11-07
+ * @date    2015-12-04
  *
  */
 public class GuiManager {
@@ -31,6 +31,10 @@ public class GuiManager {
 	private Boolean menuOptionAutoSave = false;
 	private File currentFile = null;
 	private Localization l10n = null;
+	private LogViewMode LogView = LogViewMode.TABLE;
+	public enum LogViewMode {
+		TEXT, TABLE;
+	}
 
 	protected GuiManager() {
 		// Exists only to defeat instantiation.
@@ -122,6 +126,14 @@ public class GuiManager {
 
 	public Localization getCurrentLocalizationObject() {
 		return l10n;
+	}
+
+	public LogViewMode getLogView() {
+		return LogView;
+	}
+
+	public void setLogView(LogViewMode logView) {
+		LogView = logView;
 	}
 
 }
