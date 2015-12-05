@@ -1,5 +1,7 @@
 package de.paginagmbh.epubchecker;
 
+import java.io.File;
+
 import com.adobe.epubcheck.api.EPUBLocation;
 import com.adobe.epubcheck.messages.Message;
 import com.adobe.epubcheck.messages.Severity;
@@ -111,7 +113,15 @@ public class paginaReport extends DefaultReportImpl {
 
 		Severity severity = message.getSeverity();
 		String fileName = (location.getPath() == null ? "" : "/" + location.getPath());
-		fileName = PathUtil.removeWorkingDirectory(fileName);
+
+		// clean up fileName (1/2)
+		fileName = PathUtil.removeWorkingDirectory(fileName.replaceAll("^//", "/"));
+		// if fileName is still an sbolute file path, extract only the epub name
+		if(new File(fileName).exists()) {
+			fileName = new File(fileName).getName();
+		}
+		// clean up fileName (2/2)
+		fileName = (fileName.endsWith(".epub") ? fileName.replaceAll("^/", "") : fileName);
 
 		String text = formatMessage(message, location, args);
 		Object[] tableLogObject = new Object[]{
