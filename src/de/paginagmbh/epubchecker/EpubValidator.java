@@ -17,7 +17,7 @@ import com.adobe.epubcheck.util.Messages;
  * in a SwingWorker instance
  * 
  * @author Tobias Fischer
- * @date   2015-12-04
+ * @date   2015-12-05
  */
 public class EpubValidator {
 
@@ -106,7 +106,7 @@ public class EpubValidator {
 					// set border color to red
 					gui.setBorderStateError();
 
-
+					// add separator in text mode
 					gui.addLogMessageToTextLog("\n" + "---------------------------------------------------");
 
 
