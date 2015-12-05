@@ -282,8 +282,8 @@ public class RegexSearchReplace {
 		fillArray("text not allowed here; expected element \"(.*)\"",
 				__("text not allowed here; expected element '$1'"));
 
-		fillArray("assertion failed: Exactly one '(.*)' nav element must be present",
-				__("assertion failed: Exactly one '$1' nav element must be present"));
+		fillArray("Exactly one '(.*)' nav element must be present",
+				__("Exactly one '$1' nav element must be present"));
 
 		fillArray("'(.*)': remote resource reference not allowed; resource must be placed in the OCF",
 				__("'$1': remote resource reference not allowed; resource must be placed in the OCF"));
@@ -306,14 +306,14 @@ public class RegexSearchReplace {
 		fillArray("value of attribute \"(.*)\" is invalid; must be an integer",
 				__("value of attribute '$1' is invalid; must be an integer"));
 
-		fillArray("assertion failed: Exactly one manifest item must declare the 'nav' property \\(number of 'nav' items: (\\d+)\\)\\.",
-				__("assertion failed: Exactly one manifest item must declare the 'nav' property (number of 'nav' items: $1)"));
+		fillArray("Exactly one manifest item must declare the 'nav' property \\(number of 'nav' items: (\\d+)\\)\\.",
+				__("Exactly one manifest item must declare the 'nav' property (number of 'nav' items: $1)"));
 
 		fillArray("element \"(.*)\" not allowed yet; missing required element \"(.*)\"",
 				__("element '$1' not allowed yet; missing required element '$2'"));
 
-		fillArray("assertion failed: spine element toc attribute must reference the NCX manifest item \\(referenced media type was '(.*)'\\)",
-				__("assertion failed: spine element toc attribute must reference the NCX manifest item (referenced media type was '$1')"));
+		fillArray("spine element toc attribute must reference the NCX manifest item \\(referenced media type was '(.*)'\\)",
+				__("spine element toc attribute must reference the NCX manifest item (referenced media type was '$1')"));
 
 
 
@@ -343,8 +343,8 @@ public class RegexSearchReplace {
 		fillArray("Guide reference to an item that is not a Content Document: (.*)",
 				__("Guide reference to an item that is not a Content Document: $1"));
 
-		fillArray("assertion failed: The \"(.*)\" attribute does not have a unique value",
-				__("assertion failed: The '$1' attribute does not have a unique value"));
+		fillArray("The \"(.*)\" attribute does not have a unique value",
+				__("The '$1' attribute does not have a unique value"));
 
 		fillArray("spine contains multiple references to the manifest item with id (.*)",
 				__("spine contains multiple references to the manifest item with id '$1'"));
