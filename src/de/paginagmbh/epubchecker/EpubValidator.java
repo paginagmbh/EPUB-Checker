@@ -108,7 +108,6 @@ public class EpubValidator {
 
 
 					gui.addLogMessageToTextLog("\n" + "---------------------------------------------------");
-					gui.addLogMessage("\n\n" + String.format(Messages.get("validating_version_message"), ((paginaReport)report).getCurrentEpubVersion()));
 
 
 					// warnings AND errors
