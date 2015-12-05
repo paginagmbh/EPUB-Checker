@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -84,6 +85,7 @@ public class mainGUI extends JFrame implements ActionListener {
 	private JRadioButtonMenuItem opt_AutoSave, opt_ViewMode_Text, opt_ViewMode_Table;
 	private StatusBar statusBar;
 	private JMenu mn_Log;
+	private String currentLogMessages = "";
 
 
 
@@ -307,15 +309,6 @@ public class mainGUI extends JFrame implements ActionListener {
 		new DropTarget(table_results, dragDropListener);
 		new DropTarget(txtarea_results, dragDropListener);
 
-		// try catch is needed for running this app on openjdk on ubuntu
-		// don't know exactly why...
-		try {
-			txtarea_results.setText(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
-			tableModel.addRow(new Object[]{Severity.INFO, "", "", __("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder...")});
-		} catch (Exception e) {
-			//	        e.printStackTrace();
-		}
-
 
 
 		// Windows
@@ -508,6 +501,12 @@ public class mainGUI extends JFrame implements ActionListener {
 					}
 				}
 
+
+				// add Drag & Drop message
+				clearLog();
+				addLogMessage(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
+
+
 				return null;
 			}
 		};
@@ -606,14 +605,7 @@ public class mainGUI extends JFrame implements ActionListener {
 				epubValidator.validate(file);
 
 			} else {
-
-				txtarea_results.setText(__("EPUB file couldn't be found"));
-				tableModel.addRow(new Object[]{
-						Severity.FATAL,
-						"",
-						"",
-						__("EPUB file couldn't be found")
-				});
+				addLogMessage(Severity.FATAL, __("EPUB file couldn't be found"));
 			}
 
 
@@ -831,7 +823,7 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	public void saveLogfile(File logfile) {
 
-		txtarea_results.append("\n\n---------------------------------------------------");
+		addLogMessageToTextLog("\n\n---------------------------------------------------");
 
 		// save epubcheck results
 		try{
@@ -839,8 +831,8 @@ public class mainGUI extends JFrame implements ActionListener {
 			// Create file
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logfile), "UTF-8"));
 
-			// write text from textarea
-			out.write(txtarea_results.getText());
+			// write logMessages string to file
+			out.write(currentLogMessages);
 
 			// close stream
 			out.close();
@@ -892,10 +884,14 @@ public class mainGUI extends JFrame implements ActionListener {
 	/* ********************************************************************************************************** */
 
 	public void clearLog() {
-		txtarea_results.setText("");
-		while(tableModel.getRowCount() > 0) {
-			tableModel.removeRow(0);
+		if(guiManager.getLogView() == LogViewMode.TEXT) {
+			txtarea_results.setText("");
+		} else {
+			while(tableModel.getRowCount() > 0) {
+				tableModel.removeRow(0);
+			}
 		}
+		currentLogMessages = "";
 	}
 
 
@@ -908,9 +904,33 @@ public class mainGUI extends JFrame implements ActionListener {
 	}
 
 	public void addLogMessage(Severity severity, String message) {
-		txtarea_results.append(message);
-		// remove leading and trailing line breaks in table log message
-		tableModel.addRow(new Object[]{severity, "", "", message.trim()});
+		addLogMessage(message, new Object[]{severity, "", "", message.trim()});
+	}
+
+	public void addLogMessage(String message, Object[] tableLogObject) {
+		// for LogViewMode.TEXT and for log file in TABLE mode
+		addLogMessageToTextLog(message);
+
+		if(guiManager.getLogView() == LogViewMode.TABLE) {
+			// remove leading and trailing line breaks in table log message
+			tableModel.addRow(tableLogObject);
+		}
+	}
+
+	public void addLogMessageToTextLog(String message) {
+		if(guiManager.getLogView() == LogViewMode.TEXT) {
+			txtarea_results.append(message);
+		}
+		currentLogMessages += message;
+	}
+	
+	public void insertLogMessageAtFirstPosition(Severity severity, String message) {
+		if(guiManager.getLogView() == LogViewMode.TEXT) {
+			txtarea_results.insert(message, 0);
+		} else {
+			tableModel.insertRow(0, new Object[]{severity, "", "", message.trim()});
+		}
+		currentLogMessages = message + currentLogMessages;
 	}
 
 

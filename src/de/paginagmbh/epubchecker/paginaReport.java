@@ -16,8 +16,8 @@ import com.adobe.epubcheck.util.PathUtil;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		2.0.1
- * @date 		2015-11-07
+ * @version		2.0.2
+ * @date 		2015-12-04
  */
 public class paginaReport extends DefaultReportImpl {
 
@@ -61,10 +61,11 @@ public class paginaReport extends DefaultReportImpl {
 			// System.out.println(String.format(Messages.VALIDATING_VERSION_MESSAGE, value));
 
 			// "insert at 0" instead of "append" to catch warnings and errors from above
-			gui.getTextArea().insert((String.format(Messages.get("validating_version_message"), value )
-					+ "\n" + "(https://github.com/IDPF/epubcheck)"
-					+ "\n\n"), 0);
-			gui.getTableModel().addRow(new Object[]{Severity.INFO, "", "", String.format(Messages.get("validating_version_message"), value )});
+			gui.insertLogMessageAtFirstPosition(Severity.INFO,
+					String.format(Messages.get("validating_version_message"), value )
+						+ "\n" + "(https://github.com/IDPF/epubcheck)"
+						+ "\n\n");
+
 			currentEpubVersion = value;
 			break;
 		default:
@@ -111,16 +112,16 @@ public class paginaReport extends DefaultReportImpl {
 		Severity severity = message.getSeverity();
 		String fileName = (location.getPath() == null ? "" : "/" + location.getPath());
 		fileName = PathUtil.removeWorkingDirectory(fileName);
-		
-		String text = formatMessage(message, location, args);
 
-		gui.getTextArea().append(text);
-		gui.getTableModel().addRow(new Object[]{
+		String text = formatMessage(message, location, args);
+		Object[] tableLogObject = new Object[]{
 						severity,
 						message.getID(),
 						fileName + (location.getLine() > 0 ? ("\n(" + __("line") + " " + location.getLine() + (location.getColumn() > 0 ? ", " + __("col") + " " + location.getColumn() : ""))  + ")" : ""),
 						analyzeString(fixMessage(args != null && args.length > 0 ? message.getMessage(args) : message.getMessage()))
-					});
+					};
+
+		gui.addLogMessage(text, tableLogObject);
 
 		// scroll to the end
 		gui.scrollToBottom();
