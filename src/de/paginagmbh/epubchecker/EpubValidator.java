@@ -17,7 +17,7 @@ import com.adobe.epubcheck.util.Messages;
  * in a SwingWorker instance
  * 
  * @author Tobias Fischer
- * @date   2015-12-04
+ * @date   2015-12-05
  */
 public class EpubValidator {
 
@@ -70,8 +70,8 @@ public class EpubValidator {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime( new Date() );
 		DateFormat formater = DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG );
-		gui.getTextArea().insert(formater.format(cal.getTime()) + "\n\n\n", 0);
-		gui.getTextArea().append("---------------------------------------------------\n\n");
+		gui.addLogMessageToTextLog(formater.format(cal.getTime()) + "\n\n\n");
+		gui.addLogMessageToTextLog("---------------------------------------------------\n\n");
 
 		// disable validation button && "save" menuItem
 		gui.disableButtonsDuringValidation();
@@ -106,10 +106,8 @@ public class EpubValidator {
 					// set border color to red
 					gui.setBorderStateError();
 
-
-					// if output is translated, then format it nicely
-					gui.getTextArea().append("\n" + "---------------------------------------------------");
-					gui.getTextArea().append("\n\n" + String.format(Messages.get("validating_version_message"), ((paginaReport)report).getCurrentEpubVersion()));
+					// add separator in text mode
+					gui.addLogMessageToTextLog("\n" + "---------------------------------------------------");
 
 
 					// warnings AND errors
