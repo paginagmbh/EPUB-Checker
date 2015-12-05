@@ -58,7 +58,7 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2015-12-04
+ * @date			2015-12-05
  */
 public class mainGUI extends JFrame implements ActionListener {
 
@@ -502,7 +502,7 @@ public class mainGUI extends JFrame implements ActionListener {
 				}
 
 
-				// add Drag & Drop message
+				// add initial rag & Drop message
 				clearLog();
 				addLogMessage(__("Drag & Drop here to validate! Either an EPUB file or an expanded EPUB folder..."));
 
@@ -823,19 +823,16 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	public void saveLogfile(File logfile) {
 
-		addLogMessageToTextLog("\n\n---------------------------------------------------");
-
 		// save epubcheck results
 		try{
 
-			// Create file
+			// Write currentLogMessages to log file
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logfile), "UTF-8"));
-
-			// write logMessages string to file
 			out.write(currentLogMessages);
-
-			// close stream
 			out.close();
+
+			// add separator in text log
+			addLogMessageToTextLog("\n\n---------------------------------------------------");
 
 			if(logfile.exists()) {
 				addLogMessage("\n\n" + __("Test results were saved in a logfile") + ":\n" + logfile + "\n\n");
@@ -844,6 +841,7 @@ public class mainGUI extends JFrame implements ActionListener {
 			}
 
 		} catch (Exception e1) {
+			addLogMessageToTextLog("\n\n---------------------------------------------------");
 			addLogMessage(Severity.WARNING, "\n\n" + __("An error occured! Logfile couldn't be saved!") + "\n" + logfile + "\n\n");
 		}
 

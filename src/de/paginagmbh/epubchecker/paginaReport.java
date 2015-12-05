@@ -17,7 +17,7 @@ import com.adobe.epubcheck.util.PathUtil;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		2.0.2
- * @date 		2015-12-04
+ * @date 		2015-12-05
  */
 public class paginaReport extends DefaultReportImpl {
 
