@@ -13,7 +13,7 @@ import java.net.URL;
  * better: http://stackoverflow.com/questions/4596447/java-check-if-file-exists-on-remote-server-using-its-url
  * 
  * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tuebingen
+ * @copyright	pagina GmbH, Tübingen
  * @version		2.1
  * @date 		2015-03-21
  */

@@ -11,15 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * generates a status bar at the bottom of a border
+ * 
+ * idea: http://www.java2s.com/Code/Java/Swing-Components/StatusBarDemo.htm
+ * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.2
  * @date			2015-03-21
- * 
- * generates a status bar at the bottom of a border 
- * 
- * original: http://www.java2s.com/Code/Java/Swing-Components/StatusBarDemo.htm
- * 
  */
 public class StatusBar extends JPanel {
 
