@@ -10,7 +10,14 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 
-
+/**
+ * A TableCellRenderer with Borders
+ * 
+ * @author		Tobias Fischer
+ * @copyright	pagina GmbH, Tübingen
+ * @version		1.0
+ * @date			2015-09-04
+ */
 class BoardTableCellRenderer extends DefaultTableCellRenderer {
 
 	private static final long serialVersionUID = 3292904223607348915L;

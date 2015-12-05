@@ -13,7 +13,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.adobe.epubcheck.messages.Severity;
 
 
-
+/**
+ * A TableCellRenderer for cells with an icon
+ * 
+ * @author		Marc Diem, Tobias Fischer
+ * @copyright	pagina GmbH, Tübingen
+ * @date			2015-09-04
+ */
 class IconTableCellRenderer extends DefaultTableCellRenderer {
 
 	private static final long serialVersionUID = -4957096937727032710L;

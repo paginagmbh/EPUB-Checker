@@ -17,7 +17,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 
-
 /**
  * renders a table cell with line breaks and adaptive width
  * 
