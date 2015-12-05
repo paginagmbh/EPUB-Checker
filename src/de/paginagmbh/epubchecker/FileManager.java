@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  * and image icons - including initialising them on different OS'es
  * 
  * @author Tobias Fischer
- * @date   2015-11-07
+ * @date   2015-12-05
  */
 public class FileManager {
 
@@ -50,7 +50,7 @@ public class FileManager {
 	public static final Image logoImg1024 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_1024.png"));
 
 	// icons
-	public static final Icon iconLoading = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/loading.gif")));
+	public static final Icon iconLoading = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/infinity-loader_small.gif")));
 	public static final Icon iconError = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_error.png")));
 	public static final Icon iconWarning = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_warning.png")));
 	public static final Icon iconInfo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_info.png")));
