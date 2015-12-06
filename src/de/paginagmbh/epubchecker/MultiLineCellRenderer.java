@@ -68,7 +68,11 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 		setText(renderer.getText());
 
 		TableColumnModel columnModel = table.getColumnModel();
-		setSize(columnModel.getColumn(column).getWidth(), 0);
+		// the following should reset the column height to 0
+		// but this results in issue #25. Resetting to the minium
+		// height of 26 in our table model fixes the issue.
+		// I don't know why...
+		setSize(columnModel.getColumn(column).getWidth(), 26);
 		int height_wanted = (int) getPreferredSize().getHeight();
 		addSize(table, row, column, height_wanted);
 		height_wanted = findTotalMaximumRowSize(table, row);
