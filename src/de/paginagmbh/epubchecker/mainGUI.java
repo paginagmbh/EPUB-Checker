@@ -555,7 +555,7 @@ public class mainGUI extends JFrame implements ActionListener {
 				fd.setVisible(true);
 
 				if(fd.getFile() != null) {
-					File file = new File(fd.getDirectory() + System.getProperty("file.separator") + fd.getFile());
+					File file = new File(fd.getDirectory() + File.separator + fd.getFile());
 					guiManager.setCurrentFile(file);
 
 					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
@@ -615,30 +615,60 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "Save result" menuItem
 		} else if(e.getSource() == mnItem_Save) {
 
-			final JFileChooser fc = new JFileChooser();
-			fc.setCurrentDirectory(guiManager.getCurrentFile());
-			fc.setSelectedFile(new File(guiManager.getCurrentFile().getAbsolutePath().replaceAll("\\.epub", "_log.txt")));
-			fc.setAcceptAllFileFilterUsed(false);
-			fc.setFileFilter(new FileFilter() {
-				public boolean accept(File f) {
-					return f.getName().toLowerCase().endsWith(".txt") || f.isDirectory();
+			// better File-Chooser for Mac OS X and Linux
+			if(FileManager.os_name.matches("mac|linux")) {
+
+				FileDialog fd = new FileDialog(mainGUI.this, __("Save logfile"), FileDialog.SAVE);
+				System.setProperty("apple.awt.use-file-dialog-packages", "true");
+				fd.setFilenameFilter(new FilenameFilter() {
+					@Override
+					public boolean accept(File dir, String name) {
+						return name.toLowerCase().endsWith( ".txt" );
+					}
+				});
+				fd.setLocation(0, 0);
+				fd.setDirectory(guiManager.getCurrentFile().getAbsolutePath());
+				fd.setFile(guiManager.getCurrentFile().getName().replaceAll("\\.epub", "_log.txt"));
+				fd.setVisible(true);
+
+				if(fd.getFile() != null) {
+					File file = new File(fd.getDirectory() + File.separator + fd.getFile());
+
+					// add .txt extension if mising
+					if(!file.getName().toLowerCase().endsWith(".txt")) {
+						file = new File(file.getAbsoluteFile() + ".txt");
+					}
+
+					saveLogfile(file);
 				}
-				public String getDescription() {
-					return __("Text files (*.txt)");
+
+			} else {
+
+				final JFileChooser fc = new JFileChooser();
+				fc.setCurrentDirectory(guiManager.getCurrentFile());
+				fc.setSelectedFile(new File(guiManager.getCurrentFile().getAbsolutePath().replaceAll("\\.epub", "_log.txt")));
+				fc.setAcceptAllFileFilterUsed(false);
+				fc.setFileFilter(new FileFilter() {
+					public boolean accept(File f) {
+						return f.getName().toLowerCase().endsWith(".txt") || f.isDirectory();
+					}
+					public String getDescription() {
+						return __("Text files (*.txt)");
+					}
+				});
+
+				int returnVal = fc.showSaveDialog(getComponent(0));
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+					File file = fc.getSelectedFile();
+
+					// add .txt extension if mising
+					if(!file.getName().toLowerCase().endsWith(".txt")) {
+						file = new File(file.getAbsoluteFile() + ".txt");
+					}
+
+					saveLogfile(file);
 				}
-			});
-
-			int returnVal = fc.showSaveDialog(getComponent(0));
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-				File file = fc.getSelectedFile();
-
-				// add .txt extension if mising
-				if(!file.getName().toLowerCase().endsWith(".txt")) {
-					file = new File(file.getAbsoluteFile() + ".txt");
-				}
-
-				saveLogfile(file);
 			}
 
 
