@@ -17,7 +17,7 @@
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	
 	<property name="program.version.txtNumber" value="1.6.0" />
-	<property name="program.version.release" value="beta" />	<!-- "" or "beta" -->
+	<property name="program.version.release" value="" />	<!-- "" or "beta" -->
 	
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	
