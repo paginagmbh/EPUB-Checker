@@ -67,6 +67,7 @@
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/commons-compress-1.5.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/epubcheck.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/guava-14.0.1.jar"/>
+        <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/iconloader.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/imageio-core-3.1.2.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/imageio-jpeg-3.1.2.jar"/>
         <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/imageio-metadata-3.1.2.jar"/>
@@ -124,6 +125,7 @@
 		version="${program.version.txtNumber}"
 		developmentregion="German"
 		allowMixedLocalizations="true"
+		highresolutioncapable="true"
 		signature="PAEC"
 		build="${program.version.build}"
 		copyright="© 2010-${YEAR} pagina GmbH, Tübingen, Germany"

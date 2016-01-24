@@ -10,7 +10,7 @@ import javax.swing.UIManager;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-11-07
+ * @date 		2016-01-24
  */
 public class messageGUI extends JDialog {
 
@@ -63,9 +63,8 @@ public class messageGUI extends JDialog {
 		// set window position
 		f.setLocation(50, 50);
 
-		/* Icon definieren (Windows only) */
-		f.setIconImage(FileManager.logoImg32);
-
+		/* Icon definieren */
+		f.setIconImages(FileManager.logoIcons);
 	}
 
 

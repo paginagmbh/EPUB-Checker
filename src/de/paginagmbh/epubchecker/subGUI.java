@@ -2,7 +2,7 @@ package de.paginagmbh.epubchecker;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.ImageIcon;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-11-07
+ * @date 		2016-01-24
  */
 public class subGUI {
 
@@ -50,7 +50,7 @@ public class subGUI {
 
 				__("About"),
 				JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon(FileManager.logoImg64)
+				FileManager.logoIcon64
 				);
 	}
 
@@ -76,7 +76,7 @@ public class subGUI {
 
 				__("Translations"),
 				JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon(FileManager.logoImg64)
+				FileManager.logoIcon64
 				);
 	}
 
@@ -98,7 +98,7 @@ public class subGUI {
 
 				__("Licence information"),
 				JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon(FileManager.logoImg64)
+				FileManager.logoIcon64
 				);
 
 	}
