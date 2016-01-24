@@ -144,6 +144,7 @@
 		
 		<resourcefileset dir="${build.dir}/splashscreen/">
 			<include name="SplashScreen_Mac.png"/>
+			<include name="SplashScreen_Mac@2x.png"/>
 		</resourcefileset>
 	
 	</jarbundler>
