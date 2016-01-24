@@ -58,7 +58,7 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2015-12-05
+ * @date			2016-01-24
  */
 public class mainGUI extends JFrame implements ActionListener {
 
@@ -99,12 +99,8 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		guiManager = GuiManager.getInstance();
 
-		// set lowRes Windows Icon and hiRes Linux Icon
-		if(FileManager.os_name.equals("windows")) {
-			setIconImage(FileManager.logoImg32);
-		} else if(FileManager.os_name.equals("linux")) {
-			setIconImage(FileManager.logoImg1024);
-		}
+		// set IconList with different sizes
+		setIconImages(FileManager.logoIcons);
 
 		// set Apple specific system properties
 		System.setProperty("apple.laf.useScreenMenuBar", "true");

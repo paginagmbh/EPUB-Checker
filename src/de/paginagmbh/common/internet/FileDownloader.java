@@ -28,7 +28,7 @@ import java.awt.Insets;
 /**
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-11-07
+ * @date 		2016-01-24
  */
 public class FileDownloader {
 
@@ -62,8 +62,8 @@ public class FileDownloader {
 			e.printStackTrace();
 		}
 
-		/* Icon definieren (Windows only) */
-		f.setIconImage(FileManager.logoImg32);
+		/* Icon definieren */
+		f.setIconImages(FileManager.logoIcons);
 
 		/* Fenstergröße setzen */
 		f.setSize(570,340);
@@ -81,8 +81,7 @@ public class FileDownloader {
 		f.getContentPane().setLayout(gridBagLayout);
 
 		JLabel lbl_Icon = new JLabel();
-		Icon paginaIcon = new ImageIcon(FileManager.logoImg64);
-		lbl_Icon.setIcon(paginaIcon);
+		lbl_Icon.setIcon(FileManager.logoIcon64);
 		GridBagConstraints gbc_lbl_Icon = new GridBagConstraints();
 		gbc_lbl_Icon.anchor = GridBagConstraints.NORTH;
 		gbc_lbl_Icon.ipadx = 20;

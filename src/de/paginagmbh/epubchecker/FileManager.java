@@ -6,16 +6,20 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+
+import com.bulenkov.iconloader.IconLoader;
 
 /**
  * A static Manager class to maintain all relevant file paths
  * and image icons - including initialising them on different OS'es
  * 
  * @author Tobias Fischer
- * @date   2015-12-05
+ * @date   2016-01-24
  */
 public class FileManager {
 
@@ -41,21 +45,23 @@ public class FileManager {
 	private static String cfgFile_FirstRun = "FirstRun_" + paginaEPUBChecker.PROGRAMVERSION + ".cfg";
 
 	// logo icons
-	public static final Image logoImg16 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_16.png"));
-	public static final Image logoImg32 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_32.png"));
-	public static final Image logoImg64 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_64.png"));
-	public static final Image logoImg128 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_128.png"));
-	public static final Image logoImg256 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_256.png"));
-	public static final Image logoImg512 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_512.png"));
-	public static final Image logoImg1024 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_1024.png"));
+	private static final Image logoImg16 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_16.png"));
+	private static final Image logoImg32 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_32.png"));
+	private static final Image logoImg64 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_64.png"));
+	private static final Image logoImg128 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_128.png"));
+	private static final Image logoImg256 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_256.png"));
+	private static final Image logoImg512 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_512.png"));
+	private static final Image logoImg1024 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/paginaEPUBChecker_1024.png"));
+	public static final Icon logoIcon64 = IconLoader.getIcon("/resources/icons/paginaEPUBChecker_64.png");
+	public static List<Image> logoIcons = new ArrayList<Image>();
 
 	// icons
 	public static final Icon iconLoading = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/infinity-loader_small.gif")));
-	public static final Icon iconError = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_error.png")));
-	public static final Icon iconWarning = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_warning.png")));
-	public static final Icon iconInfo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_info.png")));
-	public static final Icon iconDebug = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_debug.png")));
-	public static final Icon iconConfig = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/resources/icons/icon_config.png")));
+	public static final Icon iconError = IconLoader.getIcon("/resources/icons/icon_error.png");
+	public static final Icon iconWarning = IconLoader.getIcon("/resources/icons/icon_warning.png");
+	public static final Icon iconInfo = IconLoader.getIcon("/resources/icons/icon_info.png");
+	public static final Icon iconDebug = IconLoader.getIcon("/resources/icons/icon_debug.png");
+	public static final Icon iconConfig = IconLoader.getIcon("/resources/icons/icon_config.png");
 
 
 	public static void init() {
@@ -98,6 +104,15 @@ public class FileManager {
 		}
 
 
+
+		// logoIcons for JFrames in different sizes
+	    logoIcons.add(logoImg16);
+	    logoIcons.add(logoImg32);
+	    logoIcons.add(logoImg64);
+	    logoIcons.add(logoImg128);
+	    logoIcons.add(logoImg256);
+	    logoIcons.add(logoImg512);
+	    logoIcons.add(logoImg1024);
 
 
 
