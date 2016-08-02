@@ -25,17 +25,17 @@ import com.apple.eawt.QuitResponse;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.6.0
- * @date			2015-12-09
+ * @version		1.6.1
+ * @date		2016-08-02
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.6.0";
-	public static final String VERSIONDATE = "09.12.2015";
+	public static final String PROGRAMVERSION = "1.6.1";
+	public static final String VERSIONDATE = "02.08.2016";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- EpubCheck library v4.0.1<br/>- Fixed Linux support<br/>- Fixed Java JRE support on Mac OS X<br/>- Other bugfixes and improvements";
+	public static final String RELEASENOTES = "- Support for Apple Retina Displays<br/>- Fixed crash on Windows when running with Java 1.8.0_101 or higher";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
