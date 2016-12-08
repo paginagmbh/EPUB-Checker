@@ -72,7 +72,7 @@
 			<version>1.4</version>
 		</dependency>
 		-->
-		
+
 		<!--
 			local "unmanaged" dependencies
 			# see repository declaration above
@@ -92,6 +92,7 @@
 	<properties>
 		<!-- use UTF-8 file encoding for java source files -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
 	</properties>
 
 	<build>
@@ -111,28 +112,47 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>jar-with-dependencies</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
+						<configuration>
+							<finalName>${my.finalJarName}</finalName>
+							<attach>false</attach>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<!-- does not work - IDKW -->
+									<!--<addClasspath>true</addClasspath>-->
+									<mainClass>de.paginagmbh.epubchecker.paginaEPUBChecker</mainClass>
+								</manifest>
+								<manifestEntries>
+									<!-- manual class path entry -->
+									<Class-Path>.</Class-Path>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</execution>
+					
+					<!-- create linux distributable -->
+					<execution>
+						<id>dist</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>${project.basedir}/src/main/assembly/dist-linux.xml</descriptor>
+							</descriptors>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<!-- does not work - IDKW -->
-							<!--<addClasspath>true</addClasspath>-->
-							<mainClass>de.paginagmbh.epubchecker.paginaEPUBChecker</mainClass>
-						</manifest>
-						<manifestEntries>
-							<!-- manual class path entry -->
-							<Class-Path>.</Class-Path>
-						</manifestEntries>
-					</archive>
-				</configuration>
+
 			</plugin>
 		</plugins>
 	</build>
