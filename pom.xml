@@ -95,10 +95,34 @@
 		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
 		<my.finalExeName>EPUB-Checker</my.finalExeName>
 		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>
+		<my.versionNumber>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</my.versionNumber>
+		<my.versionNumber.withBuildId>${my.versionNumber}.${buildNumber}</my.versionNumber.withBuildId>
 	</properties>
 
 	<build>
 		<plugins>
+			<!-- create and update build ID from properties file -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<format>{0,number}</format>
+					<items>
+						<item>buildNumber</item>
+					</items>
+					<buildNumberPropertiesFileLocation>${basedir}/src/build/buildNumber.properties</buildNumberPropertiesFileLocation>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- compiler options -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -160,6 +184,8 @@
 								<manifestEntries>
 									<!-- manual class path entry -->
 									<Class-Path>.</Class-Path>
+									<Build-Version>${my.versionNumber}</Build-Version>
+									<Build-Id>${buildNumber}</Build-Id>
 								</manifestEntries>
 							</archive>
 						</configuration>
@@ -245,12 +271,12 @@
 								<timeoutErr>false</timeoutErr>
 							</splash>
 							<versionInfo>
-								<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.257</fileVersion>
-								<txtFileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</txtFileVersion>
+								<fileVersion>${my.versionNumber.withBuildId}</fileVersion>
+								<txtFileVersion>${my.versionNumber}</txtFileVersion>
+								<productVersion>${my.versionNumber.withBuildId}</productVersion>
+								<txtProductVersion>${my.versionNumber}</txtProductVersion>
 								<fileDescription>${my.finalLongName}</fileDescription>
 								<copyright>pagina GmbH, Tuebingen</copyright>
-								<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.257</productVersion>
-								<txtProductVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</txtProductVersion>
 								<productName>${my.finalLongName}</productName>
 								<companyName>pagina GmbH</companyName>
 								<internalName>${my.finalExeName}</internalName>
