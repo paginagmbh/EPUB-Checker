@@ -14,3 +14,4 @@ buildConfig/lib/
 .classpath
 
 .settings/
+/target/
