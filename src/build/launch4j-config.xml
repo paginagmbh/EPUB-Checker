@@ -1,18 +1,18 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>../../dist/paginaEPUBChecker.jar</jar>
-  <outfile>../../dist/EPUB-Checker.exe</outfile>
+  <jar>../../target/paginaEPUBChecker.jar</jar>
+  <outfile>../../target/EPUB-Checker.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
   <priority>normal</priority>
-  <downloadUrl>http://java.com/download</downloadUrl>
+  <downloadUrl>https://www.java.com/de/download/</downloadUrl>
   <supportUrl></supportUrl>
   <customProcName>true</customProcName>
   <stayAlive>true</stayAlive>
   <manifest></manifest>
-  <icon>../icons/paginaEPUBChecker_512.ico</icon>
+  <icon>icons/paginaEPUBChecker_512.ico</icon>
   <singleInstance>
     <mutexName>paginaEPUBChecker</mutexName>
     <windowTitle>EPUB-Checker</windowTitle>
@@ -24,18 +24,18 @@
     <jdkPreference>preferJre</jdkPreference>
   </jre>
   <splash>
-    <file>../splashscreen/SplashScreen_Windows.bmp</file>
+    <file>splashscreen/SplashScreen_Windows.bmp</file>
     <waitForWindow>true</waitForWindow>
     <timeout>60</timeout>
     <timeoutErr>false</timeoutErr>
   </splash>
   <versionInfo>
-    <fileVersion>1.5.0.252</fileVersion>
-    <txtFileVersion>1.5.0</txtFileVersion>
+    <fileVersion>1.6.1.257</fileVersion>
+    <txtFileVersion>1.6.1</txtFileVersion>
     <fileDescription>pagina EPUB-Checker</fileDescription>
     <copyright>pagina GmbH, Tuebingen</copyright>
-    <productVersion>1.5.0.252</productVersion>
-    <txtProductVersion>1.5.0</txtProductVersion>
+    <productVersion>1.6.1.257</productVersion>
+    <txtProductVersion>1.6.1</txtProductVersion>
     <productName>pagina EPUB-Checker</productName>
     <companyName>pagina GmbH</companyName>
     <internalName>EPUB-Checker</internalName>

@@ -93,6 +93,8 @@
 		<!-- use UTF-8 file encoding for java source files -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
+		<my.finalExeName>EPUB-Checker</my.finalExeName>
+		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>
 	</properties>
 
 	<build>
@@ -107,13 +109,38 @@
 				</configuration>
 			</plugin>
 
+			<!--
+				parse the current version number
+				# http://stackoverflow.com/a/18234772/1128689
+				
+				${parsedVersion.majorVersion}
+				${parsedVersion.minorVersion}
+				${parsedVersion.incrementalVersion}
+				${parsedVersion.qualifier}
+				${parsedVersion.buildNumber}
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>parse-version</id>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- package a single, runnable jar -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>jar-with-dependencies</id>
-						<phase>package</phase>
+						<!-- run before(!) phase "package" -->
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
@@ -137,10 +164,10 @@
 							</archive>
 						</configuration>
 					</execution>
-					
+
 					<!-- create linux distributable -->
 					<execution>
-						<id>dist</id>
+						<id>dist-linux</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
@@ -151,8 +178,94 @@
 							</descriptors>
 						</configuration>
 					</execution>
-				</executions>
 
+					<!-- create windows distributable -->
+					<execution>
+						<id>dist-win</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>${project.basedir}/src/main/assembly/dist-win.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- create windows executable -->
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>exe-win</id>
+						<!-- run BEFORE phase "package", but AFTER the runnable Jar was created (position/sequence in pom matters) -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+						<configuration>
+							<!--
+								including external launch4j config file and overriding onyl some values is not supported
+								# https://github.com/lukaszlenart/launch4j-maven-plugin/issues/48
+							-->
+							<!--<infile>${project.basedir}/src/build/launch4j-config.xml</infile>-->
+
+							<dontWrapJar>false</dontWrapJar>
+							<headerType>gui</headerType>
+							<jar>${project.basedir}/target/${my.finalJarName}.jar</jar>
+							<outfile>${project.basedir}/target/${my.finalExeName}.exe</outfile>
+							<errTitle/>
+							<cmdLine/>
+							<chdir/>
+							<priority>normal</priority>
+							<downloadUrl>https://www.java.com/de/download/</downloadUrl>
+							<supportUrl/>
+							<customProcName>true</customProcName>
+							<stayAlive>true</stayAlive>
+							<manifest/>
+							<icon>${project.basedir}/src/build/icons/paginaEPUBChecker_512.ico</icon>
+							<singleInstance>
+								<mutexName>${my.finalJarName}</mutexName>
+								<windowTitle>${my.finalExeName}</windowTitle>
+							</singleInstance>
+							<jre>
+								<path/>
+								<minVersion>1.7.0</minVersion>
+								<maxVersion/>
+								<jdkPreference>preferJre</jdkPreference>
+							</jre>
+							<splash>
+								<file>${project.basedir}/src/build/splashscreen/SplashScreen_Windows.bmp</file>
+								<waitForWindow>true</waitForWindow>
+								<timeout>60</timeout>
+								<timeoutErr>false</timeoutErr>
+							</splash>
+							<versionInfo>
+								<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.257</fileVersion>
+								<txtFileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</txtFileVersion>
+								<fileDescription>${my.finalLongName}</fileDescription>
+								<copyright>pagina GmbH, Tuebingen</copyright>
+								<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.257</productVersion>
+								<txtProductVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</txtProductVersion>
+								<productName>${my.finalLongName}</productName>
+								<companyName>pagina GmbH</companyName>
+								<internalName>${my.finalExeName}</internalName>
+								<originalFilename>${my.finalExeName}.exe</originalFilename>
+							</versionInfo>
+							<messages>
+								<startupErr>An error occurred while starting &apos;EPUB-Checker&apos;. Please contact support.</startupErr>
+								<bundledJreErr>&apos;EPUB-Checker&apos; was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
+								<jreVersionErr>&apos;EPUB-Checker&apos; requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
+								<launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. &apos;EPUB-Checker&apos; can&apos;t be used. Please contact support.</launcherErr>
+								<instanceAlreadyExistsMsg>Another instance of &apos;EPUB-Checker&apos; is already running.</instanceAlreadyExistsMsg>
+							</messages>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
