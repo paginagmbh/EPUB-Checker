@@ -493,6 +493,7 @@
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<pushChanges>False</pushChanges>
+					<preparationGoals>validate scm:add</preparationGoals>
 				</configuration>
 				<dependencies>
 					<dependency>
