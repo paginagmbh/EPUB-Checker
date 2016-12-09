@@ -29,8 +29,8 @@
 	</developers>
 	<scm>
 		<url>https://github.com/paginagmbh/EPUB-Checker</url>
-		<connection>scm:git:ssh://git@github.com:paginagmbh/EPUB-Checker.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:paginagmbh/EPUB-Checker.git</developerConnection>
+		<connection>scm:git:git@github.com:paginagmbh/EPUB-Checker.git</connection>
+		<developerConnection>scm:git:git@github.com:paginagmbh/EPUB-Checker.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
