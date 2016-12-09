@@ -48,6 +48,10 @@
 		</repository>
 	</repositories>
 
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.idpf</groupId>
@@ -123,25 +127,45 @@
 	<build>
 		<plugins>
 
-			<!--
-				create and store ${current.year} timestamp for copyright information
-				# http://stackoverflow.com/a/39307242/1128689
-			-->
+			<!-- build helper -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<version>1.12</version>
 				<executions>
+
+					<!--
+						create and store ${current.year} timestamp for copyright information
+						# http://stackoverflow.com/a/39307242/1128689
+					-->
 					<execution>
 						<id>timestamp-property</id>
+						<phase>validate</phase>
 						<goals>
 							<goal>timestamp-property</goal>
 						</goals>
-						<phase>validate</phase>
 						<configuration>
 							<name>current.year</name>
 							<pattern>yyyy</pattern>
 						</configuration>
+					</execution>
+
+					<!--
+						parse and split the current version number to its separate parts
+						# http://stackoverflow.com/a/18234772/1128689
+
+						${parsedVersion.majorVersion}
+						${parsedVersion.minorVersion}
+						${parsedVersion.incrementalVersion}
+						${parsedVersion.qualifier}
+						${parsedVersion.buildNumber}
+					-->
+					<execution>
+						<id>parse-version</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
@@ -171,41 +195,17 @@
 			<!-- java compiler options -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.6.0</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
 			</plugin>
 
-			<!--
-				parse and split the current version number to its separate parts
-				# http://stackoverflow.com/a/18234772/1128689
-
-				${parsedVersion.majorVersion}
-				${parsedVersion.minorVersion}
-				${parsedVersion.incrementalVersion}
-				${parsedVersion.qualifier}
-				${parsedVersion.buildNumber}
-			-->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>parse-version</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>parse-version</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- package a single, runnable jar -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>jar-with-dependencies</id>
@@ -285,6 +285,7 @@
 			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
 				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>1.7.13</version>
 				<executions>
 					<execution>
 						<id>exe-win</id>
@@ -357,7 +358,7 @@
 			<!-- download the universalJavaApplicationStub for the Mac App -->
 			<plugin>
 				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.2</version>
+				<version>1.9.5</version>
 				<executions>
 					<execution>
 						<id>get-javaStub</id>
@@ -425,7 +426,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
+				<version>1.5.0</version>
 				<executions>
 					<execution>
 						<id>codesign-macApp</id>
@@ -499,7 +500,7 @@
 					<dependency>
 						<groupId>org.apache.maven.scm</groupId>
 						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.9.2</version>
+						<version>1.9.5</version>
 					</dependency>
 				</dependencies>
 			</plugin>
