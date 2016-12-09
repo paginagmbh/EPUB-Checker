@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -306,24 +304,24 @@
 							<headerType>gui</headerType>
 							<jar>${project.build.directory}/${my.finalJarName}.jar</jar>
 							<outfile>${project.build.directory}/${my.finalShortName}.exe</outfile>
-							<errTitle/>
-							<cmdLine/>
-							<chdir/>
+							<errTitle />
+							<cmdLine />
+							<chdir />
 							<priority>normal</priority>
 							<downloadUrl>https://www.java.com/download/</downloadUrl>
-							<supportUrl/>
+							<supportUrl />
 							<customProcName>true</customProcName>
 							<stayAlive>true</stayAlive>
-							<manifest/>
+							<manifest />
 							<icon>${project.build.icons.sourceDir}/paginaEPUBChecker_512.ico</icon>
 							<singleInstance>
 								<mutexName>${my.finalJarName}</mutexName>
 								<windowTitle>${my.finalShortName}</windowTitle>
 							</singleInstance>
 							<jre>
-								<path/>
+								<path />
 								<minVersion>1.7.0</minVersion>
-								<maxVersion/>
+								<maxVersion />
 								<jdkPreference>preferJre</jdkPreference>
 							</jre>
 							<splash>
@@ -345,11 +343,11 @@
 								<originalFilename>${my.finalShortName}.exe</originalFilename>
 							</versionInfo>
 							<messages>
-								<startupErr>An error occurred while starting &apos;pagina EPUB-Checker&apos;. Please contact support.</startupErr>
-								<bundledJreErr>&apos;pagina EPUB-Checker&apos; was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
-								<jreVersionErr>&apos;pagina EPUB-Checker&apos; requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
-								<launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. &apos;pagina EPUB-Checker&apos; can&apos;t be used. Please contact support.</launcherErr>
-								<instanceAlreadyExistsMsg>Another instance of &apos;pagina EPUB-Checker&apos; is already running.</instanceAlreadyExistsMsg>
+								<startupErr>An error occurred while starting 'pagina EPUB-Checker'. Please contact support.</startupErr>
+								<bundledJreErr>'pagina EPUB-Checker' was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
+								<jreVersionErr>'pagina EPUB-Checker' requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
+								<launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. 'pagina EPUB-Checker' can't be used. Please contact support.</launcherErr>
+								<instanceAlreadyExistsMsg>Another instance of 'pagina EPUB-Checker' is already running.</instanceAlreadyExistsMsg>
 							</messages>
 						</configuration>
 					</execution>
@@ -394,44 +392,21 @@
 						<configuration>
 							<target>
 
-								<taskdef
-									name="jarbundler"
-									classname="com.ultramixer.jarbundler.JarBundler"
-									classpathref="maven.compile.classpath"/>
+								<taskdef name="jarbundler" classname="com.ultramixer.jarbundler.JarBundler" classpathref="maven.compile.classpath" />
 
-								<jarbundler
-									dir="${project.build.directory}"
-									name="${my.finalShortName}"
-									shortname="${my.finalLongName}"
-									bundleid="de.paginagmbh.epubchecker"
-									mainclass="${my.mainclass}"
-									stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub"
-									usejavaxkey="true"
-									icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns"
-									splashfile="SplashScreen_Mac.png"
-									version="${my.versionNumber}"
-									developmentregion="German"
-									allowMixedLocalizations="true"
-									highresolutioncapable="true"
-									signature="PAEC"
-									build="${buildNumber}"
-									copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany"
-									jvmversion="1.7+">
+								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${buildNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.7+">
 
 									<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
 									<!-- http://informagen.com/JarBundler/DocumentType.html -->
-									<documenttype
-										name="EPUB files"
-										extensions="epub EPUB"
-										role="Viewer"/>
+									<documenttype name="EPUB files" extensions="epub EPUB" role="Viewer" />
 
 									<jarfileset dir="${project.build.directory}/">
 										<include name="${my.finalJarName}.jar" />
 									</jarfileset>
 
 									<resourcefileset dir="${project.build.splash.sourceDir}">
-										<include name="SplashScreen_Mac.png"/>
-										<include name="SplashScreen_Mac@2x.png"/>
+										<include name="SplashScreen_Mac.png" />
+										<include name="SplashScreen_Mac@2x.png" />
 									</resourcefileset>
 								</jarbundler>
 							</target>
