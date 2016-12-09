@@ -13,7 +13,7 @@
 
 	<files>
 		<file>
-			<source>src/main/assembly/Linux-Readme.txt</source>
+			<source>${project.assembly.sourceDir}/Linux-Readme.txt</source>
 			<destName>README.txt</destName>
 		</file>
 		<file>
