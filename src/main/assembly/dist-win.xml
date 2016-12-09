@@ -13,7 +13,7 @@
 
 	<files>
 		<file>
-			<source>${project.build.directory}/${my.finalExeName}.exe</source>
+			<source>${project.build.directory}/${my.finalShortName}.exe</source>
 		</file>
 	</files>
 </assembly>

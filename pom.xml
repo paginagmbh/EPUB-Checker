@@ -105,10 +105,18 @@
 
 		<!-- skip 'install' phase per default as this pom creates final binaries as GUI app and no reusable libraries -->
 		<maven.install.skip>true</maven.install.skip>
+		
+		<!-- custom path properties -->
+		<project.assembly.sourceDir>${project.basedir}/src/main/assembly</project.assembly.sourceDir>
+		<project.build.sourceDir>${project.basedir}/src/build</project.build.sourceDir>
+		<project.build.icons.sourceDir>${project.build.sourceDir}/icons</project.build.icons.sourceDir>
+		<project.build.splash.sourceDir>${project.build.sourceDir}/splashscreen</project.build.splash.sourceDir>
+		<project.JavaStubRepo.directory>${project.build.directory}/universalJavaApplicationStub</project.JavaStubRepo.directory>
 
 		<!-- custom properties -->
+		<my.mainclass>de.paginagmbh.epubchecker.paginaEPUBChecker</my.mainclass>
 		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
-		<my.finalExeName>EPUB-Checker</my.finalExeName>
+		<my.finalShortName>EPUB-Checker</my.finalShortName>
 		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>
 		<my.versionNumber>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</my.versionNumber>
 		<my.versionNumber.withBuildId>${my.versionNumber}.${buildNumber}</my.versionNumber.withBuildId>
@@ -219,7 +227,7 @@
 								<manifest>
 									<!-- does not work - IDKW -->
 									<!--<addClasspath>true</addClasspath>-->
-									<mainClass>de.paginagmbh.epubchecker.paginaEPUBChecker</mainClass>
+									<mainClass>${my.mainclass}</mainClass>
 								</manifest>
 								<manifestEntries>
 									<!-- manual class path entry -->
@@ -240,7 +248,7 @@
 						</goals>
 						<configuration>
 							<descriptors>
-								<descriptor>${project.basedir}/src/main/assembly/dist-linux.xml</descriptor>
+								<descriptor>${project.assembly.sourceDir}/dist-linux.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -254,7 +262,7 @@
 						</goals>
 						<configuration>
 							<descriptors>
-								<descriptor>${project.basedir}/src/main/assembly/dist-win.xml</descriptor>
+								<descriptor>${project.assembly.sourceDir}/dist-win.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -268,7 +276,7 @@
 						</goals>
 						<configuration>
 							<descriptors>
-								<descriptor>${project.basedir}/src/main/assembly/dist-mac.xml</descriptor>
+								<descriptor>${project.assembly.sourceDir}/dist-mac.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -292,25 +300,25 @@
 								including external launch4j config file and overriding onyl some values is not supported
 								# https://github.com/lukaszlenart/launch4j-maven-plugin/issues/48
 							-->
-							<!--<infile>${project.basedir}/src/build/launch4j-config.xml</infile>-->
+							<!--<infile>${project.build.sourceDir}/launch4j-config.xml</infile>-->
 
 							<dontWrapJar>false</dontWrapJar>
 							<headerType>gui</headerType>
-							<jar>${project.basedir}/target/${my.finalJarName}.jar</jar>
-							<outfile>${project.basedir}/target/${my.finalExeName}.exe</outfile>
+							<jar>${project.build.directory}/${my.finalJarName}.jar</jar>
+							<outfile>${project.build.directory}/${my.finalShortName}.exe</outfile>
 							<errTitle/>
 							<cmdLine/>
 							<chdir/>
 							<priority>normal</priority>
-							<downloadUrl>https://www.java.com/de/download/</downloadUrl>
+							<downloadUrl>https://www.java.com/download/</downloadUrl>
 							<supportUrl/>
 							<customProcName>true</customProcName>
 							<stayAlive>true</stayAlive>
 							<manifest/>
-							<icon>${project.basedir}/src/build/icons/paginaEPUBChecker_512.ico</icon>
+							<icon>${project.build.icons.sourceDir}/paginaEPUBChecker_512.ico</icon>
 							<singleInstance>
 								<mutexName>${my.finalJarName}</mutexName>
-								<windowTitle>${my.finalExeName}</windowTitle>
+								<windowTitle>${my.finalShortName}</windowTitle>
 							</singleInstance>
 							<jre>
 								<path/>
@@ -319,7 +327,7 @@
 								<jdkPreference>preferJre</jdkPreference>
 							</jre>
 							<splash>
-								<file>${project.basedir}/src/build/splashscreen/SplashScreen_Windows.bmp</file>
+								<file>${project.build.splash.sourceDir}/SplashScreen_Windows.bmp</file>
 								<waitForWindow>true</waitForWindow>
 								<timeout>60</timeout>
 								<timeoutErr>false</timeoutErr>
@@ -333,15 +341,15 @@
 								<copyright>pagina GmbH, Tuebingen</copyright>
 								<productName>${my.finalLongName}</productName>
 								<companyName>pagina GmbH</companyName>
-								<internalName>${my.finalExeName}</internalName>
-								<originalFilename>${my.finalExeName}.exe</originalFilename>
+								<internalName>${my.finalShortName}</internalName>
+								<originalFilename>${my.finalShortName}.exe</originalFilename>
 							</versionInfo>
 							<messages>
-								<startupErr>An error occurred while starting &apos;EPUB-Checker&apos;. Please contact support.</startupErr>
-								<bundledJreErr>&apos;EPUB-Checker&apos; was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
-								<jreVersionErr>&apos;EPUB-Checker&apos; requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
-								<launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. &apos;EPUB-Checker&apos; can&apos;t be used. Please contact support.</launcherErr>
-								<instanceAlreadyExistsMsg>Another instance of &apos;EPUB-Checker&apos; is already running.</instanceAlreadyExistsMsg>
+								<startupErr>An error occurred while starting &apos;pagina EPUB-Checker&apos;. Please contact support.</startupErr>
+								<bundledJreErr>&apos;pagina EPUB-Checker&apos; was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
+								<jreVersionErr>&apos;pagina EPUB-Checker&apos; requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
+								<launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. &apos;pagina EPUB-Checker&apos; can&apos;t be used. Please contact support.</launcherErr>
+								<instanceAlreadyExistsMsg>Another instance of &apos;pagina EPUB-Checker&apos; is already running.</instanceAlreadyExistsMsg>
 							</messages>
 						</configuration>
 					</execution>
@@ -361,7 +369,7 @@
 						</goals>
 						<configuration>
 							<connectionUrl>scm:git:https://github.com/tofi86/universalJavaApplicationStub.git</connectionUrl>
-							<checkoutDirectory>${project.basedir}/target/universalJavaApplicationStub</checkoutDirectory>
+							<checkoutDirectory>${project.JavaStubRepo.directory}</checkoutDirectory>
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
 							<!-- checkout a specific tag / pinned version -->
 							<scmVersionType>tag</scmVersionType>
@@ -392,14 +400,14 @@
 									classpathref="maven.compile.classpath"/>
 
 								<jarbundler
-									dir="${project.basedir}/target"
-									name="${my.finalExeName}"
+									dir="${project.build.directory}"
+									name="${my.finalShortName}"
 									shortname="${my.finalLongName}"
 									bundleid="de.paginagmbh.epubchecker"
-									mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
-									stubfile="${project.basedir}/target/universalJavaApplicationStub/src/universalJavaApplicationStub"
+									mainclass="${my.mainclass}"
+									stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub"
 									usejavaxkey="true"
-									icon="${project.basedir}/src/build/icons/paginaEPUBChecker_1024.icns"
+									icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns"
 									splashfile="SplashScreen_Mac.png"
 									version="${my.versionNumber}"
 									developmentregion="German"
@@ -417,11 +425,11 @@
 										extensions="epub EPUB"
 										role="Viewer"/>
 
-									<jarfileset dir="${project.basedir}/target/">
+									<jarfileset dir="${project.build.directory}/">
 										<include name="${my.finalJarName}.jar" />
 									</jarfileset>
 
-									<resourcefileset dir="${project.basedir}/src/build/splashscreen/">
+									<resourcefileset dir="${project.build.splash.sourceDir}">
 										<include name="SplashScreen_Mac.png"/>
 										<include name="SplashScreen_Mac@2x.png"/>
 									</resourcefileset>
@@ -453,13 +461,13 @@
 						<configuration>
 							<skip>${maven.codesign.skip}</skip>
 							<executable>codesign</executable>
-							<workingDirectory>${project.basedir}/target/</workingDirectory>
+							<workingDirectory>${project.build.directory}</workingDirectory>
 							<arguments>
 								<argument>-f</argument>
 								<argument>-v</argument>
 								<argument>-s</argument>
 								<argument>Developer ID Application: pagina GmbH</argument>
-								<argument>${project.basedir}/target/${my.finalExeName}.app</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
 							</arguments>
 						</configuration>
 					</execution>
@@ -472,11 +480,11 @@
 						<configuration>
 							<skip>${maven.codesign.skip}</skip>
 							<executable>codesign</executable>
-							<workingDirectory>${project.basedir}/target/</workingDirectory>
+							<workingDirectory>${project.build.directory}</workingDirectory>
 							<arguments>
 								<argument>--verify</argument>
 								<argument>--verbose</argument>
-								<argument>${project.basedir}/target/${my.finalExeName}.app</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
 							</arguments>
 						</configuration>
 					</execution>
@@ -489,13 +497,13 @@
 						<configuration>
 							<skip>${maven.codesign.skip}</skip>
 							<executable>spctl</executable>
-							<workingDirectory>${project.basedir}/target/</workingDirectory>
+							<workingDirectory>${project.build.directory}</workingDirectory>
 							<arguments>
 								<argument>-a</argument>
 								<argument>-t</argument>
 								<argument>exec</argument>
 								<argument>-vv</argument>
-								<argument>${project.basedir}/target/${my.finalExeName}.app</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
 							</arguments>
 						</configuration>
 					</execution>

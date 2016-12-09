@@ -13,8 +13,8 @@
 
 	<fileSets>
 		<fileSet>
-			<directory>${project.build.directory}/${my.finalExeName}.app</directory>
-			<outputDirectory>${my.finalExeName}.app</outputDirectory>
+			<directory>${project.build.directory}/${my.finalShortName}.app</directory>
+			<outputDirectory>${my.finalShortName}.app</outputDirectory>
 			<fileMode>0777</fileMode>
 		</fileSet>
 	</fileSets>
