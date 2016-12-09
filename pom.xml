@@ -40,7 +40,7 @@
 
 	<repositories>
 		<!--
-			local in-repository maven repo for unmanaged dependencies
+			local in-repo maven repository for unmanaged dependencies
 			# https://devcenter.heroku.com/articles/local-maven-dependencies#create-a-local-maven-repository-directory
 		-->
 		<repository>
@@ -87,6 +87,13 @@
 			<artifactId>iconloader</artifactId>
 			<version>1.0</version>
 		</dependency>
+
+		<!-- build dependencies -->
+		<dependency>
+			<groupId>com.ultramixer.jarbundler</groupId>
+			<artifactId>jarbundler-core</artifactId>
+			<version>3.3.0</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
@@ -101,6 +108,30 @@
 
 	<build>
 		<plugins>
+
+			<!--
+				create and store ${current.year} timestamp for copyright information
+				# http://stackoverflow.com/a/39307242/1128689
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.12</version>
+				<executions>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<phase>validate</phase>
+						<configuration>
+							<name>current.year</name>
+							<pattern>yyyy</pattern>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- create and update build ID from properties file -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -123,7 +154,7 @@
 				</executions>
 			</plugin>
 
-			<!-- compiler options -->
+			<!-- java compiler options -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
@@ -134,9 +165,9 @@
 			</plugin>
 
 			<!--
-				parse the current version number
+				parse and split the current version number to its separate parts
 				# http://stackoverflow.com/a/18234772/1128689
-				
+
 				${parsedVersion.majorVersion}
 				${parsedVersion.minorVersion}
 				${parsedVersion.incrementalVersion}
@@ -150,6 +181,7 @@
 				<executions>
 					<execution>
 						<id>parse-version</id>
+						<phase>validate</phase>
 						<goals>
 							<goal>parse-version</goal>
 						</goals>
@@ -215,6 +247,20 @@
 						<configuration>
 							<descriptors>
 								<descriptor>${project.basedir}/src/main/assembly/dist-win.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+					<!-- create Mac App distributable -->
+					<execution>
+						<id>dist-mac</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>${project.basedir}/src/main/assembly/dist-mac.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -290,6 +336,93 @@
 								<instanceAlreadyExistsMsg>Another instance of &apos;EPUB-Checker&apos; is already running.</instanceAlreadyExistsMsg>
 							</messages>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- download the universalJavaApplicationStub for the Mac App -->
+			<plugin>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>get-javaStub</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>checkout</goal>
+						</goals>
+						<configuration>
+							<connectionUrl>scm:git:https://github.com/tofi86/universalJavaApplicationStub.git</connectionUrl>
+							<checkoutDirectory>${project.basedir}/target/universalJavaApplicationStub</checkoutDirectory>
+							<skipCheckoutIfExists>true</skipCheckoutIfExists>
+							<!-- checkout a specific tag / pinned version -->
+							<scmVersionType>tag</scmVersionType>
+							<scmVersion>v2.0.1</scmVersion>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--
+				build mac app with "jarbundler" ant task
+				unfortunately there is no suitable maven plugin available ATM
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>create-macApp</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+
+								<taskdef
+									name="jarbundler"
+									classname="com.ultramixer.jarbundler.JarBundler"
+									classpathref="maven.compile.classpath"/>
+
+								<jarbundler
+									dir="${project.basedir}/target"
+									name="${my.finalExeName}"
+									shortname="${my.finalLongName}"
+									bundleid="de.paginagmbh.epubchecker"
+									mainclass="de.paginagmbh.epubchecker.paginaEPUBChecker"
+									stubfile="${project.basedir}/target/universalJavaApplicationStub/src/universalJavaApplicationStub"
+									usejavaxkey="true"
+									icon="${project.basedir}/src/build/icons/paginaEPUBChecker_1024.icns"
+									splashfile="SplashScreen_Mac.png"
+									version="${my.versionNumber}"
+									developmentregion="German"
+									allowMixedLocalizations="true"
+									highresolutioncapable="true"
+									signature="PAEC"
+									build="${buildNumber}"
+									copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany"
+									jvmversion="1.7+">
+
+									<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
+									<!-- http://informagen.com/JarBundler/DocumentType.html -->
+									<documenttype
+										name="EPUB files"
+										extensions="epub EPUB"
+										role="Viewer"/>
+
+									<jarfileset dir="${project.basedir}/target/">
+										<include name="${my.finalJarName}.jar" />
+									</jarfileset>
+
+									<resourcefileset dir="${project.basedir}/src/build/splashscreen/">
+										<include name="SplashScreen_Mac.png"/>
+										<include name="SplashScreen_Mac@2x.png"/>
+									</resourcefileset>
+								</jarbundler>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
