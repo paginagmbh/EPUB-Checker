@@ -103,6 +103,9 @@
 		<!-- skip codesigning for Mac App with -Dmaven.codesign.skip=true -->
 		<maven.codesign.skip>false</maven.codesign.skip>
 
+		<!-- skip 'install' phase per default as this pom creates final binaries as GUI app and no reusable libraries -->
+		<maven.install.skip>true</maven.install.skip>
+
 		<!-- custom properties -->
 		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
 		<my.finalExeName>EPUB-Checker</my.finalExeName>
