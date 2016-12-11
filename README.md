@@ -37,8 +37,8 @@ We use the following libraries to build our GUI wrapper around *epubcheck*:
 * [Apple Java Extensions](http://mvnrepository.com/artifact/com.apple/AppleJavaExtensions/1.4) 1.4
   * *Apple License*
 
-To build the EPUB-Checker app, we use the following tools and libraries:
-* [Jarbundler v2.4](https://github.com/tofi86/Jarbundler) *(a forked version of [Jarbundler](http://informagen.com/JarBundler/))*
+To build the EPUB-Checker app, we use the following tools and libraries (among other maven tools):
+* [Jarbundler](https://github.com/UltraMixer/JarBundler)
   * *Apache License v2.0*
 * [launch4j](http://launch4j.sourceforge.net/)
   * *BSD license / MIT License*
@@ -46,39 +46,28 @@ To build the EPUB-Checker app, we use the following tools and libraries:
   * *MIT License*
 
 
-Disclaimer
-----------
+Build the app
+-------------
 
-This is no high-level Java application! :smirk:
+In order to build the Linux JAR, the Mac App and the Windows EXE files you just have to run
 
-We started this project as a test case for cross platform Java development but released binaries to the public very soon. We learned a lot about generating native apps from Java (like Windows `.exe` and Apple `.app` files) or writing a update mechanism and you're always welcome to ask questions relating to this.
+```
+mvn clean package
+```
 
-However, we can't guarantee that our code is free of bugs.
+from the root directory of this project.
 
+### Important Note
+The maven packaging process runs a Mac OS specific `codesign` task to sign and verify the Mac App with our (private) Apple Developer Certificate. Therefore, this part will only work on one of our Mac's.
 
-ANT-Task
-----------------
+To be able to build packages on other Mac systems or on Windows, just skip the codesigning task with the following option:
 
-The ANT build.xml needs the following libraries:
+```
+mvn -Dmaven.codesign.skip=true clean package
+```
 
-* [jarbundler 2.4.0](https://github.com/tofi86/Jarbundler/releases/tag/v2.4.0 "Jarbundler 2.4.0 Download")
-* [launch4j 3.x](https://sourceforge.net/projects/launch4j/files/launch4j-3/ "launch4j 3.x Download")
+or during `release:prepare` phase (with `maven-release-plugin`):
 
-which need to be placed here:
-
-* git root
-  * `bin/`
-  * `buildConfig/`
-    * `lib/`
-      * `jarbundler/`
-        * `jarbundler.jar`
-        * *plus dependencies...*
-      * `launch4j/`
-        * `launch4j.jar`
-        * *plus dependencies...*
-  * `dist/`
-  * `src/`
-
-If these two libraries are in the correct place, it should be easy to build the EPUB-Checker project from sources!
-
-**Note:** The `build.xml` file contains a Mac `codesign` task to sign and verify the Mac App. Therefore, this part will only work on a Mac. The codesign task also references our Apple Developer Certificate which we use to distribute the binary files [on our website](http://www.pagina-online.de/produkte/epub-checker/). It's probably better for you to remove the codesign tasks in order to be able to build the distributables...
+```
+mvn -Darguments=-Dmaven.codesign.skip=true clean package
+```
