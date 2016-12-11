@@ -121,7 +121,6 @@
 		<my.finalShortName>EPUB-Checker</my.finalShortName>
 		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>
 		<my.versionNumber>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</my.versionNumber>
-		<my.versionNumber.withBuildId>${my.versionNumber}.${buildNumber}</my.versionNumber.withBuildId>
 	</properties>
 
 	<build>
@@ -176,11 +175,7 @@
 				<artifactId>buildnumber-maven-plugin</artifactId>
 				<version>1.4</version>
 				<configuration>
-					<format>{0,number}</format>
-					<items>
-						<item>buildNumber</item>
-					</items>
-					<buildNumberPropertiesFileLocation>${basedir}/src/build/buildNumber.properties</buildNumberPropertiesFileLocation>
+					<shortRevisionLength>5</shortRevisionLength>
 				</configuration>
 				<executions>
 					<execution>
@@ -335,9 +330,9 @@
 								<timeoutErr>false</timeoutErr>
 							</splash>
 							<versionInfo>
-								<fileVersion>${my.versionNumber.withBuildId}</fileVersion>
+								<fileVersion>${my.versionNumber}.0</fileVersion>
 								<txtFileVersion>${my.versionNumber}</txtFileVersion>
-								<productVersion>${my.versionNumber.withBuildId}</productVersion>
+								<productVersion>${my.versionNumber}.0</productVersion>
 								<txtProductVersion>${my.versionNumber}</txtProductVersion>
 								<fileDescription>${my.finalLongName}</fileDescription>
 								<copyright>pagina GmbH, Tuebingen</copyright>
@@ -400,7 +395,7 @@
 
 								<taskdef name="jarbundler" classname="com.ultramixer.jarbundler.JarBundler" classpathref="maven.compile.classpath" />
 
-								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${buildNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.7+">
+								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${my.versionNumber}_${buildNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.7+">
 
 									<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
 									<!-- http://informagen.com/JarBundler/DocumentType.html -->
@@ -499,7 +494,6 @@
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<pushChanges>False</pushChanges>
-					<preparationGoals>validate scm:add</preparationGoals>
 				</configuration>
 				<dependencies>
 					<dependency>
