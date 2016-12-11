@@ -340,7 +340,7 @@
 								<companyName>pagina GmbH</companyName>
 								<internalName>${my.finalShortName}</internalName>
 								<originalFilename>${my.finalShortName}.exe</originalFilename>
-								<trademarks></trademarks>
+								<trademarks />
 								<language>ENGLISH_US</language>
 							</versionInfo>
 							<messages>
