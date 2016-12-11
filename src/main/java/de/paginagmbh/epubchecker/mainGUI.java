@@ -58,7 +58,7 @@ import java.awt.event.InputEvent;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date			2016-01-24
+ * @date			2016-12-11
  */
 public class mainGUI extends JFrame implements ActionListener {
 
@@ -433,17 +433,17 @@ public class mainGUI extends JFrame implements ActionListener {
 		mnItem_Translations.addActionListener(this);
 		mn_Help.add(mnItem_Translations);
 
-		mnItem_licenceInformation = new JMenuItem(__("Licence information"));
+		mnItem_licenceInformation = new JMenuItem(__("License information"));
 		mnItem_licenceInformation.addActionListener(this);
 		mn_Help.add(mnItem_licenceInformation);
 
 		mn_Help.addSeparator();
 
-		mnItem_WebsiteEpubcheck = new JMenuItem(__("Visit epubcheck-Website"));
+		mnItem_WebsiteEpubcheck = new JMenuItem(__("Visit IDPF/EpubCheck website"));
 		mnItem_WebsiteEpubcheck.addActionListener(this);
 		mn_Help.add(mnItem_WebsiteEpubcheck);
 
-		mnItem_WebsitePagina = new JMenuItem(__("Visit pagina-online.de"));
+		mnItem_WebsitePagina = new JMenuItem(__("Visit pagina/EPUB-Checker website"));
 		mnItem_WebsitePagina.addActionListener(this);
 		mn_Help.add(mnItem_WebsitePagina);
 

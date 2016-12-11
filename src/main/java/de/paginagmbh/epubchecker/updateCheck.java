@@ -27,11 +27,11 @@ import de.paginagmbh.common.internet.NetTest;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2015-11-07
+ * @date 		2016-12-11
  */
 public class updateCheck {
 
-	private final String updateCheckURL = "http://download.pagina-online.de/epubchecker/updatecheck.php?from="+ paginaEPUBChecker.PROGRAMVERSION;
+	private final String updateCheckURL = "http://download.pagina.gmbh/epubchecker/updatecheck.php?from="+ paginaEPUBChecker.PROGRAMVERSION;
 	private Boolean backgroundTask;
 	private DocumentBuilder builder;
 	private XPath xpath;
