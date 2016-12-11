@@ -1,6 +1,8 @@
-os: osx
 language: java
 jdk:
   - oraclejdk8
-  - oraclejdk7
+sudo: required
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y lib32z1 lib32ncurses5 lib32bz2-1.0
 script: mvn -Dmaven.codesign.skip=true clean verify
