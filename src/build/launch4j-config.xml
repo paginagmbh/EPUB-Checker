@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>../../target/paginaEPUBChecker.jar</jar>
+  <outfile>../../target/EPUB-Checker.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>https://www.java.com/download/</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>true</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>icons/paginaEPUBChecker_512.ico</icon>
+  <singleInstance>
+    <mutexName>paginaEPUBChecker</mutexName>
+    <windowTitle>EPUB-Checker</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.7.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <splash>
+    <file>splashscreen/SplashScreen_Windows.bmp</file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>60</timeout>
+    <timeoutErr>false</timeoutErr>
+  </splash>
+  <versionInfo>
+    <fileVersion>1.6.1.0</fileVersion>
+    <txtFileVersion>1.6.1</txtFileVersion>
+    <fileDescription>pagina EPUB-Checker</fileDescription>
+    <copyright>pagina GmbH, Tuebingen</copyright>
+    <productVersion>1.6.1.0</productVersion>
+    <txtProductVersion>1.6.1</txtProductVersion>
+    <productName>pagina EPUB-Checker</productName>
+    <companyName>pagina GmbH</companyName>
+    <internalName>EPUB-Checker</internalName>
+    <originalFilename>EPUB-Checker.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+  <messages>
+    <startupErr>An error occurred while starting &apos;pagina EPUB-Checker&apos;. Please contact support.</startupErr>
+    <bundledJreErr>&apos;pagina EPUB-Checker&apos; was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
+    <jreVersionErr>&apos;pagina EPUB-Checker&apos; requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. &apos;pagina EPUB-Checker&apos; can&apos;t be used. Please contact support.</launcherErr>
+    <instanceAlreadyExistsMsg>Another instance of &apos;pagina EPUB-Checker&apos; is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>
