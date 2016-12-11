@@ -34,11 +34,11 @@
     <timeoutErr>false</timeoutErr>
   </splash>
   <versionInfo>
-    <fileVersion>1.6.1.257</fileVersion>
+    <fileVersion>1.6.1.0</fileVersion>
     <txtFileVersion>1.6.1</txtFileVersion>
     <fileDescription>pagina EPUB-Checker</fileDescription>
     <copyright>pagina GmbH, Tuebingen</copyright>
-    <productVersion>1.6.1.257</productVersion>
+    <productVersion>1.6.1.0</productVersion>
     <txtProductVersion>1.6.1</txtProductVersion>
     <productName>pagina EPUB-Checker</productName>
     <companyName>pagina GmbH</companyName>
