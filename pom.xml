@@ -1,0 +1,508 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.paginagmbh</groupId>
+	<artifactId>EPUB-Checker</artifactId>
+	<version>1.6.2-SNAPSHOT</version>
+
+	<packaging>jar</packaging>
+
+	<name>pagina EPUB-Checker</name>
+	<description>pagina EPUB-Checker is a free wrapper GUI for the official IDPF EpubCheck library.</description>
+	<url>http://www.pagina.gmbh/produkte/epub-checker/</url>
+	<inceptionYear>2010</inceptionYear>
+	<organization>
+		<name>pagina GmbH</name>
+		<url>http://www.pagina.gmbh</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Tobias Fischer</name>
+			<id>tofi86</id>
+			<email>tobias.fischer@pagina.gmbh</email>
+			<organization>pagina GmbH</organization>
+		</developer>
+	</developers>
+	<scm>
+		<url>https://github.com/paginagmbh/EPUB-Checker</url>
+		<connection>scm:git:git@github.com:paginagmbh/EPUB-Checker.git</connection>
+		<developerConnection>scm:git:git@github.com:paginagmbh/EPUB-Checker.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/paginagmbh/EPUB-Checker/issues</url>
+	</issueManagement>
+
+	<repositories>
+		<!--
+			local in-repo maven repository for unmanaged dependencies
+			# https://devcenter.heroku.com/articles/local-maven-dependencies#create-a-local-maven-repository-directory
+		-->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+	</repositories>
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.idpf</groupId>
+			<artifactId>epubcheck</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.metaparadigm</groupId>
+			<artifactId>json-rpc</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!--
+			AppleJavaExtensions 1.4 differ from my version I had in use all the years
+			so I called my version "1.5" and added it as unmanaged dependency
+		-->
+		<!--
+		<dependency>
+			<groupId>com.apple</groupId>
+			<artifactId>AppleJavaExtensions</artifactId>
+			<version>1.4</version>
+		</dependency>
+		-->
+
+		<!--
+			local "unmanaged" dependencies
+			# see repository declaration above
+		-->
+		<dependency>
+			<groupId>com.apple</groupId>
+			<artifactId>AppleJavaExtensions</artifactId>
+			<version>1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bulenkov</groupId>
+			<artifactId>iconloader</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- build dependencies -->
+		<dependency>
+			<groupId>com.ultramixer.jarbundler</groupId>
+			<artifactId>jarbundler-core</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<!-- use UTF-8 file encoding for java source files -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- skip codesigning for Mac App with -Dmaven.codesign.skip=true -->
+		<maven.codesign.skip>false</maven.codesign.skip>
+
+		<!-- skip 'install' phase per default as this pom creates final binaries as GUI app and no reusable libraries -->
+		<maven.install.skip>true</maven.install.skip>
+		
+		<!-- custom path properties -->
+		<project.assembly.sourceDir>${project.basedir}/src/main/assembly</project.assembly.sourceDir>
+		<project.build.sourceDir>${project.basedir}/src/build</project.build.sourceDir>
+		<project.build.icons.sourceDir>${project.build.sourceDir}/icons</project.build.icons.sourceDir>
+		<project.build.splash.sourceDir>${project.build.sourceDir}/splashscreen</project.build.splash.sourceDir>
+		<project.JavaStubRepo.directory>${project.build.directory}/universalJavaApplicationStub</project.JavaStubRepo.directory>
+
+		<!-- custom properties -->
+		<my.mainclass>de.paginagmbh.epubchecker.paginaEPUBChecker</my.mainclass>
+		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
+		<my.finalShortName>EPUB-Checker</my.finalShortName>
+		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>
+		<my.versionNumber>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</my.versionNumber>
+	</properties>
+
+	<build>
+		<plugins>
+
+			<!-- build helper -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.12</version>
+				<executions>
+
+					<!--
+						create and store ${current.year} timestamp for copyright information
+						# http://stackoverflow.com/a/39307242/1128689
+					-->
+					<execution>
+						<id>timestamp-property</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>current.year</name>
+							<pattern>yyyy</pattern>
+						</configuration>
+					</execution>
+
+					<!--
+						parse and split the current version number to its separate parts
+						# http://stackoverflow.com/a/18234772/1128689
+
+						${parsedVersion.majorVersion}
+						${parsedVersion.minorVersion}
+						${parsedVersion.incrementalVersion}
+						${parsedVersion.qualifier}
+						${parsedVersion.buildNumber}
+					-->
+					<execution>
+						<id>parse-version</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- create and update build ID from properties file -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<shortRevisionLength>5</shortRevisionLength>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- java compiler options -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<!-- package a single, runnable jar -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>jar-with-dependencies</id>
+						<!-- run before(!) phase "package" -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>${my.finalJarName}</finalName>
+							<attach>false</attach>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<!-- does not work - IDKW -->
+									<!--<addClasspath>true</addClasspath>-->
+									<mainClass>${my.mainclass}</mainClass>
+								</manifest>
+								<manifestEntries>
+									<!-- manual class path entry -->
+									<Class-Path>.</Class-Path>
+									<Build-Version>${my.versionNumber}</Build-Version>
+									<Build-Id>${buildNumber}</Build-Id>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</execution>
+
+					<!-- create linux distributable -->
+					<execution>
+						<id>dist-linux</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>${project.assembly.sourceDir}/dist-linux.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+					<!-- create windows distributable -->
+					<execution>
+						<id>dist-win</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>${project.assembly.sourceDir}/dist-win.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+
+					<!-- create Mac App distributable -->
+					<execution>
+						<id>dist-mac</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>${project.assembly.sourceDir}/dist-mac.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- create windows executable -->
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>1.7.13</version>
+				<executions>
+					<execution>
+						<id>exe-win</id>
+						<!-- run BEFORE phase "package", but AFTER the runnable Jar was created (position/sequence in pom matters) -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+						<configuration>
+							<!--
+								including external launch4j config file and overriding onyl some values is not supported
+								# https://github.com/lukaszlenart/launch4j-maven-plugin/issues/48
+							-->
+							<!--<infile>${project.build.sourceDir}/launch4j-config.xml</infile>-->
+
+							<dontWrapJar>false</dontWrapJar>
+							<headerType>gui</headerType>
+							<jar>${project.build.directory}/${my.finalJarName}.jar</jar>
+							<outfile>${project.build.directory}/${my.finalShortName}.exe</outfile>
+							<errTitle />
+							<cmdLine />
+							<chdir />
+							<priority>normal</priority>
+							<downloadUrl>https://www.java.com/download/</downloadUrl>
+							<supportUrl />
+							<stayAlive>true</stayAlive>
+							<restartOnCrash>false</restartOnCrash>
+							<manifest />
+							<icon>${project.build.icons.sourceDir}/paginaEPUBChecker_512.ico</icon>
+							<singleInstance>
+								<mutexName>${my.finalJarName}</mutexName>
+								<windowTitle>${my.finalShortName}</windowTitle>
+							</singleInstance>
+							<jre>
+								<path />
+								<bundledJre64Bit>false</bundledJre64Bit>
+								<bundledJreAsFallback>false</bundledJreAsFallback>
+								<minVersion>1.7.0</minVersion>
+								<maxVersion />
+								<jdkPreference>preferJre</jdkPreference>
+								<runtimeBits>64/32</runtimeBits>
+							</jre>
+							<splash>
+								<file>${project.build.splash.sourceDir}/SplashScreen_Windows.bmp</file>
+								<waitForWindow>true</waitForWindow>
+								<timeout>60</timeout>
+								<timeoutErr>false</timeoutErr>
+							</splash>
+							<versionInfo>
+								<fileVersion>${my.versionNumber}.0</fileVersion>
+								<txtFileVersion>${my.versionNumber}</txtFileVersion>
+								<productVersion>${my.versionNumber}.0</productVersion>
+								<txtProductVersion>${my.versionNumber}</txtProductVersion>
+								<fileDescription>${my.finalLongName}</fileDescription>
+								<copyright>pagina GmbH, Tuebingen</copyright>
+								<productName>${my.finalLongName}</productName>
+								<companyName>pagina GmbH</companyName>
+								<internalName>${my.finalShortName}</internalName>
+								<originalFilename>${my.finalShortName}.exe</originalFilename>
+								<trademarks />
+								<language>ENGLISH_US</language>
+							</versionInfo>
+							<messages>
+								<startupErr>An error occurred while starting 'pagina EPUB-Checker'. Please contact support.</startupErr>
+								<bundledJreErr>'pagina EPUB-Checker' was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted. Please contact support.</bundledJreErr>
+								<jreVersionErr>'pagina EPUB-Checker' requires an installed Java Runtime Environment (JRE): min.</jreVersionErr>
+								<launcherErr>The registry refers to a nonexistent Java Runtime Environment (JRE) installation or the runtime is corrupted. 'pagina EPUB-Checker' can't be used. Please contact support.</launcherErr>
+								<instanceAlreadyExistsMsg>Another instance of 'pagina EPUB-Checker' is already running.</instanceAlreadyExistsMsg>
+							</messages>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- download the universalJavaApplicationStub for the Mac App -->
+			<plugin>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.9.5</version>
+				<executions>
+					<execution>
+						<id>get-javaStub</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>checkout</goal>
+						</goals>
+						<configuration>
+							<connectionUrl>scm:git:https://github.com/tofi86/universalJavaApplicationStub.git</connectionUrl>
+							<checkoutDirectory>${project.JavaStubRepo.directory}</checkoutDirectory>
+							<skipCheckoutIfExists>true</skipCheckoutIfExists>
+							<!-- checkout a specific tag / pinned version -->
+							<scmVersionType>tag</scmVersionType>
+							<scmVersion>v2.0.1</scmVersion>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--
+				build mac app with "jarbundler" ant task
+				unfortunately there is no suitable maven plugin available ATM
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>create-macApp</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+
+								<taskdef name="jarbundler" classname="com.ultramixer.jarbundler.JarBundler" classpathref="maven.compile.classpath" />
+
+								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${my.versionNumber}_${buildNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.7+">
+
+									<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
+									<!-- http://informagen.com/JarBundler/DocumentType.html -->
+									<documenttype name="EPUB files" extensions="epub EPUB" role="Viewer" />
+
+									<jarfileset dir="${project.build.directory}/">
+										<include name="${my.finalJarName}.jar" />
+									</jarfileset>
+
+									<resourcefileset dir="${project.build.splash.sourceDir}">
+										<include name="SplashScreen_Mac.png" />
+										<include name="SplashScreen_Mac@2x.png" />
+									</resourcefileset>
+								</jarbundler>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--
+				codesign and verify the Mac App
+				# skip with -Dmaven.codesign.skip=true
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<id>codesign-macApp</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<skip>${maven.codesign.skip}</skip>
+							<executable>codesign</executable>
+							<workingDirectory>${project.build.directory}</workingDirectory>
+							<arguments>
+								<argument>-f</argument>
+								<argument>-v</argument>
+								<argument>-s</argument>
+								<argument>Developer ID Application: pagina GmbH</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>verify-codesign</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<skip>${maven.codesign.skip}</skip>
+							<executable>codesign</executable>
+							<workingDirectory>${project.build.directory}</workingDirectory>
+							<arguments>
+								<argument>--verify</argument>
+								<argument>--verbose</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>verify-codesign2</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<skip>${maven.codesign.skip}</skip>
+							<executable>spctl</executable>
+							<workingDirectory>${project.build.directory}</workingDirectory>
+							<arguments>
+								<argument>-a</argument>
+								<argument>-t</argument>
+								<argument>exec</argument>
+								<argument>-vv</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- maven-release-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<pushChanges>False</pushChanges>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
