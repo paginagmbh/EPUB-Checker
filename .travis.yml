@@ -2,4 +2,8 @@ language: java
 jdk:
   - oraclejdk8
   - oraclejdk7
+sudo: required
+before_script:
+  - sudo apt-get update
+  - sudo apt-get install lib32z1 lib32ncurses5
 script: mvn -Dmaven.codesign.skip=true clean verify
