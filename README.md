@@ -24,10 +24,10 @@ pagina EPUB-Checker capsules these tools and offers some additional features, li
 pagina EPUB-Checker doesn't need to be installed and therefore works on portable USB devices as well as on computers with restricted rights.
 
 
-License
--------
+License information
+-------------------
 
-Currently licensed under a [CreativeCommons Attribution-NoDerivs 3.0](http://creativecommons.org/licenses/by-nd/3.0/) license (the binary distributables), once it's released open-source, the `de.paginagmbh.*` java sources and the build toolchain are licensed under a [GNU General Public License v2.0](http://choosealicense.com/licenses/gpl-2.0/) license unless the code comments specify the contrary.
+Our app and code and all the java sources in `de.paginagmbh.*` are licensed under the terms of the  [GNU General Public License v2.0](http://choosealicense.com/licenses/gpl-2.0/) unless the code comments specify the contrary.
 
 We use the following libraries to build our GUI wrapper around *epubcheck*:
 * [epubcheck](https://github.com/IDPF/epubcheck) 4.0.1
