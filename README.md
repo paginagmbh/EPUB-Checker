@@ -1,9 +1,12 @@
-pagina EPUB-Checker
-============
+pagina EPUB-Checker [![Build Status](https://travis-ci.org/paginagmbh/EPUB-Checker.svg?branch=master)](https://travis-ci.org/paginagmbh/EPUB-Checker)
+===================
 
-Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux
+Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux.
 
 With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [epubcheck tools](https://github.com/IDPF/epubcheck) (version 4.0.1).
+
+Features
+--------
 
 pagina EPUB-Checker capsules these tools and offers some additional features, like:
 
@@ -22,6 +25,13 @@ pagina EPUB-Checker capsules these tools and offers some additional features, li
   * Dutch (messages only, english GUI)
 
 pagina EPUB-Checker doesn't need to be installed and therefore works on portable USB devices as well as on computers with restricted rights.
+
+Download
+--------
+
+Please visit our website http://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac OS _App_ or the Linux _JAR_.
+
+This is just the source code repository. You won't find any binary downloads here...
 
 
 License information
