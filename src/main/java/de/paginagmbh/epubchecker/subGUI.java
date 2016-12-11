@@ -19,7 +19,7 @@ public class subGUI {
 	private JFrame f;
 	private final String about_header = "<html><h2>" + "pagina EPUB-Checker" + "</h2><br/>© 2010-"
 			+ new SimpleDateFormat("yyyy").format(new Date())
-			+ " pagina GmbH, Tübingen (Germany)<br/>http://www.pagina-online.de<br/><br/>";
+			+ " pagina GmbH, Tübingen (Germany)<br/>http://www.pagina.gmbh<br/><br/>";
 
 
 
@@ -96,7 +96,7 @@ public class subGUI {
 
 				+ __("adobe bsd licence") + "\n\n\n",
 
-				__("Licence information"),
+				__("License information"),
 				JOptionPane.INFORMATION_MESSAGE,
 				FileManager.logoIcon64
 				);

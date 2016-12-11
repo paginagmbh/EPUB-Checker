@@ -26,7 +26,7 @@ import com.apple.eawt.QuitResponse;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.6.1
- * @date		2016-08-02
+ * @date		2016-12-11
  */
 public class paginaEPUBChecker {
 

@@ -10,18 +10,18 @@
 
 	<name>pagina EPUB-Checker</name>
 	<description>pagina EPUB-Checker is a free wrapper GUI for the official IDPF EpubCheck library.</description>
-	<url>http://www.pagina-online.de/produkte/epub-checker/</url>
+	<url>http://www.pagina.gmbh/produkte/epub-checker/</url>
 	<inceptionYear>2010</inceptionYear>
 	<organization>
 		<name>pagina GmbH</name>
-		<url>http://www.pagina-online.de</url>
+		<url>http://www.pagina.gmbh</url>
 	</organization>
 
 	<developers>
 		<developer>
 			<name>Tobias Fischer</name>
 			<id>tofi86</id>
-			<email>tobias.fischer@pagina-tuebingen.de</email>
+			<email>tobias.fischer@pagina.gmbh</email>
 			<organization>pagina GmbH</organization>
 		</developer>
 	</developers>
