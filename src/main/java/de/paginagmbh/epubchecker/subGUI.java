@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 /**
  * keeps the different sub GUI's called from the main GUI menu
  * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date 		2016-01-24
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2016-12-12
  */
 public class subGUI {
 
@@ -69,7 +69,7 @@ public class subGUI {
 
 				+ "<html>"
 				+ "<b>" + __("French") + "</b>: Quentin Valmori" + "<br/>"
-				+ "<b>" + __("German") + "</b>: pagina GmbH" + "<br/>"
+				+ "<b>" + __("German") + "</b>: Tobias Fischer (pagina GmbH)" + "<br/>"
 				+ "<b>" + __("Russian") + "</b>: Pavel Zuev" + "<br/>"
 				+ "<b>" + __("Spanish") + "</b>: Pedro Alamo" + "<br/>"
 				+ "<br/></html>",
