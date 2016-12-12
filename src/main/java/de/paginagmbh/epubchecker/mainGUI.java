@@ -467,11 +467,11 @@ public class mainGUI extends JFrame implements ActionListener {
 				if(new File(FileManager.path_AutoSaveFile).exists()) {
 
 					try {
-						guiManager.setMenuOptionAutoSave(Boolean.valueOf(StringHelper.readFileAsString(FileManager.path_AutoSaveFile)));
+						guiManager.setMenuOptionAutoSaveLogfile(Boolean.valueOf(StringHelper.readFileAsString(FileManager.path_AutoSaveFile)));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					if(guiManager.getMenuOptionAutoSave()) {
+					if(guiManager.getMenuOptionAutoSaveLogfile()) {
 						opt_AutoSaveLogfile.setSelected(true);
 					}
 				}
@@ -676,7 +676,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		} else if(e.getSource() == opt_AutoSaveLogfile) {
 
 			StringHelper.writeStringToFile(FileManager.path_AutoSaveFile, String.valueOf(opt_AutoSaveLogfile.isSelected()));
-			guiManager.setMenuOptionAutoSave(opt_AutoSaveLogfile.isSelected());
+			guiManager.setMenuOptionAutoSaveLogfile(opt_AutoSaveLogfile.isSelected());
 
 
 

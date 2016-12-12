@@ -16,7 +16,7 @@ import com.apple.eawt.Application;
  * 
  * 
  * @author  Tobias Fischer
- * @date    2015-12-04
+ * @date    2016-12-12
  *
  */
 public class GuiManager {
@@ -28,7 +28,7 @@ public class GuiManager {
 	private Point MainGuiPosition = null;
 	private mainGUI currentGUI = null;
 	private Application macApp = null;
-	private Boolean menuOptionAutoSave = false;
+	private Boolean menuOptionAutoSaveLogfile = false;
 	private File currentFile = null;
 	private Localization l10n = null;
 	private LogViewMode LogView = LogViewMode.TABLE;
@@ -100,12 +100,12 @@ public class GuiManager {
 		this.macApp = macApp;
 	}
 
-	public Boolean getMenuOptionAutoSave() {
-		return menuOptionAutoSave;
+	public Boolean getMenuOptionAutoSaveLogfile() {
+		return menuOptionAutoSaveLogfile;
 	}
 
-	public void setMenuOptionAutoSave(Boolean menuOptionAutoSave) {
-		this.menuOptionAutoSave = menuOptionAutoSave;
+	public void setMenuOptionAutoSaveLogfile(Boolean menuOptionAutoSaveLogfile) {
+		this.menuOptionAutoSaveLogfile = menuOptionAutoSaveLogfile;
 	}
 
 	public File getCurrentFile() {

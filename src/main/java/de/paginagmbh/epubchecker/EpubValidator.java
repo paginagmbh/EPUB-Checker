@@ -22,7 +22,6 @@ public class EpubValidator {
 
 	private static GuiManager guiManager = GuiManager.getInstance();
 	private final mainGUI gui = guiManager.getCurrentGUI();
-	private final boolean autoSaveLog = guiManager.getMenuOptionAutoSave();
 	private long timestamp_begin;
 	private long timestamp_end;
 	private boolean epubcheckResult;
@@ -214,7 +213,7 @@ public class EpubValidator {
 				gui.enableButtonsAfterValidation();
 
 				// Auto Save logfile if desired
-				if(autoSaveLog) {
+				if(guiManager.getMenuOptionAutoSaveLogfile()) {
 					gui.saveLogfile(new File(epubFile.getAbsolutePath().replaceAll("(?i)\\.epub", "_log.txt")));
 				}
 			}
