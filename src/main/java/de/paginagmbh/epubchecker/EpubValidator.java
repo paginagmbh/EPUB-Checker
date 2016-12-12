@@ -27,6 +27,7 @@ public class EpubValidator {
 	private boolean epubcheckResult;
 	protected File epubFile = null;
 	private String resultMessage = "";
+	private final String epubFileExtRegex = "(?i)\\.epub$";
 
 	// Setters available
 	private boolean expanded = false;
@@ -214,7 +215,11 @@ public class EpubValidator {
 
 				// Auto Save logfile if desired
 				if(guiManager.getMenuOptionAutoSaveLogfile()) {
-					gui.saveLogfile(new File(epubFile.getAbsolutePath().replaceAll("(?i)\\.epub", "_log.txt")));
+					if(expanded && expandedBasedir != null && expandedBasedir.exists()) {
+						gui.saveLogfile(new File(expandedBasedir, epubFile.getName().replaceAll(epubFileExtRegex, "_log.txt")));
+					} else {
+						gui.saveLogfile(new File(epubFile.getAbsolutePath().replaceAll(epubFileExtRegex, "_log.txt")));
+					}
 				}
 			}
 		};
