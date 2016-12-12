@@ -4,7 +4,7 @@
 
 	<groupId>de.paginagmbh</groupId>
 	<artifactId>EPUB-Checker</artifactId>
-	<version>1.6.2-SNAPSHOT</version>
+	<version>1.7.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 

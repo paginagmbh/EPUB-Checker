@@ -23,19 +23,19 @@ import com.apple.eawt.QuitResponse;
 /**
  * checks and validates EPUB eBooks in a nice graphical user interface
  * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @version		1.6.1
- * @date		2016-12-11
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @version     1.7.0
+ * @date        2016-12-13
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.6.1";
-	public static final String VERSIONDATE = "02.08.2016";
+	public static final String PROGRAMVERSION = "1.7.0";
+	public static final String VERSIONDATE = "13.12.2016";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "- Support for Apple Retina Displays<br/>- Fixed crash on Windows when running with Java 1.8.0_101 or higher";
+	public static final String RELEASENOTES = "- IDPF EpubCheck library v4.0.2 (security and bugfix update)<br/>- Added an option for saving EPUBs created from expanded source folders<br/>- Fixed an issue where checking a valid expanded EPUB folder overwrites an existing EPUB";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
