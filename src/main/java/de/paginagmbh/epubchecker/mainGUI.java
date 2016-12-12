@@ -23,6 +23,7 @@ import java.io.OutputStreamWriter;
 
 import javax.swing.DropMode;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -56,9 +57,9 @@ import java.awt.event.InputEvent;
 /**
  * loads the main window of the EPUB-Checker
  * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date			2016-12-11
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2016-12-12
  */
 public class mainGUI extends JFrame implements ActionListener {
 
@@ -82,7 +83,8 @@ public class mainGUI extends JFrame implements ActionListener {
 	private JMenuItem mnItem_WebsitePagina;
 	private JMenuItem mnItem_Updates;
 	JMenu mn_File, mn_Language, mn_Help;
-	private JRadioButtonMenuItem opt_AutoSave, opt_ViewMode_Text, opt_ViewMode_Table;
+	private JRadioButtonMenuItem opt_ViewMode_Text, opt_ViewMode_Table;
+	private JCheckBoxMenuItem opt_AutoSaveLogfile;
 	private StatusBar statusBar;
 	private JMenu mn_Log;
 	private String currentLogMessages = "";
@@ -369,9 +371,9 @@ public class mainGUI extends JFrame implements ActionListener {
 		mnItem_Save.addActionListener(this);
 		mn_Log.add(mnItem_Save);
 
-		opt_AutoSave = new JRadioButtonMenuItem(__("Auto Save"));
-		opt_AutoSave.addActionListener(this);
-		mn_Log.add(opt_AutoSave);
+		opt_AutoSaveLogfile = new JCheckBoxMenuItem(__("Auto Save"));
+		opt_AutoSaveLogfile.addActionListener(this);
+		mn_Log.add(opt_AutoSaveLogfile);
 
 		mn_Log.addSeparator();
 
@@ -471,7 +473,7 @@ public class mainGUI extends JFrame implements ActionListener {
 						e.printStackTrace();
 					}
 					if(guiManager.getMenuOptionAutoSave()) {
-						opt_AutoSave.setSelected(true);
+						opt_AutoSaveLogfile.setSelected(true);
 					}
 				}
 
@@ -672,10 +674,10 @@ public class mainGUI extends JFrame implements ActionListener {
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 		// handle "AutoSave" menuItem
-		} else if(e.getSource() == opt_AutoSave) {
+		} else if(e.getSource() == opt_AutoSaveLogfile) {
 
-			StringHelper.writeStringToFile(FileManager.path_AutoSaveFile, String.valueOf(opt_AutoSave.isSelected()));
-			guiManager.setMenuOptionAutoSave(opt_AutoSave.isSelected());
+			StringHelper.writeStringToFile(FileManager.path_AutoSaveFile, String.valueOf(opt_AutoSaveLogfile.isSelected()));
+			guiManager.setMenuOptionAutoSave(opt_AutoSaveLogfile.isSelected());
 
 
 
