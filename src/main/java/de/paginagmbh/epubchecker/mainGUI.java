@@ -82,11 +82,10 @@ public class mainGUI extends JFrame implements ActionListener {
 	private JMenuItem mnItem_WebsiteEpubcheck;
 	private JMenuItem mnItem_WebsitePagina;
 	private JMenuItem mnItem_Updates;
-	JMenu mn_File, mn_Language, mn_Help;
+	private JMenu mn_File, mn_Log, mn_Language, mn_Help;
 	private JRadioButtonMenuItem opt_ViewMode_Text, opt_ViewMode_Table;
 	private JCheckBoxMenuItem opt_AutoSaveLogfile;
 	private StatusBar statusBar;
-	private JMenu mn_Log;
 	private String currentLogMessages = "";
 
 
