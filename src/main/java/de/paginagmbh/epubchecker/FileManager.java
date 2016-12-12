@@ -31,6 +31,8 @@ public class FileManager {
 	public static String path_ConfigDir;
 	public static String path_LastUpdateCheckFile;
 	private static String cfgFile_LastUpdateCheck = "UpdateCheck.cfg";
+	public static String path_ExpandedSaveFile;
+	private static String cfgFile_ExpandedSave = "ExpandedSave.cfg";
 	public static String path_AutoSaveFile;
 	private static String cfgFile_AutoSave = "AutoSave.cfg";
 	public static String path_LanguageFile;
@@ -92,6 +94,7 @@ public class FileManager {
 
 		// set paths to config files after having set the OS dependant config base path above
 		path_LastUpdateCheckFile = path_ConfigDir + File.separator + cfgFile_LastUpdateCheck;
+		path_ExpandedSaveFile = path_ConfigDir + File.separator + cfgFile_ExpandedSave;
 		path_AutoSaveFile = path_ConfigDir + File.separator + cfgFile_AutoSave;
 		path_LanguageFile = path_ConfigDir + File.separator + cfgFile_Language;
 		path_TranslateFile = path_ConfigDir + File.separator + cfgFile_Translate;

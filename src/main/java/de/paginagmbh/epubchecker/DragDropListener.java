@@ -204,7 +204,6 @@ public class DragDropListener implements DropTargetListener {
 						EpubValidator epubValidator = new EpubValidator(report);
 						epubValidator.setExpanded(true);
 						epubValidator.setExpandedBasedir(file.getParentFile());
-						epubValidator.setKeepArchive(true);
 
 						// set file path in the file-path-input field
 						GuiManager.getInstance().setCurrentFile(temporaryEpubFile);

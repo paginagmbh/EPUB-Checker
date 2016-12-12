@@ -16,7 +16,7 @@ import com.apple.eawt.Application;
  * 
  * 
  * @author  Tobias Fischer
- * @date    2015-12-04
+ * @date    2016-12-12
  *
  */
 public class GuiManager {
@@ -28,13 +28,18 @@ public class GuiManager {
 	private Point MainGuiPosition = null;
 	private mainGUI currentGUI = null;
 	private Application macApp = null;
-	private Boolean menuOptionAutoSave = false;
+	private Boolean menuOptionAutoSaveLogfile = false;
 	private File currentFile = null;
 	private Localization l10n = null;
-	private LogViewMode LogView = LogViewMode.TABLE;
+	private LogViewMode logView = LogViewMode.TABLE;
 	public enum LogViewMode {
 		TEXT, TABLE;
 	}
+	private ExpandedSaveMode expandedSave = ExpandedSaveMode.VALID;
+	public enum ExpandedSaveMode {
+		NEVER, VALID, ALWAYS;
+	}
+
 
 	protected GuiManager() {
 		// Exists only to defeat instantiation.
@@ -52,10 +57,10 @@ public class GuiManager {
 		return instance;
 	}
 
+
 	public String getCurrentLanguage() {
 		return currentLanguage;
 	}
-
 	public void setCurrentLanguage(String currentLanguage) {
 		this.currentLanguage = currentLanguage;
 	}
@@ -63,7 +68,6 @@ public class GuiManager {
 	public JSONObject getCurrentLanguageJSONObject() {
 		return currentLanguageJSONObject;
 	}
-
 	public void setCurrentLanguageJSONObject(JSONObject currentLanguageJSONObject) {
 		this.currentLanguageJSONObject = currentLanguageJSONObject;
 	}
@@ -71,7 +75,6 @@ public class GuiManager {
 	public Dimension getMainGuiDimension() {
 		return MainGuiDimension;
 	}
-
 	public void setMainGuiDimension(Dimension mainGuiDimension) {
 		MainGuiDimension = mainGuiDimension;
 	}
@@ -79,7 +82,6 @@ public class GuiManager {
 	public Point getMainGuiPosition() {
 		return MainGuiPosition;
 	}
-
 	public void setMainGuiPosition(Point mainGuiPosition) {
 		MainGuiPosition = mainGuiPosition;
 	}
@@ -87,7 +89,6 @@ public class GuiManager {
 	public mainGUI getCurrentGUI() {
 		return currentGUI;
 	}
-
 	public void setCurrentGUI(mainGUI currentGUI) {
 		this.currentGUI = currentGUI;
 	}
@@ -95,23 +96,20 @@ public class GuiManager {
 	public Application getMacApp() {
 		return macApp;
 	}
-
 	public void setMacApp(Application macApp) {
 		this.macApp = macApp;
 	}
 
-	public Boolean getMenuOptionAutoSave() {
-		return menuOptionAutoSave;
+	public Boolean getMenuOptionAutoSaveLogfile() {
+		return menuOptionAutoSaveLogfile;
 	}
-
-	public void setMenuOptionAutoSave(Boolean menuOptionAutoSave) {
-		this.menuOptionAutoSave = menuOptionAutoSave;
+	public void setMenuOptionAutoSaveLogfile(Boolean menuOptionAutoSaveLogfile) {
+		this.menuOptionAutoSaveLogfile = menuOptionAutoSaveLogfile;
 	}
 
 	public File getCurrentFile() {
 		return currentFile;
 	}
-
 	public void setCurrentFile(File currentFile) {
 		this.currentFile = currentFile;
 		this.getCurrentGUI().getPathInputField().setText(currentFile.getAbsolutePath());
@@ -129,11 +127,17 @@ public class GuiManager {
 	}
 
 	public LogViewMode getLogView() {
-		return LogView;
+		return logView;
+	}
+	public void setLogView(LogViewMode logView) {
+		this.logView = logView;
 	}
 
-	public void setLogView(LogViewMode logView) {
-		LogView = logView;
+	public ExpandedSaveMode getExpandedSave() {
+		return expandedSave;
+	}
+	public void setExpandedSave(ExpandedSaveMode expandedSave) {
+		this.expandedSave = expandedSave;
 	}
 
 }
