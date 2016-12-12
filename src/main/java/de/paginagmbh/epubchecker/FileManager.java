@@ -18,8 +18,8 @@ import com.bulenkov.iconloader.IconLoader;
  * A static Manager class to maintain all relevant file paths
  * and image icons - including initialising them on different OS'es
  * 
- * @author Tobias Fischer
- * @date   2016-12-08
+ * @author   Tobias Fischer
+ * @date     2016-12-12
  */
 public class FileManager {
 
@@ -43,6 +43,7 @@ public class FileManager {
 	private static String cfgFile_Window = "WindowPosition.cfg";
 	public static String path_FirstRunFile;
 	private static String cfgFile_FirstRun = "FirstRun_" + paginaEPUBChecker.PROGRAMVERSION + ".cfg";
+	public static File path_TempDir = new File(System.getProperty("java.io.tmpdir"), "paginaEpubChecker");
 
 	// logo icons
 	private static final Image logoImg16 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/icons/paginaEPUBChecker_16.png"));

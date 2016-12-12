@@ -24,10 +24,10 @@ import com.adobe.epubcheck.util.FeatureEnum;
  * 
  * idea: http://blog.christoffer.me/post/2011-01-09-drag-and-dropping-files-to-java-desktop-application/
  * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @version		1.2.2
- * @date			2015-11-07
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @version     1.2.3
+ * @date        2016-12-12
  */
 public class DragDropListener implements DropTargetListener {
 
@@ -177,8 +177,8 @@ public class DragDropListener implements DropTargetListener {
 
 				} else if(file.isDirectory()) {
 
-					File expectedMimetype = new File(file.getPath() + File.separator + "mimetype");
-					File expectedMetaInf = new File(file.getPath() + File.separator + "META-INF");
+					File expectedMimetype = new File(file.getPath(), "mimetype");
+					File expectedMetaInf = new File(file.getPath(), "META-INF");
 
 					if(expectedMimetype.exists() && expectedMimetype.isFile()
 							&& expectedMetaInf.exists() && expectedMetaInf.isDirectory()) {
@@ -190,16 +190,26 @@ public class DragDropListener implements DropTargetListener {
 						report.info(null, FeatureEnum.TOOL_NAME, "epubcheck");
 						report.info(null, FeatureEnum.TOOL_VERSION, EpubCheck.version());
 
-						epub.createArchive();
+						// #11 create EPUB in temp dir
+						File temporaryEpubFile = new File(FileManager.path_TempDir, epub.getEpubName());
+						if(FileManager.path_TempDir.exists()) {
+							if(temporaryEpubFile.exists()) {
+								temporaryEpubFile.delete();
+							}
+						} else {
+							FileManager.path_TempDir.mkdirs();
+						}
+						epub.createArchive(temporaryEpubFile);
 
 						EpubValidator epubValidator = new EpubValidator(report);
 						epubValidator.setExpanded(true);
+						epubValidator.setExpandedBasedir(file.getParentFile());
 						epubValidator.setKeepArchive(true);
 
 						// set file path in the file-path-input field
-						GuiManager.getInstance().setCurrentFile(epub.getEpubFile());
+						GuiManager.getInstance().setCurrentFile(temporaryEpubFile);
 
-						epubValidator.validate(epub.getEpubFile());
+						epubValidator.validate(temporaryEpubFile);
 
 
 					} else {

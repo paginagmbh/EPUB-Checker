@@ -83,6 +83,8 @@
 	"This folder doesn't seem to contain any valid EPUB structure" : "Ce répertoire ne semble pas contenir toute structure d'un EPUB",
 	"There should be at least a folder named 'META-INF' and the 'mimetype' file..." : "Il devrait y avoir au moins un répertoire nommé 'META-INF' et le fichier 'mimetype'...",
 	"EPUB from source folder was successfully saved!" : "EPUB à partir du répertoire source a été enregistrée avec succès!",
+	"EPUB from source folder couldn't be saved next to the source folder!" : "",
+	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "",
 	"EPUB file couldn't be found" : "Le fichier EPUB n'a pas été trouvé",
 	"ERROR" : "ERREUR",
 	"ERROR_preposition" : "dans",

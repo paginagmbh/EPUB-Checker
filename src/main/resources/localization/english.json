@@ -83,6 +83,8 @@
 	"This folder doesn't seem to contain any valid EPUB structure" : "",
 	"There should be at least a folder named 'META-INF' and the 'mimetype' file..." : "",
 	"EPUB from source folder was successfully saved!" : "",
+	"EPUB from source folder couldn't be saved next to the source folder!" : "",
+	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "",
 	"EPUB file couldn't be found" : "",
 	"ERROR" : "ERROR",
 	"ERROR_preposition" : "at",
