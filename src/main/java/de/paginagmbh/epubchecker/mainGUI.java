@@ -12,6 +12,7 @@ import java.awt.Insets;
 import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedWriter;
@@ -21,6 +22,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -36,8 +38,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,11 +51,8 @@ import com.adobe.epubcheck.messages.Severity;
 import de.paginagmbh.common.gui.DashedLineBorder;
 import de.paginagmbh.common.gui.StatusBar;
 import de.paginagmbh.common.internet.OpenURIinBrowser;
+import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
 import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
-
-import javax.swing.UIManager;
-import javax.swing.KeyStroke;
-import java.awt.event.InputEvent;
 
 
 /**
@@ -82,8 +83,10 @@ public class mainGUI extends JFrame implements ActionListener {
 	private JMenuItem mnItem_WebsiteEpubcheck;
 	private JMenuItem mnItem_WebsitePagina;
 	private JMenuItem mnItem_Updates;
-	private JMenu mn_File, mn_Log, mn_Language, mn_Help;
+	private JMenu mn_File, mn_Expanded, mn_Log, mn_Language, mn_Help;
 	private JRadioButtonMenuItem opt_ViewMode_Text, opt_ViewMode_Table;
+	private JRadioButtonMenuItem opt_ExpandedSave_Never, opt_ExpandedSave_Valid, opt_ExpandedSave_Always;
+	private ButtonGroup AutoSaveFromExpandedGroup;
 	private JCheckBoxMenuItem opt_AutoSaveLogfile;
 	private StatusBar statusBar;
 	private String currentLogMessages = "";
@@ -340,7 +343,6 @@ public class mainGUI extends JFrame implements ActionListener {
 		mnItem_Open.addActionListener(this);
 		mn_File.add(mnItem_Open);
 
-
 		// not a mac system
 		if(!FileManager.os_name.equals("mac")) {
 
@@ -355,6 +357,28 @@ public class mainGUI extends JFrame implements ActionListener {
 			mnItem_Exit.addActionListener(this);
 			mn_File.add(mnItem_Exit);
 		}
+
+
+		mn_Expanded = new JMenu(__("Expanded"));
+		menuBar.add(mn_Expanded);
+
+		AutoSaveFromExpandedGroup = new ButtonGroup();
+
+		opt_ExpandedSave_Never = new JRadioButtonMenuItem(__("ExpandedSave_Never"));
+		opt_ExpandedSave_Never.addActionListener(this);
+		mn_Expanded.add(opt_ExpandedSave_Never);
+		AutoSaveFromExpandedGroup.add(opt_ExpandedSave_Never);
+
+		opt_ExpandedSave_Valid = new JRadioButtonMenuItem(__("ExpandedSave_Valid"));
+		opt_ExpandedSave_Valid.addActionListener(this);
+		opt_ExpandedSave_Valid.setSelected(true);
+		mn_Expanded.add(opt_ExpandedSave_Valid);
+		AutoSaveFromExpandedGroup.add(opt_ExpandedSave_Valid);
+
+		opt_ExpandedSave_Always = new JRadioButtonMenuItem(__("ExpandedSave_Always"));
+		opt_ExpandedSave_Always.addActionListener(this);
+		mn_Expanded.add(opt_ExpandedSave_Always);
+		AutoSaveFromExpandedGroup.add(opt_ExpandedSave_Always);
 
 
 		mn_Log = new JMenu(__("Logfile"));
@@ -462,6 +486,35 @@ public class mainGUI extends JFrame implements ActionListener {
 
 			@Override
 			protected Void doInBackground() throws Exception {
+
+				// ExpandedSaveMode
+				if(new File(FileManager.path_ExpandedSaveFile).exists()) {
+					try {
+						String expandedSaveState = StringHelper.readFileAsString(FileManager.path_ExpandedSaveFile);
+						if(expandedSaveState.equals("never")) {
+							guiManager.setExpandedSave(ExpandedSaveMode.NEVER);
+						} else if(expandedSaveState.equals("all")) {
+							guiManager.setExpandedSave(ExpandedSaveMode.ALWAYS);
+						} else {
+							guiManager.setExpandedSave(ExpandedSaveMode.VALID);
+						}
+					} catch (IOException e) {
+						guiManager.setExpandedSave(ExpandedSaveMode.VALID);
+						e.printStackTrace();
+					}
+
+					switch (guiManager.getExpandedSave()) {
+					case ALWAYS:
+						opt_ExpandedSave_Always.setSelected(true);
+						break;
+					case NEVER:
+						opt_ExpandedSave_Never.setSelected(true);
+						break;
+					default:
+						opt_ExpandedSave_Valid.setSelected(true);
+						break;
+					}
+				}
 
 				// AutoSave
 				if(new File(FileManager.path_AutoSaveFile).exists()) {
@@ -667,6 +720,23 @@ public class mainGUI extends JFrame implements ActionListener {
 					saveLogfile(file);
 				}
 			}
+
+
+
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+		// handle "ExpandedSave" menuItem
+		} else if(e.getSource() == opt_ExpandedSave_Never || e.getSource() == opt_ExpandedSave_Valid || e.getSource() == opt_ExpandedSave_Always) {
+
+			if(e.getSource() == opt_ExpandedSave_Never) {
+				guiManager.setExpandedSave(ExpandedSaveMode.NEVER);
+			} else if(e.getSource() == opt_ExpandedSave_Always) {
+				guiManager.setExpandedSave(ExpandedSaveMode.ALWAYS);
+			} else {
+				guiManager.setExpandedSave(ExpandedSaveMode.VALID);
+			}
+
+			StringHelper.writeStringToFile(FileManager.path_ExpandedSaveFile, guiManager.getExpandedSave().toString().toLowerCase());
 
 
 

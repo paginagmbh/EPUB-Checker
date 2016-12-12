@@ -10,6 +10,9 @@ import javax.swing.SwingWorker;
 
 import com.adobe.epubcheck.api.EpubCheck;
 import com.adobe.epubcheck.api.Report;
+import com.adobe.epubcheck.messages.Severity;
+
+import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
 
 /**
  * Validates EPUB files with EpubCheck
@@ -32,7 +35,6 @@ public class EpubValidator {
 	// Setters available
 	private boolean expanded = false;
 	private File expandedBasedir = null;
-	private boolean keepArchive = false;
 	private Report report = null;
 
 
@@ -50,10 +52,6 @@ public class EpubValidator {
 
 	public void setExpandedBasedir(File expandedBasedir) {
 		this.expandedBasedir = expandedBasedir;
-	}
-
-	public void setKeepArchive(boolean keepArchive) {
-		this.keepArchive = keepArchive;
 	}
 
 
@@ -147,10 +145,14 @@ public class EpubValidator {
 					}
 
 
-					// delete the temporarily created EPUB file cause it's invalid
-					if(expanded && epubFile.exists()) {
-						epubFile.delete();
-						gui.addLogMessage("\n\n" + __("EPUB from source folder wasn't saved because it contains errors or warnings!") + "\n");
+					// #20 save the temporarily created EPUB file if ExpandedSaveMode.ALWAYS is set
+					if(guiManager.getExpandedSave() == ExpandedSaveMode.ALWAYS) {
+						saveEpubFromExpandedFolder();
+					} else {
+						if(expanded && epubFile.exists()) {
+							epubFile.delete();
+							gui.addLogMessage(Severity.WARNING, "\n\n" + __("EPUB from source folder wasn't saved because it contains errors or warnings!") + "\n");
+						}
 					}
 
 
@@ -164,30 +166,14 @@ public class EpubValidator {
 					resultMessage = __("No errors or warnings detected");
 					gui.addLogMessage("\n\n" + resultMessage + "\n");
 
-
 					// set error counter in mac dock badge
 					if(guiManager.getMacApp() != null) {
 						guiManager.getMacApp().setDockIconBadge("✓");
 					}
 
-
-					// mode "expanded" : show a message "epub" saved successfully
-					if(expanded && epubFile.exists() && keepArchive) {
-						// #11: move temp epub to basedir
-						if(expandedBasedir != null && expandedBasedir.exists()) {
-							File destEpubFile = new File(expandedBasedir, epubFile.getName().replaceAll("\\.epub$", "") + "__created-with-epubcheck.epub");
-							if(destEpubFile.exists()) {
-								destEpubFile.delete();
-							}
-							epubFile.renameTo(destEpubFile);
-							if(destEpubFile.exists()) {
-								gui.addLogMessage("\n\n" + __("EPUB from source folder was successfully saved!") + "\n" + destEpubFile.getAbsolutePath() + "\n");
-							} else {
-								gui.addLogMessage("\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + "\n");
-							}
-						} else {
-							gui.addLogMessage("\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + "\n" + "Error 2" + "\n");
-						}
+					// #20 save the temporarily created EPUB file if ExpandedSaveMode != NEVER is set
+					if(guiManager.getExpandedSave() != ExpandedSaveMode.NEVER) {
+						saveEpubFromExpandedFolder();
 					}
 				}
 
@@ -226,6 +212,33 @@ public class EpubValidator {
 
 		// execute SwingWorker
 		validationWorker.execute();
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	// #11: move temp epub to basedir
+	private void saveEpubFromExpandedFolder() {
+		if(expanded && epubFile.exists() && guiManager.getExpandedSave() != ExpandedSaveMode.NEVER) {
+			if(expanded && expandedBasedir != null && expandedBasedir.exists()) {
+				File destEpubFile = new File(expandedBasedir, epubFile.getName().replaceAll(epubFileExtRegex, "") + "__created-with-epubcheck.epub");
+				if(destEpubFile.exists()) {
+					destEpubFile.delete();
+				}
+				epubFile.renameTo(destEpubFile);
+				if(destEpubFile.exists()) {
+					gui.addLogMessage("\n\n" + __("EPUB from source folder was successfully saved!") + "\n" + destEpubFile.getAbsolutePath() + "\n");
+				} else {
+					gui.addLogMessage(Severity.ERROR, "\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + " (ErrorCode 3)" + "\n");
+				}
+			} else {
+				gui.addLogMessage(Severity.ERROR, "\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + " (ErrorCode 2)" + "\n");
+			}
+		} else {
+			gui.addLogMessage(Severity.ERROR, "\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + " (ErrorCode 1)" + "\n");
+		}
 	}
 
 

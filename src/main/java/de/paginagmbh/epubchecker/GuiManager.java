@@ -35,6 +35,11 @@ public class GuiManager {
 	public enum LogViewMode {
 		TEXT, TABLE;
 	}
+	private ExpandedSaveMode expandedSave = ExpandedSaveMode.VALID;
+	public enum ExpandedSaveMode {
+		NEVER, VALID, ALWAYS;
+	}
+
 
 	protected GuiManager() {
 		// Exists only to defeat instantiation.
@@ -126,6 +131,13 @@ public class GuiManager {
 	}
 	public void setLogView(LogViewMode logView) {
 		this.logView = logView;
+	}
+
+	public ExpandedSaveMode getExpandedSave() {
+		return expandedSave;
+	}
+	public void setExpandedSave(ExpandedSaveMode expandedSave) {
+		this.expandedSave = expandedSave;
 	}
 
 }
