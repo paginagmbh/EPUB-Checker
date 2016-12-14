@@ -79,5 +79,5 @@ mvn -Dmaven.codesign.skip=true clean package
 or during `release:prepare` phase (with `maven-release-plugin`):
 
 ```
-mvn -Darguments=-Dmaven.codesign.skip=true clean package
+mvn -Darguments=-Dmaven.codesign.skip=true clean release:prepare
 ```
