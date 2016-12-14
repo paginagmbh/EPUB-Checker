@@ -244,10 +244,10 @@ public class EpubValidator {
 
 
 					// #20 save the temporarily created EPUB file if ExpandedSaveMode.ALWAYS is set
-					if(guiManager.getExpandedSave() == ExpandedSaveMode.ALWAYS) {
-						saveEpubFromExpandedFolder();
-					} else {
-						if(expanded && epubFile.exists()) {
+					if(expanded) {
+						if(guiManager.getExpandedSave() == ExpandedSaveMode.ALWAYS) {
+							saveEpubFromExpandedFolder();
+						} else if(epubFile.exists()) {
 							epubFile.delete();
 							gui.addLogMessage(Severity.WARNING, "\n\n" + __("EPUB from source folder wasn't saved because it contains errors or warnings!") + "\n");
 						}
@@ -270,7 +270,7 @@ public class EpubValidator {
 					}
 
 					// #20 save the temporarily created EPUB file if ExpandedSaveMode != NEVER is set
-					if(guiManager.getExpandedSave() != ExpandedSaveMode.NEVER) {
+					if(expanded && guiManager.getExpandedSave() != ExpandedSaveMode.NEVER) {
 						saveEpubFromExpandedFolder();
 					}
 				}
@@ -305,6 +305,9 @@ public class EpubValidator {
 						gui.saveLogfile(new File(epubFile.getAbsolutePath().replaceAll(epubFileExtRegex, "_log.txt")));
 					}
 				}
+
+				// scroll to the end
+				gui.scrollToBottom();
 			}
 		};
 
