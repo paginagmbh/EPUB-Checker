@@ -2,22 +2,24 @@ package de.paginagmbh.epubchecker;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
+import com.apple.eawt.AppEvent.OpenFilesEvent;
 import com.apple.eawt.AppEvent.QuitEvent;
 import com.apple.eawt.Application;
 import com.apple.eawt.OpenFilesHandler;
-import com.apple.eawt.AppEvent.OpenFilesEvent;
 import com.apple.eawt.QuitHandler;
 import com.apple.eawt.QuitResponse;
+
 
 
 /**
@@ -26,14 +28,14 @@ import com.apple.eawt.QuitResponse;
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     1.7.0
- * @date        2016-12-13
+ * @date        2016-12-14
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.7.0";
-	public static final String VERSIONDATE = "13.12.2016";
+	public static final String VERSIONDATE = "14.12.2016";
 	public static final String PROGRAMRELEASE = "";	// "" or "beta"
 	public static final String RELEASENOTES = "- IDPF EpubCheck library v4.0.2 (security and bugfix update)<br/>- Added an option for saving EPUBs created from expanded source folders<br/>- Fixed an issue where checking a valid expanded EPUB folder overwrites an existing EPUB";
 
@@ -95,8 +97,8 @@ public class paginaEPUBChecker {
 			for (int i = 0; i < args.length; i++) {
 				argFiles.add(new File(args[i]));
 			}
-			DragDropListener dragDropListener = new DragDropListener();
-			dragDropListener.handleDroppedFiles(argFiles);
+			// validate EPUB files
+			new EpubValidator().validate(argFiles);
 		}
 
 
@@ -176,10 +178,10 @@ public class paginaEPUBChecker {
 
 		// start validating immediately if a file has been set yet
 		// (e.g. when changing the language)
-		if(guiManager.getCurrentFile() != null && guiManager.getCurrentFile().exists()) {
-			File file = guiManager.getCurrentFile();
-			EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
-			epubValidator.validate(file);
+		File file = guiManager.getCurrentFile();
+		if(file != null && file.exists()) {
+			// validate EPUB file
+			new EpubValidator().validate(file);
 		}
 	}
 
@@ -224,11 +226,8 @@ public class paginaEPUBChecker {
 
 			@Override
 			public void openFiles(OpenFilesEvent arg0) {
-				List<File> files = arg0.getFiles();
-
-				DragDropListener dragDropListener = new DragDropListener();
-				dragDropListener.handleDroppedFiles(files);
-
+				// validate EPUB files
+				new EpubValidator().validate(arg0.getFiles());
 			}
 		});
 

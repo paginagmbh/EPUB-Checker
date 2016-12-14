@@ -55,12 +55,13 @@ import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
 import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
 
 
+
 /**
  * loads the main window of the EPUB-Checker
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @date        2016-12-12
+ * @date        2016-12-14
  */
 public class mainGUI extends JFrame implements ActionListener {
 
@@ -606,10 +607,8 @@ public class mainGUI extends JFrame implements ActionListener {
 
 				if(fd.getFile() != null) {
 					File file = new File(fd.getDirectory() + File.separator + fd.getFile());
-					guiManager.setCurrentFile(file);
-
-					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
-					epubValidator.validate(file);
+					// validate EPUB file
+					new EpubValidator().validate(file);
 				}
 
 
@@ -629,12 +628,9 @@ public class mainGUI extends JFrame implements ActionListener {
 
 				int returnVal = fc.showOpenDialog(getComponent(0));
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-
 					File file = fc.getSelectedFile();
-					guiManager.setCurrentFile(file);
-
-					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
-					epubValidator.validate(file);
+					// validate EPUB file
+					new EpubValidator().validate(file);
 				}
 
 			}
@@ -645,15 +641,12 @@ public class mainGUI extends JFrame implements ActionListener {
 
 		// handle "validate" button
 		} else if(e.getSource() == btn_validateEpub) {
-
 			File file = new File(input_filePath.getText());
 
-			// file doesn't exist
+			// Check whether file exists
 			if(file.exists()) {
-				guiManager.setCurrentFile(file);
-				EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
-				epubValidator.validate(file);
-
+				// validate EPUB file
+				new EpubValidator().validate(file);
 			} else {
 				addLogMessage(Severity.FATAL, __("EPUB file couldn't be found"));
 			}

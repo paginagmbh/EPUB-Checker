@@ -14,9 +14,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import com.adobe.epubcheck.api.EpubCheck;
-import com.adobe.epubcheck.util.Archive;
-import com.adobe.epubcheck.util.FeatureEnum;
+
 
 
 /**
@@ -26,8 +24,8 @@ import com.adobe.epubcheck.util.FeatureEnum;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     1.2.3
- * @date        2016-12-12
+ * @version     1.3.0
+ * @date        2016-12-14
  */
 public class DragDropListener implements DropTargetListener {
 
@@ -62,7 +60,7 @@ public class DragDropListener implements DropTargetListener {
 						@SuppressWarnings("unchecked")
 						List<File> files = (java.util.List<File>) transferable.getTransferData(flavor);
 
-						handleDroppedFiles(files);
+						new EpubValidator().validate(files);
 
 					}
 
@@ -105,7 +103,7 @@ public class DragDropListener implements DropTargetListener {
 					}
 				}
 
-				handleDroppedFiles(files);
+				new EpubValidator().validate(files);
 
 			} catch (UnsupportedFlavorException e1) {
 				e1.printStackTrace();
@@ -147,91 +145,6 @@ public class DragDropListener implements DropTargetListener {
 
 	@Override
 	public void dropActionChanged(DropTargetDragEvent event) {
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
-	public void handleDroppedFiles(List<File> files) {
-		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
-
-		// If exactly 1 file was dropped
-		if(files.size() == 1) { 
-			for(int i=0; i<files.size(); i++) {
-
-				File file = files.get(i);
-
-				if(file.isFile() && file.getName().toLowerCase().endsWith(".epub")) {
-
-					gui.setBorderStateNormal();
-
-					EpubValidator epubValidator = new EpubValidator(new paginaReport(file.getName()));
-
-					// set file path in the file-path-input field
-					GuiManager.getInstance().setCurrentFile(file);
-
-					epubValidator.validate(file);
-
-
-				} else if(file.isDirectory()) {
-
-					File expectedMimetype = new File(file.getPath(), "mimetype");
-					File expectedMetaInf = new File(file.getPath(), "META-INF");
-
-					if(expectedMimetype.exists() && expectedMimetype.isFile()
-							&& expectedMetaInf.exists() && expectedMetaInf.isDirectory()) {
-
-						Archive epub = new Archive(file.getPath(), true);
-
-						paginaReport report = new paginaReport(epub.getEpubName());
-
-						report.info(null, FeatureEnum.TOOL_NAME, "epubcheck");
-						report.info(null, FeatureEnum.TOOL_VERSION, EpubCheck.version());
-
-						// #11 create EPUB in temp dir
-						File temporaryEpubFile = new File(FileManager.path_TempDir, epub.getEpubName());
-						if(FileManager.path_TempDir.exists()) {
-							if(temporaryEpubFile.exists()) {
-								temporaryEpubFile.delete();
-							}
-						} else {
-							FileManager.path_TempDir.mkdirs();
-						}
-						epub.createArchive(temporaryEpubFile);
-
-						EpubValidator epubValidator = new EpubValidator(report);
-						epubValidator.setExpanded(true);
-						epubValidator.setExpandedBasedir(file.getParentFile());
-
-						// set file path in the file-path-input field
-						GuiManager.getInstance().setCurrentFile(temporaryEpubFile);
-
-						epubValidator.validate(temporaryEpubFile);
-
-
-					} else {
-						gui.setBorderStateError();
-						gui.clearLog();
-						gui.addLogMessage(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
-						gui.addLogMessage("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
-					}
-
-
-				} else {
-					gui.setBorderStateError();
-					gui.clearLog();
-					gui.addLogMessage(__("This isn't an EPUB file") + ": " + file.getName());
-				}
-
-			}
-
-			// if multiple files were dropped
-		} else {
-			gui.clearLog();
-			gui.addLogMessage(__("Sorry, but more than one file can't be validated at the same time!"));
-		}
 	}
 
 

@@ -3,23 +3,29 @@ package de.paginagmbh.epubchecker;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.SwingWorker;
 
 import com.adobe.epubcheck.api.EpubCheck;
 import com.adobe.epubcheck.api.Report;
 import com.adobe.epubcheck.messages.Severity;
+import com.adobe.epubcheck.util.Archive;
+import com.adobe.epubcheck.util.FeatureEnum;
 
 import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
+
+
 
 /**
  * Validates EPUB files with EpubCheck
  * in a SwingWorker instance
  * 
  * @author   Tobias Fischer
- * @date     2016-12-12
+ * @date     2016-12-14
  */
 public class EpubValidator {
 
@@ -29,29 +35,19 @@ public class EpubValidator {
 	private long timestamp_end;
 	private boolean epubcheckResult;
 	protected File epubFile = null;
+	private Report report = null;
 	private String resultMessage = "";
 	private final String epubFileExtRegex = "(?i)\\.epub$";
-
-	// Setters available
 	private boolean expanded = false;
 	private File expandedBasedir = null;
-	private Report report = null;
 
 
 
 
 	/* ********************************************************************************************************** */
 
-	public EpubValidator(Report report) {
-		this.report = report;
-	}
-
-	public void setExpanded(boolean expanded) {
-		this.expanded = expanded;
-	}
-
-	public void setExpandedBasedir(File expandedBasedir) {
-		this.expandedBasedir = expandedBasedir;
+	public EpubValidator() {
+		// nothing to do here...
 	}
 
 
@@ -60,7 +56,109 @@ public class EpubValidator {
 	/* ********************************************************************************************************** */
 
 	public void validate(File file) {
-		this.epubFile = file;
+		List<File> files = new ArrayList<File>();
+		files.add(file);
+		validate(files);
+	}
+
+	public void validate(List<File> files) {
+		// reset border color
+		gui.setBorderStateNormal();
+
+		// If exactly 1 file was dropped
+		if(files.size() == 1) { 
+			for(int i=0; i<files.size(); i++) {
+
+				File file = files.get(i);
+
+				// EPUB files
+				if(file.isFile() && file.getName().toLowerCase().endsWith(".epub")) {
+					// internal setters
+					this.report = createReport(file);
+					this.epubFile = file;
+
+					// set file path in the file-path-input field
+					guiManager.setCurrentFile(file);
+
+					// run the validation
+					runValidation();
+
+
+				// expanded EPUB source folders
+				} else if(file.isDirectory()) {
+					File expectedMimetype = new File(file.getPath(), "mimetype");
+					File expectedMetaInf = new File(file.getPath(), "META-INF");
+
+					if(expectedMimetype.exists() && expectedMimetype.isFile()
+							&& expectedMetaInf.exists() && expectedMetaInf.isDirectory()) {
+
+						Archive epub = new Archive(file.getPath(), true);
+
+						// #11 create EPUB in temp dir
+						File temporaryEpubFile = new File(FileManager.path_TempDir, epub.getEpubName());
+						if(FileManager.path_TempDir.exists()) {
+							if(temporaryEpubFile.exists()) {
+								temporaryEpubFile.delete();
+							}
+						} else {
+							FileManager.path_TempDir.mkdirs();
+						}
+						epub.createArchive(temporaryEpubFile);
+
+						// internal setters
+						this.report = createReport(file);
+						this.expanded = true;
+						this.expandedBasedir = file.getParentFile();
+						this.epubFile = temporaryEpubFile;
+
+						// set basedir path in the file-path-input field
+						guiManager.setCurrentFile(file);
+
+						// run the validation
+						runValidation();
+
+					} else {
+						gui.setBorderStateError();
+						gui.clearLog();
+						gui.addLogMessage(__("This folder doesn't seem to contain any valid EPUB structure") + ": " + file.getName() + "/");
+						gui.addLogMessage("\n\n" + __("There should be at least a folder named 'META-INF' and the 'mimetype' file..."));
+					}
+
+
+				} else {
+					gui.setBorderStateError();
+					gui.clearLog();
+					gui.addLogMessage(__("This isn't an EPUB file") + ": " + file.getName());
+				}
+
+			}
+
+			// if multiple files were dropped
+		} else {
+			gui.setBorderStateError();
+			gui.clearLog();
+			gui.addLogMessage(__("Sorry, but more than one file can't be validated at the same time!"));
+		}
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	private Report createReport(File file) {
+		paginaReport report = new paginaReport(file.getName());
+		report.info(null, FeatureEnum.TOOL_NAME, "epubcheck");
+		report.info(null, FeatureEnum.TOOL_VERSION, EpubCheck.version());
+		return report;
+	}
+
+
+
+
+	/* ********************************************************************************************************** */
+
+	private void runValidation() {
 
 		// set "begin" timestamp
 		timestamp_begin = System.currentTimeMillis();
