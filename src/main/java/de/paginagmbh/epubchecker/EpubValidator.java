@@ -27,7 +27,7 @@ import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
  * in a SwingWorker instance
  * 
  * @author   Tobias Fischer
- * @date     2016-12-14
+ * @date     2016-12-16
  */
 public class EpubValidator {
 
