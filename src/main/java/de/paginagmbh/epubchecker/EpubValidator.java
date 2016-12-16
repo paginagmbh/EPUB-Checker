@@ -1,6 +1,7 @@
 package de.paginagmbh.epubchecker;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import com.adobe.epubcheck.api.Report;
 import com.adobe.epubcheck.messages.Severity;
 import com.adobe.epubcheck.util.Archive;
 import com.adobe.epubcheck.util.FeatureEnum;
+import com.google.common.io.Files;
 
 import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
 
@@ -328,11 +330,16 @@ public class EpubValidator {
 				if(destEpubFile.exists()) {
 					destEpubFile.delete();
 				}
-				epubFile.renameTo(destEpubFile);
-				if(destEpubFile.exists()) {
-					gui.addLogMessage("\n\n" + __("EPUB from source folder was successfully saved!") + "\n" + destEpubFile.getAbsolutePath() + "\n");
-				} else {
-					gui.addLogMessage(Severity.ERROR, "\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + " (ErrorCode 3)" + "\n");
+				try {
+					// #36: do not use epubFile.renameTo() as it doesn't work for Mac external volumes
+					Files.move(epubFile, destEpubFile);
+					if(destEpubFile.exists()) {
+						gui.addLogMessage("\n\n" + __("EPUB from source folder was successfully saved!") + "\n" + destEpubFile.getAbsolutePath() + "\n");
+					} else {
+						throw new IOException("(ErrorCode 4)");
+					}
+				} catch (IOException e) {
+					gui.addLogMessage(Severity.ERROR, "\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + " (ErrorCode 3)" + "\n" + e.getMessage() + "\n");
 				}
 			} else {
 				gui.addLogMessage(Severity.ERROR, "\n\n" + __("EPUB from source folder couldn't be saved next to the source folder!") + " (ErrorCode 2)" + "\n");
