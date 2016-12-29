@@ -36,10 +36,10 @@
   <versionInfo>
     <fileVersion>1.7.0.0</fileVersion>
     <txtFileVersion>1.7.0</txtFileVersion>
-    <fileDescription>pagina EPUB-Checker</fileDescription>
-    <copyright>pagina GmbH, Tuebingen</copyright>
     <productVersion>1.7.0.0</productVersion>
     <txtProductVersion>1.7.0</txtProductVersion>
+    <fileDescription>pagina EPUB-Checker</fileDescription>
+    <copyright>pagina GmbH, Tuebingen</copyright>
     <productName>pagina EPUB-Checker</productName>
     <companyName>pagina GmbH</companyName>
     <internalName>EPUB-Checker</internalName>
