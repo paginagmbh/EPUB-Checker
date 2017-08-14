@@ -25,7 +25,8 @@ public class Localization {
 			"English",
 			"French",
 			"Spanish",
-			"Russian"
+			"Russian",
+			"Japanese"
 	};
 
 	public Localization(String initialLanguage) {
@@ -59,6 +60,11 @@ public class Localization {
 			} else if(currentUserLang.equals("ru")) {
 				currentLanguage = "russian";
 				currentLanguageJSON = loadLanguageFile("russian");
+
+				// Japanese
+			} else if(currentUserLang.equals("ja")) {
+				currentLanguage = "japanese";
+				currentLanguageJSON = loadLanguageFile("japanese");
 
 				// English; Fallback
 			} else {

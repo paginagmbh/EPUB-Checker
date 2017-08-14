@@ -72,6 +72,7 @@ public class subGUI {
 				+ "<b>" + __("German") + "</b>: Tobias Fischer (pagina GmbH)" + "<br/>"
 				+ "<b>" + __("Russian") + "</b>: Pavel Zuev" + "<br/>"
 				+ "<b>" + __("Spanish") + "</b>: Pedro Alamo" + "<br/>"
+				+ "<b>" + __("Japanese") + "</b>: Masayoshi Takahashi" + "<br/>"
 				+ "<br/></html>",
 
 				__("Translations"),
