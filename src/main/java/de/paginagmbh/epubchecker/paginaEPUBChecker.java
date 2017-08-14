@@ -27,17 +27,17 @@ import com.apple.eawt.QuitResponse;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     1.7.1
- * @date        2016-12-16
+ * @version     1.8.0-beta
+ * @date        2017-08-15
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.7.1";
-	public static final String VERSIONDATE = "16.12.2016";
-	public static final String PROGRAMRELEASE = "";	// "" or "beta"
-	public static final String RELEASENOTES = "1.7.0:<br/>- IDPF EpubCheck library v4.0.2 (security and bugfix update)<br/>- Added an option for saving EPUBs created from expanded source folders<br/>- Fixed an issue where checking a valid expanded EPUB folder overwrites an existing EPUB<br/>1.7.1:<br/>- Fixed an issue where an EPUB created from a source folder wasn't saved on external volumes";
+	public static final String PROGRAMVERSION = "1.8.0";
+	public static final String VERSIONDATE = "15.08.2017";
+	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
+	public static final String RELEASENOTES = "- Added Japanese translation (Thanks to Masayoshi Takahashi!)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
