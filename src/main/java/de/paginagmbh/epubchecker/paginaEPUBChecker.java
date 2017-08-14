@@ -153,6 +153,8 @@ public class paginaEPUBChecker {
 			Locale.setDefault(new Locale("es", "ES"));
 		} else if(currentLanguage.equals("russian")) {
 			Locale.setDefault(new Locale("ru", "RU"));
+		} else if(currentLanguage.equals("japanese")) {
+			Locale.setDefault(new Locale("ja", "JP"));
 		} else if(currentLanguage.equals("english")) {
 			Locale.setDefault(new Locale("en", "US"));
 		} else {
