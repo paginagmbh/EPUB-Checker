@@ -27,17 +27,17 @@ import com.apple.eawt.QuitResponse;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     1.8.0-beta
- * @date        2017-08-15
+ * @version     1.7.2-beta
+ * @date        2018-07-25
  */
 public class paginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.8.0";
+	public static final String PROGRAMVERSION = "1.7.2";
 	public static final String VERSIONDATE = "15.08.2017";
 	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
-	public static final String RELEASENOTES = "- Added Japanese translation (Thanks to Masayoshi Takahashi!)";
+	public static final String RELEASENOTES = "- Added Japanese translation (Thanks to Masayoshi Takahashi!)<br/>- Require Java 7 or Java 8 JRE/JDK to run the App";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
