@@ -1,7 +1,10 @@
 language: java
 jdk:
-  - oraclejdk8
   - openjdk7
+  - oraclejdk8
+  - oraclejdk9
+  - oraclejdk10
+  - openjdk10
 sudo: required
 install: true
 before_script:
