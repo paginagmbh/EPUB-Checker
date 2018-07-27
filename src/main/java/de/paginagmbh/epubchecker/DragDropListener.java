@@ -121,7 +121,7 @@ public class DragDropListener implements DropTargetListener {
 
 	@Override
 	public void dragEnter(DropTargetDragEvent event) {
-		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
+		MainGUI gui = GuiManager.getInstance().getCurrentGUI();
 		// System.out.println("Enter");
 		gui.setBorderStateActive();
 		gui.clearLog();
@@ -131,7 +131,7 @@ public class DragDropListener implements DropTargetListener {
 
 	@Override
 	public void dragExit(DropTargetEvent event) {
-		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
+		MainGUI gui = GuiManager.getInstance().getCurrentGUI();
 		// System.out.println("Exit");
 		gui.setBorderStateNormal();
 		gui.clearLog();

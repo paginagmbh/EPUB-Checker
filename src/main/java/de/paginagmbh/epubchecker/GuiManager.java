@@ -26,7 +26,7 @@ public class GuiManager {
 	private JSONObject currentLanguageJSONObject = null;
 	private Dimension MainGuiDimension = null;
 	private Point MainGuiPosition = null;
-	private mainGUI currentGUI = null;
+	private MainGUI currentGUI = null;
 	private Application macApp = null;
 	private Boolean menuOptionAutoSaveLogfile = false;
 	private File currentFile = null;
@@ -86,10 +86,10 @@ public class GuiManager {
 		MainGuiPosition = mainGuiPosition;
 	}
 
-	public mainGUI getCurrentGUI() {
+	public MainGUI getCurrentGUI() {
 		return currentGUI;
 	}
-	public void setCurrentGUI(mainGUI currentGUI) {
+	public void setCurrentGUI(MainGUI currentGUI) {
 		this.currentGUI = currentGUI;
 	}
 

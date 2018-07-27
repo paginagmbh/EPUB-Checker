@@ -116,7 +116,7 @@
 		<project.JavaStubRepo.directory>${project.build.directory}/universalJavaApplicationStub</project.JavaStubRepo.directory>
 
 		<!-- custom properties -->
-		<my.mainclass>de.paginagmbh.epubchecker.paginaEPUBChecker</my.mainclass>
+		<my.mainclass>de.paginagmbh.epubchecker.PaginaEPUBChecker</my.mainclass>
 		<my.finalJarName>paginaEPUBChecker</my.finalJarName>
 		<my.finalShortName>EPUB-Checker</my.finalShortName>
 		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>

@@ -32,7 +32,7 @@ import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
 public class EpubValidator {
 
 	private static GuiManager guiManager = GuiManager.getInstance();
-	private final mainGUI gui = guiManager.getCurrentGUI();
+	private final MainGUI gui = guiManager.getCurrentGUI();
 	private long timestamp_begin;
 	private long timestamp_end;
 	private boolean epubcheckResult;
@@ -149,7 +149,7 @@ public class EpubValidator {
 	/* ********************************************************************************************************** */
 
 	private Report createReport(File file) {
-		paginaReport report = new paginaReport(file.getName());
+		PaginaReport report = new PaginaReport(file.getName());
 		report.info(null, FeatureEnum.TOOL_NAME, "epubcheck");
 		report.info(null, FeatureEnum.TOOL_VERSION, EpubCheck.version());
 		return report;

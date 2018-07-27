@@ -30,7 +30,7 @@ import com.apple.eawt.QuitResponse;
  * @version     1.7.2-beta
  * @date        2018-07-25
  */
-public class paginaEPUBChecker {
+public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
@@ -49,10 +49,10 @@ public class paginaEPUBChecker {
 	/* ********************************************************************************************************** */
 
 	public static void main(String[] args) {
-		new paginaEPUBChecker(args);
+		new PaginaEPUBChecker(args);
 	}
 	
-	public paginaEPUBChecker(String[] args) {
+	public PaginaEPUBChecker(String[] args) {
 
 		// use system proxy
 		System.setProperty("java.net.useSystemProxies", "true");
@@ -82,7 +82,7 @@ public class paginaEPUBChecker {
 
 
 		// perform update check
-		new updateCheck(true);
+		new UpdateCheck(true);
 
 
 		// init mac specific event listeners; after GUI is loaded
@@ -104,7 +104,7 @@ public class paginaEPUBChecker {
 
 		// show release notes only on first run
 		if( ! new File(FileManager.path_FirstRunFile).exists() ) {
-			messageGUI msg = new messageGUI();
+			MessageGUI msg = new MessageGUI();
 			//msg.setTitle("");
 			msg.showMessage(__("Thanks for updating!")
 					+ "<br/><br/><br/>"
@@ -175,7 +175,7 @@ public class paginaEPUBChecker {
 		}
 
 		// show main GUI
-		mainGUI gui =  new mainGUI();
+		MainGUI gui =  new MainGUI();
 		guiManager.setCurrentGUI(gui);
 
 		// start validating immediately if a file has been set yet
@@ -218,7 +218,7 @@ public class paginaEPUBChecker {
 		macApp.setAboutHandler(new AboutHandler() {
 			@Override
 			public void handleAbout(AboutEvent arg0) {
-				subGUI s = new subGUI(guiManager.getCurrentGUI());
+				SubGUI s = new SubGUI(guiManager.getCurrentGUI());
 				s.displayAboutBox();
 			}
 		});

@@ -44,7 +44,7 @@ public class FileManager {
 	public static String path_WindowFile;
 	private static String cfgFile_Window = "WindowPosition.cfg";
 	public static String path_FirstRunFile;
-	private static String cfgFile_FirstRun = "FirstRun_" + paginaEPUBChecker.PROGRAMVERSION + ".cfg";
+	private static String cfgFile_FirstRun = "FirstRun_" + PaginaEPUBChecker.PROGRAMVERSION + ".cfg";
 	public static File path_TempDir = new File(System.getProperty("java.io.tmpdir"), "paginaEpubChecker");
 
 	// logo icons
@@ -86,7 +86,7 @@ public class FileManager {
 
 		// any other OS isn't supported yet
 		} else {
-			messageGUI msg = new messageGUI();
+			MessageGUI msg = new MessageGUI();
 			msg.setTitle("pagina EPUB-Checker");
 			msg.showError("This operating system isn't supported yet!");
 			System.exit(1);

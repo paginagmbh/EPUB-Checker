@@ -63,7 +63,7 @@ import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
  * @copyright   pagina GmbH, Tübingen
  * @date        2016-12-14
  */
-public class mainGUI extends JFrame implements ActionListener {
+public class MainGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = -9097011004038447484L;
 	private static GuiManager guiManager;
@@ -96,7 +96,7 @@ public class mainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	public mainGUI() {
+	public MainGUI() {
 
 		// new JFrame
 		super("pagina EPUB-Checker");
@@ -594,7 +594,7 @@ public class mainGUI extends JFrame implements ActionListener {
 			// better File-Chooser for Mac OS X and Linux
 			if(FileManager.os_name.matches("mac|linux")) {
 
-				FileDialog fd = new FileDialog(mainGUI.this, __("Please choose an EPUB file for validation"), FileDialog.LOAD);
+				FileDialog fd = new FileDialog(MainGUI.this, __("Please choose an EPUB file for validation"), FileDialog.LOAD);
 				System.setProperty("apple.awt.use-file-dialog-packages", "true");
 				fd.setFilenameFilter(new FilenameFilter() {
 					@Override
@@ -661,7 +661,7 @@ public class mainGUI extends JFrame implements ActionListener {
 			// better File-Chooser for Mac OS X and Linux
 			if(FileManager.os_name.matches("mac|linux")) {
 
-				FileDialog fd = new FileDialog(mainGUI.this, __("Save logfile"), FileDialog.SAVE);
+				FileDialog fd = new FileDialog(MainGUI.this, __("Save logfile"), FileDialog.SAVE);
 				System.setProperty("apple.awt.use-file-dialog-packages", "true");
 				fd.setFilenameFilter(new FilenameFilter() {
 					@Override
@@ -789,7 +789,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "about" dialog
 		} else if(e.getSource() == mnItem_About) {
 
-			subGUI s = new subGUI(mainGUI.this);
+			SubGUI s = new SubGUI(MainGUI.this);
 			s.displayAboutBox();
 
 
@@ -799,7 +799,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "translation" dialog
 		} else if(e.getSource() == mnItem_Translations) {
 
-			subGUI s = new subGUI(mainGUI.this);
+			SubGUI s = new SubGUI(MainGUI.this);
 			s.displayTranslationBox();
 
 
@@ -809,7 +809,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		// handle "licence" dialog
 		} else if(e.getSource() == mnItem_licenceInformation) {
 
-			subGUI s = new subGUI(mainGUI.this);
+			SubGUI s = new SubGUI(MainGUI.this);
 			s.displayLicenceBox();
 
 
@@ -824,7 +824,7 @@ public class mainGUI extends JFrame implements ActionListener {
 				@Override
 				protected Void doInBackground() throws Exception {
 
-					new updateCheck(false);
+					new UpdateCheck(false);
 
 					return null;
 				}
@@ -903,7 +903,7 @@ public class mainGUI extends JFrame implements ActionListener {
 		guiManager.setMainGuiPosition(getLocation());
 
 		// new GUI in given language
-		new paginaEPUBChecker(null);
+		new PaginaEPUBChecker(null);
 	}
 
 

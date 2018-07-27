@@ -12,7 +12,7 @@ import javax.swing.UIManager;
  * @copyright	pagina GmbH, Tübingen
  * @date 		2016-01-24
  */
-public class messageGUI extends JDialog {
+public class MessageGUI extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JFrame f;
@@ -22,7 +22,7 @@ public class messageGUI extends JDialog {
 
 	/* ***************************************************************************************************************** */
 
-	public messageGUI() {
+	public MessageGUI() {
 		GuiManager guiManager = GuiManager.getInstance();
 		if(guiManager.getCurrentGUI() == null) {
 			// epub-checker gui isn't loaded yet

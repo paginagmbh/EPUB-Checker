@@ -21,7 +21,7 @@ import com.adobe.epubcheck.util.PathUtil;
  * @version		2.0.2
  * @date 		2015-12-05
  */
-public class paginaReport extends DefaultReportImpl {
+public class PaginaReport extends DefaultReportImpl {
 
 	private boolean DEBUG = false;
 	boolean quiet, saveQuiet;
@@ -32,7 +32,7 @@ public class paginaReport extends DefaultReportImpl {
 
 	/* ********************************************************************************************************** */
 
-	public paginaReport(String ePubName) {
+	public PaginaReport(String ePubName) {
 	    super(ePubName);
 	}
 
@@ -56,7 +56,7 @@ public class paginaReport extends DefaultReportImpl {
 	@Override
 	public void info(String resource, FeatureEnum feature, String value) {
 
-		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
+		MainGUI gui = GuiManager.getInstance().getCurrentGUI();
 
 		switch (feature) {
 		case FORMAT_VERSION:
@@ -109,7 +109,7 @@ public class paginaReport extends DefaultReportImpl {
 	@Override
 	public void message(Message message, EPUBLocation location, Object... args) {
 
-		mainGUI gui = GuiManager.getInstance().getCurrentGUI();
+		MainGUI gui = GuiManager.getInstance().getCurrentGUI();
 
 		Severity severity = message.getSeverity();
 		String fileName = (location.getPath() == null ? "" : "/" + location.getPath());

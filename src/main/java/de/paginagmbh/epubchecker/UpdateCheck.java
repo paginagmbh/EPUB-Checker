@@ -29,9 +29,9 @@ import de.paginagmbh.common.internet.NetTest;
  * @copyright	pagina GmbH, Tübingen
  * @date 		2016-12-11
  */
-public class updateCheck {
+public class UpdateCheck {
 
-	private final String updateCheckURL = "http://download.pagina.gmbh/epubchecker/updatecheck.php?from="+ paginaEPUBChecker.PROGRAMVERSION;
+	private final String updateCheckURL = "http://download.pagina.gmbh/epubchecker/updatecheck.php?from="+ PaginaEPUBChecker.PROGRAMVERSION;
 	private Boolean backgroundTask;
 	private DocumentBuilder builder;
 	private XPath xpath;
@@ -46,7 +46,7 @@ public class updateCheck {
 
 	/* ***************************************************************************************************************** */
 
-	public updateCheck(Boolean performInBackground) {
+	public UpdateCheck(Boolean performInBackground) {
 
 		guiManager = GuiManager.getInstance();
 		statusBar = guiManager.getCurrentGUI().getStatusBar();
@@ -159,17 +159,17 @@ public class updateCheck {
 
 			// lokale Version ist niedriger als Server-Version
 			// Ein Update steht bereit!
-			if(Integer.parseInt(paginaEPUBChecker.PROGRAMVERSION.replace(".", "")) < Integer.parseInt(UpdateInfo[0].replace(".", ""))) {
+			if(Integer.parseInt(PaginaEPUBChecker.PROGRAMVERSION.replace(".", "")) < Integer.parseInt(UpdateInfo[0].replace(".", ""))) {
 
 				statusBar.reset();
 
-				messageGUI msg = new messageGUI();
+				MessageGUI msg = new MessageGUI();
 				int answer = msg.showQuestion(
 						__("Version %NEW_VERSION% is now available for download!")
 						.replaceAll("%NEW_VERSION%", UpdateInfo[0])
 						+ "<br/>"
 						+ __("You are currently using %CURRENT_VERSION%")
-						.replaceAll("%CURRENT_VERSION%", paginaEPUBChecker.PROGRAMVERSION)
+						.replaceAll("%CURRENT_VERSION%", PaginaEPUBChecker.PROGRAMVERSION)
 						+ "<br/><br/>"
 						+ __("New version %NEW_VERSION% includes these features:")
 						.replaceAll("%NEW_VERSION%", UpdateInfo[0])
@@ -189,8 +189,8 @@ public class updateCheck {
 									__("An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..."),
 									UpdateInfo[0],
 									UpdateInfo[1],
-									paginaEPUBChecker.PROGRAMVERSION,
-									paginaEPUBChecker.VERSIONDATE));
+									PaginaEPUBChecker.PROGRAMVERSION,
+									PaginaEPUBChecker.VERSIONDATE));
 
 				} else {
 					return;
@@ -205,7 +205,7 @@ public class updateCheck {
 				if(backgroundTask) {
 					statusBar.update(null, __("There are no new updates available."));
 				} else {
-					messageGUI msg = new messageGUI();
+					MessageGUI msg = new MessageGUI();
 					statusBar.reset();
 					msg.showMessage(__("There are no new updates available."), __("You're up-to-date!"));
 				}
@@ -228,7 +228,7 @@ public class updateCheck {
 		if(backgroundTask) {
 			statusBar.update(null, __("Update check failed!") + " " + __("Please check manually for updates").replace("<br/>", " "));
 		} else {
-			messageGUI msg = new messageGUI();
+			MessageGUI msg = new MessageGUI();
 			statusBar.reset();
 			msg.showMessage(__("Please check manually for updates") + "<br/><br/>["+ e.getClass().getName() +"]<br/>"+ e.getMessage().replace(System.getProperty("line.separator"), "<br/>"), __("Update check failed!"));
 		}
@@ -242,7 +242,7 @@ public class updateCheck {
 		if(backgroundTask) {
 			statusBar.update(null, __("Update check failed!") + " " + __("Can't establish internet connection."));
 		} else {
-			messageGUI msg = new messageGUI();
+			MessageGUI msg = new MessageGUI();
 			statusBar.reset();
 			msg.showError(__("Update check failed!") + "<br/>" + __("Can't establish internet connection."));
 		}
@@ -256,7 +256,7 @@ public class updateCheck {
 		if(backgroundTask) {
 			statusBar.update(null, __("Update check failed!") + " " + __("Update server not available."));
 		} else {
-			messageGUI msg = new messageGUI();
+			MessageGUI msg = new MessageGUI();
 			statusBar.reset();
 			msg.showError(__("Update check failed!") + "<br/>" + __("Update server not available."));
 		}

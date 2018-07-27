@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @copyright   pagina GmbH, Tübingen
  * @date        2016-12-12
  */
-public class subGUI {
+public class SubGUI {
 
 	private JFrame f;
 	private final String about_header = "<html><h2>" + "pagina EPUB-Checker" + "</h2><br/>© 2010-"
@@ -25,7 +25,7 @@ public class subGUI {
 
 	/* ********************************************************************************************************** */
 
-	public subGUI(JFrame parentFrame) {
+	public SubGUI(JFrame parentFrame) {
 		// new JFrame
 		f = parentFrame;
 	}
@@ -42,8 +42,8 @@ public class subGUI {
 				about_header
 				+ __("about_content-1") + "\n\n"
 				+ __("about_content-2")
-				.replaceAll("%PROGRAM_VERSION%", paginaEPUBChecker.PROGRAMVERSION + " " + paginaEPUBChecker.PROGRAMRELEASE)
-				.replaceAll("%VERSION_DATE%", paginaEPUBChecker.VERSIONDATE)
+				.replaceAll("%PROGRAM_VERSION%", PaginaEPUBChecker.PROGRAMVERSION + " " + PaginaEPUBChecker.PROGRAMRELEASE)
+				.replaceAll("%VERSION_DATE%", PaginaEPUBChecker.VERSIONDATE)
 				+ "\n\n"
 				+ __("about_content-3") + "\n\n"
 				+ __("about_content-4") + "\n\n",
