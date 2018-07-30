@@ -27,11 +27,12 @@ import de.paginagmbh.common.internet.NetTest;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @date 		2016-12-11
+ * @date 		2018-07-30
  */
 public class UpdateCheck {
 
-	private final String updateCheckURL = "http://download.pagina.gmbh/epubchecker/updatecheck.php?from="+ PaginaEPUBChecker.PROGRAMVERSION;
+	// check for updates via https/SSL starting with v1.7.2
+	private final String updateCheckURL = "https://download.pagina.gmbh/epubchecker/updatecheck.php?from="+ PaginaEPUBChecker.PROGRAMVERSION;
 	private Boolean backgroundTask;
 	private DocumentBuilder builder;
 	private XPath xpath;
@@ -90,7 +91,7 @@ public class UpdateCheck {
 		statusBar.update(FileManager.iconLoading, __("Checking internet connection..."));
 
 		try {
-			NetTest internetTest = new NetTest("http://www.google.com");
+			NetTest internetTest = new NetTest("https://www.google.com");
 			boolean hasInternetConnection = internetTest.testInternetConnection();
 
 			// cancel updateCheck with message if failing
@@ -154,7 +155,7 @@ public class UpdateCheck {
 			//  [1] BuildDate
 			//  [2] DownloadURL
 			//  [3] ReleaseNotes
-			String[] UpdateInfo = retrieve_UpdateInfo(FileManager.os_name);
+			String[] UpdateInfo = retrieve_UpdateInfo(FileManager.os_name + PaginaEPUBChecker.PROGRAMRELEASE);
 
 
 			// lokale Version ist niedriger als Server-Version
@@ -183,7 +184,8 @@ public class UpdateCheck {
 
 					// download the update
 					dlgui = new FileDownloader(
-							UpdateInfo[2],
+							// download updates via https/SSL starting with v1.7.2, keep http download-URL for old versions
+							UpdateInfo[2].replaceAll("^http://", "https://"),
 							System.getProperty("user.home") + File.separator + "Desktop",
 							String.format(
 									__("An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..."),

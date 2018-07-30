@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @date        2018-07-25
+ * @date        2018-07-30
  */
 public class SubGUI {
 
 	private JFrame f;
 	private final String about_header = "<html><h2>" + "pagina EPUB-Checker" + "</h2><br/>© 2010-"
 			+ new SimpleDateFormat("yyyy").format(new Date())
-			+ " pagina GmbH, Tübingen (Germany)<br/>http://www.pagina.gmbh<br/><br/>";
+			+ " pagina GmbH, Tübingen (Germany)<br/>https://www.pagina.gmbh<br/><br/>";
 
 
 
@@ -42,7 +42,7 @@ public class SubGUI {
 				about_header
 				+ __("about_content-1") + "\n\n"
 				+ __("about_content-2")
-				.replaceAll("%PROGRAM_VERSION%", PaginaEPUBChecker.PROGRAMVERSION + " " + PaginaEPUBChecker.PROGRAMRELEASE)
+				.replaceAll("%PROGRAM_VERSION%", PaginaEPUBChecker.PROGRAMVERSION + " " + PaginaEPUBChecker.PROGRAMRELEASE.toLowerCase())
 				.replaceAll("%VERSION_DATE%", PaginaEPUBChecker.VERSIONDATE)
 				+ "\n\n"
 				+ __("about_content-3") + "\n\n"

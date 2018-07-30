@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
  * @version		1.1
- * @date 		2014-01-12
+ * @date 		2018-07-30
  */
 public class ProxyTest {
 
@@ -25,7 +25,7 @@ public class ProxyTest {
 
 		System.setProperty("java.net.useSystemProxies", "true");
 
-		List<?> l = ProxySelector.getDefault().select(new URI("http://www.pagina-online.de/"));
+		List<?> l = ProxySelector.getDefault().select(new URI("https://www.pagina.gmbh/"));
 
 		for (Iterator<?> iter = l.iterator(); iter.hasNext();) {
 
