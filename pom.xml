@@ -394,7 +394,7 @@
 								<argument>-f</argument>
 								<argument>-v</argument>
 								<argument>-s</argument>
-								<argument>Developer ID Application: pagina GmbH</argument>
+								<argument>Developer ID Application: pagina GmbH Apps (PPJQ7BTA69)</argument>
 								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
 							</arguments>
 						</configuration>
