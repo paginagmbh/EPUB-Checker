@@ -20,8 +20,8 @@ pagina EPUB-Checker capsules these tools and offers some additional features, li
   * German
   * French
   * Spanish
+  * Japanese
   * Russian (messages incomplete)
-  * Japanese (messages only, english GUI)
   * Dutch (messages only, english GUI)
 
 pagina EPUB-Checker doesn't need to be installed and therefore works on portable USB devices as well as on computers with restricted rights.
@@ -68,7 +68,7 @@ mvn clean package
 from the root directory of this project.
 
 ### Important Note
-The maven packaging process runs a Mac OS specific `codesign` task to sign and verify the Mac App with our (private) Apple Developer Certificate. Therefore, this part will only work on one of our Mac's.
+The maven packaging process runs a Mac OS specific `codesign` task to sign and verify the Mac App with our (private) Apple Developer Certificate. Therefore, this part will only work on one of our company Mac's.
 
 To be able to build packages on other Mac systems or on Windows, just skip the codesigning task with the following option:
 
