@@ -19,7 +19,7 @@ import javax.swing.UIManager;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     1.7.2-beta
+ * @version     1.7.2
  * @date        2018-07-30
  */
 public class PaginaEPUBChecker {
@@ -28,7 +28,7 @@ public class PaginaEPUBChecker {
 
 	public static final String PROGRAMVERSION = "1.7.2";
 	public static final String VERSIONDATE = "30.07.2018";
-	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
+	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
 	public static final String RELEASENOTES = "This release does not contain updates to the EpubCheck routines and checks!<br/>It is a pure maintenance release with the following features:<br/><br/>- Support for Java 9 and 10 on Mac OS and Windows<br/>- Update check and download are now performed on a secure connection (HTTPS/SSL)<br/>- Added Japanese translation (Thanks to Masayoshi Takahashi!)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
