@@ -29,7 +29,7 @@ public class PaginaEPUBChecker {
 	public static final String PROGRAMVERSION = "1.7.2";
 	public static final String VERSIONDATE = "30.07.2018";
 	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Added Japanese translation (Thanks to Masayoshi Takahashi!)<br/>- Support for Java 9 and 10 on Mac OS and Windows<br/>- Update check and Update download are now performed on a secure connection via HTTPS/SSL";
+	public static final String RELEASENOTES = "This release does not contain updates to the EpubCheck routines and checks!<br/>It is a pure maintenance release with the following features:<br/><br/>- Support for Java 9 and 10 on Mac OS and Windows<br/>- Update check and download are now performed on a secure connection (HTTPS/SSL)<br/>- Added Japanese translation (Thanks to Masayoshi Takahashi!)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -49,7 +49,7 @@ public class PaginaEPUBChecker {
 		// use system proxy
 		System.setProperty("java.net.useSystemProxies", "true");
 
-		// Workaround for SSL connections https://stackoverflow.com/questions/7615645/
+		// Workaround for SSL connection errors ( https://stackoverflow.com/questions/7615645/ )
 		System.setProperty("jsse.enableSNIExtension", "false");
 
 		// create a GuiManager instance

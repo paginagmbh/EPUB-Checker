@@ -29,7 +29,7 @@ pagina EPUB-Checker doesn't need to be installed and therefore works on portable
 Download
 --------
 
-Please visit our website http://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac OS _App_ or the Linux _JAR_.
+Please visit our website https://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac OS _App_ or the Linux _JAR_.
 
 This is just the source code repository. You won't find any binary downloads here...
 
