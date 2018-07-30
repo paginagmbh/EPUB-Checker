@@ -3,6 +3,7 @@ package de.paginagmbh.epubchecker;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -10,15 +11,6 @@ import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
-import com.apple.eawt.AboutHandler;
-import com.apple.eawt.AppEvent.AboutEvent;
-import com.apple.eawt.AppEvent.OpenFilesEvent;
-import com.apple.eawt.AppEvent.QuitEvent;
-import com.apple.eawt.Application;
-import com.apple.eawt.OpenFilesHandler;
-import com.apple.eawt.QuitHandler;
-import com.apple.eawt.QuitResponse;
 
 
 
@@ -28,16 +20,16 @@ import com.apple.eawt.QuitResponse;
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     1.7.2-beta
- * @date        2018-07-25
+ * @date        2018-07-30
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.7.2";
-	public static final String VERSIONDATE = "15.08.2017";
+	public static final String VERSIONDATE = "30.07.2018";
 	public static final String PROGRAMRELEASE = "beta";	// "" or "beta"
-	public static final String RELEASENOTES = "- Added Japanese translation (Thanks to Masayoshi Takahashi!)<br/>- Require Java 7 or Java 8 JRE/JDK to run the App";
+	public static final String RELEASENOTES = "- Added Japanese translation (Thanks to Masayoshi Takahashi!)<br/>- Support for Java 9 and 10 on Mac OS and Windows";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -87,7 +79,16 @@ public class PaginaEPUBChecker {
 
 		// init mac specific event listeners; after GUI is loaded
 		if(FileManager.os_name.equals("mac")) {
-			initMacOSEventListeners();
+			MacOsIntegration macOsIntegration = new MacOsIntegration();
+			try {
+				macOsIntegration.addEventHandlers();
+				// store current Application object in GuiManager
+				guiManager.setMacOsIntegration(macOsIntegration);
+
+			} catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+				System.out.println("ERROR: Failed to load Mac OS integration: 'About' menu or Drag&Drop features may not work as expected! Please report to the developer!");
+				e.printStackTrace();
+			}
 		}
 
 
@@ -144,7 +145,7 @@ public class PaginaEPUBChecker {
 		String currentLanguage = guiManager.getCurrentLanguage();
 
 		// set the defaultLocale for epubcheck resource bundles
-		// TODO: seems as this has no effect when switching the language and the user already validated an epub
+		// TODO: seems as this has no effect when switching the language and the user already validated an epub (#23)
 		if(currentLanguage.equals("german")) {
 			Locale.setDefault(new Locale("de", "DE"));
 		} else if(currentLanguage.equals("french")) {
@@ -185,56 +186,6 @@ public class PaginaEPUBChecker {
 			// validate EPUB file
 			new EpubValidator().validate(file);
 		}
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
-	public void initMacOSEventListeners() {
-		// mac specific event listeners
-		// have to be set after the GUI was loaded
-
-		/*
-		 * Help and tutorial:
-		 * https://developer.apple.com/library/mac/documentation/Java/Reference/JavaSE6_AppleExtensionsRef/api/com/apple/eawt/Application.html#addApplicationListener%28com.apple.eawt.ApplicationListener%29
-		 *
-		 */
-
-
-		// create an instance of the mac osx Application class
-		Application macApp = Application.getApplication();
-
-		// Exit handler
-		macApp.setQuitHandler(new QuitHandler() {
-			@Override
-			public void handleQuitRequestWith(QuitEvent arg0, QuitResponse arg1) {
-				System.exit(0);
-			}
-		});
-
-		// AboutMenu handler
-		macApp.setAboutHandler(new AboutHandler() {
-			@Override
-			public void handleAbout(AboutEvent arg0) {
-				SubGUI s = new SubGUI(guiManager.getCurrentGUI());
-				s.displayAboutBox();
-			}
-		});
-
-		// Drop handler (for dropping files on the program or dock)
-		macApp.setOpenFileHandler(new OpenFilesHandler() {
-
-			@Override
-			public void openFiles(OpenFilesEvent arg0) {
-				// validate EPUB files
-				new EpubValidator().validate(arg0.getFiles());
-			}
-		});
-
-		// store current Application object in GuiManager
-		guiManager.setMacApp(macApp);
 	}
 
 

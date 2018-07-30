@@ -6,8 +6,6 @@ import java.io.File;
 
 import org.json.JSONObject;
 
-import com.apple.eawt.Application;
-
 /**
  * GUI Manager singelton
  * 
@@ -16,7 +14,7 @@ import com.apple.eawt.Application;
  * 
  * 
  * @author  Tobias Fischer
- * @date    2016-12-12
+ * @date    2018-07-30
  *
  */
 public class GuiManager {
@@ -27,7 +25,7 @@ public class GuiManager {
 	private Dimension MainGuiDimension = null;
 	private Point MainGuiPosition = null;
 	private MainGUI currentGUI = null;
-	private Application macApp = null;
+	private MacOsIntegration macOsIntegration = null;
 	private Boolean menuOptionAutoSaveLogfile = false;
 	private File currentFile = null;
 	private Localization l10n = null;
@@ -93,11 +91,11 @@ public class GuiManager {
 		this.currentGUI = currentGUI;
 	}
 
-	public Application getMacApp() {
-		return macApp;
+	public MacOsIntegration getMacOsIntegration() {
+		return macOsIntegration;
 	}
-	public void setMacApp(Application macApp) {
-		this.macApp = macApp;
+	public void setMacOsIntegration(MacOsIntegration macOsIntegration) {
+		this.macOsIntegration = macOsIntegration;
 	}
 
 	public Boolean getMenuOptionAutoSaveLogfile() {
