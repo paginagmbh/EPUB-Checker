@@ -27,7 +27,7 @@ import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
  * in a SwingWorker instance
  * 
  * @author   Tobias Fischer
- * @date     2016-12-16
+ * @date     2018-07-30
  */
 public class EpubValidator {
 
@@ -236,11 +236,11 @@ public class EpubValidator {
 
 
 					// set error counter in mac dock badge
-					if(guiManager.getMacApp() != null) {
+					if(guiManager.getMacOsIntegration() != null) {
 						if(report.getWarningCount() + report.getErrorCount() > 0) {
-							guiManager.getMacApp().setDockIconBadge(new Integer(report.getWarningCount() + report.getErrorCount()).toString());
+							guiManager.getMacOsIntegration().setDockIconBadge(new Integer(report.getWarningCount() + report.getErrorCount()).toString());
 						} else {
-							guiManager.getMacApp().setDockIconBadge("error");
+							guiManager.getMacOsIntegration().setDockIconBadge("error");
 						}
 					}
 
@@ -267,8 +267,8 @@ public class EpubValidator {
 					gui.addLogMessage("\n\n" + resultMessage + "\n");
 
 					// set error counter in mac dock badge
-					if(guiManager.getMacApp() != null) {
-						guiManager.getMacApp().setDockIconBadge("✓");
+					if(guiManager.getMacOsIntegration() != null) {
+						guiManager.getMacOsIntegration().setDockIconBadge("✓");
 					}
 
 					// #20 save the temporarily created EPUB file if ExpandedSaveMode != NEVER is set
