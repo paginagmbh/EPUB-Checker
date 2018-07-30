@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @date        2016-12-12
+ * @date        2018-07-25
  */
 public class SubGUI {
 
@@ -46,7 +46,8 @@ public class SubGUI {
 				.replaceAll("%VERSION_DATE%", PaginaEPUBChecker.VERSIONDATE)
 				+ "\n\n"
 				+ __("about_content-3") + "\n\n"
-				+ __("about_content-4") + "\n\n",
+				+ __("about_content-4") + "\n\n"
+				+ "Java Version: " + System.getProperty("java.version") + "\n\n",
 
 				__("About"),
 				JOptionPane.INFORMATION_MESSAGE,
