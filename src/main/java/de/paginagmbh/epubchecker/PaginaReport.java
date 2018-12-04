@@ -64,7 +64,7 @@ public class PaginaReport extends DefaultReportImpl {
 
 			// "insert at 0" instead of "append" to catch warnings and errors from above
 			gui.insertLogMessageAtFirstPosition(Severity.INFO,
-					String.format(Messages.get("validating_version_message"), value )
+					String.format(Messages.getInstance().get("validating_version_message"), value )
 						+ "\n" + "(https://github.com/IDPF/epubcheck)"
 						+ "\n\n");
 
