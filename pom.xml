@@ -4,12 +4,12 @@
 
 	<groupId>de.paginagmbh</groupId>
 	<artifactId>EPUB-Checker</artifactId>
-	<version>1.7.3-SNAPSHOT</version>
+	<version>1.8.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
 	<name>pagina EPUB-Checker</name>
-	<description>pagina EPUB-Checker is a free wrapper GUI for the official IDPF EpubCheck library.</description>
+	<description>pagina EPUB-Checker is a free wrapper GUI for the official IDPF/W3C EPUBCheck library.</description>
 	<url>http://www.pagina.gmbh/produkte/epub-checker/</url>
 	<inceptionYear>2010</inceptionYear>
 	<organization>
@@ -107,7 +107,7 @@
 
 		<!-- skip 'install' phase per default as this pom creates final binaries as GUI app and no reusable libraries -->
 		<maven.install.skip>true</maven.install.skip>
-		
+
 		<!-- custom path properties -->
 		<project.assembly.sourceDir>${project.basedir}/src/main/assembly</project.assembly.sourceDir>
 		<project.build.sourceDir>${project.basedir}/src/build</project.build.sourceDir>
