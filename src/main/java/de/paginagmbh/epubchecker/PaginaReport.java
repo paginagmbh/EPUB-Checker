@@ -18,8 +18,8 @@ import com.adobe.epubcheck.util.PathUtil;
  * 
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		2.0.2
- * @date 		2015-12-05
+ * @version		2.0.3
+ * @date 		2018-12-04
  */
 public class PaginaReport extends DefaultReportImpl {
 
@@ -65,7 +65,7 @@ public class PaginaReport extends DefaultReportImpl {
 			// "insert at 0" instead of "append" to catch warnings and errors from above
 			gui.insertLogMessageAtFirstPosition(Severity.INFO,
 					String.format(Messages.getInstance().get("validating_version_message"), value )
-						+ "\n" + "(https://github.com/IDPF/epubcheck)"
+						+ "\n" + "(https://github.com/w3c/epubcheck)"
 						+ "\n\n");
 
 			currentEpubVersion = value;

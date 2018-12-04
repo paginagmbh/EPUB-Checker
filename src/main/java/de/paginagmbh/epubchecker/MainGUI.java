@@ -61,7 +61,7 @@ import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
  * 
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @date        2016-12-14
+ * @date        2018-12-04
  */
 public class MainGUI extends JFrame implements ActionListener {
 
@@ -465,11 +465,11 @@ public class MainGUI extends JFrame implements ActionListener {
 
 		mn_Help.addSeparator();
 
-		mnItem_WebsiteEpubcheck = new JMenuItem(__("Visit IDPF/EpubCheck website"));
+		mnItem_WebsiteEpubcheck = new JMenuItem(__("Visit W3C EPUBCheck website"));
 		mnItem_WebsiteEpubcheck.addActionListener(this);
 		mn_Help.add(mnItem_WebsiteEpubcheck);
 
-		mnItem_WebsitePagina = new JMenuItem(__("Visit pagina/EPUB-Checker website"));
+		mnItem_WebsitePagina = new JMenuItem(__("Visit pagina EPUB-Checker website"));
 		mnItem_WebsitePagina.addActionListener(this);
 		mn_Help.add(mnItem_WebsitePagina);
 
@@ -780,7 +780,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		// handle "open website epubcheck"
 		} else if(e.getSource() == mnItem_WebsiteEpubcheck) {
 
-			new OpenURIinBrowser("https://github.com/IDPF/epubcheck");
+			new OpenURIinBrowser("https://github.com/w3c/epubcheck");
 
 
 
