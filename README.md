@@ -3,7 +3,7 @@ pagina EPUB-Checker [![Build Status](https://travis-ci.org/paginagmbh/EPUB-Check
 
 Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux.
 
-With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck tools](https://github.com/w3c/epubcheck) (version 4.0.2).
+With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck tools](https://github.com/w3c/epubcheck) (version 4.1.0).
 
 Features
 --------
