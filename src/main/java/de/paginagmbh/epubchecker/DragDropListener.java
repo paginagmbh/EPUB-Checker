@@ -19,9 +19,9 @@ import java.util.StringTokenizer;
 
 /**
  * handles Drag'n'Drop events for the EPUB-Checker GUI
- * 
+ *
  * idea: http://blog.christoffer.me/post/2011-01-09-drag-and-dropping-files-to-java-desktop-application/
- * 
+ *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     1.3.0
@@ -82,7 +82,7 @@ public class DragDropListener implements DropTargetListener {
 				String data = (String)transferable.getTransferData(nixFileDataFlavor);
 
 
-				List<File> files = new ArrayList<File>();
+				List<File> files = new ArrayList<>();
 
 				for(StringTokenizer st = new StringTokenizer(data, "\r\n"); st.hasMoreTokens();) {
 
@@ -141,7 +141,7 @@ public class DragDropListener implements DropTargetListener {
 	@Override
 	public void dragOver(DropTargetDragEvent event) {
 		// System.out.println("Over");
-	} 
+	}
 
 	@Override
 	public void dropActionChanged(DropTargetDragEvent event) {

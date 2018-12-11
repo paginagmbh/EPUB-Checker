@@ -61,7 +61,7 @@ import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
 
 /**
  * loads the main window of the EPUB-Checker
- * 
+ *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @date        2018-12-04
@@ -187,8 +187,11 @@ public class MainGUI extends JFrame implements ActionListener {
 
 		// Key listener listening to the filepath input field and changing the validate buttons status
 		KeyListener keyListener = new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent keyEvent) { }
+			@Override
 			public void keyTyped(KeyEvent e) { }
+			@Override
 			public void keyReleased(KeyEvent keyEvent) {
 				if(input_filePath.getText().length() > 0) {
 					if(btn_validateEpub.isEnabled() == false) {
@@ -578,6 +581,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -622,9 +626,11 @@ public class MainGUI extends JFrame implements ActionListener {
 				fc.setName(__("Please choose an EPUB file for validation"));
 				fc.setAcceptAllFileFilterUsed(false);
 				fc.setFileFilter(new FileFilter() {
+					@Override
 					public boolean accept(File f) {
 						return f.getName().toLowerCase().endsWith(".epub") || f.isDirectory();
 					}
+					@Override
 					public String getDescription() {
 						return __("EPUB files (*.epub)");
 					}
@@ -696,9 +702,11 @@ public class MainGUI extends JFrame implements ActionListener {
 				fc.setSelectedFile(new File(guiManager.getCurrentFile().getAbsolutePath().replaceAll("\\.epub", "_log.txt")));
 				fc.setAcceptAllFileFilterUsed(false);
 				fc.setFileFilter(new FileFilter() {
+					@Override
 					public boolean accept(File f) {
 						return f.getName().toLowerCase().endsWith(".txt") || f.isDirectory();
 					}
+					@Override
 					public String getDescription() {
 						return __("Text files (*.txt)");
 					}
@@ -855,7 +863,7 @@ public class MainGUI extends JFrame implements ActionListener {
 	public void setBorderStateActive() {
 		setLogComponentsBackgroundColor(new Color(255,255,215));
 		scroll_results.setBorder(new DashedLineBorder(new Color(255,153,0), 7));
-	}	
+	}
 
 	public void setBorderStateNormal() {
 		setLogComponentsBackgroundColor(new Color(255,255,245));
@@ -1000,7 +1008,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		}
 		currentLogMessages += message;
 	}
-	
+
 	public void insertLogMessageAtFirstPosition(Severity severity, String message) {
 		if(guiManager.getLogView() == LogViewMode.TEXT) {
 			txtarea_results.insert(message, 0);

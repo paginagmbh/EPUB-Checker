@@ -13,10 +13,10 @@ import de.paginagmbh.common.json.JSON;
 /**
  * handles the localization and language file management for the pagina EPUB-Checker
  *
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @version		2.0.0
- * @date 		2018-12-11
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @version     2.0.0
+ * @date        2018-12-11
  */
 public class Localization {
 

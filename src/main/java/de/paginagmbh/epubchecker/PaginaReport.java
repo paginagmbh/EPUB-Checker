@@ -15,11 +15,11 @@ import com.adobe.epubcheck.util.PathUtil;
 /**
  * overrides the Adobe epubcheck "Report" class to handle all the epubcheck warnings and errors
  * instead of writing them to stderr, we are appending them to the rsult textarea on our GUI
- * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @version		2.0.3
- * @date 		2018-12-04
+ *
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @version     2.0.3
+ * @date        2018-12-04
  */
 public class PaginaReport extends DefaultReportImpl {
 
@@ -43,8 +43,9 @@ public class PaginaReport extends DefaultReportImpl {
 
 	// duplicate method fixMessage() since original method is private
 	private String fixMessage(String message) {
-		if (message == null)
+		if (message == null) {
 			return "";
+		}
 		return message.replaceAll("[\\s]+", " ");
 	}
 
@@ -75,11 +76,11 @@ public class PaginaReport extends DefaultReportImpl {
 				if (resource == null) {
 					System.out.println("INFO: [" + feature + "]=" + value);
 				} else {
-					System.out.println("INFO: [" + feature + " (" + 
+					System.out.println("INFO: [" + feature + " (" +
 							resource + ")]=" + value);
 				}
 			}
-			break;      
+			break;
 		}
 	}
 

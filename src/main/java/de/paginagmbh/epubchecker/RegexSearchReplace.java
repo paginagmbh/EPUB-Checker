@@ -7,15 +7,15 @@ import java.util.regex.Pattern;
 
 /**
  * initializes and performs the many regex queries needed to translate the epubcheck results
- * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date 		2015-11-07
+ *
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2015-11-07
  */
 public class RegexSearchReplace {
 
-	private ArrayList<String> regex_search = new ArrayList<String>();
-	private ArrayList<String> regex_replace = new ArrayList<String>();
+	private ArrayList<String> regex_search = new ArrayList<>();
+	private ArrayList<String> regex_replace = new ArrayList<>();
 
 
 

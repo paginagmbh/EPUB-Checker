@@ -16,7 +16,7 @@ import javax.swing.UIManager;
 
 /**
  * checks and validates EPUB eBooks in a nice graphical user interface
- * 
+ *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     1.8.0
@@ -43,7 +43,7 @@ public class PaginaEPUBChecker {
 	public static void main(String[] args) {
 		new PaginaEPUBChecker(args);
 	}
-	
+
 	public PaginaEPUBChecker(String[] args) {
 
 		// use system proxy
@@ -96,7 +96,7 @@ public class PaginaEPUBChecker {
 
 
 		// init commandLine start for windows drag'n'drop on exe icon (issue #6)
-		List<File> argFiles = new ArrayList<File>();
+		List<File> argFiles = new ArrayList<>();
 		if(args != null && args.length > 0) {
 			for (int i = 0; i < args.length; i++) {
 				argFiles.add(new File(args[i]));
@@ -123,7 +123,7 @@ public class PaginaEPUBChecker {
 
 
 		// ShutdownHook to save window size and position for next startup
-		Runtime.getRuntime().addShutdownHook(new Thread() { 
+		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override public void run() {
 
 				Dimension MainGuiDimension = guiManager.getCurrentGUI().getSize();
@@ -131,7 +131,7 @@ public class PaginaEPUBChecker {
 
 				// write window dimension and position to config file
 				StringHelper.writeStringToFile(FileManager.path_WindowFile, (int)MainGuiDimension.getWidth() + "x" + (int)MainGuiDimension.getHeight() + "@" + (int)MainGuiPosition.getX() + "," + (int)MainGuiPosition.getY());
-			} 
+			}
 		});
 	}
 

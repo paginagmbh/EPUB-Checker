@@ -25,7 +25,7 @@ import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
 /**
  * Validates EPUB files with EpubCheck
  * in a SwingWorker instance
- * 
+ *
  * @author   Tobias Fischer
  * @date     2018-07-30
  */
@@ -58,7 +58,7 @@ public class EpubValidator {
 	/* ********************************************************************************************************** */
 
 	public void validate(File file) {
-		List<File> files = new ArrayList<File>();
+		List<File> files = new ArrayList<>();
 		files.add(file);
 		validate(files);
 	}
@@ -68,7 +68,7 @@ public class EpubValidator {
 		gui.setBorderStateNormal();
 
 		// If exactly 1 file was dropped
-		if(files.size() == 1) { 
+		if(files.size() == 1) {
 			for(int i=0; i<files.size(); i++) {
 
 				File file = files.get(i);

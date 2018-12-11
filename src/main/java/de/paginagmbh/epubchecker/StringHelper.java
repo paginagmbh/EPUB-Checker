@@ -8,9 +8,9 @@ import java.io.FileWriter;
 /**
  * A bunch of helper functions to read and write strings
  * from/to files
- * 
- * @author Tobias Fischer
- * @date   2015-11-07
+ *
+ * @author  Tobias Fischer
+ * @date    2015-11-07
  */
 public class StringHelper {
 
@@ -39,7 +39,7 @@ public class StringHelper {
 
 	public static void writeStringToFile(String file, String content) {
 		try {
-			// Create file 
+			// Create file
 			FileWriter fstream = new FileWriter(file);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(content);

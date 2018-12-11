@@ -8,9 +8,9 @@ import javax.swing.UIManager;
 
 
 /**
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date 		2016-01-24
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2016-01-24
  */
 public class MessageGUI extends JDialog {
 
@@ -36,6 +36,7 @@ public class MessageGUI extends JDialog {
 
 	/* ***************************************************************************************************************** */
 
+	@Override
 	public void setTitle(String s) {
 		windowTitle = s;
 	}

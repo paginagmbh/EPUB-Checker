@@ -3,6 +3,7 @@ package de.paginagmbh.epubchecker;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
+
 import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -12,11 +13,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * A TableCellRenderer with Borders
- * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @version		1.0
- * @date			2015-09-04
+ *
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @version     1.0
+ * @date        2015-09-04
  */
 class BoardTableCellRenderer extends DefaultTableCellRenderer {
 
@@ -24,6 +25,7 @@ class BoardTableCellRenderer extends DefaultTableCellRenderer {
 
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
+	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
 
 		// set the Font, Color, etc.

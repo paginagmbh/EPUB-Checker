@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.CompoundBorder;
@@ -19,12 +20,12 @@ import javax.swing.table.TableColumnModel;
 
 /**
  * renders a table cell with line breaks and adaptive width
- * 
+ *
  * idea: http://manivelcode.blogspot.de/2008/08/how-to-wrap-text-inside-cells-of-jtable.html
- * 
- * @author		Marc Diem, Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date			2015-11-07
+ *
+ * @author      Marc Diem, Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2015-11-07
  */
 class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
@@ -33,7 +34,7 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
 	// Column heights are placed in this Map
-	private final Map<JTable, Map<Object, Map<Object, Integer>>> tablecellSizes = new HashMap<JTable, Map<Object, Map<Object, Integer>>>();
+	private final Map<JTable, Map<Object, Map<Object, Integer>>> tablecellSizes = new HashMap<>();
 
 	public MultiLineCellRenderer() {
 		setLineWrap(true);
@@ -44,7 +45,7 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 	/**
 	 * Returns the component used for drawing the cell.  This method is
 	 * used to configure the renderer appropriately before drawing.
-	 * 
+	 *
 	 * @param table      - JTable object
 	 * @param value      - the value of the cell to be rendered.
 	 * @param isSelected - isSelected   true if the cell is to be rendered with the selection highlighted;
@@ -54,6 +55,7 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 	 * @param column     - The column index of the cell being drawn.
 	 * @return - Returns the component used for drawing the cell.
 	 */
+	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
 		// set the Font, Color, etc.
@@ -93,11 +95,11 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 	private void addSize(JTable table, int row, int column, int height) {
 		Map<Object, Map<Object, Integer>> rowsMap = tablecellSizes.get(table);
 		if (rowsMap == null) {
-			tablecellSizes.put(table, rowsMap = new HashMap<Object, Map<Object, Integer>>());
+			tablecellSizes.put(table, rowsMap = new HashMap<>());
 		}
 		Map<Object, Integer> rowheightsMap = rowsMap.get(row);
 		if (rowheightsMap == null) {
-			rowsMap.put(row, rowheightsMap = new HashMap<Object, Integer>());
+			rowsMap.put(row, rowheightsMap = new HashMap<>());
 		}
 		rowheightsMap.put(column, height);
 	}
@@ -106,7 +108,7 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 	 * Look through all columns and get the renderer.  If it is
 	 * also a TextAreaRenderer, we look at the maximum height in
 	 * its hash table for this row.
-	 * 
+	 *
 	 * @param table -JTable object
 	 * @param row   - The row index of the cell being drawn.
 	 * @return row maximum height as integer value
@@ -128,16 +130,20 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
 	/**
 	 * This will find the maximum row size
-	 * 
+	 *
 	 * @param table - JTable object
 	 * @param row   - The row index of the cell being drawn.
 	 * @return row maximum height as integer value
 	 */
 	private int findMaximumRowSize(JTable table, int row) {
 		Map<Object, Map<Object, Integer>> rows = tablecellSizes.get(table);
-		if (rows == null) return 0;
+		if (rows == null) {
+			return 0;
+		}
 		Map<Object, Integer> rowheights = rows.get(row);
-		if (rowheights == null) return 0;
+		if (rowheights == null) {
+			return 0;
+		}
 		int maximum_height = 0;
 		for (Map.Entry<Object, Integer> entry : rowheights.entrySet()) {
 			int cellHeight = entry.getValue();

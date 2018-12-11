@@ -18,7 +18,7 @@ import com.bulenkov.iconloader.IconLoader;
 /**
  * A static Manager class to maintain all relevant file paths
  * and image icons - including initialising them on different OS'es
- * 
+ *
  * @author   Tobias Fischer
  * @date     2018-12-11
  */
@@ -57,7 +57,7 @@ public class FileManager {
 	private static final Image logoImg512 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/icons/paginaEPUBChecker_512.png"));
 	private static final Image logoImg1024 = Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/icons/paginaEPUBChecker_1024.png"));
 	public static final Icon logoIcon64 = IconLoader.getIcon("/icons/paginaEPUBChecker_64.png");
-	public static List<Image> logoIcons = new ArrayList<Image>();
+	public static List<Image> logoIcons = new ArrayList<>();
 
 	// icons
 	public static final Icon iconLoading = new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileManager.class.getResource("/icons/infinity-loader_small.gif")));
@@ -190,16 +190,16 @@ public class FileManager {
 	/**
 	 * Parse string as integer and
 	 * return true if possible
-	 * 
+	 *
 	 * @author http://stackoverflow.com/a/5439547/1128689
 	 * @param String string
 	 * @return boolean True if string can pe parsed as Integer
 	 */
 	public static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
+	    try {
+	        Integer.parseInt(s);
+	    } catch(NumberFormatException e) {
+	        return false;
 	    } catch(NullPointerException e) {
 	        return false;
 	    }

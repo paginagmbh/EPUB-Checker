@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  * keeps the different sub GUI's called from the main GUI menu
- * 
+ *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @date        2018-07-30

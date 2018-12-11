@@ -24,10 +24,10 @@ import de.paginagmbh.common.internet.NetTest;
 
 /**
  * checks for updates
- * 
- * @author		Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date 		2018-07-30
+ *
+ * @author      Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2018-07-30
  */
 public class UpdateCheck {
 

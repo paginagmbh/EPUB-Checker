@@ -10,15 +10,16 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+
 import com.adobe.epubcheck.messages.Severity;
 
 
 /**
  * A TableCellRenderer for cells with an icon
- * 
- * @author		Marc Diem, Tobias Fischer
- * @copyright	pagina GmbH, Tübingen
- * @date			2015-09-04
+ *
+ * @author      Marc Diem, Tobias Fischer
+ * @copyright   pagina GmbH, Tübingen
+ * @date        2015-09-04
  */
 class IconTableCellRenderer extends DefaultTableCellRenderer {
 
@@ -26,6 +27,7 @@ class IconTableCellRenderer extends DefaultTableCellRenderer {
 
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
+	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
 		// set the Font, Color, etc.
