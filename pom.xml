@@ -324,7 +324,7 @@
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
 							<!-- checkout a specific tag / pinned version -->
 							<scmVersionType>tag</scmVersionType>
-							<scmVersion>v3.0.3</scmVersion>
+							<scmVersion>v3.0.4</scmVersion>
 						</configuration>
 					</execution>
 				</executions>
