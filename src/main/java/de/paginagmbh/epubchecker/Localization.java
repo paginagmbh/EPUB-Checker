@@ -1,6 +1,10 @@
 package de.paginagmbh.epubchecker;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import de.paginagmbh.common.json.JSON;
@@ -8,80 +12,44 @@ import de.paginagmbh.common.json.JSON;
 
 /**
  * handles the localization and language file management for the pagina EPUB-Checker
- * 
+ *
  * @author		Tobias Fischer
  * @copyright	pagina GmbH, Tübingen
- * @version		1.3.1
- * @date 		2016-12-08
+ * @version		2.0.0
+ * @date 		2018-12-11
  */
 public class Localization {
 
 	private JSONObject currentLanguageJSON = null;
-	private String currentLanguage;
 	private RegexSearchReplace regexEngine;
 
-	private final String[] availableLanguages = {
-			"German",
-			"English",
-			"French",
-			"Spanish",
-			"Russian",
-			"Japanese"
-	};
-
-	public Localization(String initialLanguage) {
-
-		// set system language
-		if(initialLanguage == null || initialLanguage.equals("systemLanguage")) {
-
-			// retrieve the "system language"
-			String currentUserLang = System.getProperty("user.language").toLowerCase();
+	private static final Map<Locale, String> availableLanguages;
+	static
+    {
+		availableLanguages = new HashMap<>();
+		availableLanguages.put(new Locale("en","US"), "English");
+		availableLanguages.put(new Locale("de","DE"), "German");
+		availableLanguages.put(new Locale("fr","FR"), "French");
+		availableLanguages.put(new Locale("es","ES"), "Spanish");
+		availableLanguages.put(new Locale("ru","RU"), "Russian");
+		availableLanguages.put(new Locale("ja","JP"), "Japanese");
+		availableLanguages.put(new Locale("pt","BR"), "Portuguese (Brazil)");
+    }
 
 
-			// load language file depending on system language
-			// possible values are: http://mindprod.com/jgloss/countrycodes.html
 
-			// German
-			if(currentUserLang.equals("de")) {
-				currentLanguage = "german";
-				currentLanguageJSON = loadLanguageFile("german");
+	public Localization(Locale locale) {
 
-				// French
-			} else if(currentUserLang.equals("fr")) {
-				currentLanguage = "french";
-				currentLanguageJSON = loadLanguageFile("french");
-
-				// Spanish
-			} else if(currentUserLang.equals("es")) {
-				currentLanguage = "spanish";
-				currentLanguageJSON = loadLanguageFile("spanish");
-
-				// Russian
-			} else if(currentUserLang.equals("ru")) {
-				currentLanguage = "russian";
-				currentLanguageJSON = loadLanguageFile("russian");
-
-				// Japanese
-			} else if(currentUserLang.equals("ja")) {
-				currentLanguage = "japanese";
-				currentLanguageJSON = loadLanguageFile("japanese");
-
-				// English; Fallback
-			} else {
-				currentLanguage = "english";
-				currentLanguageJSON = loadLanguageFile("english");
-			}
-
-
-			// set pre-defined language (when user switched language in menu)
+		// load language file depending on system language
+		if(availableLanguages.containsKey(locale)) {
+			currentLanguageJSON = loadLanguageFile(locale);
 		} else {
-			currentLanguage = initialLanguage;
-			currentLanguageJSON = loadLanguageFile(initialLanguage);
+			currentLanguageJSON = loadLanguageFile(new Locale("en","US"));
 		}
 
 		// save currentLanguage in GuiManager to avoid
 		// NPE in RegexSearchReplace()
-		GuiManager.getInstance().setCurrentLanguage(currentLanguage);
+		GuiManager.getInstance().setCurrentLocale(locale);
 		GuiManager.getInstance().setCurrentLanguageJSONObject(currentLanguageJSON);
 	}
 
@@ -90,14 +58,12 @@ public class Localization {
 
 	/* ********************************************************************************************************** */
 
-	private JSONObject loadLanguageFile(String language) {
+	private JSONObject loadLanguageFile(Locale locale) {
 		try {
-			return JSON.parseString(JSON.readResourceAsString(Localization.class, "/localization/" + language + ".json"));
-
+			return JSON.parseString(JSON.readResourceAsString(Localization.class, "/localization/" + locale.toString() + ".json"));
 		} catch (IOException e) {
 			// Fallback, if language file couldn't be found
-			currentLanguage = "english";
-			return loadLanguageFile("english");
+			return loadLanguageFile(new Locale("en","US"));
 		}
 	}
 
@@ -134,7 +100,7 @@ public class Localization {
 
 	/* ********************************************************************************************************** */
 
-	public String[] getAvailableLanguages() {
+	public Map<Locale, String> getAvailableLanguages() {
 		return availableLanguages;
 	}
 

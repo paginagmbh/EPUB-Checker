@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -19,7 +20,7 @@ import com.bulenkov.iconloader.IconLoader;
  * and image icons - including initialising them on different OS'es
  * 
  * @author   Tobias Fischer
- * @date     2016-12-12
+ * @date     2018-12-11
  */
 public class FileManager {
 
@@ -124,15 +125,16 @@ public class FileManager {
 		if(new File(FileManager.path_LanguageFile).exists()) {
 			try {
 				String lang = StringHelper.readFileAsString(FileManager.path_LanguageFile);
-				if(lang.length() != 0) {
-					guiManager.setCurrentLanguage(lang);
+				if(lang.length() != 0 && lang.matches("[a-zA-Z]+[-_][a-zA-Z]+([-_][a-zA-Z]+)?")) {
+					String languageTag = lang.replaceAll("_","-");
+					guiManager.setCurrentLocale(Locale.forLanguageTag(languageTag));
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		// "else" isn't needed since the default is the "systemLanguage" if no language is specified
+		// "else" isn't needed since the default is the System Language if no language was saved
 
 
 

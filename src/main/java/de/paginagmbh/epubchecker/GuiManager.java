@@ -3,24 +3,25 @@ package de.paginagmbh.epubchecker;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.File;
+import java.util.Locale;
 
 import org.json.JSONObject;
 
 /**
  * GUI Manager singelton
- * 
+ *
  * is used to store all relevant GUI settings
  * like position, language, etc...
- * 
- * 
+ *
+ *
  * @author  Tobias Fischer
- * @date    2018-07-30
+ * @date    2018-12-11
  *
  */
 public class GuiManager {
 
 	private static volatile GuiManager instance = null;
-	private String currentLanguage = null;
+	private Locale currentLocale = Locale.getDefault();
 	private JSONObject currentLanguageJSONObject = null;
 	private Dimension MainGuiDimension = null;
 	private Point MainGuiPosition = null;
@@ -56,11 +57,11 @@ public class GuiManager {
 	}
 
 
-	public String getCurrentLanguage() {
-		return currentLanguage;
+	public Locale getCurrentLocale() {
+		return currentLocale;
 	}
-	public void setCurrentLanguage(String currentLanguage) {
-		this.currentLanguage = currentLanguage;
+	public void setCurrentLocale(Locale currentLocale) {
+		this.currentLocale = currentLocale;
 	}
 
 	public JSONObject getCurrentLanguageJSONObject() {
@@ -115,7 +116,7 @@ public class GuiManager {
 
 	public void createNewLocalizationObject() {
 		// create new Localization object
-		this.l10n = new Localization(getCurrentLanguage());
+		this.l10n = new Localization(getCurrentLocale());
 		// init regex-patterns
 		this.l10n.setRegexEngine(new RegexSearchReplace());
 	}

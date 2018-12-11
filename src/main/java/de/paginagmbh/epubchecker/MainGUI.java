@@ -21,6 +21,9 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DropMode;
@@ -418,31 +421,32 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		// init the AvailableLanguage/-button arrays
-		final String[] availableLanguages = guiManager.getCurrentLocalizationObject().getAvailableLanguages();
-		final String[] availableLanguagesTranslated = new String[availableLanguages.length];
-		JRadioButtonMenuItem[] opt_Lang = new JRadioButtonMenuItem[availableLanguages.length];
+		final Map<Locale, String> availableLanguages = guiManager.getCurrentLocalizationObject().getAvailableLanguages();
+		final Map<String, Locale> availableLanguagesTranslated = new HashMap<>();
 
 		// iterate over the available langauges
-		for(int i=0; i<availableLanguages.length; i++) {
+		for (Map.Entry<Locale, String> entry : availableLanguages.entrySet()) {
+			Locale locale = entry.getKey();
+		    String localeName = entry.getValue();
 
 			// add the translated language string to the "original" array
 			// later on we need the translated string to determine which language was clicked
-			availableLanguagesTranslated[i] = __(availableLanguages[i]);
-
+		    availableLanguagesTranslated.put(__(localeName), locale);
 
 			// make AWT RadioButton
-			opt_Lang[i] = new JRadioButtonMenuItem(__(availableLanguages[i]));
+		    JRadioButtonMenuItem item = new JRadioButtonMenuItem(__(localeName));
 			// select RadioButton if language equals
-			if(guiManager.getCurrentLanguage().equals(availableLanguages[i].toLowerCase())) { opt_Lang[i].setSelected(true); }
+			if(guiManager.getCurrentLocale().equals(locale)) { item.setSelected(true); }
 			// add RadioButton to "language" menu item
-			mn_Language.add(opt_Lang[i]);
+			mn_Language.add(item);
 			// add actionListener
-			opt_Lang[i].addActionListener(new ActionListener() {
+			item.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					// get index of Menu Label in Array "availableLanguagesOriginal"
-					int index = getIndex(availableLanguagesTranslated, e.paramString().split(",")[1].replaceAll("cmd=", ""));
+					Locale selectedLocale = availableLanguagesTranslated.get(e.paramString().split(",")[1].replaceAll("cmd=", ""));
 					// get english language string of given index in array "availableLanguages"
-					restartWithNewLanguage(availableLanguages[index].toLowerCase());
+					restartWithNewLocale(selectedLocale);
 				}
 			});
 		}
@@ -878,13 +882,12 @@ public class MainGUI extends JFrame implements ActionListener {
 
 	/* ********************************************************************************************************** */
 
-	private void restartWithNewLanguage(String newLanguage) {
-
+	private void restartWithNewLocale(Locale newLocale) {
 		// write new language string to file
-		StringHelper.writeStringToFile(FileManager.path_LanguageFile, String.valueOf(newLanguage));
+		StringHelper.writeStringToFile(FileManager.path_LanguageFile, newLocale.toString());
 
 		// set new language in mainClass so that the new Constructor can read this information
-		guiManager.setCurrentLanguage(newLanguage);
+		guiManager.setCurrentLocale(newLocale);
 
 		saveGuiSettingsAndReloadGui();
 	}
@@ -937,20 +940,6 @@ public class MainGUI extends JFrame implements ActionListener {
 
 		// scroll to the end
 		scrollToBottom();
-	}
-
-
-
-
-	/* ********************************************************************************************************** */
-
-	public int getIndex(String[] array, String specificValue) {
-		for(int i=0; i<array.length; i++){
-			if(array[i].equals(specificValue)){
-				return i;
-			}
-		}
-		return -1;
 	}
 
 
