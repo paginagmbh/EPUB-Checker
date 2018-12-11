@@ -48,10 +48,6 @@
 		</repository>
 	</repositories>
 
-	<prerequisites>
-		<maven>3.0</maven>
-	</prerequisites>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.idpf</groupId>
@@ -126,6 +122,28 @@
 	<build>
 		<plugins>
 
+			<!-- require maven version 3.5 or higher -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.0.0-M2</version>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>[3.5,)</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- build helper -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -190,7 +208,7 @@
 			<!-- java compiler options -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -200,7 +218,7 @@
 			<!-- package a single, runnable jar -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.1.0</version>
 				<executions>
 					<execution>
 						<id>jar-with-dependencies</id>
@@ -310,7 +328,7 @@
 			<!-- download the universalJavaApplicationStub for the Mac App -->
 			<plugin>
 				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.10.0</version>
+				<version>1.11.1</version>
 				<executions>
 					<execution>
 						<id>get-javaStub</id>
@@ -378,7 +396,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.5.0</version>
+				<version>1.6.0</version>
 				<executions>
 					<execution>
 						<id>codesign-macApp</id>
