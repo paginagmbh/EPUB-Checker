@@ -67,7 +67,7 @@
 	"validate EPUB" : "validar EPUB",
 	"epubcheck %1$1s" : "epubcheck %1$1s",
 	"Please choose an EPUB file for validation" : "Por favor escolha um arquivo EPUB para validação",
-	"EPUB files (*.epub)" : "Arquivos EPUB (*.epub"),
+	"EPUB files (*.epub)" : "Arquivos EPUB (*.epub)",
 	"Text files (*.txt)" : "Arquivos de texto (*.txt)",
 	"Validated in %s seconds" : "Validado em %s segundos",
 	"Please choose a proper EPUB file!" : "Por favor escolha um arquivo EPUB adequado!",
