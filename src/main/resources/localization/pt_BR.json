@@ -4,7 +4,7 @@
 	"Exit" : "Sair",
 	"Expanded" : "Expandido",
 	"ExpandedSave_Never" : "Nunca salve EPUBs criados à partir da pasta expandida",
-	"ExpandedSave_Valid" : "Somente salve EPUBs válidos criados à partir da pasta expandida",
+	"ExpandedSave_Valid" : "Salve apenas EPUBs válidos criados à partir da pasta expandida",
 	"ExpandedSave_Always" : "Sempre salve EPUBs criados à partir da pasta expandida",
 	"Logfile" : "Arquivo de log",
 	"Save logfile" : "Salvar arquivo de log",
