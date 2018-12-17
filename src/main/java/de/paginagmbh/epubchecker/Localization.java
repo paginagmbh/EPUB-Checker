@@ -33,7 +33,7 @@ public class Localization {
 		availableLanguages.put(new Locale("es","ES"), "Spanish");
 		availableLanguages.put(new Locale("ru","RU"), "Russian");
 		availableLanguages.put(new Locale("ja","JP"), "Japanese");
-		availableLanguages.put(new Locale("pt","BR"), "Portuguese (Brazil)");
+		availableLanguages.put(new Locale("pt","BR"), "Portuguese [BR]");
     }
 
 
