@@ -97,7 +97,7 @@ public class SubGUI {
 
 				+ "-------------------------------------------------------------\n\n"
 
-				+ __("adobe bsd licence") + "\n\n\n",
+				+ __("new bsd license") + "\n\n\n",
 
 				__("License information"),
 				JOptionPane.INFORMATION_MESSAGE,
