@@ -9,12 +9,12 @@
 	<packaging>jar</packaging>
 
 	<name>pagina EPUB-Checker</name>
-	<description>pagina EPUB-Checker is a free wrapper GUI for the official IDPF/W3C EPUBCheck library.</description>
-	<url>http://www.pagina.gmbh/produkte/epub-checker/</url>
+	<description>pagina EPUB-Checker is a free wrapper GUI for the official W3C EPUBCheck library.</description>
+	<url>https://www.pagina.gmbh/produkte/epub-checker/</url>
 	<inceptionYear>2010</inceptionYear>
 	<organization>
 		<name>pagina GmbH</name>
-		<url>http://www.pagina.gmbh</url>
+		<url>https://www.pagina.gmbh</url>
 	</organization>
 
 	<developers>

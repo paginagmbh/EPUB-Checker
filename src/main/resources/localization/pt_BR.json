@@ -30,7 +30,7 @@
 	"about_content-1" : "Desenvolvedor: Tobias Fischer\ntobias.fischer@pagina.gmbh",
 	"about_content-2" : "Versão: %PROGRAM_VERSION%\nVersion data: %VERSION_DATE%",
 	"about_content-3" : "O pagina EPUB-Checker é lançado sob\nos termos da GNU Licença Pública Geral v2.0\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
-	"about_content-4" : "Os mecanismos de teste do pagina EPUB-Checker\nsão baseados na ferramenta open-source 'EPUBCheck'\npublicada em https://github.com/IDPF/epubcheck/\nsob uma licença New BSD.",
+	"about_content-4" : "Os mecanismos de teste do pagina EPUB-Checker\nsão baseados na ferramenta open-source 'EPUBCheck'\npublicada em https://github.com/w3c/epubcheck/\nsob uma licença New BSD.",
 	"translation_content-1" : "Se você quer ajudar este projeto com traduções adicionais, sinta-se livre\npara entrar em contato com Tobias Fischer (tobias.fischer@pagina.gmbh)",
 	"translation_content-2" : "Muito obrigado aos seguinte contribuidores e tradutores:",
 	"licence content" : "<html>A ferramenta open-source 'EPUBCheck', na qual o pagina EPUB-Checker<br/>é baseado, é lançada sob uma licença New BSD license.<br/><br/>Mais informações em https://github.com/IDPF/epubcheck/</html>",
