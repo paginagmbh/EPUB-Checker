@@ -41,7 +41,7 @@ Our app and code and all the java sources in `de.paginagmbh.*` are licensed unde
 
 We use the following libraries to build our GUI wrapper around *EPUBCheck*:
 * [EPUBCheck](https://github.com/w3c/epubcheck) 4.1.0
-  * *New BSD License*
+  * *3-Clause BSD License*
 * [JSON RPC](http://mvnrepository.com/artifact/com.metaparadigm/json-rpc/1.0) 1.0
   * *Apache License 2.0*
 * [Apple Java Extensions](http://mvnrepository.com/artifact/com.apple/AppleJavaExtensions/1.4) 1.4
