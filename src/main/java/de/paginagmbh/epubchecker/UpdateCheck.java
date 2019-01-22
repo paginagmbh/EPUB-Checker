@@ -27,7 +27,7 @@ import de.paginagmbh.common.internet.NetTest;
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @date        2018-07-30
+ * @date        2019-01-22
  */
 public class UpdateCheck {
 
@@ -255,12 +255,25 @@ public class UpdateCheck {
 	/* ***************************************************************************************************************** */
 
 	public void errorUpdateServerNotAvailable() {
+		String failureReason = __("Update server not available.");
+		/* pagina'S SSL certificate root authority (DigiCert Global Root G2) is only accepted by
+		 * - Java 7u101 and later https://bugs.openjdk.java.net/browse/JDK-8151321
+		 * - Java 8u91 and later https://www.oracle.com/technetwork/java/javase/8u91-relnotes-2949462.html
+		 * - Java 9 and later
+		 */
+		String javaVersion = System.getProperty("java.version");
+		if(javaVersion.startsWith("1.7") || javaVersion.startsWith("1.8")) {
+			int minorVersion = Integer.parseInt(javaVersion.split("_")[1]);
+			if((javaVersion.startsWith("1.7") && minorVersion <= 101) || (javaVersion.startsWith("1.8") && minorVersion <= 91)) {
+				failureReason = __("Java version too old") + " " + __("Please check manually for updates").replace("<br/>", " ");
+			}
+		}
 		if(backgroundTask) {
-			statusBar.update(null, __("Update check failed!") + " " + __("Update server not available."));
+			statusBar.update(null, __("Update check failed!") + " " + failureReason);
 		} else {
 			MessageGUI msg = new MessageGUI();
 			statusBar.reset();
-			msg.showError(__("Update check failed!") + "<br/>" + __("Update server not available."));
+			msg.showError(__("Update check failed!") + "<br/>" + failureReason);
 		}
 	}
 
