@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+import de.paginagmbh.epubchecker.PreferenceManager.Preference;
+
 
 
 /**
@@ -131,6 +133,8 @@ public class PaginaEPUBChecker {
 
 				// write window dimension and position to config file
 				StringHelper.writeStringToFile(FileManager.path_WindowFile, (int)MainGuiDimension.getWidth() + "x" + (int)MainGuiDimension.getHeight() + "@" + (int)MainGuiPosition.getX() + "," + (int)MainGuiPosition.getY());
+				PreferenceManager.savePref(Preference.WINDOWPOSITION, (int)MainGuiPosition.getX() + "," + (int)MainGuiPosition.getY());
+				System.out.println(PreferenceManager.getPref(Preference.WINDOWPOSITION));
 			}
 		});
 	}
