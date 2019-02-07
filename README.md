@@ -3,24 +3,25 @@ pagina EPUB-Checker [![Build Status](https://travis-ci.org/paginagmbh/EPUB-Check
 
 Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux.
 
-With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck tools](https://github.com/w3c/epubcheck) (version 4.1.0).
+With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck tool](https://github.com/w3c/epubcheck) (version 4.1.1).
 
 Features
 --------
 
-pagina EPUB-Checker capsules these tools and offers some additional features, like:
+pagina EPUB-Checker wraps up this tool and offers some additional features like:
 
-* Graphical user interface (like a "real" program)
-* Drag & drop to validate
-* Ability to validate expanded/unzipped EPUBs
-  * Expanded folders are automatically archived to an EPUB file upon validation
-  * The generated EPUB file will be saved if valid
+* Graphical user interface
+* Drag & drop EPUB to validate
+* Ability to validate expanded (unzipped) EPUB's
+  * Expanded folders are automatically zipped up to an EPUB file upon validation
+  * The generated EPUB file will be saved if it is valid
 * Localized GUI and errors and warnings:
   * English
   * German
   * French
   * Spanish
   * Japanese
+  * Portuguese (Brazil)
   * Russian (messages incomplete)
   * Dutch (messages only, english GUI)
 
@@ -40,7 +41,7 @@ License information
 Our app and code and all the java sources in `de.paginagmbh.*` are licensed under the terms of the  [GNU General Public License v2.0](http://choosealicense.com/licenses/gpl-2.0/) unless the code comments specify the contrary.
 
 We use the following libraries to build our GUI wrapper around *EPUBCheck*:
-* [EPUBCheck](https://github.com/w3c/epubcheck) 4.1.0
+* [EPUBCheck](https://github.com/w3c/epubcheck) 4.1.1
   * *3-Clause BSD License*
 * [JSON RPC](http://mvnrepository.com/artifact/com.metaparadigm/json-rpc/1.0) 1.0
   * *Apache License 2.0*

@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>pagina EPUB-Checker</name>
-	<description>pagina EPUB-Checker is a free wrapper GUI for the official W3C EPUBCheck library.</description>
+	<description>pagina EPUB-Checker is a free GUI wrapper for the official W3C EPUBCheck library.</description>
 	<url>https://www.pagina.gmbh/produkte/epub-checker/</url>
 	<inceptionYear>2010</inceptionYear>
 	<organization>
