@@ -76,6 +76,7 @@ public class SubGUI {
 				+ "<b>" + __("Japanese") + "</b>: Masayoshi Takahashi" + "<br/>"
 				+ "<b>" + __("Portuguese [BR]") + "</b>: Thiago de Oliveira Pereira" + "<br/>"
 				+ "<b>" + __("Czech") + "</b>: Petr Burkot" + "<br/>"
+				+ "<b>" + __("Chinese [TW]") + "</b>: Bobby Tung" + "<br/>"
 				+ "<br/></html>",
 
 				__("Translations"),
