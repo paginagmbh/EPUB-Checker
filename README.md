@@ -24,6 +24,7 @@ pagina EPUB-Checker wraps up this tool and offers some additional features like:
   * Portuguese (Brazil)
   * Russian (messages incomplete)
   * Dutch (messages only, english GUI)
+  * Czech (GUI only, english messages)
 
 pagina EPUB-Checker doesn't need to be installed and therefore works on portable USB devices as well as on computers with restricted rights.
 
