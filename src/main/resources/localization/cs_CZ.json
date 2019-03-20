@@ -25,7 +25,7 @@
 	"About" : "O projektu \"EPUB-Checker\"",
 	"Translations" : "Překlady",
 	"License information" : "Licenční informace",
-	"Visit W3C EPUBCheck website" : "Navštivte stránky W3C Epubcheck",
+	"Visit W3C EPUBCheck website" : "Navštivte stránky W3C EPUBCheck",
 	"Visit pagina EPUB-Checker website" : "Navštivte stránky pagina EPUB-Checker",
 	"Check for updates..." : "Kontrola aktualizací...",
 
@@ -141,7 +141,7 @@
 	"zip file contains empty directory" : "",
 	"Unable to read zip file entries." : "",
 
-	"Epubcheck Version $1" : "Epubcheck version $1",
+	"Epubcheck Version $1" : "EPUBCheck version $1",
 	"Length of the first filename in archive must be 8, but was $1" : "",
 	"Mimetype entry must not have an extra field in its ZIP header" : "",
 	"The file $1 does not appear to be of type $2" : "",
