@@ -47,6 +47,7 @@
 	"You are currently using %CURRENT_VERSION%" : "你現在使用的是 %CURRENT_VERSION% 版",
 	"New version %NEW_VERSION% includes these features:" : "最新版本 %NEW_VERSION% 新增以下功能：",
 	"Do you want to download the update?" : "要下載最新版嗎？",
+	"You're up-to-date!" : "",
 	"There are no new updates available." : "目前沒有更新的版本",
 	"Update check failed!" : "無法確認更新",
 	"Java version too old" : "你所使用的Java版本太舊",

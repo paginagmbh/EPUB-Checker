@@ -48,6 +48,7 @@
 	"New version %NEW_VERSION% includes these features:" : "",
 	"Do you want to download the update?" : "¿Quiere descargar la actualización?",
 	"There are no new updates available." : "No hay actualizaciones disponibles",
+	"You're up-to-date!" : "",
 	"Update check failed!" : "¡Actualización fallida!",
 	"Java version too old" : "Your version of Java is too old.",
 	"Please check manually for updates" : "Compruebe manualmente: https://www.pagina.gmbh/produkte/epub-checker/",

@@ -47,6 +47,7 @@
 	"You are currently using %CURRENT_VERSION%" : "現在使われているのは %CURRENT_VERSION% です",
 	"New version %NEW_VERSION% includes these features:" : "最新版 version %NEW_VERSION% には以下の機能が含まれます:",
 	"Do you want to download the update?" : "最新版をダウンロードしますか？",
+	"You're up-to-date!" : "",
 	"There are no new updates available." : "お使いのアプリケーションは最新です",
 	"Update check failed!" : "更新のチェックに失敗しました",
 	"Java version too old" : "Your version of Java is too old.",

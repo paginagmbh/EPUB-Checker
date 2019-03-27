@@ -47,6 +47,7 @@
 	"You are currently using %CURRENT_VERSION%" : "Momentálně používáte verzi %CURRENT_VERSION% ",
 	"New version %NEW_VERSION% includes these features:" : "Nová verze %NEW_VERSION% obsahuje tyto vylepšení:",
 	"Do you want to download the update?" : "Chcete stáhnout aktualizaci?",
+	"You're up-to-date!" : "",
 	"There are no new updates available." : "Používáte poslední verzi aplikace.",
 	"Update check failed!" : "Ověření aktualizace selhalo.",
 	"Java version too old" : "Vaše verze Javy je zastaralá.",

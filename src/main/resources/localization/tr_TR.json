@@ -47,6 +47,7 @@
 	"You are currently using %CURRENT_VERSION%" : "En son olan %CURRENT_VERSION% versiyonu kullanıyorsunuz.",
 	"New version %NEW_VERSION% includes these features:" : "Yeni %NEW_VERSION% versiyondaki özellikler:",
 	"Do you want to download the update?" : "Güncel versiyonu indirmek ister misiniz?",
+	"You're up-to-date!" : "",
 	"There are no new updates available." : "Şu an için yeni bir güncelleme yok.",
 	"Update check failed!" : "Güncelleme kontrolü yapılırken bir hata oluştu!",
 	"Java version too old" : "Kullandığınız Java versiyonu eskidir.",

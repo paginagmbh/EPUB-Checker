@@ -47,6 +47,7 @@
 	"You are currently using %CURRENT_VERSION%" : "Сейчас Вы используете %CURRENT_VERSION%",
 	"New version %NEW_VERSION% includes these features:" : "Новая версия %NEW_VERSION% обладает следующими возможностями:",
 	"Do you want to download the update?" : "Хотите загрузить обновления?",
+	"You're up-to-date!" : "",
 	"There are no new updates available." : "Нет доступных обновлений.",
 	"Update check failed!" : "Ошибка!",
 	"Java version too old" : "Your version of Java is too old.",
