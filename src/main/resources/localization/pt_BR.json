@@ -47,7 +47,7 @@
 	"You are currently using %CURRENT_VERSION%" : "Você está atualmente utilizando a %CURRENT_VERSION%",
 	"New version %NEW_VERSION% includes these features:" : "A nova versão %NEW_VERSION% inclui os seguintes recursos",
 	"Do you want to download the update?" : "Você deseja baixar a atualização?",
-	"You're up-to-date!" : "",
+	"You're up-to-date!" : "Você já tem a última versão!",
 	"There are no new updates available." : "Não há nenhuma nova atualização disponível.",
 	"Update check failed!" : "A verificação de atualização falhou!",
 	"Java version too old" : "Your version of Java is too old.",
