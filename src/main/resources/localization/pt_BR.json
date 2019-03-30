@@ -50,7 +50,7 @@
 	"You're up-to-date!" : "Você já tem a última versão!",
 	"There are no new updates available." : "Não há nenhuma nova atualização disponível.",
 	"Update check failed!" : "A verificação de atualização falhou!",
-	"Java version too old" : "Your version of Java is too old.",
+	"Java version too old" : "A sua versão do Java é muito antiga.",
 	"Please check manually for updates" : "Por favor verifique manualmente se há atualizações:<br/>https://www.pagina.gmbh/produkte/epub-checker/",
 	"Can't establish internet connection." : "Não foi possível estabelecer um conexão com a internet.",
 	"Update server not available." : "Servidor de atualização não disponível.",
