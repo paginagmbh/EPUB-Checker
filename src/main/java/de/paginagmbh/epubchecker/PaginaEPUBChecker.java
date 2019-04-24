@@ -28,7 +28,7 @@ public class PaginaEPUBChecker {
 
 	public static final String PROGRAMVERSION = "1.9.0";
 	public static final String VERSIONDATE = "24.04.2019";
-	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
+	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
 	public static final String RELEASENOTES = "- Update the official W3C EPUBCheck library to the latest release v4.2.0<br/>- Added Czech translation (Thanks to Petr Burkot)<br/>- Added Traditional Chinese (Taiwan) translation (Thanks to Bobby Tung)<br/>- Added Turkish translation (Thanks to N. Erhan Üzümcü)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
