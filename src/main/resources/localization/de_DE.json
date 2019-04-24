@@ -200,10 +200,10 @@
 	"element \"$1\" not allowed here; expected the element end-tag or element $2 or \"$3\" (with $4)" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird ein Element-Ende-Tag oder eines der Elemente $2 oder \"$3\" (mit Namespace $4)",
 	"element \"$1\" not allowed here; expected the element end-tag or element $2 or \"$3\"" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird ein Element-Ende-Tag oder eines der Elemente $2 oder \"$3\"",
 	"element \"$1\" not allowed here; expected element $2 or \"$3\" (with $4)" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird eines der Elemente $2 oder \"$3\" (mit Namespace $4)",
-	"element \"$1\" not allowed here; expected element $2" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird das Elemente $2",
+	"element \"$1\" not allowed here; expected element $2" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird das Element $2",
 	"element \"$1\" not allowed here; expected the element end-tag" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird ein Element-Ende-Tag.",
-	"element \"$1\" not allowed anywhere; expected the element end-tag or text" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird ein Element-Ende-Tag oder Text.",
-	"element \"$1\" not allowed anywhere; expected element $2" : "Das Element \"$1\" ist an dieser Stelle nicht erlaubt. Erwartet wird das Element $2",
+	"element \"$1\" not allowed anywhere; expected the element end-tag or text" : "Das Element \"$1\" ist nirgends erlaubt. Erwartet wird ein Element-Ende-Tag oder Text.",
+	"element \"$1\" not allowed anywhere; expected element $2" : "Das Element \"$1\" ist nirgends erlaubt. Erwartet wird das Element $2",
 	"element \"$1\" incomplete; expected element $2 or \"$3\" (with $4)" : "Das Element \"$1\" ist nicht vollständig. Es wird eines der folgenden Kind-Elemente erwartet: $2 oder \"$3\" (mit Namespace $4)",
 
 	"Length of the first filename in archive must be 8, but was $1 !" : "Die erste Datei im EPUB-Archiv ist nicht die unkomprimierte MimeType-Datei \"mimetype\"",
