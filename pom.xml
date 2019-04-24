@@ -148,7 +148,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.12</version>
+				<version>3.0.0</version>
 				<executions>
 
 					<!--
@@ -218,7 +218,7 @@
 			<!-- package a single, runnable jar -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>3.1.1</version>
 				<executions>
 					<execution>
 						<id>jar-with-dependencies</id>
@@ -298,7 +298,7 @@
 			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
 				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>1.7.22</version>
+				<version>1.7.25</version>
 				<executions>
 					<execution>
 						<id>exe-win</id>
@@ -328,7 +328,7 @@
 			<!-- download the universalJavaApplicationStub for the Mac App -->
 			<plugin>
 				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.11.1</version>
+				<version>1.11.2</version>
 				<executions>
 					<execution>
 						<id>get-javaStub</id>
@@ -469,7 +469,7 @@
 					<dependency>
 						<groupId>org.apache.maven.scm</groupId>
 						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.10.0</version>
+						<version>1.11.2</version>
 					</dependency>
 				</dependencies>
 			</plugin>
