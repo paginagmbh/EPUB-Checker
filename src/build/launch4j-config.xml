@@ -26,6 +26,7 @@
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>64/32</runtimeBits>
+    <opt>-Xss1024k</opt>
   </jre>
   <splash>
     <file>splashscreen/SplashScreen_Windows.bmp</file>
