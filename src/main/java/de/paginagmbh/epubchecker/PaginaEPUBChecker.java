@@ -19,17 +19,17 @@ import javax.swing.UIManager;
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     1.9.0
- * @date        2019-04-24
+ * @version     1.9.1
+ * @date        2019-04-25
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.9.0";
-	public static final String VERSIONDATE = "24.04.2019";
+	public static final String PROGRAMVERSION = "1.9.1";
+	public static final String VERSIONDATE = "25.04.2019";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Update the official W3C EPUBCheck library to the latest release v4.2.0<br/>- Added Czech translation (Thanks to Petr Burkot)<br/>- Added Traditional Chinese (Taiwan) translation (Thanks to Bobby Tung)<br/>- Added Turkish translation (Thanks to N. Erhan Üzümcü)";
+	public static final String RELEASENOTES = "1.9.0:<br/>- Update the official W3C EPUBCheck library to the latest release v4.2.0<br/>&nbsp;&nbsp;&nbsp;(release notes: https://github.com/w3c/epubcheck/releases/tag/v4.2.0)<br/>- Added Czech translation (Thanks to Petr Burkot)<br/>- Added Traditional Chinese (Taiwan) translation (Thanks to Bobby Tung)<br/>- Added Turkish translation (Thanks to N. Erhan Üzümcü)<br/>1.9.1:<br/>- Fixed a validation issue with 32bit Java versions (mainly on Windows)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
