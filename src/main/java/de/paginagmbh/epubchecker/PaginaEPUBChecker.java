@@ -20,15 +20,15 @@ import javax.swing.UIManager;
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     1.9.1
- * @date        2019-04-25
+ * @date        2019-05-13
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
-	public static final String PROGRAMVERSION = "1.9.1";
-	public static final String VERSIONDATE = "25.04.2019";
-	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
+	public static final String PROGRAMVERSION = "1.9.2";
+	public static final String VERSIONDATE = "13.05.2019";
+	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
 	public static final String RELEASENOTES = "- Added Danish translation (Thanks to Marianne Gulstad)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
