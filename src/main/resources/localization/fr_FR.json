@@ -71,7 +71,6 @@
 
 	"choose EPUB file" : "Choisissez un fichier EPUB",
 	"validate EPUB" : "Validation EPUB",
-	"epubcheck %1$1s" : "EPUBCheck %1$1s",
 	"Please choose an EPUB file for validation" : "Choisissez un fichier EPUB à valider",
 	"EPUB files (*.epub)" : "Fichiers EPUB (*.epub)",
 	"Text files (*.txt)" : "Fichiers Texte (*.txt)",

@@ -219,7 +219,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		gbc_btn_validateEpub.gridy = 3;
 		main.add(btn_validateEpub, gbc_btn_validateEpub);
 
-		JLabel lbl_epubcheckVersion = new JLabel("(" + __(String.format("EPUBCheck %1$1s", EpubCheck.version())) + ")");
+		JLabel lbl_epubcheckVersion = new JLabel("(" + String.format("EPUBCheck %1$1s", EpubCheck.version()) + ")");
 		lbl_epubcheckVersion.setForeground(Color.DARK_GRAY);
 		lbl_epubcheckVersion.setFont(lbl_epubcheckVersion.getFont().deriveFont(10f));
 		lbl_epubcheckVersion.setHorizontalAlignment(SwingConstants.CENTER);

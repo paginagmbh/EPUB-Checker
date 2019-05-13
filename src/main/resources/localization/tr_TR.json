@@ -71,7 +71,6 @@
 
 	"choose EPUB file" : "EPUB Belgesi Seç",
 	"validate EPUB" : "EPUB'ı Onaylat",
-	"epubcheck %1$1s" : "",
 	"Please choose an EPUB file for validation" : "Lütfen onaylatmak için bir EPUB belgesi seçin.",
 	"EPUB files (*.epub)" : "EPUB belgesi (*.epub)",
 	"Text files (*.txt)" : "Yazı belgesi (*.txt)",

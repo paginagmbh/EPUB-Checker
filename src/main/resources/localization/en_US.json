@@ -71,7 +71,6 @@
 
 	"choose EPUB file" : "",
 	"validate EPUB" : "",
-	"epubcheck %1$1s" : "",
 	"Please choose an EPUB file for validation" : "",
 	"EPUB files (*.epub)" : "",
 	"Text files (*.txt)" : "",

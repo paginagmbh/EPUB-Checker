@@ -71,7 +71,6 @@
 
 	"choose EPUB file" : "EPUBファイルを選択",
 	"validate EPUB" : "EPUBを検証",
-	"epubcheck %1$1s" : "EPUBCheck %1$1s",
 	"Please choose an EPUB file for validation" : "検証するEPUBファイルを選択してください",
 	"EPUB files (*.epub)" : "EPUBファイル (*.epub)",
 	"Text files (*.txt)" : "テキストファイル (*.txt)",

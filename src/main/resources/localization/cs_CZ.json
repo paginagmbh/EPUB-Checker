@@ -71,7 +71,6 @@
 
 	"choose EPUB file" : "Vyberte soubor EPUB",
 	"validate EPUB" : "Spusť validaci",
-	"epubcheck %1$1s" : "",
 	"Please choose an EPUB file for validation" : "Prosím vyberte soubor EPUB pro validaci",
 	"EPUB files (*.epub)" : "Soubory EPUB",
 	"Text files (*.txt)" : "Textový dokument",

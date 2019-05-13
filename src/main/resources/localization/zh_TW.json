@@ -71,7 +71,6 @@
 
 	"choose EPUB file" : "選擇EPUB檔案",
 	"validate EPUB" : "驗證EPUB",
-	"epubcheck %1$1s" : "EPUBCheck %1$1s",
 	"Please choose an EPUB file for validation" : "請選擇要驗證的EPUB檔案",
 	"EPUB files (*.epub)" : "EPUB檔案 (*.epub)",
 	"Text files (*.txt)" : "純文字檔案 (*.txt)",
