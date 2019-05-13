@@ -27,6 +27,7 @@ pagina EPUB-Checker wraps up this tool and offers some additional features like:
   * Czech (GUI only, english messages)
   * Traditional Chinese (Taiwan) (GUI only, english messages)
   * Turkish (GUI only, english messages)
+  * Danish
 
 pagina EPUB-Checker doesn't need to be installed and therefore works on portable USB devices as well as on computers with restricted rights.
 

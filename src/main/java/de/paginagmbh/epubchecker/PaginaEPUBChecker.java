@@ -29,7 +29,7 @@ public class PaginaEPUBChecker {
 	public static final String PROGRAMVERSION = "1.9.1";
 	public static final String VERSIONDATE = "25.04.2019";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
-	public static final String RELEASENOTES = "1.9.0:<br/>- Update the official W3C EPUBCheck library to the latest release v4.2.0<br/>&nbsp;&nbsp;&nbsp;(release notes: https://github.com/w3c/epubcheck/releases/tag/v4.2.0)<br/>- Added Czech translation (Thanks to Petr Burkot)<br/>- Added Traditional Chinese (Taiwan) translation (Thanks to Bobby Tung)<br/>- Added Turkish translation (Thanks to N. Erhan Üzümcü)<br/>1.9.1:<br/>- Fixed a validation issue with 32bit Java versions (mainly on Windows)";
+	public static final String RELEASENOTES = "- Added Danish translation (Thanks to Marianne Gulstad)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
