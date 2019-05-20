@@ -16,7 +16,7 @@ import de.paginagmbh.common.json.JSON;
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     2.0.4
- * @date        2019-05-13
+ * @date        2019-05-20
  */
 public class Localization {
 
@@ -37,7 +37,7 @@ public class Localization {
 		availableLanguages.put(new Locale("cs","CZ"), "Czech");
 		availableLanguages.put(new Locale("zh","TW"), "Chinese [TW]");
 		availableLanguages.put(new Locale("tr","TR"), "Turkish");
-		availableLanguages.put(new Locale("dk","DK"), "Danish");
+		availableLanguages.put(new Locale("da","DK"), "Danish");
     }
 
 

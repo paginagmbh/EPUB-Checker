@@ -208,8 +208,8 @@
 
 	"Length of the first filename in archive must be 8, but was $1 !" : "",
 	"Validating against EPUB version %1$s" : "",
-	"line" : "",
-	"col" : "",
+	"line" : "linje",
+	"col" : "tegn",
 	"The direction and unicode-bidi properties must not be included in an EPUB Style Sheet." : "",
 	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: [For input string: '$1'] is not an integer" : "",
 	"date value '$1' is not valid as per http://www.w3.org/TR/NOTE-datetime: zero-length string" : "",
