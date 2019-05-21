@@ -33,7 +33,7 @@
 
 	"about_content-1" : "Vývojář: Tobias Fischer\ntobias.fischer@pagina.gmbh",
 	"about_content-2" : "Verze: %PROGRAM_VERSION%\nDatum vydání verze: %VERSION_DATE%",
-	"about_content-3" : "Program pagina EPUB-Checker je licencován GNU General Public License v2.0\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
+	"about_content-3" : "Program pagina EPUB-Checker je licencován\nGNU General Public License v2.0\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
 	"about_content-4" : "Testovací mechanismus programu pagina EPUB-Checker\njsou založeny na open-source nástroji 'EPUBCheck'\npublikovanému na https://github.com/w3c/epubcheck/\nje licencován pod 3-Clause BSD License.",
 	"translation_content-1" : "Chcete-li podpořit projekt dalším překladem,\nkontaktujte Tobias Fischer (tobias.fischer@pagina.gmbh)",
 	"translation_content-2" : "Děkujeme těmto přispěvatelům a překladatelům:",

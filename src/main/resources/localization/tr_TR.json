@@ -34,7 +34,7 @@
 	"about_content-1" : "Geliştirici: Tobias Fischer\ntobias.fischer@pagina.gmbh",
 	"about_content-2" : "Versiyon: %PROGRAM_VERSION%\nGüncelleme Tarihi: %VERSION_DATE%",
 	"about_content-3" : "pagina EPUB-Checker,\nGNU Genel Kamu Lisansı v2.0 şartları altında yayınlanmıştır.\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
-	"about_content-4" : "pagina EPUB-Checker test alt yapısı,\naçık kaynak kodlu 'EPUBCheck' adıyla\nhttps://github.com/w3c/epubcheck/\n GitHub sayfasında 3-Clause BSD Lisansı ile yayınlanmaktadır.",
+	"about_content-4" : "pagina EPUB-Checker test alt yapısı,\naçık kaynak kodlu 'EPUBCheck' adıyla\nhttps://github.com/w3c/epubcheck/\nGitHub sayfasında 3-Clause BSD Lisansı ile yayınlanmaktadır.",
 	"translation_content-1" : "Bu uygulamanın arayüzüne yeni bir dil ekleyerek\nbu projeyi desteklemek istiyorsanız Tobias Fischer ile\niletişime geçebilirsiniz. (tobias.fischer@pagina.gmbh)",
 	"translation_content-2" : "Katkıda bulunanlara ve çevirmenlere teşekkür ederiz:",
 	"licence content" : "<html>pagina EPUB-Checker, açık kaynak kodlu 'EPUBCheck' projesini temel alır.<br/>Bu proje 3-Clause BSD Lisansı altında yayınlanmıştır.<br/><br/>Daha ayrıntılı bilgi için: https://github.com/w3c/epubcheck/</html>",
