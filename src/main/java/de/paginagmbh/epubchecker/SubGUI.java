@@ -78,7 +78,7 @@ public class SubGUI {
 				+ "<b>" + __("Czech") + "</b>: Petr Burkot" + "<br/>"
 				+ "<b>" + __("Chinese [TW]") + "</b>: Bobby Tung" + "<br/>"
 				+ "<b>" + __("Turkish") + "</b>: N. Erhan Üzümcü" + "<br/>"
-				+ "<b>" + __("Danish") + "</b>: Marianne Gulstad" + "<br/>"
+				+ "<b>" + __("Danish") + "</b>: Marianne Gulstad (Publizon)" + "<br/>"
 				+ "<br/></html>",
 
 				__("Translations"),

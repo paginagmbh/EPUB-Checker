@@ -29,7 +29,7 @@ public class PaginaEPUBChecker {
 	public static final String PROGRAMVERSION = "1.9.2";
 	public static final String VERSIONDATE = "20.05.2019";
 	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
-	public static final String RELEASENOTES = "Update the official W3C EPUBCheck library to the latest release v4.2.1<br/>- Added Danish translation (Thanks to Marianne Gulstad)";
+	public static final String RELEASENOTES = "- Update the official W3C EPUBCheck library to the latest release v4.2.1<br/>- Added Danish translation (Thanks to Marianne Gulstad)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
