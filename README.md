@@ -3,7 +3,7 @@ pagina EPUB-Checker [![Build Status](https://travis-ci.org/paginagmbh/EPUB-Check
 
 Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux.
 
-With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck tool](https://github.com/w3c/epubcheck) (version 4.1.1).
+With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck tool](https://github.com/w3c/epubcheck) (version 4.2.2).
 
 Features
 --------
@@ -45,7 +45,7 @@ License information
 Our app and code and all the java sources in `de.paginagmbh.*` are licensed under the terms of the  [GNU General Public License v2.0](http://choosealicense.com/licenses/gpl-2.0/) unless the code comments specify the contrary.
 
 We use the following libraries to build our GUI wrapper around *EPUBCheck*:
-* [EPUBCheck](https://github.com/w3c/epubcheck) 4.2.0
+* [EPUBCheck](https://github.com/w3c/epubcheck) 4.2.2
   * *3-Clause BSD License*
 * [JSON RPC](http://mvnrepository.com/artifact/com.metaparadigm/json-rpc/1.0) 1.0
   * *Apache License 2.0*
