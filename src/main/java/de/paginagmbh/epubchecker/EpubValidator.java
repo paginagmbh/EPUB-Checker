@@ -27,7 +27,7 @@ import de.paginagmbh.epubchecker.GuiManager.ExpandedSaveMode;
  * in a SwingWorker instance
  *
  * @author   Tobias Fischer
- * @date     2018-07-30
+ * @date     2020-01-14
  */
 public class EpubValidator {
 
@@ -35,7 +35,7 @@ public class EpubValidator {
 	private final MainGUI gui = guiManager.getCurrentGUI();
 	private long timestamp_begin;
 	private long timestamp_end;
-	private boolean epubcheckResult;
+	private int epubcheckResult;
 	protected File epubFile = null;
 	private Report report = null;
 	private String resultMessage = "";
@@ -193,7 +193,7 @@ public class EpubValidator {
 
 				// run original epubcheck
 				EpubCheck epubcheck = new EpubCheck(epubFile, report);
-				epubcheckResult = epubcheck.validate();
+				epubcheckResult = epubcheck.doValidate();
 
 				return null;
 			}
@@ -202,8 +202,8 @@ public class EpubValidator {
 			@Override
 			protected void done() {
 
-				// validation finished with warnings or errors
-				if(epubcheckResult == false) {
+				// validation finished with warnings, errors or fatal errors
+				if(epubcheckResult != 0) {
 
 					// set border color to red
 					gui.setBorderStateError();
@@ -211,24 +211,52 @@ public class EpubValidator {
 					// add separator in text mode
 					gui.addLogMessageToTextLog("\n" + "---------------------------------------------------");
 
+					switch (epubcheckResult) {
+						// warnings (1) AND errors (2) AND fatals (4)
+						case 7:
+							resultMessage = String.format(__("Check finished with %1$1s warnings, %2$1s errors and %3$1s fatal errors!"),
+								report.getWarningCount(), report.getErrorCount(), report.getFatalErrorCount());
+							break;
 
-					// warnings AND errors
-					if(report.getErrorCount() > 0 && report.getWarningCount() > 0) {
-						resultMessage = String.format(__("Check finished with %1$1s warnings and %2$1s errors!"), report.getWarningCount(), report.getErrorCount());
+							// errors (2) AND fatals (4)
+						case 6:
+							resultMessage = String.format(__("Check finished with %1$1s errors and %2$1s fatal errors!"),
+									report.getErrorCount(), report.getFatalErrorCount());
+							break;
 
-					// only errors
-					} else if(report.getErrorCount() > 0) {
-						resultMessage = String.format(__("Check finished with %d errors!"), report.getErrorCount());
+						// warnings (1) AND fatals (4)
+						case 5:
+							resultMessage = String.format(__("Check finished with %1$1s warnings and %2$1s fatal errors!"),
+									report.getWarningCount(), report.getFatalErrorCount());
+							break;
 
-					// only warnings
-					} else if(report.getWarningCount() > 0) {
-						// set border color to orange
-						gui.setBorderStateWarning();
-						resultMessage = String.format(__("Check finished with %d warnings!"), report.getWarningCount());
+						// only fatals (4)
+						case 4:
+							resultMessage = String.format(__("Check finished with %d fatal errors!"), report.getFatalErrorCount());
+							break;
 
-					// something went wrong
-					} else {
-						resultMessage = __("Check finished with warnings or errors!");
+						// warnings (1) AND errors (2)
+						case 3:
+							resultMessage = String.format(__("Check finished with %1$1s warnings and %2$1s errors!"),
+									report.getWarningCount(), report.getErrorCount());
+							break;
+
+						// only errors (2)
+						case 2:
+							resultMessage = String.format(__("Check finished with %d errors!"), report.getErrorCount());
+							break;
+
+						// only warnings (1)
+						case 1:
+							// set border color to orange
+							gui.setBorderStateWarning();
+							resultMessage = String.format(__("Check finished with %d warnings!"), report.getWarningCount());
+							break;
+
+						// something went wrong
+						default:
+							resultMessage = __("Check finished with warnings or errors!");
+							break;
 					}
 
 					// add result message to log
