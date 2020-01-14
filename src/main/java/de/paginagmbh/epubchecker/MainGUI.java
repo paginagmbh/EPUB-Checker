@@ -763,6 +763,7 @@ public class MainGUI extends JFrame implements ActionListener {
 			if((e.getSource() == opt_ViewMode_Table && opt_ViewMode_Table.isSelected())
 					|| (e.getSource() == opt_ViewMode_Text && opt_ViewMode_Text.isSelected()) ) {
 				// do nothing when user clicks on currently selected ViewMode Item
+				return;
 			}
 
 			if(e.getSource() == opt_ViewMode_Text) {
