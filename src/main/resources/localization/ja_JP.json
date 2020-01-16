@@ -102,6 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "ソースフォルダからEPUBの保存に失敗しました",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "エラーまたは警告が検出されたため、ソースフォルダからEPUBの保存を行いませんでした",
 	"EPUB file couldn't be found" : "EPUBファイルが見つかりませんでした",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application." : "",
 	"ERROR" : "ERROR",
 	"ERROR_preposition" : "at",
 	"WARNING" : "WARNING",

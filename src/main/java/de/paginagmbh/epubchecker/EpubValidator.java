@@ -193,7 +193,13 @@ public class EpubValidator {
 
 				// run original epubcheck
 				EpubCheck epubcheck = new EpubCheck(epubFile, report);
-				epubcheckResult = epubcheck.doValidate();
+
+				try {
+					epubcheckResult = epubcheck.doValidate();
+				} catch(StackOverflowError t) {
+					t.printStackTrace();
+					epubcheckResult = 99;
+				}
 
 				return null;
 			}
@@ -212,6 +218,11 @@ public class EpubValidator {
 					gui.addLogMessageToTextLog("\n" + "---------------------------------------------------");
 
 					switch (epubcheckResult) {
+
+						case 99:
+							resultMessage = __("EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application.");
+							break;
+
 						// warnings (1) AND errors (2) AND fatals (4)
 						case 7:
 							resultMessage = String.format(__("Check finished with %1$1s warnings, %2$1s errors and %3$1s fatal errors!"),
@@ -221,7 +232,7 @@ public class EpubValidator {
 							// errors (2) AND fatals (4)
 						case 6:
 							resultMessage = String.format(__("Check finished with %1$1s errors and %2$1s fatal errors!"),
-									report.getErrorCount(), report.getFatalErrorCount());
+								report.getErrorCount(), report.getFatalErrorCount());
 							break;
 
 						// warnings (1) AND fatals (4)
@@ -238,7 +249,7 @@ public class EpubValidator {
 						// warnings (1) AND errors (2)
 						case 3:
 							resultMessage = String.format(__("Check finished with %1$1s warnings and %2$1s errors!"),
-									report.getWarningCount(), report.getErrorCount());
+								report.getWarningCount(), report.getErrorCount());
 							break;
 
 						// only errors (2)

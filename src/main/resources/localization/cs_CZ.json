@@ -102,6 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "EPUB ze zdrojové složky nemůže být uložen vedle zdrojové složky",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "EPUB ze zdrojové složky nebyl uložen, protože obsahuje chyby a varování.",
 	"EPUB file couldn't be found" : "Nelze nalézt soubor EPUB.",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application." : "",
 	"ERROR" : "CHYBA",
 	"ERROR_preposition" : "v",
 	"WARNING" : "WARNING",

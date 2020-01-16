@@ -102,6 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "Der kunne ikke gemmes en midlertidig EPUB ved siden af kildemappen!",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "Der kunne ikke gemmes en midlertidig EPUB, fordi den indeholder fejl eller advarsler!",
 	"EPUB file couldn't be found" : "Den valgte EPUB-fil kunne ikke findes!",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application." : "",
 	"ERROR" : "FEJL",
 	"ERROR_preposition" : "i",
 	"WARNING" : "ADVARSEL",
