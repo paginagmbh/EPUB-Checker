@@ -10,10 +10,12 @@ bin/
 dist/
 buildConfig/lib/
 
-# Eclipse stuff
+# Eclipse & IntelliJ stuff
 .project
 .classpath
 .settings/
+.idea
+EPUB-Checker.iml
 
 # maven stuff
 target/
