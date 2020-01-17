@@ -199,6 +199,9 @@ public class EpubValidator {
 				} catch(StackOverflowError t) {
 					t.printStackTrace();
 					epubcheckResult = 99;
+				} catch(OutOfMemoryError t) {
+					t.printStackTrace();
+					epubcheckResult = 98;
 				}
 
 				return null;
@@ -220,7 +223,8 @@ public class EpubValidator {
 					switch (epubcheckResult) {
 
 						case 99:
-							resultMessage = __("EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application.");
+						case 98:
+							resultMessage = String.format(__("EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application. Error code: %d"), epubcheckResult);
 							break;
 
 						// warnings (1) AND errors (2) AND fatals (4)

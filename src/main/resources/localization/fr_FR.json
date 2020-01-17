@@ -102,7 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "",
 	"EPUB file couldn't be found" : "Le fichier EPUB n'a pas été trouvé",
-	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application." : "",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application. Error code: %d" : "",
 	"ERROR" : "ERREUR",
 	"ERROR_preposition" : "dans",
 	"WARNING" : "AVERTISSEMENT",

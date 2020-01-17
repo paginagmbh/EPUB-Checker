@@ -102,7 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "無法將打包的EPUB存放在原始資料夾所在位置",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "發現錯誤或者警告訊息，所以不會將原始資料夾打包成EPUB",
 	"EPUB file couldn't be found" : "找不到EPUB檔案",
-	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application." : "",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application. Error code: %d" : "",
 	"ERROR" : "錯誤",
 	"ERROR_preposition" : "在",
 	"WARNING" : "警告訊息",

@@ -102,7 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "Das temporär erstellte EPUB konnte nicht neben dem Quellverzeichnis gespeichert werden!",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "Das temporär erstellte EPUB wurde nicht gespeichert, da es Fehler oder Warnungen enthält!",
 	"EPUB file couldn't be found" : "Die angegebene EPUB-Datei konnte nicht gefunden werden!",
-	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application." : "EPUBCheck abgebrochen! Dem System fehlt ausreichender Speicher! Stelle sicher, dass Java als 64bit-Anwendung installiert ist.",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application. Error code: %d" : "EPUBCheck abgebrochen! Dem System fehlt ausreichender Speicher! Stelle sicher, dass Java als 64bit-Anwendung installiert ist. Fehler-Code: %d",
 	"ERROR" : "FEHLER",
 	"ERROR_preposition" : "in",
 	"WARNING" : "WARNUNG",
