@@ -102,7 +102,7 @@
 	"EPUB from source folder couldn't be saved next to the source folder!" : "O EPUB criado à partir da pasta expandida não pôde ser salvo próximo a ela!",
 	"EPUB from source folder wasn't saved because it contains errors or warnings!" : "O EPUB criado à partir da pasta expandida não foi salvo porque ele contém erros ou advertências!",
 	"EPUB file couldn't be found" : "Não foi possível encontrar o arquivo EPUB",
-	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application. Error code: %d" : "",
+	"EPUBCheck aborted! The system lacks sufficient memory! Make sure that Java is installed as 64bit application. Error code: %d" : "O EPUBCheck abortou! Falta memória suficente no sistema! Certifique-se de que o Java está instalado como uma aplicação de 64 bits. Código do erro: %d",
 	"ERROR" : "ERRO",
 	"ERROR_preposition" : "em",
 	"WARNING" : "ADVERTÊNCIA",
