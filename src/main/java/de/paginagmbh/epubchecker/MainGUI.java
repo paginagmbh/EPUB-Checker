@@ -760,9 +760,11 @@ public class MainGUI extends JFrame implements ActionListener {
 		// handle "ViewMode" menuItem
 		} else if(e.getSource() == opt_ViewMode_Table || e.getSource() == opt_ViewMode_Text) {
 
-			if((e.getSource() == opt_ViewMode_Table && opt_ViewMode_Table.isSelected())
-					|| (e.getSource() == opt_ViewMode_Text && opt_ViewMode_Text.isSelected()) ) {
-				// do nothing when user clicks on currently selected ViewMode Item
+			if((e.getSource() == opt_ViewMode_Table && guiManager.getLogView() == LogViewMode.TABLE)
+					|| (e.getSource() == opt_ViewMode_Text && guiManager.getLogView() == LogViewMode.TEXT) ) {
+				// re-select the item because the change-listener has already de-selected on-click
+				((JRadioButtonMenuItem)e.getSource()).setSelected(true);
+				// do not reload the view
 				return;
 			}
 
