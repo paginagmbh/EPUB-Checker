@@ -342,7 +342,7 @@
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
 							<!-- checkout a specific tag / pinned version -->
 							<scmVersionType>tag</scmVersionType>
-							<scmVersion>v3.0.4</scmVersion>
+							<scmVersion>v3.0.6</scmVersion>
 						</configuration>
 					</execution>
 				</executions>
@@ -398,6 +398,23 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<executions>
+					<execution>
+						<id>plist-update</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<skip>${maven.codesign.skip}</skip>
+							<executable>/usr/libexec/PlistBuddy</executable>
+							<workingDirectory>${project.build.directory}</workingDirectory>
+							<arguments>
+								<argument>-c</argument>
+								<argument>Add :NSAppleEventsUsageDescription string There was an error while launching pagina EPUB-Checker. Please click OK to display a dialog with more information or cancel and view the syslog for details.</argument>
+								<argument>${project.build.directory}/${my.finalShortName}.app/Contents/Info.plist</argument>
+							</arguments>
+						</configuration>
+					</execution>
 					<execution>
 						<id>codesign-macApp</id>
 						<phase>prepare-package</phase>
