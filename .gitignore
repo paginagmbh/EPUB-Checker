@@ -30,3 +30,6 @@ buildNumber.properties
 
 # Exclude maven wrapper
 !/.mvn/wrapper/maven-wrapper.jar
+
+# Ignore secrets
+src/build/gon-config.json

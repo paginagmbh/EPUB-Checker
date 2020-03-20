@@ -67,21 +67,39 @@ Build the app
 In order to build the Linux JAR, the Mac App and the Windows EXE files you just have to run
 
 ```
-mvn clean package
+mvn -Dmaven.codesign.skip=true clean package
 ```
 
 from the root directory of this project.
 
-### Important Note
-The maven packaging process runs a Mac OS specific `codesign` task to sign and verify the Mac App with our (private) Apple Developer Certificate. Therefore, this part will only work on one of our company Mac's.
+This will build the executables but skip the Mac OS specific codesigning process.
 
-To be able to build packages on other Mac systems or on Windows, just skip the codesigning task with the following option:
+
+### Important Note
+
+
+Release the app
+---------------
+
+The maven packaging process can run a Mac OS specific release task to sign and notarize the Mac App with our (private) Apple Developer Certificate. Therefore, this step will only work on our systems.
+
+Releasing a new version requires the Mac OS App to be codesigned and notarized. This is done with a specific maven exec call to the `gon` command, an excellent wrapper for this job. Make sure you have [gon](https://github.com/mitchellh/gon) installed.
+
+To be able to build signed packages on other Mac OS systems, you need to copy `src/build/gon-config.template.json` to `src/build/gon-config.json` and fill all empty keys.
+
+Then you can run the following to build the app:
+
+```
+mvn clean package
+```
+
+Signing can be skipped with:
 
 ```
 mvn -Dmaven.codesign.skip=true clean package
 ```
 
-or during `release:prepare` phase (with `maven-release-plugin`):
+Signing during `mvn release:prepare` phase (with `maven-release-plugin`) can be skipped with:
 
 ```
 mvn -Darguments=-Dmaven.codesign.skip=true clean release:prepare

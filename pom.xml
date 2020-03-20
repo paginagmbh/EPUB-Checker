@@ -98,7 +98,7 @@
 		<!-- use UTF-8 file encoding for java source files -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- skip codesigning for Mac App with -Dmaven.codesign.skip=true -->
+		<!-- skip codesigning the Mac App with -Dmaven.codesign.skip=true -->
 		<maven.codesign.skip>false</maven.codesign.skip>
 
 		<!-- skip 'install' phase per default as this pom creates final binaries as GUI app and no reusable libraries -->
@@ -399,7 +399,7 @@
 				<version>1.6.0</version>
 				<executions>
 					<execution>
-						<id>plist-update</id>
+						<id>apple-plist-update</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>exec</goal>
@@ -416,57 +416,22 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>codesign-macApp</id>
+						<id>apple-dmg-codesign-notarize</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>exec</goal>
 						</goals>
 						<configuration>
 							<skip>${maven.codesign.skip}</skip>
-							<executable>codesign</executable>
-							<workingDirectory>${project.build.directory}</workingDirectory>
+							<executable>gon</executable>
+							<workingDirectory>${project.basedir}</workingDirectory>
+							<environmentVariables>
+								<EC_VERSION>${my.versionNumber}</EC_VERSION>
+							</environmentVariables>
 							<arguments>
-								<argument>-f</argument>
-								<argument>-v</argument>
-								<argument>-s</argument>
-								<argument>Developer ID Application: pagina GmbH Apps (PPJQ7BTA69)</argument>
-								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
-							</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>verify-codesign</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<skip>${maven.codesign.skip}</skip>
-							<executable>codesign</executable>
-							<workingDirectory>${project.build.directory}</workingDirectory>
-							<arguments>
-								<argument>--verify</argument>
-								<argument>--verbose</argument>
-								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
-							</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>verify-codesign2</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<skip>${maven.codesign.skip}</skip>
-							<executable>spctl</executable>
-							<workingDirectory>${project.build.directory}</workingDirectory>
-							<arguments>
-								<argument>-a</argument>
-								<argument>-t</argument>
-								<argument>exec</argument>
-								<argument>-vv</argument>
-								<argument>${project.build.directory}/${my.finalShortName}.app</argument>
+								<argument>-log-level=info</argument>
+								<argument>-log-json</argument>
+								<argument>${project.build.sourceDir}/gon-config.json</argument>
 							</arguments>
 						</configuration>
 					</execution>
