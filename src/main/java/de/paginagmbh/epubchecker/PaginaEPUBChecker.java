@@ -15,21 +15,21 @@ import javax.swing.UIManager;
 
 
 /**
- * checks and validates EPUB eBooks in a nice graphical user interface
+ * Checks and validates EPUB eBooks in a nice graphical user interface
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
  * @version     1.9.4-beta
- * @date        2020-01-17
+ * @date        2020-03-20
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
 
 	public static final String PROGRAMVERSION = "1.9.4";
-	public static final String VERSIONDATE = "17.01.2020";
+	public static final String VERSIONDATE = "20.03.2020";
 	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Fatal errors are now mentioned in the validation summary<br/>- Improved error handling when running the program on 32bit Java.";
+	public static final String RELEASENOTES = "- Notarized the Mac App for latest OS X 10.15<br/>- Fatal errors are now mentioned in the validation summary<br/>- Improved error handling when running the program on 32bit Java.";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
