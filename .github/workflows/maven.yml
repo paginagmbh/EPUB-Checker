@@ -5,7 +5,7 @@
 # - https://github.com/actions/starter-workflows/edit/master/ci/maven.yml
 
 name: Java CI with Maven
-
+Update GitHub Actions CI buildfile 
 on:
   push:
     branches:
@@ -37,5 +37,5 @@ jobs:
     - name: Archive App & Jar build snapshots
       uses: actions/upload-artifact@v2-preview
       with:
-        name: App-Snapshots
+        name: App-Snapshots-Java-${{ matrix.java }}
         path: target/EPUB-Checker-*.zip
