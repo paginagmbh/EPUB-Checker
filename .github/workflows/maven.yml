@@ -5,7 +5,7 @@
 # - https://github.com/actions/starter-workflows/edit/master/ci/maven.yml
 
 name: Java CI with Maven
-Update GitHub Actions CI buildfile 
+
 on:
   push:
     branches:
