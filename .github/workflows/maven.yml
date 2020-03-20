@@ -34,8 +34,9 @@ jobs:
     - name: Build and Verify with Maven on Java ${{ matrix.java }}
       run: mvn -B --show-version -Dmaven.codesign.skip=true clean verify
 
-    - name: Archive App & Jar build snapshots
+    - name: Archive App & Jar build snapshots for Java 8
       uses: actions/upload-artifact@v2-preview
+      if: matrix.java == '8'
       with:
         name: App-Snapshots-Java-${{ matrix.java }}
         path: target/EPUB-Checker-*.zip
