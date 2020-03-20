@@ -21,7 +21,7 @@ jobs:
       matrix:
         # test against latest update of each major Java version:
         java: [ 7, 8, 9, 10, 11, 12, 13, 14 ]
-    name: Java ${{ matrix.java }} sample
+    name: Build with Java ${{ matrix.java }}
     
     steps:
     - uses: actions/checkout@v2
@@ -33,3 +33,9 @@ jobs:
     
     - name: Build and Verify with Maven on Java ${{ matrix.java }}
       run: mvn -B --show-version -Dmaven.codesign.skip=true clean verify
+
+    - name: Archive App & Jar build snapshots
+      uses: actions/upload-artifact@v2-preview
+      with:
+        name: App & Jar build snapshots
+        path: target/EPUB-Checker-*
