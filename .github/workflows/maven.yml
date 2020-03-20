@@ -37,5 +37,5 @@ jobs:
     - name: Archive App & Jar build snapshots
       uses: actions/upload-artifact@v2-preview
       with:
-        name: App_Snapshots
-        path: target/EPUB-Checker-*
+        name: App-Snapshots
+        path: target/EPUB-Checker-*.zip
