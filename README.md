@@ -1,5 +1,7 @@
-pagina EPUB-Checker [![Build Status](https://travis-ci.org/paginagmbh/EPUB-Checker.svg?branch=master)](https://travis-ci.org/paginagmbh/EPUB-Checker)
+pagina EPUB-Checker
 ===================
+
+![Java CI with Maven](https://github.com/paginagmbh/EPUB-Checker/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux.
 
