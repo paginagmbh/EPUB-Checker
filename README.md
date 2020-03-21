@@ -77,9 +77,6 @@ from the root directory of this project.
 This will build the executables but skip the Mac OS specific codesigning process.
 
 
-### Important Note
-
-
 Release the app
 ---------------
 
