@@ -1,0 +1,84 @@
+# note: list of awesome GitHub Actions: https://github.com/sdras/awesome-actions
+
+name: Release pagina EPUB-Checker Apps
+
+on:
+  push:
+    branches:
+    ## live
+    #- master
+    ## debug
+    - development
+
+jobs:
+  release:
+    
+    runs-on: macos-latest
+    
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Import Code-Signing Certificates
+      uses: Apple-Actions/import-codesign-certs@v1
+      with:
+        # The certificates in a PKCS12 file encoded as a base64 string created with "openssl base64 -in cert.p12 -out cert-base64.txt"
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
+        # The password used to import the PKCS12 file.
+        p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
+
+    - name: Install gon via HomeBrew for code signing and app notarization
+      run: |
+        brew tap mitchellh/gon
+        brew install mitchellh/gon/gon
+
+    - name: Create gon config file
+      run: |
+        echo ${{ secrets.GON_CONFIG_BASE64 }} | base64 --decode > src/build/gon-config.json
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v1
+      with:
+        java-version: '8'
+
+    - name: Set up GitHub Actions git user
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+    - name: Build the Java App and the native wrappers with Maven and codesign and notarize the Mac App
+      run: |
+        mvn -B --show-version clean release:clean release:prepare
+
+    - name: Push maven-release-plugin changes
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        tags: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Archive Mac DiskImage distributable
+      uses: actions/upload-artifact@v1
+      with:
+        name: Released-Mac-DiskImage
+        path: target/pagina-EPUB-Checker.dmg
+
+    - name: Archive Mac App distributable
+      uses: actions/upload-artifact@v1
+      with:
+        name: Released-Mac-App
+        path: target/EPUB-Checker-*-dist-mac.zip
+
+    - name: Archive Windows App distributable
+      uses: actions/upload-artifact@v1
+      with:
+        name: Released-Windows-App
+        path: target/EPUB-Checker-*-dist-win.zip
+
+    - name: Archive Windows App distributable
+      uses: actions/upload-artifact@v1
+      with:
+        name: Released-Linux-App
+        path: target/EPUB-Checker-*-dist-linux.tar.gz
+
+# TODO: Upload release-files to our primary download server
+# https://github.com/marketplace/actions/scp-files
