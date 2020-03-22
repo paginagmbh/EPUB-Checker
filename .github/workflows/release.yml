@@ -57,10 +57,13 @@ jobs:
         mvn -B --show-version -Darguments=-Dmaven.skip.macSigning=false clean release:clean release:prepare
 
     - name: Push maven-release-plugin changes
-      uses: ad-m/github-push-action@v0.5.0
-      with:
-        tags: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      # does not work on Mac: https://github.com/ad-m/github-push-action/issues/51
+      #uses: ad-m/github-push-action@v0.5.0
+      #with:
+      #  tags: true
+      #  github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" --tags
 
     - name: Archive Mac DiskImage distributable
       uses: actions/upload-artifact@v1
