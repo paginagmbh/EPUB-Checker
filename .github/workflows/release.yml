@@ -12,9 +12,9 @@ on:
 
 jobs:
   release:
-    
+
     runs-on: macos-latest
-    
+
     steps:
 
     - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
 
     - name: Build the Java App and the native wrappers with Maven and codesign and notarize the Mac App
       run: |
-        mvn -B --show-version clean release:clean release:prepare
+        mvn -B --show-version clean release:clean release:prepare -Dapple.signId="${{ secrets.APPLE_DEVELOPER_SIGNING_IDENTITY }}"
 
     - name: Push maven-release-plugin changes
       uses: ad-m/github-push-action@v0.5.0
@@ -60,7 +60,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Released-Mac-DiskImage
-        path: target/pagina-EPUB-Checker.dmg
+        path: target/EPUB-Checker.dmg
 
     - name: Archive Mac App distributable
       uses: actions/upload-artifact@v1
@@ -74,7 +74,7 @@ jobs:
         name: Released-Windows-App
         path: target/EPUB-Checker-*-dist-win.zip
 
-    - name: Archive Windows App distributable
+    - name: Archive Linux App distributable
       uses: actions/upload-artifact@v1
       with:
         name: Released-Linux-App
