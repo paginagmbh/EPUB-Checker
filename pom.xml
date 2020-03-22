@@ -433,6 +433,7 @@
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<scmReleaseCommitComment>@{prefix} Release @{releaseLabel}</scmReleaseCommitComment>
+					<pushChanges>False</pushChanges>
 				</configuration>
 				<dependencies>
 					<dependency>
