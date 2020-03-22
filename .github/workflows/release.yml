@@ -18,6 +18,12 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+        ## live
+        #ref: 'master'
+        ## debug
+        ref: 'development'
 
     - name: Import Code-Signing Certificates
       uses: Apple-Actions/import-codesign-certs@v1
