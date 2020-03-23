@@ -6,9 +6,9 @@ on:
   push:
     branches:
     ## live
-    #- master
+    - master
     ## debug
-    - development
+    #- development
 
 jobs:
   release:
@@ -21,9 +21,9 @@ jobs:
       with:
         fetch-depth: '0'
         ## live
-        #ref: 'master'
+        ref: 'master'
         ## debug
-        ref: 'development'
+        #ref: 'development'
 
     - name: Import Code-Signing Certificates
       uses: Apple-Actions/import-codesign-certs@v1
@@ -63,7 +63,10 @@ jobs:
       #  tags: true
       #  github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:development --follow-tags --tags
+        git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master --follow-tags --tags
+        git checkout development
+        git merge master
+        git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:development
 
     - name: Archive Mac DiskImage distributable
       uses: actions/upload-artifact@v2-preview
