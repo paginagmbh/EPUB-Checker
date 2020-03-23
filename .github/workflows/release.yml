@@ -66,25 +66,25 @@ jobs:
         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" --tags
 
     - name: Archive Mac DiskImage distributable
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2-preview
       with:
         name: Released-Mac-DiskImage
         path: target/EPUB-Checker.dmg
 
     - name: Archive Mac App distributable
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2-preview
       with:
         name: Released-Mac-App
         path: target/EPUB-Checker-*-dist-mac.zip
 
     - name: Archive Windows App distributable
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2-preview
       with:
         name: Released-Windows-App
         path: target/EPUB-Checker-*-dist-win.zip
 
     - name: Archive Linux App distributable
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2-preview
       with:
         name: Released-Linux-App
         path: target/EPUB-Checker-*-dist-linux.tar.gz
