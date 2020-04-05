@@ -4,7 +4,7 @@
 
 	<groupId>de.paginagmbh</groupId>
 	<artifactId>EPUB-Checker</artifactId>
-	<version>1.9.4-SNAPSHOT</version>
+	<version>2.0.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
@@ -98,8 +98,8 @@
 		<!-- use UTF-8 file encoding for java source files -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- skip codesigning the Mac App with -Dmaven.codesign.skip=true -->
-		<maven.codesign.skip>false</maven.codesign.skip>
+		<!-- default: SKIP codesigning the Mac App! Activate signing with -Dmaven.skip.macSigning=false -->
+		<maven.skip.macSigning>true</maven.skip.macSigning>
 
 		<!-- skip 'install' phase per default as this pom creates final binaries as GUI app and no reusable libraries -->
 		<maven.install.skip>true</maven.install.skip>
@@ -117,6 +117,7 @@
 		<my.finalShortName>EPUB-Checker</my.finalShortName>
 		<my.finalLongName>pagina EPUB-Checker</my.finalLongName>
 		<my.versionNumber>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</my.versionNumber>
+		<my.appleSigningIdentity>Developer ID Application: pagina GmbH Apps (PPJQ7BTA69)</my.appleSigningIdentity>
 	</properties>
 
 	<build>
@@ -210,8 +211,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 
@@ -365,7 +366,7 @@
 
 								<taskdef name="jarbundler" classname="com.ultramixer.jarbundler.JarBundler" classpathref="maven.compile.classpath" />
 
-								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}_${buildNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${my.versionNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.7+" vmoptions="-Xss1024k">
+								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}_${buildNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${my.versionNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.8+" vmoptions="-Xss1024k">
 
 									<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
 									<!-- http://informagen.com/JarBundler/DocumentType.html -->
@@ -391,50 +392,36 @@
 
 			<!--
 				codesign and verify the Mac App
-				# skip with -Dmaven.codesign.skip=true
+				# skip with -Dmaven.skip.macSigning=true
 			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<executions>
+
+					<!-- run mac-release.sh script to codesign and notarize the Mac App -->
 					<execution>
-						<id>apple-plist-update</id>
+						<id>mac-release</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<skip>${maven.codesign.skip}</skip>
-							<executable>/usr/libexec/PlistBuddy</executable>
-							<workingDirectory>${project.build.directory}</workingDirectory>
-							<arguments>
-								<argument>-c</argument>
-								<argument>Add :NSAppleEventsUsageDescription string There was an error while launching pagina EPUB-Checker. Please click OK to display a dialog with more information or cancel and view the syslog for details.</argument>
-								<argument>${project.build.directory}/${my.finalShortName}.app/Contents/Info.plist</argument>
-							</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>apple-dmg-codesign-notarize</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<skip>${maven.codesign.skip}</skip>
-							<executable>gon</executable>
+							<skip>${maven.skip.macSigning}</skip>
+							<executable>${project.build.sourceDir}/mac-release.sh</executable>
 							<workingDirectory>${project.basedir}</workingDirectory>
 							<environmentVariables>
-								<EC_VERSION>${my.versionNumber}</EC_VERSION>
+								<MVN_BASEDIR>${project.basedir}</MVN_BASEDIR>
+								<MVN_BUILDDIR>${project.build.directory}</MVN_BUILDDIR>
+								<APP_VERSION>${my.versionNumber}</APP_VERSION>
+								<APP_NAME>${my.finalShortName}</APP_NAME>
+								<APP_NAME_LONG>${my.finalLongName}</APP_NAME_LONG>
+								<APPLE_SIGN_ID>${my.appleSigningIdentity}</APPLE_SIGN_ID>
 							</environmentVariables>
-							<arguments>
-								<argument>-log-level=info</argument>
-								<argument>-log-json</argument>
-								<argument>${project.build.sourceDir}/gon-config.json</argument>
-							</arguments>
 						</configuration>
 					</execution>
+
 				</executions>
 			</plugin>
 
@@ -442,16 +429,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
+				<version>3.0.0-M1</version>
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<scmReleaseCommitComment>@{prefix} Release @{releaseLabel}</scmReleaseCommitComment>
 					<pushChanges>False</pushChanges>
 				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.scm</groupId>
 						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.10.0</version>
+						<version>1.11.2</version>
 					</dependency>
 				</dependencies>
 			</plugin>

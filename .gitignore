@@ -33,3 +33,5 @@ buildNumber.properties
 
 # Ignore secrets
 src/build/gon-config.json
+src/build/gon-app-config.json
+src/build/gon-dmg-config.json

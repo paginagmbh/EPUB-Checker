@@ -19,17 +19,17 @@ import javax.swing.UIManager;
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     1.9.4-beta
- * @date        2020-03-20
+ * @version     2.0.0
+ * @date        2020-04-05
  */
 public class PaginaEPUBChecker {
 
-	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //
+	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //	
 
-	public static final String PROGRAMVERSION = "1.9.4";
-	public static final String VERSIONDATE = "20.03.2020";
-	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Notarized the Mac App for latest OS X 10.15<br/>- Fatal errors are now mentioned in the validation summary<br/>- Improved error handling when running the program on 32bit Java.";
+	public static final String PROGRAMVERSION = "2.0.0";
+	public static final String VERSIONDATE = "05.04.2020";
+	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
+	public static final String RELEASENOTES = "- Dropped support for Java 7. Supported Java versions now are 8.0.91+ up to 14.0<br/>- Notarized the Mac App for latest macOS 10.15<br/>- Improved error handling when running the program on 32bit Java<br/>- Fatal errors are now mentioned in the validation summary";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
@@ -48,13 +48,10 @@ public class PaginaEPUBChecker {
 
 		// use system proxy
 		System.setProperty("java.net.useSystemProxies", "true");
-
-		// Workaround for SSL connection errors ( https://stackoverflow.com/questions/7615645/ )
-		System.setProperty("jsse.enableSNIExtension", "false");
+		
 
 		// create a GuiManager instance
 		guiManager = GuiManager.getInstance();
-
 
 
 		// load and set system LookAndFeel
@@ -65,7 +62,6 @@ public class PaginaEPUBChecker {
 			e.printStackTrace();
 			System.exit(1);
 		}
-
 
 
 		/* init FileManager && check operating system */

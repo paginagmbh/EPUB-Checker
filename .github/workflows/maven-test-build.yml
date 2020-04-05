@@ -4,14 +4,14 @@
 # - https://github.com/actions/setup-java
 # - https://github.com/actions/starter-workflows/edit/master/ci/maven.yml
 
-name: Java CI with Maven
+name: Maven test, build and verify
 
 on:
   push:
-    branches:
+    branches-ignore:
     - master
   pull_request:
-    branches:
+    branches-ignore:
     - master
 
 jobs:
@@ -20,19 +20,19 @@ jobs:
     strategy:
       matrix:
         # test against latest update of each major Java version:
-        java: [ 7, 8, 9, 10, 11, 12, 13, 14 ]
+        java: [ 8, 9, 10, 11, 12, 13, 14 ]
     name: Build with Java ${{ matrix.java }}
-    
+
     steps:
     - uses: actions/checkout@v2
-      
+
     - name: Set up JDK ${{ matrix.java }}
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
-    
+
     - name: Build and Verify with Maven on Java ${{ matrix.java }}
-      run: mvn -B --show-version -Dmaven.codesign.skip=true clean verify
+      run: mvn -B --show-version -Dmaven.skip.macSigning=true clean verify
 
     - name: Archive App & Jar build snapshots for Java 8
       uses: actions/upload-artifact@v2-preview

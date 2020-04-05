@@ -1,0 +1,12 @@
+{
+  "apple_id": {
+    "username" : "",
+    "password":  "",
+    "provider": ""
+  },
+  "notarize" :{
+    "path": "target/EPUB-Checker.dmg",
+    "bundle_id": "de.paginagmbh.epubchecker",
+    "staple": true
+  }
+}
