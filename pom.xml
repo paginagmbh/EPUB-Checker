@@ -211,8 +211,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 
@@ -366,7 +366,7 @@
 
 								<taskdef name="jarbundler" classname="com.ultramixer.jarbundler.JarBundler" classpathref="maven.compile.classpath" />
 
-								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}_${buildNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${my.versionNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.7+" vmoptions="-Xss1024k">
+								<jarbundler dir="${project.build.directory}" name="${my.finalShortName}" shortname="${my.finalLongName}" bundleid="de.paginagmbh.epubchecker" mainclass="${my.mainclass}" stubfile="${project.JavaStubRepo.directory}/src/universalJavaApplicationStub" usejavaxkey="true" icon="${project.build.icons.sourceDir}/paginaEPUBChecker_1024.icns" splashfile="SplashScreen_Mac.png" version="${my.versionNumber}_${buildNumber}" developmentregion="German" allowMixedLocalizations="true" highresolutioncapable="true" signature="PAEC" build="${my.versionNumber}" copyright="© 2010-${current.year} pagina GmbH, Tübingen, Germany" jvmversion="1.8+" vmoptions="-Xss1024k">
 
 									<!-- this documenttype lets me received drag/drop events from safari to my dock icon -->
 									<!-- http://informagen.com/JarBundler/DocumentType.html -->
