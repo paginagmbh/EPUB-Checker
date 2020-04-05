@@ -48,13 +48,10 @@ public class PaginaEPUBChecker {
 
 		// use system proxy
 		System.setProperty("java.net.useSystemProxies", "true");
-
-		// Workaround for SSL connection errors ( https://stackoverflow.com/questions/7615645/ )
-		System.setProperty("jsse.enableSNIExtension", "false");
+		
 
 		// create a GuiManager instance
 		guiManager = GuiManager.getInstance();
-
 
 
 		// load and set system LookAndFeel
@@ -65,7 +62,6 @@ public class PaginaEPUBChecker {
 			e.printStackTrace();
 			System.exit(1);
 		}
-
 
 
 		/* init FileManager && check operating system */
