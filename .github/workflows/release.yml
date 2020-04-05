@@ -64,10 +64,8 @@ jobs:
       #  github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master --follow-tags --tags
-        git branch -a
         git fetch --prune
-        git branch -a
-        git checkout origin development
+        git checkout development
         git merge master
         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:development
 
