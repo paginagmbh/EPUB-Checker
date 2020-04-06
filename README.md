@@ -100,7 +100,7 @@ Codesigning is done with Mac OS system tools
 
 *App notarization*
 
-This is done with the [gon](https://github.com/mitchellh/gon) command, an excellent wrapper for this job. It will be installed via HomeBrew if missing.
+This is done with the [gon](https://github.com/mitchellh/gon) utility, an excellent wrapper for this job. It will be installed via HomeBrew if missing.
 
 To build signed packages, you need to copy `src/build/gon-dmg-config.template.json` to `src/build/gon-dmg-config.json` and fill all empty keys.
 
@@ -113,13 +113,11 @@ Creating the DiskImage is done with the NodeJS library [electron-installer-dmg](
 Signing is skipped by the default `mvn package` task. In order to sign and notarize, you need to *not skip it* and run:
 
 ```
-export APPLE_DEVELOPER_SIGNING_IDENTITY="your.identity"
 mvn -Dmaven.skip.macSigning=false clean package
 ```
 
 Or during a `mvn release:prepare` with the `maven-release-plugin`:
 
 ```
-export APPLE_DEVELOPER_SIGNING_IDENTITY="your.identity"
 mvn -Darguments=-Dmaven.skip.macSigning=false release:clean release:prepare
 ```
