@@ -52,6 +52,14 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
 
+    - name: Cache Maven dependencies between builds
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
     - name: Build the Java App and the native wrappers with Maven and codesign and notarize the Mac App
       run: |
         mvn -B --show-version -Darguments=-Dmaven.skip.macSigning=false clean release:clean release:prepare
