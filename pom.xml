@@ -391,8 +391,8 @@
 			</plugin>
 
 			<!--
-				codesign and verify the Mac App
-				# skip with -Dmaven.skip.macSigning=true
+				codesign and notarize the Mac App
+				skipped by default. enable with -Dmaven.skip.macSigning=false
 			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
