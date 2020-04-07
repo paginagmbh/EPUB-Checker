@@ -96,21 +96,21 @@ Releasing a new version requires the Mac App to be codesigned and notarized. Thi
 
 *App codesigning*
 
-Codesigning is done with the macOS system tools
+Codesigning is done with the default macOS `codesign` utility
 
 *App notarization*
 
-This is done with the [gon](https://github.com/mitchellh/gon) utility, an excellent wrapper for this job. It will be installed via HomeBrew if missing.
+App notarization is done with [gon](https://github.com/mitchellh/gon), an excellent utility for this job. It will be installed via HomeBrew if it's missing.
 
-To build signed packages, you need to copy `src/build/gon-dmg-config.template.json` to `src/build/gon-dmg-config.json` and fill all empty keys.
+To be able to submit the App for notarization, you need to copy `src/build/gon-dmg-config.template.json` to `src/build/gon-dmg-config.json` and fill the `apple_id` credentials.
 
 *DiskImage creation*
 
-Creating the DiskImage is done with the NodeJS library [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg).
+DiskImage creation is done with the NodeJS utility [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg). It will be installed via NPM if it's missing.
 
 ### Build the release
 
-Signing is skipped by the default `mvn package` task. In order to sign and notarize, you need to *not skip it* and run:
+The codesign and notarization step is _skipped by the default_ in the Maven configuration. In order to run it, you need to enable it explicitly with:
 
 ```
 mvn -Dmaven.skip.macSigning=false clean package
