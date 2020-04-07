@@ -3,7 +3,7 @@ pagina EPUB-Checker
 
 ![Java CI with Maven](https://github.com/paginagmbh/EPUB-Checker/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Standalone "EPUB-Checker" application for Windows, macOS and Linux.
+Standalone "EPUBCheck" application for Windows, macOS and Linux.
 
 With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck](https://github.com/w3c/epubcheck) EPUB validator.
 
@@ -40,7 +40,7 @@ Download
 
 Please visit our website https://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac _App_ or the Linux _JAR_.
 
-This is just the source code repository. You won't find any binary downloads here...
+This is just the source code repository. You won't find any pre-build binaries here...
 
 
 License information
@@ -108,9 +108,9 @@ To be able to submit the App for notarization, you need to copy `src/build/gon-d
 
 DiskImage creation is done with the NodeJS utility [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg). It will be installed via NPM if it's missing.
 
-### Build the release
+### Build the release locally
 
-The codesign and notarization step is _skipped by the default_ in the Maven configuration. In order to run it, you need to enable it explicitly with:
+To build the JAR's, the Windows EXE and Mac App and to run the Mac App codesigning and notarization process for distribution _locally,_ you have to enable the _skipped-by-default_ maven task with:
 
 ```
 mvn -Dmaven.skip.macSigning=false clean package
