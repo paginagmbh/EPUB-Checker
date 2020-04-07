@@ -12,11 +12,10 @@ on:
 
 jobs:
   release:
-
     runs-on: macos-latest
-
+    env:
+      MAVEN_VERSIONS_PLUGIN: org.codehaus.mojo:versions-maven-plugin:2.7
     steps:
-
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
@@ -62,19 +61,28 @@ jobs:
 
     - name: Build the Java App and the native wrappers with Maven and codesign and notarize the Mac App
       run: |
-        mvn -B --show-version -Darguments=-Dmaven.skip.macSigning=false clean release:clean release:prepare
+        mvn -B ${MAVEN_VERSIONS_PLUGIN}:set -DremoveSnapshot=true -DgenerateBackupPoms=false
+        export MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
+        mvn -B --show-version -Dmaven.skip.macSigning=false clean package
+        git commit -a -m "release version ${MAVEN_PROJECT_VERSION}"
+        git tag v${MAVEN_PROJECT_VERSION}
 
-    - name: Push maven-release-plugin changes
-      # does not work on Mac: https://github.com/ad-m/github-push-action/issues/51
+    - name: Push changes at pom.xml to master
+      # 'github-push-action' does not work on 'macos-latest': https://github.com/ad-m/github-push-action/issues/51
       #uses: ad-m/github-push-action@v0.5.0
       #with:
       #  tags: true
       #  github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master --follow-tags --tags
+
+    - name: Increment maven project version on development branch
+      run: |
         git fetch --prune
-        git checkout development
-        git merge master --no-ff
+        git checkout -f development
+        git merge --no-ff master
+        mvn -B ${MAVEN_VERSIONS_PLUGIN}:set -DnextSnapshot=true -DgenerateBackupPoms=false
+        git commit -a -m "prepare for next development iteration"
         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:development
 
     - name: Archive Mac DiskImage distributable

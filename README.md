@@ -116,8 +116,9 @@ To build the JAR's, the Windows EXE and Mac App and to run the Mac App codesigni
 mvn -Dmaven.skip.macSigning=false clean package
 ```
 
-Or during a `mvn release:prepare` with the `maven-release-plugin`:
 
-```
-mvn -Darguments=-Dmaven.skip.macSigning=false release:clean release:prepare
-```
+### Build & release with GitHub Actions
+
+To build and release with GitHub Actions CI, just merge a _snapshot version_ from `development` to `master`. No need to upgrade the Maven version first or to set a git tag. Just merge to `master` and CI is doing all the hard work (as defined in `.github/workflows/release.yml`).
+
+The release distributables are attached to the GitHub Actions build as build artifacts and can be used for distribution on our download server.
