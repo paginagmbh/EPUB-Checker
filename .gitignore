@@ -16,6 +16,7 @@ buildConfig/lib/
 .settings/
 .idea
 EPUB-Checker.iml
+.vscode/
 
 # maven stuff
 target/
