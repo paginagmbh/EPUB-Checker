@@ -3,7 +3,7 @@ pagina EPUB-Checker
 
 ![Java CI with Maven](https://github.com/paginagmbh/EPUB-Checker/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Standalone "EPUB-Checker" application for Windows, Mac OS X and Linux.
+Standalone "EPUBCheck" application for Windows, macOS and Linux.
 
 With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck](https://github.com/w3c/epubcheck) EPUB validator.
 
@@ -38,9 +38,9 @@ pagina EPUB-Checker doesn't need to be installed and therefore works on portable
 Download
 --------
 
-Please visit our website https://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac OS _App_ or the Linux _JAR_.
+Please visit our website https://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac _App_ or the Linux _JAR_.
 
-This is just the source code repository. You won't find any binary downloads here...
+This is just the source code repository. You won't find any pre-build binaries here...
 
 
 License information
@@ -49,7 +49,7 @@ License information
 Our app and code and all the java sources in `de.paginagmbh.*` are licensed under the terms of the  [GNU General Public License v2.0](http://choosealicense.com/licenses/gpl-2.0/) unless the code comments specify the contrary.
 
 We use the following Java libraries to build our GUI wrapper around *EPUBCheck*:
-* [EPUBCheck](https://github.com/w3c/epubcheck) 4.2.2 (*3-Clause BSD License*)
+* [EPUBCheck](https://github.com/w3c/epubcheck) 4.2.4 (*3-Clause BSD License*)
 * [JSON RPC](http://mvnrepository.com/artifact/com.metaparadigm/json-rpc/1.0) 1.0 (*Apache License 2.0*)
 * [Apple Java Extensions](http://mvnrepository.com/artifact/com.apple/AppleJavaExtensions/1.4) 1.4 (*Apple License*)
 
@@ -72,7 +72,7 @@ mvn clean package
 
 from the root directory of this project.
 
-This will build the executables but skip the Mac OS specific codesigning process by default.
+This will build the executables but skip the macOS specific codesigning process by default.
 
 
 ### Build requirements
@@ -84,11 +84,11 @@ This will build the executables but skip the Mac OS specific codesigning process
 Release the app
 ---------------
 
-Releasing a new version requires the Mac OS App to be codesigned and notarized. This can be done from the maven packaging process or during a `mvn release:prepare` call. The additional maven step will run a bash script to sign and notarize the Mac App with our private Apple Developer Certificate. Therefore, this step will only work on our systems or in GitHub Actions CI.
+Releasing a new version requires the Mac App to be codesigned and notarized. This can be done from the maven packaging process or via GitHub Actions CI on the `master` branch. The additional maven step will run a bash script (`src/build/mac-release.sh`) to codesign and notarize the Mac App with our private Apple Developer Certificate. Therefore, this step will only work on our systems or in GitHub Actions CI.
 
 ### Release requirements
 
-* Mac OS X 10.14+
+* macOS 10.14+
 * Java/JDK 8
 * Maven 3.5+
 * NodeJS + npm
@@ -96,30 +96,29 @@ Releasing a new version requires the Mac OS App to be codesigned and notarized. 
 
 *App codesigning*
 
-Codesigning is done with Mac OS system tools
+Codesigning is done with the default macOS `codesign` utility
 
 *App notarization*
 
-This is done with the [gon](https://github.com/mitchellh/gon) command, an excellent wrapper for this job. It will be installed via HomeBrew if missing.
+App notarization is done with [gon](https://github.com/mitchellh/gon), an excellent utility for this job. It will be installed via HomeBrew if it's missing.
 
-To build signed packages, you need to copy `src/build/gon-dmg-config.template.json` to `src/build/gon-dmg-config.json` and fill all empty keys.
+To be able to submit the App for notarization, you need to copy `src/build/gon-dmg-config.template.json` to `src/build/gon-dmg-config.json` and fill the `apple_id` credentials.
 
 *DiskImage creation*
 
-Creating the DiskImage is done with the NodeJS library [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg).
+DiskImage creation is done with the NodeJS utility [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg). It will be installed via NPM if it's missing.
 
-### Build the release
+### Build the release locally
 
-Signing is skipped by the default `mvn package` task. In order to sign and notarize, you need to *not skip it* and run:
+To build the JAR's, the Windows EXE and Mac App and to run the Mac App codesigning and notarization process for distribution _locally,_ you have to enable the _skipped-by-default_ maven task with:
 
 ```
-export APPLE_DEVELOPER_SIGNING_IDENTITY="your.identity"
 mvn -Dmaven.skip.macSigning=false clean package
 ```
 
-Or during a `mvn release:prepare` with the `maven-release-plugin`:
 
-```
-export APPLE_DEVELOPER_SIGNING_IDENTITY="your.identity"
-mvn -Darguments=-Dmaven.skip.macSigning=false release:clean release:prepare
-```
+### Build & release with GitHub Actions
+
+To build and release with GitHub Actions CI, just merge a _snapshot version_ from `development` to `master`. No need to upgrade the Maven version first or to set a git tag. Just merge to `master` and CI is doing all the hard work (as defined in `.github/workflows/release.yml`).
+
+The release distributables are attached to the GitHub Actions build as build artifacts and can be used for distribution on our download server.

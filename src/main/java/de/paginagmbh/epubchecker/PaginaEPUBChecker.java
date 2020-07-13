@@ -19,17 +19,17 @@ import javax.swing.UIManager;
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     2.0.0
- * @date        2020-04-05
+ * @version     2.0.1
+ * @date        2020-07-13
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //	
 
-	public static final String PROGRAMVERSION = "2.0.0";
-	public static final String VERSIONDATE = "05.04.2020";
+	public static final String PROGRAMVERSION = "2.0.1";
+	public static final String VERSIONDATE = "13.07.2020";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Dropped support for Java 7. Supported Java versions now are 8.0.91+ up to 14.0<br/>- Notarized the Mac App for latest macOS 10.15<br/>- Improved error handling when running the program on 32bit Java<br/>- Fatal errors are now mentioned in the validation summary";
+	public static final String RELEASENOTES = "- Update the official W3C EPUBCheck library to the latest release v4.2.4<br/>- Improved reliability of the app under MacOS 10.15 'Catalina'";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 

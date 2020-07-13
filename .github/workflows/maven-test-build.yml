@@ -3,6 +3,7 @@
 # - https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 # - https://github.com/actions/setup-java
 # - https://github.com/actions/starter-workflows/edit/master/ci/maven.yml
+# - https://github.com/actions/cache/blob/master/examples.md#java---maven
 
 name: Maven test, build and verify
 
@@ -30,6 +31,14 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
+
+    - name: Cache Maven dependencies between builds
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-jdk${{ matrix.java }}-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-jdk${{ matrix.java }}-
 
     - name: Build and Verify with Maven on Java ${{ matrix.java }}
       run: mvn -B --show-version -Dmaven.skip.macSigning=true clean verify

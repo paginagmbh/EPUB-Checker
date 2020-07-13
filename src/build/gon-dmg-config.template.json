@@ -4,7 +4,7 @@
     "password":  "",
     "provider": ""
   },
-  "notarize" :{
+  "notarize" : {
     "path": "target/EPUB-Checker.dmg",
     "bundle_id": "de.paginagmbh.epubchecker",
     "staple": true
