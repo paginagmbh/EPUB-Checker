@@ -85,29 +85,15 @@ jobs:
         git commit -a -m "prepare for next development iteration"
         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:development
 
-    - name: Archive Mac DiskImage distributable
-      uses: actions/upload-artifact@v2-preview
+    - name: Archive build distributables
+      uses: actions/upload-artifact@v2
       with:
-        name: Released-Mac-DiskImage
-        path: target/EPUB-Checker.dmg
-
-    - name: Archive Mac App distributable
-      uses: actions/upload-artifact@v2-preview
-      with:
-        name: Released-Mac-App
-        path: target/EPUB-Checker-*-dist-mac.zip
-
-    - name: Archive Windows App distributable
-      uses: actions/upload-artifact@v2-preview
-      with:
-        name: Released-Windows-App
-        path: target/EPUB-Checker-*-dist-win.zip
-
-    - name: Archive Linux App distributable
-      uses: actions/upload-artifact@v2-preview
-      with:
-        name: Released-Linux-App
-        path: target/EPUB-Checker-*-dist-linux.tar.gz
+        name: Signed-Apps
+        path: |
+          target/EPUB-Checker.dmg
+          target/EPUB-Checker-*-dist-mac.zip
+          target/EPUB-Checker-*-dist-win.zip
+          target/EPUB-Checker-*-dist-linux.tar.gz
 
 # TODO: Upload release-files to our primary download server
 # https://github.com/marketplace/actions/scp-files
