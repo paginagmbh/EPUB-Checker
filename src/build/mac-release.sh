@@ -2,7 +2,7 @@
 
 # author: Tobias Fischer
 # copyright: pagina GmbH, Tübingen
-# date: 2020-07-13
+# date: 2020-03-22
 #
 # general tips about notarization
 # - http://www.zarkonnen.com/signing_notarizing_catalina
