@@ -19,15 +19,15 @@ import javax.swing.UIManager;
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     2.0.1
- * @date        2020-07-13
+ * @version     2.0.2
+ * @date        2020-07-14
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //	
 
-	public static final String PROGRAMVERSION = "2.0.1";
-	public static final String VERSIONDATE = "13.07.2020";
+	public static final String PROGRAMVERSION = "2.0.2";
+	public static final String VERSIONDATE = "14.07.2020";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
 	public static final String RELEASENOTES = "- Update the official W3C EPUBCheck library to the latest release v4.2.4";
 
