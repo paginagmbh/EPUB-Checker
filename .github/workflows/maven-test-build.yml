@@ -44,7 +44,7 @@ jobs:
       run: mvn -B --show-version -Dmaven.skip.macSigning=true clean verify
 
     - name: Archive App & Jar build snapshots for Java 8
-      uses: actions/upload-artifact@v2-preview
+      uses: actions/upload-artifact@v2
       if: matrix.java == '8'
       with:
         name: App-Snapshots-Java-${{ matrix.java }}
