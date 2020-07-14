@@ -23,20 +23,11 @@ set -e
 # build file paths
 APP_PATH="${MVN_BUILDDIR}/${APP_NAME}.app"
 DMG_PATH="${MVN_BUILDDIR}/${APP_NAME}.dmg"
-STUB_PATH="${APP_PATH}/Contents/MacOS/universalJavaApplicationStub"
 
 
 # update App Info.plist with an additional key
 /usr/libexec/PlistBuddy -c "Add :NSAppleEventsUsageDescription string There was an error while launching ${APP_NAME_LONG}. Please click OK to display a dialog with more information or cancel and view the syslog for details." \
   "${APP_PATH}/Contents/Info.plist"
-
-
-# compile the universalJavaApplicationStub shell script to binary with 'shc'
-# https://github.com/tofi86/universalJavaApplicationStub/issues/85#issuecomment-651986038
-which shc || ( brew install shc )
-shc -r -f "${STUB_PATH}"
-rm "${STUB_PATH}" "${STUB_PATH}.x.c"
-mv "${STUB_PATH}.x" "${STUB_PATH}"
 
 
 # codesign the Mac App
