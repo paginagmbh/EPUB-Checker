@@ -31,11 +31,11 @@
 	"Visit pagina EPUB-Checker website" : "Navštivte stránky pagina EPUB-Checker",
 	"Check for updates..." : "Kontrola aktualizací...",
 
-	"about_content-1" : "Vývojář: Tobias Fischer\ntobias.fischer@pagina.gmbh",
+	"about_content-1" : "Vyvíjen Tobiasem Fischerem, pečován týmem vývojářů paginy GmbH\nt.fischer@goldflam.de",
 	"about_content-2" : "Verze: %PROGRAM_VERSION%\nDatum vydání verze: %VERSION_DATE%",
 	"about_content-3" : "Program pagina EPUB-Checker je licencován\nGNU General Public License v2.0\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
 	"about_content-4" : "Testovací mechanismus programu pagina EPUB-Checker\njsou založeny na open-source nástroji 'EPUBCheck'\npublikovanému na https://github.com/w3c/epubcheck/\nje licencován pod 3-Clause BSD License.",
-	"translation_content-1" : "Chcete-li podpořit projekt dalším překladem,\nkontaktujte Tobias Fischer (tobias.fischer@pagina.gmbh)",
+	"translation_content-1" : "Chcete-li podpořit projekt dalším překladem,\nkontaktujte support@pagina.gmbh",
 	"translation_content-2" : "Děkujeme těmto přispěvatelům a překladatelům:",
 	"licence content" : "<html>Open-source nástroj 'EPUBCheck', na kterém je pagina EPUB-Checker<br/>založen, je vydán pod licencí 3-Clause BSD License.<br/><br/>Pro další informace navštivte https://github.com/w3c/epubcheck/</html>",
 	"new bsd license" : "<html><small>EPUBCheck 3-Clause BSD License<br/><br/>© 2007 Adobe Systems Incorporated Copyright<br/>© 2008 IDPF Copyright © 2017 W3C (MIT, ERCIM, Keio, Beihang)<br/><br/>Redistribuce a užívání zdrojového kódu, s nebo bez úprav,<br/>je povoleno pouze při dodržení těchto podmínek:<br/><br/>1. Redistributce zdrojového kódu musí obsahovat výše zmíněnou copyright informaci,<br/>tento seznam podmínek a následující prohlášení.<br/><br/>2. Redistribuce v binární podobě musí reprodukovat copyright informaci,<br/>tento seznam podmínek a následující prohlášení v dokumentaci<br/>a/nebo v ostatních materiálech jež jsou obsahem dodávky.<br/><br/>3. Jméno vlastníka práv ani jména jeho přispěvatelů <br/>k propagování či marketingu produktu odvozeného od tohoto programu<br/>bez předchozího písemného souhlasu.<br/><br/>SOFTWARE je dodáván \"JAK JE\", bez jakékoliv záruky, kromě <br/>zamýšlené funkčnosti<br/>pro daný účel užívání. Autor ani vlastník licence<br/>nenesou žádnou zodpovědnost za škody způsobené používáním softwaru.</small></html>",
