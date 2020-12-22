@@ -31,7 +31,7 @@
 	"Visit pagina EPUB-Checker website" : "pagina EPUB-Checker Web Sitesini Aç",
 	"Check for updates..." : "Güncelleştir...",
 
-	"about_content-1" : "Program kodu Tobias Fischer tarafından yapılmışdır. Pagina GmbH şirkete ayid olan program kodu geliştirme ekibi tarafından desdek ve sürdürüldiyor.\nsupport@pagina.gmbh",
+	"about_content-1" : "Program kodu Tobias Fischer tarafından yapılmışdır. pagina GmbH şirkete ayid olan program kodu geliştirme ekibi tarafından desdek ve sürdürüldiyor.\nsupport@pagina.gmbh",
 	"about_content-2" : "Versiyon: %PROGRAM_VERSION%\nGüncelleme Tarihi: %VERSION_DATE%",
 	"about_content-3" : "pagina EPUB-Checker,\nGNU Genel Kamu Lisansı v2.0 şartları altında yayınlanmıştır.\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
 	"about_content-4" : "pagina EPUB-Checker test alt yapısı,\naçık kaynak kodlu 'EPUBCheck' adıyla\nhttps://github.com/w3c/epubcheck/\nGitHub sayfasında 3-Clause BSD Lisansı ile yayınlanmaktadır.",
