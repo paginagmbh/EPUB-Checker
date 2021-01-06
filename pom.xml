@@ -21,20 +21,20 @@
 		<developer>
 			<name>Tobias Fischer</name>
 			<id>tofi86</id>
-			<email>t.fischer@goldflam.de</email>
-			<organization>Goldflam GmbH</organization>
+			<email>tobias.carl.fischer@gmail.com</email>
+			<organization>previously pagina GmbH</organization>
 		</developer>
 		<developer>
 			<name>Magdalena Sannwald</name>
 			<id>Sannwama</id>
 			<email>magdalena.sannwald@pagina.gmbh</email>
-			<organization>pagina GmbH Publikationstechnologien</organization>
+			<organization>pagina GmbH</organization>
 		</developer>
 		<developer>
 			<name>Kai Weber</name>
 			<id>sermo_de_arboribus</id>
 			<email>kai.weber@pagina.gmbh</email>
-			<organization>pagina GmbH Publikationstechnologien</organization>
+			<organization>pagina GmbH</organization>
 		</developer>
 	</developers>
 	<scm>
