@@ -31,7 +31,7 @@
 	"Visit pagina EPUB-Checker website" : "Visite o site do pagina EPUB-Checker",
 	"Check for updates..." : "Verificar updates...",
 
-	"about_content-1" : "Desenvolvedor: Tobias Fischer\nt.fischer@goldflam.de",
+	"about_content-1" : "Desenvolvido por Tobias Fischer, cuidado pela equipe de desenvolvimento da pagina GmbH\nsupport@pagina.gmbh",
 	"about_content-2" : "Versão: %PROGRAM_VERSION%\nVersion data: %VERSION_DATE%",
 	"about_content-3" : "O pagina EPUB-Checker é lançado sob\nos termos da GNU Licença Pública Geral v2.0\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
 	"about_content-4" : "Os mecanismos de teste do pagina EPUB-Checker\nsão baseados na ferramenta open-source 'EPUBCheck'\npublicada em https://github.com/w3c/epubcheck/\nsob uma licença '3-Clause BSD License'.",
