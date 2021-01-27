@@ -4,7 +4,7 @@
 
 	<groupId>de.paginagmbh</groupId>
 	<artifactId>EPUB-Checker</artifactId>
-	<version>2.0.2</version>
+	<version>2.0.3-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
@@ -21,7 +21,19 @@
 		<developer>
 			<name>Tobias Fischer</name>
 			<id>tofi86</id>
-			<email>tobias.fischer@pagina.gmbh</email>
+			<email>tobias.carl.fischer@gmail.com</email>
+			<organization>previously pagina GmbH</organization>
+		</developer>
+		<developer>
+			<name>Magdalena Sannwald</name>
+			<id>Sannwama</id>
+			<email>magdalena.sannwald@pagina.gmbh</email>
+			<organization>pagina GmbH</organization>
+		</developer>
+		<developer>
+			<name>Kai Weber</name>
+			<id>sermo_de_arboribus</id>
+			<email>kai.weber@pagina.gmbh</email>
 			<organization>pagina GmbH</organization>
 		</developer>
 	</developers>
@@ -343,7 +355,7 @@
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
 							<!-- checkout a specific tag / pinned version -->
 							<scmVersionType>tag</scmVersionType>
-							<scmVersion>v3.0.6</scmVersion>
+							<scmVersion>v3.1.0</scmVersion>
 						</configuration>
 					</execution>
 				</executions>
