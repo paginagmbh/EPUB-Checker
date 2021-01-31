@@ -18,6 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
+        lfs: true
         fetch-depth: '0'
         ## live
         ref: 'master'
