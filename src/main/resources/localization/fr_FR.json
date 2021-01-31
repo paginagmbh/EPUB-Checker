@@ -31,7 +31,7 @@
 	"Visit pagina EPUB-Checker website" : "Visiter le site de pagina EPUB-Checker",
 	"Check for updates..." : "Vérifier les mises à jour",
 
-	"about_content-1" : "Développé par Tobias Fischer, entretenu par l'équipe des développeurs de pagina GmbH \nsupport@pagina.gmbh",
+	"about_content-1" : "Développé à l'origine par Tobias Fischer. Entretenu par l'équipe des développeurs de pagina GmbH.\nContact: support@pagina.gmbh",
 	"about_content-2" : "Version: %PROGRAM_VERSION%\nDate de la version: %VERSION_DATE%",
 	"about_content-3" : "pagina EPUB-Checker est distribué sous\nla licence GNU General Public License v2.0\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
 	"about_content-4" : "Les mécanismes de test de pagina EPUB-Checker sont\nbasés sur l'outil open-source 'EPUBCheck'\npubliés sur https://github.com/w3c/epubcheck/\nsous la licence '3-Clause BSD License'.",

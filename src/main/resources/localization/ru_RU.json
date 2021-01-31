@@ -31,7 +31,7 @@
 	"Visit pagina EPUB-Checker website" : "Перейти на сайт pagina EPUB-Checker",
 	"Check for updates..." : "Проверить обновления...",
 
-	"about_content-1" : "Разработано Тобиасом Фишером, поддерживается командой разработчиков pagina GmbH\nsupport@pagina.gmbh",
+	"about_content-1" : "Первоначально разработан Тобиасом Фишером.\nПоддерживается командой разработчиков pagina GmbH.\nКонтакты: support@pagina.gmbh",
 	"about_content-2" : "Версия: %PROGRAM_VERSION%\nДата релиза: %VERSION_DATE%",
 	"about_content-3" : "Программа pagina EPUB-Checker распространяется\nна основе GNU General Public License v2.0 лицензии\nhttp://www.gnu.org/licenses/gpl-2.0.txt",
 	"about_content-4" : "Механизмы проверки pagina EPUB-Checker основаны\nна бесплатных инструментах 'EPUBCheck',\nопубликованных на https://github.com/w3c/epubcheck/,\nи распространяемых на основе '3-Clause BSD License' лицензии.",
