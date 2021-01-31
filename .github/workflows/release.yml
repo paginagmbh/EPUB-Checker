@@ -24,6 +24,8 @@ jobs:
         ref: 'master'
         ## debug
         #ref: 'development'
+    - name: Checkout LFS objects
+      run: git lfs checkout
 
     - name: Import Code-Signing Certificates
       uses: Apple-Actions/import-codesign-certs@v1
