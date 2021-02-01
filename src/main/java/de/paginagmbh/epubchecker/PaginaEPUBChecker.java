@@ -19,16 +19,16 @@ import javax.swing.UIManager;
  *
  * @author      Tobias Fischer
  * @copyright   pagina GmbH, Tübingen
- * @version     2.0.3
- * @date        2021-01-07
+ * @version     2.0.4
+ * @date        2021-01-31
  */
 public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //	
 
-	public static final String PROGRAMVERSION = "2.0.3";
-	public static final String VERSIONDATE = "07.01.2021";
-	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
+	public static final String PROGRAMVERSION = "2.0.4";
+	public static final String VERSIONDATE = "31.01.2021";
+	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
 	public static final String RELEASENOTES = "- Support for macOS 11.0 (Big Sur)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
