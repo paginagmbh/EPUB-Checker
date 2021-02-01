@@ -28,7 +28,7 @@ public class PaginaEPUBChecker {
 
 	public static final String PROGRAMVERSION = "2.0.4";
 	public static final String VERSIONDATE = "31.01.2021";
-	public static final String PROGRAMRELEASE = "Beta";	// "" or "Beta"
+	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
 	public static final String RELEASENOTES = "- Support for macOS 11.0 (Big Sur)";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
