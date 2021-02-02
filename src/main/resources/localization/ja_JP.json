@@ -65,7 +65,7 @@
 	"Download" : "ダウンロード",
 	"of" : "/",
 	"Estimating download size..." : "ダウンロードサイズを推測中...",
-	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "お使いのバージョン (v%3$s, %4$s) よりも新しい最新版 (v%1$s, %2$s) をダウンロードしています...",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..." : "お使いのバージョン (v%3$s, %4$s) よりも新しい最新版 (v%1$s, %2$s) をダウンロードしています...",
 	"Please unzip the downloaded update and replace your current version manually!" : "ダウンロードした最新版をunzipして、現在のものと置き換えてください",
 
 	"This operating system isn't supported yet!": "このOSには対応していません",

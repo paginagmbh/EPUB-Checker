@@ -65,7 +65,7 @@
 	"Download" : "",
 	"of" : "",
 	"Estimating download size..." : "",
-	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..." : "",
 	"Please unzip the downloaded update and replace your current version manually!" : "",
 
 	"This operating system isn't supported yet!": "This operating system isn't supported yet!",
