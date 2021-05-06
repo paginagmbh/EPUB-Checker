@@ -65,7 +65,7 @@
 	"Download" : "İndir",
 	"of" : "ile",
 	"Estimating download size..." : "İndirme boyutu hesaplanıyor ...",
-	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "Kullandığınız versiyon (v%3$s, %4$s) için yeni güncel (v%1$s, %2$s) versiyon şu an indiriliyor...",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..." : "Kullandığınız versiyon (v%3$s, %4$s) için yeni güncel (v%1$s, %2$s) versiyon şu an indiriliyor...",
 	"Please unzip the downloaded update and replace your current version manually!" : "Lütfen masaüstüne indirilen ZIP format güncellemeyi açın ve eski versiyonun olduğu dosyaya sürükleyip, eskisi ile değiştirin!",
 
 	"This operating system isn't supported yet!": "Bu işletim sistemi henüz desteklenmiyor!",

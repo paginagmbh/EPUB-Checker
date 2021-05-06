@@ -188,7 +188,7 @@ public class UpdateCheck {
 							UpdateInfo[2].replaceAll("^http://", "https://"),
 							System.getProperty("user.home") + File.separator + "Desktop",
 							String.format(
-									__("An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..."),
+									__("An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..."),
 									UpdateInfo[0],
 									UpdateInfo[1],
 									PaginaEPUBChecker.PROGRAMVERSION,

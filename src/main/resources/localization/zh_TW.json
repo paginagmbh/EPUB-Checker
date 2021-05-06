@@ -65,7 +65,7 @@
 	"Download" : "下載",
 	"of" : "/",
 	"Estimating download size..." : "預估下載容量...",
-	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "正在下你比你現在使用版本 (v%3$s, %4$s) 還新的版本 (v%1$s, %2$s) ...",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..." : "正在下你比你現在使用版本 (v%3$s, %4$s) 還新的版本 (v%1$s, %2$s) ...",
 	"Please unzip the downloaded update and replace your current version manually!" : "請解壓縮下載的最新版本，置換現有的檔案",
 
 	"This operating system isn't supported yet!": "不支援本作業系統！",

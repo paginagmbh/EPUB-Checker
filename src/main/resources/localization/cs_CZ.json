@@ -65,7 +65,7 @@
 	"Download" : "Stáhnout",
 	"of" : "",
 	"Estimating download size..." : "Odhad velikosti stahování...",
-	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "Aktualizace (v%1$s, %2$s) pro vaši současnou instalaci (v%3$s, %4$s) se stahuje...",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..." : "Aktualizace (v%1$s, %2$s) pro vaši současnou instalaci (v%3$s, %4$s) se stahuje...",
 	"Please unzip the downloaded update and replace your current version manually!" : "Prosím rozbalte staženou aktualizaci a ručně nahraďte vaši současnou verzi.",
 
 	"This operating system isn't supported yet!": "Tento operační systém zatím není podporován.",

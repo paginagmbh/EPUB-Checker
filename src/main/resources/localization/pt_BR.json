@@ -65,7 +65,7 @@
 	"Download" : "Baixar",
 	"of" : "de",
 	"Estimating download size..." : "Estimando tamanho do download...",
-	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is beeing downloaded right now..." : "Uma atualização (v%1$s, %2$s) para sua atual instalação (v%3$s, %4$s) está sendo baixada neste instante...",
+	"An update (v%1$s, %2$s) for your current installation (v%3$s, %4$s) is being downloaded right now..." : "Uma atualização (v%1$s, %2$s) para sua atual instalação (v%3$s, %4$s) está sendo baixada neste instante...",
 	"Please unzip the downloaded update and replace your current version manually!" : "Por favor descompacte a atualização baixada e substitua sua versão atual manualmente!",
 
 	"This operating system isn't supported yet!": "Este sistema operacional ainda não é suportado!",
