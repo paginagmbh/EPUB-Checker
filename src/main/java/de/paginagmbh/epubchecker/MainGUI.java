@@ -136,7 +136,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		}
 
 
-		// set gui to be always on top
+		// don't set gui to be always on top
 		setAlwaysOnTop(false);
 
 
@@ -159,6 +159,8 @@ public class MainGUI extends JFrame implements ActionListener {
 		btn_chooseEpubFile = new JButton(__("choose EPUB file"));
 		btn_chooseEpubFile.setFont(btn_chooseEpubFile.getFont().deriveFont(12f));
 		btn_chooseEpubFile.addActionListener(this);
+		// make it possible to reach the element without mouse (for accessibility)
+		btn_chooseEpubFile.setFocusable(true);
 		GridBagConstraints gbc_btn_chooseEpubFile = new GridBagConstraints();
 		gbc_btn_chooseEpubFile.anchor = GridBagConstraints.WEST;
 		gbc_btn_chooseEpubFile.insets = new Insets(0, 0, 5, 5);
@@ -169,6 +171,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		input_filePath = new JTextField();
 		input_filePath.addActionListener(this);
 		input_filePath.setFont(input_filePath.getFont().deriveFont(12f));
+		input_filePath.setFocusable(true);
 		GridBagConstraints gbc_input_filePath = new GridBagConstraints();
 		gbc_input_filePath.ipady = 5;
 		gbc_input_filePath.ipadx = 5;
@@ -209,6 +212,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		btn_validateEpub = new JButton(__("validate EPUB"));
 		btn_validateEpub.setEnabled(false);
 		btn_validateEpub.addActionListener(this);
+		btn_validateEpub.setFocusable(true);
 		btn_validateEpub.setFont(btn_validateEpub.getFont().deriveFont(btn_validateEpub.getFont().getStyle() | Font.BOLD, btn_validateEpub.getFont().getSize() + 3f));
 		GridBagConstraints gbc_btn_validateEpub = new GridBagConstraints();
 		gbc_btn_validateEpub.ipady = 15;
@@ -339,6 +343,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 
 		mn_File = new JMenu(__("File"));
+		mn_File.setFocusable(true);
 		menuBar.add(mn_File);
 
 		mnItem_Open = new JMenuItem(__("Open"));
@@ -367,6 +372,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Expanded = new JMenu(__("Expanded"));
+		mn_Expanded.setFocusable(true);
 		menuBar.add(mn_Expanded);
 
 		AutoSaveFromExpandedGroup = new ButtonGroup();
@@ -389,6 +395,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Log = new JMenu(__("Logfile"));
+		mn_Log.setFocusable(true);
 		menuBar.add(mn_Log);
 
 		mnItem_Save = new JMenuItem(__("Save logfile"));
@@ -420,6 +427,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Language = new JMenu(__("Language"));
+		mn_Language.setFocusable(true);
 		menuBar.add(mn_Language);
 
 
@@ -456,6 +464,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Help = new JMenu(__("Help"));
+		mn_Help.setFocusable(true);
 		menuBar.add(mn_Help);
 
 		mnItem_About = new JMenuItem(__("About"));
