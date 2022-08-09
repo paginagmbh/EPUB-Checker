@@ -343,7 +343,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 
 		mn_File = new JMenu(__("File"));
-		mn_File.setFocusable(true);
+		
 		menuBar.add(mn_File);
 
 		mnItem_Open = new JMenuItem(__("Open"));
@@ -372,7 +372,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Expanded = new JMenu(__("Expanded"));
-		mn_Expanded.setFocusable(true);
+		
 		menuBar.add(mn_Expanded);
 
 		AutoSaveFromExpandedGroup = new ButtonGroup();
@@ -395,7 +395,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Log = new JMenu(__("Logfile"));
-		mn_Log.setFocusable(true);
+		
 		menuBar.add(mn_Log);
 
 		mnItem_Save = new JMenuItem(__("Save logfile"));
@@ -427,7 +427,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Language = new JMenu(__("Language"));
-		mn_Language.setFocusable(true);
+		
 		menuBar.add(mn_Language);
 
 
@@ -464,7 +464,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Help = new JMenu(__("Help"));
-		mn_Help.setFocusable(true);
+		
 		menuBar.add(mn_Help);
 
 		mnItem_About = new JMenuItem(__("About"));
