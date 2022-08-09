@@ -157,6 +157,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		parent.add(main,BorderLayout.CENTER);
 
 		btn_chooseEpubFile = new JButton(__("choose EPUB file"));
+		btn_chooseEpubFile.getAccessibleContext().setAccessibleDescription(__("Select an EPUB file to check"));
 		btn_chooseEpubFile.setFont(btn_chooseEpubFile.getFont().deriveFont(12f));
 		btn_chooseEpubFile.addActionListener(this);
 		// make it possible to reach the element without mouse (for accessibility)
@@ -169,6 +170,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		main.add(btn_chooseEpubFile, gbc_btn_chooseEpubFile);
 
 		input_filePath = new JTextField();
+		input_filePath.getAccessibleContext().setAccessibleDescription(__("Text field holding the path to the EPUB file to check"));
 		input_filePath.addActionListener(this);
 		input_filePath.setFont(input_filePath.getFont().deriveFont(12f));
 		input_filePath.setFocusable(true);
@@ -210,6 +212,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		input_filePath.addKeyListener(keyListener);
 
 		btn_validateEpub = new JButton(__("validate EPUB"));
+		btn_validateEpub.getAccessibleContext().setAccessibleDescription(__("Start accessibility checks on selected EPUB"));
 		btn_validateEpub.setEnabled(false);
 		btn_validateEpub.addActionListener(this);
 		btn_validateEpub.setFocusable(true);
@@ -224,6 +227,8 @@ public class MainGUI extends JFrame implements ActionListener {
 		main.add(btn_validateEpub, gbc_btn_validateEpub);
 
 		JLabel lbl_epubcheckVersion = new JLabel("(" + String.format("EPUBCheck %1$1s", EpubCheck.version()) + ")");
+		lbl_epubcheckVersion.setFocusable(true);
+		lbl_epubcheckVersion.getAccessibleContext().setAccessibleDescription(__("Version of the EPUB Checker tool"));
 		lbl_epubcheckVersion.setForeground(Color.DARK_GRAY);
 		lbl_epubcheckVersion.setFont(lbl_epubcheckVersion.getFont().deriveFont(10f));
 		lbl_epubcheckVersion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -268,6 +273,7 @@ public class MainGUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
+		table_results.getAccessibleContext().setAccessibleDescription(__("Results table"));
 
 		table_results.setAutoCreateRowSorter(true);
 		table_results.getTableHeader().setReorderingAllowed(false);

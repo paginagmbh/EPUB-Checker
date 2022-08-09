@@ -291,5 +291,12 @@
 	"The '$1' attribute does not have a unique value" : "Das '$1'-Attribut hat keinen einzigartigen Wert",
 	"spine contains multiple references to the manifest item with id '$1'" : "Der EPUB-\"Spine\" enthält mehrfache Referenzen auf die manifestierte Datei mit der ID '$1'",
 
-	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "Datumseintrag '$1' folgt nicht dem vorgegebenen Schema aus http://www.w3.org/TR/NOTE-datetime : $2"
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "Datumseintrag '$1' folgt nicht dem vorgegebenen Schema aus http://www.w3.org/TR/NOTE-datetime : $2",
+	
+	"Select an EPUB file to check" : "Eine EPUB-Datei zur Prüfung auswählen",
+	"Text field holding the path to the EPUB file to check" : "Textfeld mit dem Pfad zu der zu überprüfenden EPUB Datei",
+	"Start accessibility checks on selected EPUB" : "Barrierefreiheitsprüfungen für ausgewählte EPUB-Datei starten",
+	"Version of the EPUB Checker tool" : "Verwendete Version des EPUB Checkers:",
+	"Results table" : "Tabelle zur Anzeige der Ergebnisse"
+	
 }
