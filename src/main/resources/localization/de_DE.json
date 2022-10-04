@@ -297,6 +297,7 @@
 	"Text field holding the path to the EPUB file to check" : "Textfeld mit dem Pfad zu der zu überprüfenden EPUB Datei",
 	"Start accessibility checks on selected EPUB" : "Barrierefreiheitsprüfungen für ausgewählte EPUB-Datei starten",
 	"Version of the EPUB Checker tool" : "Verwendete Version des EPUB Checkers:",
-	"Results table" : "Tabelle zur Anzeige der Ergebnisse"
+	"Results table" : "Tabelle zur Anzeige der Ergebnisse",
+	"Status bar" : "Statusanzeige"
 	
 }

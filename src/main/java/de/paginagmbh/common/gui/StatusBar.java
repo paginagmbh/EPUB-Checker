@@ -5,10 +5,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import de.paginagmbh.epubchecker.GuiManager;
 
 /**
  * generates a status bar at the bottom of a border
@@ -36,7 +39,10 @@ public class StatusBar extends JPanel {
 		setLayout(new BorderLayout());
 		// set dimensions - only the height ("22") is important
 		setPreferredSize(new Dimension(10, 22));
-
+		
+		// set focusable so that it can be accessed via screen readers
+		setFocusable(true);
+		getAccessibleContext().setAccessibleName(__("Status bar"));
 
 		// create text label
 		lbl_text = new JLabel(text);
@@ -110,6 +116,11 @@ public class StatusBar extends JPanel {
 
 	}
 
+	/* ********************************************************************************************************** */
+
+	private String __(String s) {
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
+	}
 }
 
 
@@ -151,4 +162,5 @@ class AngledLinesWindowsCornerIcon implements Icon {
 		g.drawLine(10, 12, 12, 10);
 
 	}
+	
 }
