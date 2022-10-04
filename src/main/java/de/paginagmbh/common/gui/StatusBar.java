@@ -97,6 +97,8 @@ public class StatusBar extends JPanel {
 	public void reset() {
 		lbl_text.setIcon(null);
 		lbl_text.setText(null);
+		// update accessible description for screen readers
+		getAccessibleContext().setAccessibleDescription(__("empty"));
 	}
 
 
