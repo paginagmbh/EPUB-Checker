@@ -213,6 +213,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 		btn_validateEpub = new JButton(__("validate EPUB"));
 		btn_validateEpub.setToolTipText(__("Start accessibility checks on selected EPUB"));
+		btn_validateEpub.setMnemonic(KeyEvent.VK_V);
 		btn_validateEpub.setEnabled(false);
 		btn_validateEpub.addActionListener(this);
 		btn_validateEpub.setFocusable(true);
@@ -349,6 +350,8 @@ public class MainGUI extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 
 		mn_File = new JMenu(__("File"));
+		// add a shortcut
+		mn_File.setMnemonic(KeyEvent.VK_D);
 		
 		menuBar.add(mn_File);
 
@@ -378,6 +381,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Expanded = new JMenu(__("Expanded"));
+		// add a shortcut
+		mn_Expanded.setMnemonic(KeyEvent.VK_E);
 		
 		menuBar.add(mn_Expanded);
 
@@ -401,6 +406,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Log = new JMenu(__("Logfile"));
+		// add a shortcut
+		mn_Log.setMnemonic(KeyEvent.VK_L);
 		
 		menuBar.add(mn_Log);
 
@@ -433,6 +440,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Language = new JMenu(__("Language"));
+		// add a shortcut
+		mn_Language.setMnemonic(KeyEvent.VK_P);
 		
 		menuBar.add(mn_Language);
 
@@ -470,6 +479,8 @@ public class MainGUI extends JFrame implements ActionListener {
 
 
 		mn_Help = new JMenu(__("Help"));
+		// add a shortcut
+		mn_Help.setMnemonic(KeyEvent.VK_H);
 		
 		menuBar.add(mn_Help);
 
