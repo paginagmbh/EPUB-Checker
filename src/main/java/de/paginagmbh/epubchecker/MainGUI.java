@@ -1068,6 +1068,12 @@ public class MainGUI extends JFrame implements ActionListener {
 		btn_chooseEpubFile.setEnabled(true);
 	}
 
+	/**
+	 * Requests to put the focus on the status bar.
+	 */
+	public void focusStatusBar() {
+		boolean focused = getStatusBar().requestFocusInWindow();
+	}
 
 
 

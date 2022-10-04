@@ -178,6 +178,9 @@ public class EpubValidator {
 		// disable validation button && "save" menuItem
 		gui.disableButtonsDuringValidation();
 
+		// focus the status bar so that when using a screen reader it is clear what is going on
+		gui.focusStatusBar();
+		
 		// set the loading icon and update the statusbar
 		gui.getStatusBar().update(FileManager.iconLoading, __("Checking file"));
 
