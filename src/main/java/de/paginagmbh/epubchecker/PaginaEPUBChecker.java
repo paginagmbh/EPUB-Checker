@@ -26,10 +26,10 @@ public class PaginaEPUBChecker {
 
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //	
 
-	public static final String PROGRAMVERSION = "2.0.6";
-	public static final String VERSIONDATE = "07.07.2021";
+	public static final String PROGRAMVERSION = "2.1.0";
+	public static final String VERSIONDATE = "04.10.2022";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Update the official W3C EPUBCheck library to the latest release v4.2.6";
+	public static final String RELEASENOTES = "- Improve accessibility with screenreaders.";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
