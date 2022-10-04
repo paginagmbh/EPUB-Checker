@@ -298,6 +298,7 @@
 	"Start accessibility checks on selected EPUB" : "Barrierefreiheitsprüfungen für ausgewählte EPUB-Datei starten",
 	"Version of the EPUB Checker tool" : "Verwendete Version des EPUB Checkers:",
 	"Results table" : "Tabelle zur Anzeige der Ergebnisse",
-	"Status bar" : "Statusanzeige"
+	"Status bar" : "Statusanzeige",
+	"empty" : "leer"
 	
 }

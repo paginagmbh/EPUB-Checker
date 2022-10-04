@@ -42,10 +42,16 @@ public class StatusBar extends JPanel {
 		
 		// set focusable so that it can be accessed via screen readers
 		setFocusable(true);
+		// add name for screen readers
 		getAccessibleContext().setAccessibleName(__("Status bar"));
 
 		// create text label
 		lbl_text = new JLabel(text);
+		// if the label is empty, make it explicit in the parent widget for screen readers
+		if(text == null || text.trim().equals("")) {
+			getAccessibleContext().setAccessibleDescription(__("empty"));
+		}
+		
 		lbl_text.setFont(lbl_text.getFont().deriveFont(lbl_text.getFont().getSize() - 2f));
 		// border as padding
 		lbl_text.setBorder(BorderFactory.createEmptyBorder(3,10,0,10));
@@ -74,6 +80,13 @@ public class StatusBar extends JPanel {
 	public void update(Icon icon, String text) {
 		lbl_text.setIcon(icon);
 		lbl_text.setText(text);
+		
+		// update accessible description for screen readers
+		if(text == null || text.trim().equals("")) {
+			getAccessibleContext().setAccessibleDescription(__("empty"));
+		}else {
+			getAccessibleContext().setAccessibleDescription(text);
+		}
 	}
 
 
