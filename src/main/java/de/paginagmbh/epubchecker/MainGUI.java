@@ -155,6 +155,7 @@ public class MainGUI extends JFrame implements ActionListener {
 
 		main.setLayout(gridBagLayout);
 		parent.add(main,BorderLayout.CENTER);
+		main.getAccessibleContext().setAccessibleDescription(__("main application panel"));
 
 		btn_chooseEpubFile = new JButton(__("choose EPUB file"));
 		btn_chooseEpubFile.setToolTipText(__("Select an EPUB file to check"));
