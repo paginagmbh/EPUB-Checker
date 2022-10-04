@@ -157,7 +157,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		parent.add(main,BorderLayout.CENTER);
 
 		btn_chooseEpubFile = new JButton(__("choose EPUB file"));
-		btn_chooseEpubFile.getAccessibleContext().setAccessibleDescription(__("Select an EPUB file to check"));
+		btn_chooseEpubFile.setToolTipText(__("Select an EPUB file to check"));
 		btn_chooseEpubFile.setFont(btn_chooseEpubFile.getFont().deriveFont(12f));
 		btn_chooseEpubFile.addActionListener(this);
 		// make it possible to reach the element without mouse (for accessibility)
@@ -212,7 +212,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		input_filePath.addKeyListener(keyListener);
 
 		btn_validateEpub = new JButton(__("validate EPUB"));
-		btn_validateEpub.getAccessibleContext().setAccessibleDescription(__("Start accessibility checks on selected EPUB"));
+		btn_validateEpub.setToolTipText(__("Start accessibility checks on selected EPUB"));
 		btn_validateEpub.setEnabled(false);
 		btn_validateEpub.addActionListener(this);
 		btn_validateEpub.setFocusable(true);
