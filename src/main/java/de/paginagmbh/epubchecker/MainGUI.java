@@ -70,6 +70,8 @@ import de.paginagmbh.epubchecker.GuiManager.LogViewMode;
 public class MainGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = -9097011004038447484L;
+	// the factor by which to scale up or scale down the UI upon menu click
+	private static final float UI_SCALING_FACTOR = 6f;
 	private static GuiManager guiManager;
 	private JTextField input_filePath;
 	private JTextArea txtarea_results;
@@ -90,7 +92,7 @@ public class MainGUI extends JFrame implements ActionListener {
 	private JMenuItem mnItem_WebsitePagina;
 	private JMenuItem mnItem_Updates;
 	private JMenuItem mnItem_HighContrast;
-	private JMenuItem mnItem_IncreaseFont;
+	private JMenuItem mnItem_IncreaseFont, mnItem_DecreaseFont;
 	private JMenu mn_File, mn_Expanded, mn_Log, mn_Language, mn_Help;
 	private JMenuBar menuBar;
 	private JRadioButtonMenuItem opt_ViewMode_Text, opt_ViewMode_Table;
@@ -103,8 +105,6 @@ public class MainGUI extends JFrame implements ActionListener {
 	private boolean highContrastMode;
 	// current state of the border/scroll area (default: normal)
 	private BorderState borderState;
-	// whether the font has been increased or is at the default value
-	private boolean fontIncreased;
 
 	/*
 	 * *****************************************************************************
@@ -520,12 +520,14 @@ public class MainGUI extends JFrame implements ActionListener {
 		mnItem_HighContrast.addActionListener(this);
 		mn_Help.add(mnItem_HighContrast);
 		
-		// default: font is not increased
-		fontIncreased = false;
 		mnItem_IncreaseFont = new JMenuItem(__("increase font"));
 		mnItem_IncreaseFont.addActionListener(this);
 		mn_Help.add(mnItem_IncreaseFont);
-		
+
+		mnItem_DecreaseFont = new JMenuItem(__("decrease font"));
+		mnItem_DecreaseFont.addActionListener(this);
+		mn_Help.add(mnItem_DecreaseFont);
+
 		
 
 		// default: don't enable high contrast mode
@@ -899,15 +901,13 @@ public class MainGUI extends JFrame implements ActionListener {
 		}
 		
 		else if(e.getSource() == mnItem_IncreaseFont) {
-			if(!fontIncreased) {
-				fontIncreased = true;
 				// increase font
-				doIncreaseFont();
-			}else {
-				// TODO decrease font
-				fontIncreased = false;
-			}
+				changeUIFont(UI_SCALING_FACTOR);
 		}
+		else if(e.getSource() == mnItem_DecreaseFont) {
+			// decrease font
+			changeUIFont(-UI_SCALING_FACTOR);
+	}
 	}
 
 	/*
@@ -1113,56 +1113,34 @@ public class MainGUI extends JFrame implements ActionListener {
 	}
 	
 	/**
-	 * Increases the font size for the UI components.
+	 * Increases or decreases the font size for the UI components by the given factor.
+	 * 
+	 * @param the factor by which to scale the font.
 	 */
-	private void doIncreaseFont() {
-		// the factor by which to scale the font
-		float factor = 8f;
+	private void changeUIFont(float factor) {
 		
-		Font fontLbl_epubcheckVersion = lbl_epubcheckVersion.getFont().deriveFont(lbl_epubcheckVersion.getFont().getSize2D() + factor);
-		lbl_epubcheckVersion.setFont(fontLbl_epubcheckVersion);
-		lbl_epubcheckVersion.repaint();
+		// the components to scale
+		Component[] components = new Component[] {lbl_epubcheckVersion, statusBar.getTextLabel(),btn_validateEpub, btn_chooseEpubFile,
+				getPathInputField(), scroll_results, 	mn_File, mn_Expanded, mn_Log, mn_Language, mn_Help
+		};
 		
-		Font fontStatusBar = statusBar.getTextLabel().getFont().deriveFont(statusBar.getTextLabel().getFont().getSize2D() + factor);
-		statusBar.getTextLabel().setFont(fontStatusBar);
-		statusBar.getTextLabel().repaint();
+		// perform the actual scaling
+		for(Component component : components) {
+			changeFontComponentAndRepaint(component, factor);	
+		}
 		
-		Font fontBtn_validateEpub = btn_validateEpub.getFont().deriveFont(btn_validateEpub.getFont().getSize2D() + factor);
-		btn_validateEpub.setFont(fontBtn_validateEpub);
-		btn_validateEpub.repaint();
-		
-		Font fontBtn_chooseEpubFile = btn_chooseEpubFile.getFont().deriveFont(btn_chooseEpubFile.getFont().getSize2D() + factor);
-		btn_chooseEpubFile.setFont(fontBtn_chooseEpubFile);
-		btn_chooseEpubFile.repaint();
-		
-		Font fontInput_filePath = getPathInputField().getFont().deriveFont(getPathInputField().getFont().getSize2D() + factor);
-		getPathInputField().setFont(fontInput_filePath);
-		getPathInputField().repaint();
-		
-		Font fontScroll_results = scroll_results.getFont().deriveFont(scroll_results.getFont().getSize2D() + factor);
-		scroll_results.setFont(fontScroll_results);
-		scroll_results.repaint();
-		
-		
-		Font fontMn_File = mn_File.getFont().deriveFont(mn_File.getFont().getSize2D() + factor); 
-		mn_File.setFont(fontMn_File);
-		mn_File.repaint();
-		
-		Font fontMn_Expanded = mn_Expanded.getFont().deriveFont(mn_Expanded.getFont().getSize2D() + factor); 
-		mn_Expanded.setFont(fontMn_Expanded);
-		mn_Expanded.repaint();
-		
-		Font fontMn_Log = mn_Log.getFont().deriveFont(mn_Log.getFont().getSize2D() + factor); 
-		mn_Log.setFont(fontMn_Log);
-		mn_Log.repaint();
-		
-		Font fontMn_Language = mn_Language.getFont().deriveFont(mn_Language.getFont().getSize2D() + factor); 
-		mn_Language.setFont(fontMn_Language);
-		mn_Language.repaint();
-		
-		Font fontMn_Help = mn_Help.getFont().deriveFont(mn_Help.getFont().getSize2D() + factor); 
-		mn_Help.setFont(fontMn_Help);
-		mn_Help.repaint();
+	}
+	
+	/**
+	 * Creates a derivative font of the given component, scales it by the provided factor, assigns it back to the component, and repaints the component.
+	 * 
+	 * @param component the component to scale the font for.
+	 * @param factor the factor by which to scale the font.
+	 */
+	private void changeFontComponentAndRepaint(Component component, float factor) {
+		Font fontMn_Help = component.getFont().deriveFont(component.getFont().getSize2D() + factor); 
+		component.setFont(fontMn_Help);
+		component.repaint();
 	}
 
 	/*

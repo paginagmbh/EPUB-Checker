@@ -303,6 +303,8 @@
 	"result view" : "Resultatansicht",
 	"main application panel" : "Hauptbereich der Anwendung",
 	"high contrast mode" : "Hoher Kontrast",
-	"increase font" : "Schriftgröße erhöhen"
+	"increase font" : "Schriftgröße erhöhen",
+	"decrease font" : "Schriftgröße verkleinern"
+	
 	
 }
