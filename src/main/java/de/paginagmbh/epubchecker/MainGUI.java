@@ -521,10 +521,20 @@ public class MainGUI extends JFrame implements ActionListener {
 		mn_Help.add(mnItem_HighContrast);
 		
 		mnItem_IncreaseFont = new JMenuItem(__("increase font"));
+		if (FileManager.os_name.equals("mac")) {
+			mnItem_IncreaseFont.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.META_MASK));
+		} else {
+			mnItem_IncreaseFont.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.CTRL_MASK));
+		}
 		mnItem_IncreaseFont.addActionListener(this);
 		mn_Help.add(mnItem_IncreaseFont);
 
 		mnItem_DecreaseFont = new JMenuItem(__("decrease font"));
+		if (FileManager.os_name.equals("mac")) {
+			mnItem_DecreaseFont.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.META_MASK));
+		} else {
+			mnItem_DecreaseFont.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.CTRL_MASK));
+		}
 		mnItem_DecreaseFont.addActionListener(this);
 		mn_Help.add(mnItem_DecreaseFont);
 
