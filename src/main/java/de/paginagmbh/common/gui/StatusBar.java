@@ -130,6 +130,10 @@ public class StatusBar extends JPanel {
 		g.drawLine(0, y, getWidth(), y);
 
 	}
+	
+	public JLabel getTextLabel() {
+		return lbl_text;
+	}
 
 	/* ********************************************************************************************************** */
 

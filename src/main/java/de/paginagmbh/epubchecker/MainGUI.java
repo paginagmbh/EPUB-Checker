@@ -90,7 +90,9 @@ public class MainGUI extends JFrame implements ActionListener {
 	private JMenuItem mnItem_WebsitePagina;
 	private JMenuItem mnItem_Updates;
 	private JMenuItem mnItem_HighContrast;
+	private JMenuItem mnItem_IncreaseFont;
 	private JMenu mn_File, mn_Expanded, mn_Log, mn_Language, mn_Help;
+	private JMenuBar menuBar;
 	private JRadioButtonMenuItem opt_ViewMode_Text, opt_ViewMode_Table;
 	private JRadioButtonMenuItem opt_ExpandedSave_Never, opt_ExpandedSave_Valid, opt_ExpandedSave_Always;
 	private ButtonGroup AutoSaveFromExpandedGroup;
@@ -101,6 +103,8 @@ public class MainGUI extends JFrame implements ActionListener {
 	private boolean highContrastMode;
 	// current state of the border/scroll area (default: normal)
 	private BorderState borderState;
+	// whether the font has been increased or is at the default value
+	private boolean fontIncreased;
 
 	/*
 	 * *****************************************************************************
@@ -345,7 +349,7 @@ public class MainGUI extends JFrame implements ActionListener {
 		gbc_lbl_test.gridy = 2;
 		main.add(lbl_test, gbc_lbl_test);
 
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		mn_File = new JMenu(__("File"));
@@ -515,6 +519,14 @@ public class MainGUI extends JFrame implements ActionListener {
 		mnItem_HighContrast = new JMenuItem(__("high contrast mode"));
 		mnItem_HighContrast.addActionListener(this);
 		mn_Help.add(mnItem_HighContrast);
+		
+		// default: font is not increased
+		fontIncreased = false;
+		mnItem_IncreaseFont = new JMenuItem(__("increase font"));
+		mnItem_IncreaseFont.addActionListener(this);
+		mn_Help.add(mnItem_IncreaseFont);
+		
+		
 
 		// default: don't enable high contrast mode
 		highContrastMode = false;
@@ -885,6 +897,17 @@ public class MainGUI extends JFrame implements ActionListener {
 				resetHighContrastMode();
 			}
 		}
+		
+		else if(e.getSource() == mnItem_IncreaseFont) {
+			if(!fontIncreased) {
+				fontIncreased = true;
+				// increase font
+				doIncreaseFont();
+			}else {
+				// TODO decrease font
+				fontIncreased = false;
+			}
+		}
 	}
 
 	/*
@@ -1026,7 +1049,7 @@ public class MainGUI extends JFrame implements ActionListener {
 	/**
 	 * Sets the interface to a high contrast mode.
 	 */
-	public void setHighContrastMode() {
+	private void setHighContrastMode() {
 
 		Color bgColor = new Color(0, 0, 0);
 		Color fgColor = new Color(255, 255, 255);
@@ -1087,6 +1110,59 @@ public class MainGUI extends JFrame implements ActionListener {
 			break;
 		}
 		}
+	}
+	
+	/**
+	 * Increases the font size for the UI components.
+	 */
+	private void doIncreaseFont() {
+		// the factor by which to scale the font
+		float factor = 8f;
+		
+		Font fontLbl_epubcheckVersion = lbl_epubcheckVersion.getFont().deriveFont(lbl_epubcheckVersion.getFont().getSize2D() + factor);
+		lbl_epubcheckVersion.setFont(fontLbl_epubcheckVersion);
+		lbl_epubcheckVersion.repaint();
+		
+		Font fontStatusBar = statusBar.getTextLabel().getFont().deriveFont(statusBar.getTextLabel().getFont().getSize2D() + factor);
+		statusBar.getTextLabel().setFont(fontStatusBar);
+		statusBar.getTextLabel().repaint();
+		
+		Font fontBtn_validateEpub = btn_validateEpub.getFont().deriveFont(btn_validateEpub.getFont().getSize2D() + factor);
+		btn_validateEpub.setFont(fontBtn_validateEpub);
+		btn_validateEpub.repaint();
+		
+		Font fontBtn_chooseEpubFile = btn_chooseEpubFile.getFont().deriveFont(btn_chooseEpubFile.getFont().getSize2D() + factor);
+		btn_chooseEpubFile.setFont(fontBtn_chooseEpubFile);
+		btn_chooseEpubFile.repaint();
+		
+		Font fontInput_filePath = getPathInputField().getFont().deriveFont(getPathInputField().getFont().getSize2D() + factor);
+		getPathInputField().setFont(fontInput_filePath);
+		getPathInputField().repaint();
+		
+		Font fontScroll_results = scroll_results.getFont().deriveFont(scroll_results.getFont().getSize2D() + factor);
+		scroll_results.setFont(fontScroll_results);
+		scroll_results.repaint();
+		
+		
+		Font fontMn_File = mn_File.getFont().deriveFont(mn_File.getFont().getSize2D() + factor); 
+		mn_File.setFont(fontMn_File);
+		mn_File.repaint();
+		
+		Font fontMn_Expanded = mn_Expanded.getFont().deriveFont(mn_Expanded.getFont().getSize2D() + factor); 
+		mn_Expanded.setFont(fontMn_Expanded);
+		mn_Expanded.repaint();
+		
+		Font fontMn_Log = mn_Log.getFont().deriveFont(mn_Log.getFont().getSize2D() + factor); 
+		mn_Log.setFont(fontMn_Log);
+		mn_Log.repaint();
+		
+		Font fontMn_Language = mn_Language.getFont().deriveFont(mn_Language.getFont().getSize2D() + factor); 
+		mn_Language.setFont(fontMn_Language);
+		mn_Language.repaint();
+		
+		Font fontMn_Help = mn_Help.getFont().deriveFont(mn_Help.getFont().getSize2D() + factor); 
+		mn_Help.setFont(fontMn_Help);
+		mn_Help.repaint();
 	}
 
 	/*
