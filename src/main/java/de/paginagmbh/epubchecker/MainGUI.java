@@ -263,6 +263,9 @@ public class MainGUI extends JFrame implements ActionListener {
 		txtarea_results.setLineWrap(true);
 		txtarea_results.setBackground(new Color(255, 255, 240));
 		txtarea_results.setMargin(new Insets(10, 10, 10, 15));
+		txtarea_results.setFocusable(true);
+		txtarea_results.getAccessibleContext().setAccessibleName(__("result text view"));
+		txtarea_results.getAccessibleContext().setAccessibleDescription(txtarea_results.getText());
 
 		GridBagConstraints gbc_txtarea_results = new GridBagConstraints();
 		gbc_txtarea_results.insets = new Insets(0, 0, 5, 5);
