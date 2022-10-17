@@ -1073,6 +1073,12 @@ public class MainGUI extends JFrame implements ActionListener {
 		mainPanel.setForeground(fgColor);
 
 		lbl_epubcheckVersion.setForeground(fgColor);
+		
+		// this is intentional (black foreground color as background)
+		btn_validateEpub.setBackground(fgColor);
+		btn_validateEpub.setForeground(bgColor);
+		btn_validateEpub.repaint();
+		
 
 		repaintBorderStateAndScrollArea(true, borderState);
 	}
@@ -1089,13 +1095,17 @@ public class MainGUI extends JFrame implements ActionListener {
 
 		lbl_epubcheckVersion.setForeground(Color.DARK_GRAY);
 
+		btn_validateEpub.setBackground(UIManager.getColor("Button.background"));
+		btn_validateEpub.setForeground(UIManager.getColor("Button.foreground"));
+		btn_validateEpub.repaint();
+		
 		repaintBorderStateAndScrollArea(false, borderState);
 
 	}
 
 
 	/**
-	 * Repaints the scrollable area and border state based on the given value and whethe r the high contrast mode is enabled.
+	 * Repaints the scrollable area and border state based on the given value and whether the high contrast mode is enabled.
 	 * 
 	 * @param highContrast true if the interface should be displayed with high contrast.
 	 * @param borderState the currently set state of the border.
