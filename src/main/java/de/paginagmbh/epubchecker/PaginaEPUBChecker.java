@@ -29,7 +29,7 @@ public class PaginaEPUBChecker {
 	public static final String PROGRAMVERSION = "2.1.0";
 	public static final String VERSIONDATE = "04.10.2022";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
-	public static final String RELEASENOTES = "- Improve accessibility with screenreaders.";
+	public static final String RELEASENOTES = "-accessibility: support screenreaders<br/>-accessibility: added high contrast mode<br/>-accessibility: options to change font sizes";
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
