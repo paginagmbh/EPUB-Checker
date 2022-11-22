@@ -67,8 +67,21 @@ class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 				new EmptyBorder(new Insets(5,5,5,5))
 				));
 		setFont(renderer.getFont());
-		setText(renderer.getText());
-
+		// add a zero-width space in front of the text
+		// otherwise screenreaders will read text twice; they can not deal with line wrap
+		// so we need to set a selection (see below) on the invisible character
+		setText( "\u200B" + renderer.getText());
+		
+		if(renderer != null && renderer.getText() != null) {
+			getAccessibleContext().setAccessibleDescription(renderer.getText());
+			
+		}
+		// put a selection on the invisible character
+		if(renderer != null && renderer.getText() != null && renderer.getText().length() > 0) {
+			setSelectionStart(0);
+			setSelectionEnd(1);
+		}
+		
 		TableColumnModel columnModel = table.getColumnModel();
 		// the following should reset the column height to 0
 		// but this results in issue #25. Resetting to the minium

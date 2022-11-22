@@ -5,10 +5,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import de.paginagmbh.epubchecker.GuiManager;
 
 /**
  * generates a status bar at the bottom of a border
@@ -36,10 +39,19 @@ public class StatusBar extends JPanel {
 		setLayout(new BorderLayout());
 		// set dimensions - only the height ("22") is important
 		setPreferredSize(new Dimension(10, 22));
-
+		
+		// set focusable so that it can be accessed via screen readers
+		setFocusable(true);
+		// add name for screen readers
+		getAccessibleContext().setAccessibleName(__("Status bar"));
 
 		// create text label
 		lbl_text = new JLabel(text);
+		// if the label is empty, make it explicit in the parent widget for screen readers
+		if(text == null || text.trim().equals("")) {
+			getAccessibleContext().setAccessibleDescription(__("empty"));
+		}
+		
 		lbl_text.setFont(lbl_text.getFont().deriveFont(lbl_text.getFont().getSize() - 2f));
 		// border as padding
 		lbl_text.setBorder(BorderFactory.createEmptyBorder(3,10,0,10));
@@ -68,6 +80,13 @@ public class StatusBar extends JPanel {
 	public void update(Icon icon, String text) {
 		lbl_text.setIcon(icon);
 		lbl_text.setText(text);
+		
+		// update accessible description for screen readers
+		if(text == null || text.trim().equals("")) {
+			getAccessibleContext().setAccessibleDescription(__("empty"));
+		}else {
+			getAccessibleContext().setAccessibleDescription(text);
+		}
 	}
 
 
@@ -78,6 +97,8 @@ public class StatusBar extends JPanel {
 	public void reset() {
 		lbl_text.setIcon(null);
 		lbl_text.setText(null);
+		// update accessible description for screen readers
+		getAccessibleContext().setAccessibleDescription(__("empty"));
 	}
 
 
@@ -109,7 +130,16 @@ public class StatusBar extends JPanel {
 		g.drawLine(0, y, getWidth(), y);
 
 	}
+	
+	public JLabel getTextLabel() {
+		return lbl_text;
+	}
 
+	/* ********************************************************************************************************** */
+
+	private String __(String s) {
+		return GuiManager.getInstance().getCurrentLocalizationObject().getString(s);
+	}
 }
 
 
@@ -151,4 +181,5 @@ class AngledLinesWindowsCornerIcon implements Icon {
 		g.drawLine(10, 12, 12, 10);
 
 	}
+	
 }

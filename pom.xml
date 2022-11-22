@@ -36,6 +36,12 @@
 			<email>kai.weber@pagina.gmbh</email>
 			<organization>pagina GmbH</organization>
 		</developer>
+		<developer>
+			<name>Dr. Björn Rudzewitz</name>
+			<id>br-pagina</id>
+			<email>bjoern.rudzewitz@pagina.gmbh</email>
+			<organization>pagina GmbH</organization>
+		</developer>
 	</developers>
 	<scm>
 		<url>https://github.com/paginagmbh/EPUB-Checker</url>
