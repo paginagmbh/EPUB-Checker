@@ -27,7 +27,7 @@ public class PaginaEPUBChecker {
 	// +++++++++++++++++++++++++ DON'T FORGET TO UPDATE EVERYTIME ++++++++++++++++++ //	
 
 	public static final String PROGRAMVERSION = "2.1.0";
-	public static final String VERSIONDATE = "04.10.2022";
+	public static final String VERSIONDATE = "22.11.2022";
 	public static final String PROGRAMRELEASE = "";	// "" or "Beta"
 	public static final String RELEASENOTES = "-accessibility: support screenreaders<br/>-accessibility: added high contrast mode<br/>-accessibility: options to change font sizes<br/>-accessibility: added keyboard shortcuts to open menus";
 
