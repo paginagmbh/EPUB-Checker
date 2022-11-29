@@ -3,9 +3,9 @@
 	"Open" : "Ouvrir",
 	"Exit" : "Quitter",
 	"Expanded" : "Expanded",
-	"ExpandedSave_Never" : "Never save EPUBs created from expanded source folder",
-	"ExpandedSave_Valid" : "Only save valid EPUBs created from expanded source folder",
-	"ExpandedSave_Always" : "Always save EPUBs created from expanded source folder",
+	"ExpandedSave_Never" : "Ne jamais enregistrer les EPUBs créés depuis le dossier source",
+	"ExpandedSave_Valid" : "Enregistrer uniquement les EPUBs valides créés à partir du dossier source",
+	"ExpandedSave_Always" : "Toujours enregistrer les EPUBs créés depuis le dossier source",
 	"Logfile" : "Journal",
 	"Save logfile" : "Enregistrer le journal",
 	"Auto Save" : "Enregistrement automatique",
@@ -24,7 +24,7 @@
 	"Turkish" : "Türkçe (Turc)",
 	"Danish" : "Dansk (Danois)",
 	"Help" : "Aide",
-	"About" : "À propos de \"pagina EPUB-Checker\"",
+	"About" : "À propos de pagina EPUB-Checker",
 	"Translations" : "Traductions",
 	"License information" : "Information sur la licence",
 	"Visit W3C EPUBCheck website" : "Visiter le site de W3C EPUBCheck",
@@ -291,5 +291,19 @@
 	"The '$1' attribute does not have a unique value" : "",
 	"spine contains multiple references to the manifest item with id '$1'" : "",
 
-	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : ""
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "",
+	
+	"Select an EPUB file to check" : "Select an EPUB file to check",
+	"Text field holding the path to the EPUB file to check" : "Text field containing the path to the EPUB file to check",
+	"Start accessibility checks on selected EPUB" : "Start accessibility checks on selected EPUB",
+	"Version of the EPUB Checker tool" : "Version of the EPUB Checker tool:",
+	"Results table" : "Results table",
+	"Status bar" : "Status bar",
+	"empty" : "empty",
+	"result view" : "result view",
+	"main application panel" : "main application panel",
+	"high contrast mode" : "Mode contraste élevé ",
+	"increase font" : "Agrandir la taille du texte",
+	"decrease font" : "Diminuer la taille du texte",
+	"result text view" : "result text view"
 }
