@@ -291,5 +291,19 @@
 	"The '$1' attribute does not have a unique value" : "Значение атрибута '$1' не уникально",
 	"spine contains multiple references to the manifest item with id '$1'" : "'spine' содержит несколько ссылок на элемент, указанный в 'manifest', с идентификатором '$1'",
 
-	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : ""
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "",
+	
+	"Select an EPUB file to check" : "Выбрать файл EPUB для просмотра",
+	"Text field holding the path to the EPUB file to check" : "Текстовое поле с путем к проверяемому EPUB-файлу",
+	"Start accessibility checks on selected EPUB" : "Начать проверку доступности для выбранного файла EPUB",
+	"Version of the EPUB Checker tool" : "Используемая версия EPUB Checker:",
+	"Results table" : "Таблица для отображения результатов",
+	"Status bar" : "Отображение состояния",
+	"empty" : "пусто",
+	"result view" : "Просмотр результатов",
+	"main application panel" : "Основная область применения",
+	"high contrast mode" : "Высокая контрастность",
+	"increase font" : "Увеличить размер шрифта",
+	"decrease font" : "Уменьшить размер шрифта",
+	"result text view" : "Отображение результата в текстовом виде"
 }

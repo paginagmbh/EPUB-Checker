@@ -290,5 +290,19 @@
 	"The '$1' attribute does not have a unique value" : "'$1' 屬性(atrribute)不能為獨特值",
 	"spine contains multiple references to the manifest item with id '$1'" : "Spine裡對id為「$1」的manifest項目重複參照。",
 
-	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "日期值「$1」並未遵循推薦語法，如 http://www.w3.org/TR/NOTE-datetime:$2。"
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "日期值「$1」並未遵循推薦語法，如 http://www.w3.org/TR/NOTE-datetime:$2。",
+	
+	"Select an EPUB file to check" : "Select an EPUB file to check",
+	"Text field holding the path to the EPUB file to check" : "Text field containing the path to the EPUB file to check",
+	"Start accessibility checks on selected EPUB" : "Start accessibility checks on selected EPUB",
+	"Version of the EPUB Checker tool" : "Version of the EPUB Checker tool:",
+	"Results table" : "Results table",
+	"Status bar" : "Status bar",
+	"empty" : "empty",
+	"result view" : "result view",
+	"main application panel" : "main application panel",
+	"high contrast mode" : "high contrast mode",
+	"increase font" : "increase font",
+	"decrease font" : "decrease font",
+	"result text view" : "result text view"
 }
