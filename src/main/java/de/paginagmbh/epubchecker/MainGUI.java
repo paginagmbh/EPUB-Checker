@@ -842,7 +842,7 @@ public class MainGUI extends JFrame implements ActionListener {
 			// handle "open website pagina"
 		} else if (e.getSource() == mnItem_WebsitePagina) {
 
-			new OpenURIinBrowser("https://bit.ly/1h7g4rn");
+			new OpenURIinBrowser("https://pagina.gmbh/startseite/leistungen/publishing-softwareloesungen/epub-checker/");
 
 			// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			// //

@@ -291,5 +291,19 @@
 	"The '$1' attribute does not have a unique value" : "",
 	"spine contains multiple references to the manifest item with id '$1'" : "",
 
-	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : ""
+	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "",
+	
+	"Select an EPUB file to check" : "seleccionar el archivo EPUB a verificar",
+	"Text field holding the path to the EPUB file to check" : "espacio de texto que incluye sendero a seguir para verificar el archivo EPUB",
+	"Start accessibility checks on selected EPUB" : "verificación de acceso al archivo EPUB seleccionado",
+	"Version of the EPUB Checker tool" : "versión utilizada del comprobador de archivos EPUB:",
+	"Results table" : "tabla de resultados",
+	"Status bar" : "indicador de estatus",
+	"empty" : "vacío",
+	"result view" : "indicación de resultados",
+	"main application panel" : "área principal de la aplicación",
+	"high contrast mode" : "alto contraste",
+	"increase font" : "agrandar el tamaño de la letra",
+	"decrease font" : "disminuir el tamaño de la letra",
+	"result text view" : "indicación de resultado escrito"
 }
