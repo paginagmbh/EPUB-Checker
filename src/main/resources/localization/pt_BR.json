@@ -293,17 +293,17 @@
 
 	"date value '$1' does not follow recommended syntax as per http://www.w3.org/TR/NOTE-datetime: $2" : "o valor de 'date' '$1' não segue a sintaxe recomendada pela especificação http://www.w3.org/TR/NOTE-datetime: $2",
 	
-	"Select an EPUB file to check" : "Selecionar um arquivo EPUB para revisão",
-	"Text field holding the path to the EPUB file to check" : "Campo de texto com a ligação de verificar o arquivo EPUB",
-	"Start accessibility checks on selected EPUB" : "Iniciar a verificação da acessibilidade do arquivo EPUB selecionado",
-	"Version of the EPUB Checker tool" : "Versão do verificador EPUB ultilizado:",
-	"Results table" : "Tabela para mostrar os resultados",
-	"Status bar" : "Visualizar status",
-	"empty" : "Vazio",
-	"result view" : "Ver resultados",
-	"main application panel" : "Área principal da aplicação",
-	"high contrast mode" : "Alto contraste",
+	"Select an EPUB file to check" : "Selecione um arquivo EPUB para verificação",
+	"Text field holding the path to the EPUB file to check" : "Campo de texto com o endereço do arquivo EPUB a verificar",
+	"Start accessibility checks on selected EPUB" : "Iniciar a verificação de acessibilidade do arquivo EPUB selecionado",
+	"Version of the EPUB Checker tool" : "Versão da ferramenta EPUB Checker:",
+	"Results table" : "Tabela de resultados",
+	"Status bar" : "Barra de status",
+	"empty" : "vazio",
+	"result view" : "visualização de resultados",
+	"main application panel" : "área principal do programa",
+	"high contrast mode" : "Modo de alto contraste",
 	"increase font" : "Aumentar tamanho da letra",
 	"decrease font" : "Diminuir tamanho da letra",
-	"result text view" : "Mostrar resultados em forma de texto"
+	"result text view" : "visualização de resultados em texto"
 }
