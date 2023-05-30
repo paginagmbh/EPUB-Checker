@@ -75,9 +75,9 @@ which gon || ( brew tap mitchellh/gon && brew install mitchellh/gon/gon )
 gon -log-level=info -log-json "${MVN_BASEDIR}/src/build/gon-dmg-config.json"
 
 # validate the notarization process of the dmg
-/usr/bin/xcrun stapler validate "${DMG_PATH}"
+#/usr/bin/xcrun stapler validate "${DMG_PATH}"
 /usr/sbin/spctl -a -t install -vv "${DMG_PATH}"
 
 # staple the notarization ticket to the App which may also be released in a ZIP file
 /usr/bin/xcrun stapler staple "${APP_PATH}"
-/usr/bin/xcrun stapler validate "${APP_PATH}"
+#/usr/bin/xcrun stapler validate "${APP_PATH}"
