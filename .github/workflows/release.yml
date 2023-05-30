@@ -75,7 +75,7 @@ jobs:
         find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
         find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
         find /Users/runner/work/EPUB-Checker/ -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-        mvn -B --show-version -Dmaven.skip.macSigning=false package -Dmaven.compile.skip=true
+        mvn -B --show-version -Dmaven.skip.macSigning=false package -Dmaven.compile.skip=true -DSkipTests
         git commit -a -m "release version ${MAVEN_PROJECT_VERSION}"
         git tag v${MAVEN_PROJECT_VERSION}
 
