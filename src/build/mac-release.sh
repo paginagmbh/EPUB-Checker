@@ -29,6 +29,14 @@ DMG_PATH="${MVN_BUILDDIR}/${APP_NAME}.dmg"
 /usr/libexec/PlistBuddy -c "Add :NSAppleEventsUsageDescription string There was an error while launching ${APP_NAME_LONG}. Please click OK to display a dialog with more information or cancel and view the syslog for details." \
   "${APP_PATH}/Contents/Info.plist"
 
+# try to add file extension to license files
+echo "trying to add file extension to  license files"
+find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+find /Users/runner/work/EPUB-Checker/ -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+find "${APP_PATH}" -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+find "${DMG_PATH}" -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+
 
 # codesign the Mac App
 /usr/bin/codesign --force --verbose --options runtime --sign "${APPLE_SIGN_ID}" "${APP_PATH}"

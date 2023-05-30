@@ -71,10 +71,10 @@ jobs:
       run: |
         mvn -B ${MAVEN_VERSIONS_PLUGIN}:set -DremoveSnapshot=true -DgenerateBackupPoms=false
         export MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
-        mvn compile
-        find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-        find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-        find /Users/runner/work/EPUB-Checker/ -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+        # mvn compile
+        # find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+        # find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
+        # find /Users/runner/work/EPUB-Checker/ -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
         mvn -B --show-version -Dmaven.skip.macSigning=false clean package
         git commit -a -m "release version ${MAVEN_PROJECT_VERSION}"
         git tag v${MAVEN_PROJECT_VERSION}
