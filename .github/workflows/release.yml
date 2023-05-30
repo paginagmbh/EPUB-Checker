@@ -8,7 +8,7 @@ on:
     ## live
     - master
     ## debug
-    #- development
+    - development
 
 jobs:
   release:
@@ -61,6 +61,10 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
+
+    - name: Rename license file
+      run: |      
+        find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
 
     - name: Build the Java App and the native wrappers with Maven and codesign and notarize the Mac App
       run: |
