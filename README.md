@@ -1,7 +1,7 @@
 pagina EPUB-Checker
 ===================
 
-![Java CI with Maven](https://github.com/paginagmbh/EPUB-Checker/workflows/Java%20CI%20with%20Maven/badge.svg)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paginagmbh/EPUB-Checker/maven-test-build.yml?label=Maven%20CI%20Tests) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paginagmbh/EPUB-Checker/release.yml?label=Release%20CI)
 
 Standalone "EPUBCheck" application for Windows, macOS and Linux.
 
