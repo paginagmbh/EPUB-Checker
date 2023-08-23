@@ -31,6 +31,7 @@ pagina EPUB-Checker wraps up this tool and offers some additional features like:
   * Traditional Chinese (Taiwan) (GUI only, english messages)
   * Turkish (GUI only, english messages)
   * Danish
+* Accessibility options: The application is usable with screen readers, offers a high contrast mode, and allows users to increase (or decrease) the font size.
 
 pagina EPUB-Checker doesn't need to be installed and therefore works on portable USB devices as well as on computers with restricted rights.
 
@@ -116,8 +117,52 @@ To build the JAR's, the Windows EXE and Mac App and to run the Mac App codesigni
 mvn -Dmaven.skip.macSigning=false clean package
 ```
 
+With changes to how the generated .jar file is structured internally, and how Apple handles the files for the notarization, at the moment some manual steps are required to arrive at a notarized version of the application. <br/>
+
+**Problem**
+
+The problem is that inside the generated .jar file, there is a naming conflict, but only on case-insensitive Mac-based file systems, which seems to be the case for the notarization runners. Inside the generated .jar file, the process generates a file `LICENSE` (uppercase), which conflicts with a folder `license` (lowercase). The extraction of the .jar fails due to a file conflict during extraction of the .jar file, since first the folder is extracted, which can not be overwritten by the file, which is extracted later.
+
+**Solution**
+The future naming conflict needs to be resolved, before it can come into effect. In order to achieve this, the build process needs to be stopped before the application is uploaded to the notarization service and modified and before the .dmg archive is built. Since the .dmg is built from the .app, the future naming conflict needs to be dealt with inside the .app. In order to resolve the issue, open the file `paginaEPUBChecker.jar` inside `target/EPUB-Checker.app/Contents/Resources/Java` in Oxygen or any other program capable of renaming files inside .zip/.jar files. Then rename either the file `LICENSE` to e.g. `LICENSE.txt`, or the `license` folder to e.g. `license_dir` and overwrite the existing .jar file. Then build the .dmg file from the modified .app directory with 
+
+```
+electron-installer-dmg \
+  --title="pagina EPUB-Checker X.Y.Z" \
+  --out=target \
+  --icon=src/build/icons/paginaEPUBChecker_128.icns \
+  --background=src/build/splashscreen/DmgBackground.png \
+  --overwrite \
+  target/EPUB-Checker.app \
+  EPUB-Checker
+```
+
+Then, codesign the .dmg archive (replace "${APPLE_SIGN_ID}" with the actual ID).
+
+```
+/usr/bin/codesign --force --verbose --options runtime --sign "${APPLE_SIGN_ID}" target/EPUB-Checker.dmg
+/usr/bin/codesign --verify --strict --deep --verbose target/EPUB-Checker.dmg
+```
+
+In the next step, upload the .dmg file to the Apple notarization service with 
+
+```
+gon -log-level=info -log-json src/build/gon-dmg-config.json
+```
+
+Then ensure that the codesigning and subsequent notarization actions worked by running the following commands:
+
+```
+/usr/bin/xcrun stapler validate target/EPUB-Checker.dmg
+/usr/sbin/spctl -a -t install -vv target/EPUB-Checker.dmg
+
+/usr/bin/xcrun stapler staple target/EPUB-Checker.app
+/usr/bin/xcrun stapler validate target/EPUB-Checker.app
+```
 
 ### Build & release with GitHub Actions
+
+**Update (05/2023)**: at the moment, the release mechanism temporarily only works when started **locally** (cf. above), due to changes in how Apple handles the files to be notarized. The procedure described below will work again, once the steps that are described above will have been automatized - which is definitely within the realm of possibilities.
 
 To build and release with GitHub Actions CI, just merge a _snapshot version_ from `development` to `master`. No need to upgrade the Maven version first or to set a git tag. Just merge to `master` and CI is doing all the hard work (as defined in `.github/workflows/release.yml`).
 
