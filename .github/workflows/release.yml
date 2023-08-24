@@ -62,20 +62,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-#    - name: Rename license file
-#      run: |
-#        find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-#        find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-
     - name: Build the Java App and the native wrappers with Maven and codesign and notarize the Mac App
       run: |
         mvn -B ${MAVEN_VERSIONS_PLUGIN}:set -DremoveSnapshot=true -DgenerateBackupPoms=false
         export MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
-        mvn clean compile
-        find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-        find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-        find /Users/runner/work/EPUB-Checker/ -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-        mvn -B --show-version -Dmaven.skip.macSigning=false package -Dmaven.compile.skip=true -DSkipTests
+        mvn -B --show-version -Dmaven.skip.macSigning=false clean package
         git commit -a -m "release version ${MAVEN_PROJECT_VERSION}"
         git tag v${MAVEN_PROJECT_VERSION}
 

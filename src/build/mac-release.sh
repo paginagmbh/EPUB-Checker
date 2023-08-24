@@ -29,16 +29,6 @@ DMG_PATH="${MVN_BUILDDIR}/${APP_NAME}.dmg"
 /usr/libexec/PlistBuddy -c "Add :NSAppleEventsUsageDescription string There was an error while launching ${APP_NAME_LONG}. Please click OK to display a dialog with more information or cancel and view the syslog for details." \
   "${APP_PATH}/Contents/Info.plist"
 
-# try to add file extension to license files
-echo "trying to add file extension to  license files"
-find . -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-find /tmp -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-find /Users/runner/work/EPUB-Checker/ -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-find "${MVN_BUILDDIR}" -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-find "${MVN_BASEDIR}" -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-find "${APP_PATH}" -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-find "${DMG_PATH}" -name "LICENSE" -exec bash -c 'echo mv $0 ${0/LICENSE/LICENSE.txt}' {} \;
-
 
 # codesign the Mac App
 /usr/bin/codesign --force --verbose --options runtime --sign "${APPLE_SIGN_ID}" "${APP_PATH}"
@@ -74,9 +64,7 @@ electron-installer-dmg \
 
 # notarize the Mac App with 'gon' (https://github.com/mitchellh/gon)
 which gon || ( brew tap mitchellh/gon && brew install mitchellh/gon/gon )
-if ! gon -log-level=info -log-json "${MVN_BASEDIR}/src/build/gon-dmg-config.json"; then
-     echo "command exited with non-zero exit code"
-fi
+gon -log-level=info -log-json "${MVN_BASEDIR}/src/build/gon-dmg-config.json"
 
 # validate the notarization process of the dmg
 /usr/bin/xcrun stapler validate "${DMG_PATH}"
