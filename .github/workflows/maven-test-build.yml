@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         # test against latest update of each major Java version:
-        java: [ 8, 9, 10, 11, 12, 13, 14 ]
+        java: [ 8, 11, 17, 20 ]
     name: Build with Java ${{ matrix.java }}
 
     steps:
