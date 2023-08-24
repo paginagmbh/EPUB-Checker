@@ -426,6 +426,11 @@
 
 					<!-- rename license to prevent issues on non case sensitive system -->
 					<execution>
+						<id>fix-license-collisions-python</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
 						<configuration>
 							<executable>python3</executable>
 							<workingDirectory>${project.basedir}</workingDirectory>
@@ -434,11 +439,6 @@
 								<argument>${project.build.directory}/${my.finalShortName}.app/Contents/Resources/Java/${my.finalJarName}.jar</argument>
 							</arguments>
 						</configuration>
-						<id>python_build</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
 					</execution>
 
 					<!-- run mac-release.sh script to codesign and notarize the Mac App -->

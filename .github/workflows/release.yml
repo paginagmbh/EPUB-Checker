@@ -18,14 +18,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        lfs: true
+        lfs: false
         fetch-depth: '0'
         ## live
-        ref: 'master'
+        #ref: 'master'
         ## debug
-        #ref: 'development'
-    - name: Checkout LFS objects
-      run: git lfs checkout
+        ref: 'development'
+    # - name: Checkout LFS objects
+    #   run: git lfs checkout
 
     - name: Import Code-Signing Certificates
       uses: Apple-Actions/import-codesign-certs@v1
