@@ -87,6 +87,8 @@ Release the app
 
 Releasing a new version requires the Mac App to be codesigned and notarized. This can be done from the maven packaging process or via GitHub Actions CI on the `main` branch. The additional maven step will run a bash script (`src/build/mac-release.sh`) to codesign and notarize the Mac App with our private Apple Developer Certificate. Therefore, this step will only work on our systems or in GitHub Actions CI.
 
+Before the release the version number and release notes should be adjusted in *src/main/java/de/paginagmbh/epubchecker/PaginaEPUBChecker.java*.
+
 ### Release requirements
 
 * macOS 10.14+
