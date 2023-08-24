@@ -3,7 +3,7 @@ pagina EPUB-Checker
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paginagmbh/EPUB-Checker/maven-test-build.yml?label=Maven%20CI%20Tests) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paginagmbh/EPUB-Checker/release.yml?label=Release%20CI)
 
-Standalone "EPUBCheck" application for Windows, macOS and Linux.
+Standalone “EPUBCheck” application for Windows, macOS and Linux.
 
 With the pagina EPUB-Checker one can easily validate eBooks in the EPUB format. The test mechanisms of the EPUB-Checker are based on the official open-source [EPUBCheck](https://github.com/w3c/epubcheck) EPUB validator.
 
@@ -15,7 +15,7 @@ pagina EPUB-Checker wraps up this tool and offers some additional features like:
 
 * Graphical user interface
 * Drag & drop EPUB to validate
-* Ability to validate expanded (unzipped) EPUB's
+* Ability to validate expanded (unzipped) EPUBs
   * Expanded folders are automatically zipped up to an EPUB file upon validation
   * The generated EPUB file will be saved if it is valid
 * Localized GUI and errors and warnings:
@@ -39,9 +39,9 @@ pagina EPUB-Checker doesn't need to be installed and therefore works on portable
 Download
 --------
 
-Please visit our website https://www.pagina.gmbh/produkte/epub-checker/ to download the Windows _EXE_ file, the Mac _App_ or the Linux _JAR_.
+Please visit our website https://www.pagina.gmbh/produkte/epub-checker/ to download the Windows *.exe* file, the Mac *.app* or the Linux *.jar*.
 
-This is just the source code repository. You won't find any pre-build binaries here...
+This is just the source code repository. You won’t find any pre-build binaries here...
 
 
 License information
@@ -67,7 +67,7 @@ Build the app
 
 In order to build the Linux JAR, the Mac App and the Windows EXE files you just have to run
 
-```
+```sh
 mvn clean package
 ```
 
@@ -85,7 +85,7 @@ This will build the executables but skip the macOS specific codesigning process 
 Release the app
 ---------------
 
-Releasing a new version requires the Mac App to be codesigned and notarized. This can be done from the maven packaging process or via GitHub Actions CI on the `master` branch. The additional maven step will run a bash script (`src/build/mac-release.sh`) to codesign and notarize the Mac App with our private Apple Developer Certificate. Therefore, this step will only work on our systems or in GitHub Actions CI.
+Releasing a new version requires the Mac App to be codesigned and notarized. This can be done from the maven packaging process or via GitHub Actions CI on the `main` branch. The additional maven step will run a bash script (`src/build/mac-release.sh`) to codesign and notarize the Mac App with our private Apple Developer Certificate. Therefore, this step will only work on our systems or in GitHub Actions CI.
 
 ### Release requirements
 
@@ -101,69 +101,26 @@ Codesigning is done with the default macOS `codesign` utility
 
 *App notarization*
 
-App notarization is done with [gon](https://github.com/mitchellh/gon), an excellent utility for this job. It will be installed via HomeBrew if it's missing.
+App notarization is done with [gon](https://github.com/mitchellh/gon), an excellent utility for this job. It will be installed via HomeBrew if it’s missing.
 
 To be able to submit the App for notarization, you need to copy `src/build/gon-dmg-config.template.json` to `src/build/gon-dmg-config.json` and fill the `apple_id` credentials.
 
 *DiskImage creation*
 
-DiskImage creation is done with the NodeJS utility [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg). It will be installed via NPM if it's missing.
+DiskImage creation is done with the NodeJS utility [electron-installer-dmg](https://github.com/electron-userland/electron-installer-dmg). It will be installed via NPM if it’s missing.
 
 ### Build the release locally
 
-To build the JAR's, the Windows EXE and Mac App and to run the Mac App codesigning and notarization process for distribution _locally,_ you have to enable the _skipped-by-default_ maven task with:
+To build the *.jar*s, the Windows *.exe* and Mac *.app* and to run the Mac-App codesigning and notarization process for distribution _locally,_ you have to enable the *skipped-by-default* maven task with:
 
-```
+```sh
 mvn -Dmaven.skip.macSigning=false clean package
 ```
 
-With changes to how the generated .jar file is structured internally, and how Apple handles the files for the notarization, at the moment some manual steps are required to arrive at a notarized version of the application. <br/>
-
-**Problem**
-
-The problem is that inside the generated .jar file, there is a naming conflict, but only on case-insensitive Mac-based file systems, which seems to be the case for the notarization runners. Inside the generated .jar file, the process generates a file `LICENSE` (uppercase), which conflicts with a folder `license` (lowercase). The extraction of the .jar fails due to a file conflict during extraction of the .jar file, since first the folder is extracted, which can not be overwritten by the file, which is extracted later.
-
-**Solution**
-The future naming conflict needs to be resolved, before it can come into effect. In order to achieve this, the build process needs to be stopped before the application is uploaded to the notarization service and modified and before the .dmg archive is built. Since the .dmg is built from the .app, the future naming conflict needs to be dealt with inside the .app. In order to resolve the issue, open the file `paginaEPUBChecker.jar` inside `target/EPUB-Checker.app/Contents/Resources/Java` in Oxygen or any other program capable of renaming files inside .zip/.jar files. Then rename either the file `LICENSE` to e.g. `LICENSE.txt`, or the `license` folder to e.g. `license_dir` and overwrite the existing .jar file. Then build the .dmg file from the modified .app directory with 
-
-```
-electron-installer-dmg \
-  --title="pagina EPUB-Checker X.Y.Z" \
-  --out=target \
-  --icon=src/build/icons/paginaEPUBChecker_128.icns \
-  --background=src/build/splashscreen/DmgBackground.png \
-  --overwrite \
-  target/EPUB-Checker.app \
-  EPUB-Checker
-```
-
-Then, codesign the .dmg archive (replace "${APPLE_SIGN_ID}" with the actual ID).
-
-```
-/usr/bin/codesign --force --verbose --options runtime --sign "${APPLE_SIGN_ID}" target/EPUB-Checker.dmg
-/usr/bin/codesign --verify --strict --deep --verbose target/EPUB-Checker.dmg
-```
-
-In the next step, upload the .dmg file to the Apple notarization service with 
-
-```
-gon -log-level=info -log-json src/build/gon-dmg-config.json
-```
-
-Then ensure that the codesigning and subsequent notarization actions worked by running the following commands:
-
-```
-/usr/bin/xcrun stapler validate target/EPUB-Checker.dmg
-/usr/sbin/spctl -a -t install -vv target/EPUB-Checker.dmg
-
-/usr/bin/xcrun stapler staple target/EPUB-Checker.app
-/usr/bin/xcrun stapler validate target/EPUB-Checker.app
-```
+With changes to how the generated *.jar* file is structured internally, and how Apple handles the files for the notarization, at the moment some manual steps are required to arrive at a notarized version of the application.
 
 ### Build & release with GitHub Actions
 
-**Update (05/2023)**: at the moment, the release mechanism temporarily only works when started **locally** (cf. above), due to changes in how Apple handles the files to be notarized. The procedure described below will work again, once the steps that are described above will have been automatized - which is definitely within the realm of possibilities.
-
-To build and release with GitHub Actions CI, just merge a _snapshot version_ from `development` to `master`. No need to upgrade the Maven version first or to set a git tag. Just merge to `master` and CI is doing all the hard work (as defined in `.github/workflows/release.yml`).
+To build and release with GitHub Actions CI, just merge a _snapshot version_ from `development` to `main`. No need to upgrade the Maven version first or to set a git tag. Just merge to `main` and CI is doing all the hard work (as defined in `.github/workflows/release.yml`).
 
 The release distributables are attached to the GitHub Actions build as build artifacts and can be used for distribution on our download server.
