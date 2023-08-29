@@ -1,5 +1,4 @@
 # pagina EPUB-Checker
-===================
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paginagmbh/EPUB-Checker/maven-test-build.yml?label=Maven%20CI%20Tests) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paginagmbh/EPUB-Checker/release.yml?label=Release%20CI)
 
