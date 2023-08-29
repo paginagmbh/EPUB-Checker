@@ -433,7 +433,7 @@
 						</goals>
 						<configuration>
 							<executable>python3</executable>
-							<workingDirectory>${project.basedir}</workingDirectory>
+							<workingDirectory>${project.build.sourceDir}</workingDirectory>
 							<arguments>
 								<argument>fix_license_file.py</argument>
 								<argument>${project.build.directory}/${my.finalShortName}.app/Contents/Resources/Java/${my.finalJarName}.jar</argument>
