@@ -126,4 +126,4 @@ The release distributables are attached to the GitHub Actions build as build art
 
 ## License
 
-This project is licensed under the [GPL-2.0 license](LICENSE.txt).
+This project is licensed under the [GPL-2.0 license](LICENSE.md).
